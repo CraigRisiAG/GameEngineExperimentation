@@ -1,3 +1,6 @@
+This is a modiffied version of the Godot Engine, the autohors of whom can be found below:
+
+
 # Godot Engine authors
 
 Godot Engine is developed by a community of voluntary contributors who
