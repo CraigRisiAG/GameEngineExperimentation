@@ -7,6 +7,7 @@
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2020 Craig Risi.   									 */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -28,11 +29,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
+//checks to see if file is defined. If not, sets up default mapping.
 #ifndef INPUT_DEFAULT_H
 #define INPUT_DEFAULT_H
 
 #include "core/os/input.h"
 
+//this sets up default mapping for input devices
 class InputDefault : public Input {
 
 	GDCLASS(InputDefault, Input);
@@ -43,6 +46,7 @@ class InputDefault : public Input {
 	Set<int> keys_pressed;
 	Set<int> joy_buttons_pressed;
 	Map<int, float> _joy_axis;
+
 	//Map<StringName,int> custom_action_press;
 	Vector3 gravity;
 	Vector3 accelerometer;
@@ -65,7 +69,7 @@ class InputDefault : public Input {
 
 	int mouse_from_touch_index;
 
-	struct VibrationInfo {
+	struct VibrationInfo { //sets responsivenes of vibration
 		float weak_magnitude;
 		float strong_magnitude;
 		float duration; // Duration in seconds
