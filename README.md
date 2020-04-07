@@ -1,6 +1,4 @@
-[![Godot Engine logo](/logo.png)](https://godotengine.org)
-
-## Godot Engine
+This is a modified engine based off the Godot Engine. It is intended as mroe of an opprotnutiy to learn and play around with game engine dynamics and not for any further releae and so may not always work perfectly and is not intended to be actively supported. For a more stablle, updated and worknig version of the Godot Game Engine, rather follow the links to the Godot Open Source Engine below:
 
 Homepage: https://godotengine.org
 
@@ -65,10 +63,3 @@ as well.
 There are also a number of other learning resources provided by the community,
 such as text and video tutorials, demos, etc. Consult the [community channels](https://godotengine.org/community)
 for more info.
-
-[![Travis Build Status](https://travis-ci.org/godotengine/godot.svg?branch=master)](https://travis-ci.org/godotengine/godot)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/bfiihqq6byxsjxxh/branch/master?svg=true)](https://ci.appveyor.com/project/akien-mga/godot)
-[![Code Triagers Badge](https://www.codetriage.com/godotengine/godot/badges/users.svg)](https://www.codetriage.com/godotengine/godot)
-[![Translate on Weblate](https://hosted.weblate.org/widgets/godot-engine/-/godot/svg-badge.svg)](https://hosted.weblate.org/engage/godot-engine/?utm_source=widget)
-[![Total alerts on LGTM](https://img.shields.io/lgtm/alerts/g/godotengine/godot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/godotengine/godot/alerts)
-[![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/godotengine/godot)](https://www.tickgit.com/browse?repo=github.com/godotengine/godot)
