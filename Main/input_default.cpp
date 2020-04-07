@@ -7,6 +7,7 @@
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2020 Craig Risi  										 */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -36,6 +37,7 @@
 #include "scene/resources/texture.h"
 #include "servers/visual_server.h"
 
+//updates the tracking speed of the navigation system
 void InputDefault::SpeedTrack::update(const Vector2 &p_delta_p) {
 
 	uint64_t tick = OS::get_singleton()->get_ticks_usec();
@@ -46,6 +48,7 @@ void InputDefault::SpeedTrack::update(const Vector2 &p_delta_p) {
 	accum += p_delta_p;
 	accum_t += delta_t;
 
+	//prevents the tracker from exceeding a certain limit
 	if (accum_t > max_ref_frame * 10)
 		accum_t = max_ref_frame * 10;
 
@@ -59,7 +62,7 @@ void InputDefault::SpeedTrack::update(const Vector2 &p_delta_p) {
 		speed = (slice / min_ref_frame).linear_interpolate(speed, min_ref_frame / max_ref_frame);
 	}
 }
-
+//restores the speed of tracking
 void InputDefault::SpeedTrack::reset() {
 	last_tick = OS::get_singleton()->get_ticks_usec();
 	speed = Vector2();
@@ -73,12 +76,14 @@ InputDefault::SpeedTrack::SpeedTrack() {
 	reset();
 }
 
+//identifes when a key is pressed and then maps it back to perform expected operation
 bool InputDefault::is_key_pressed(int p_keycode) const {
 
 	_THREAD_SAFE_METHOD_
 	return keys_pressed.has(p_keycode);
 }
 
+//identifies when mouse button is pressed and them performs expected operation
 bool InputDefault::is_mouse_button_pressed(int p_button) const {
 
 	_THREAD_SAFE_METHOD_
@@ -90,6 +95,7 @@ static int _combine_device(int p_value, int p_device) {
 	return p_value | (p_device << 20);
 }
 
+//used for identifying controller mapping
 bool InputDefault::is_joy_button_pressed(int p_device, int p_button) const {
 
 	_THREAD_SAFE_METHOD_

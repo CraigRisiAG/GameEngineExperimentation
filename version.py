@@ -1,6 +1,6 @@
-short_name = "godot"
-name = "Godot Engine"
-major = 4
+short_name = "godot-cr"
+name = "Modified Godot Engine - Craig Risi"
+major = 1
 minor = 0
 patch = 0
 status = "dev"

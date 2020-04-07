@@ -3,6 +3,7 @@ import re
 import glob
 import subprocess
 
+# Collection of functinos to be used throughout the application
 
 def add_source_files(self, sources, files, warn_duplicates=True):
     # Convert string to list of absolute paths (including expanding wildcard)
@@ -49,7 +50,7 @@ def disable_warnings(self):
 def add_module_version_string(self,s):
     self.module_version_string += "." + s
 
-
+# Gets the build version of the system
 def update_version(module_version_string=""):
 
     build_name = "custom_build"
@@ -58,7 +59,7 @@ def update_version(module_version_string=""):
         print("Using custom build name: " + build_name)
 
     import version
-
+    # Displays the version information of the application
     # NOTE: It is safe to generate this file here, since this is still executed serially
     f = open("core/version_generated.gen.h", "w")
     f.write("/* THIS FILE IS GENERATED DO NOT EDIT */\n")
@@ -85,6 +86,7 @@ def update_version(module_version_string=""):
     githash = ""
     gitfolder = ".git"
 
+    # Searches Git repo to ensure it builds correctly
     if os.path.isfile(".git"):
         module_folder = open(".git", "r").readline().strip()
         if module_folder.startswith("gitdir: "):

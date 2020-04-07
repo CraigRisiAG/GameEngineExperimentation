@@ -28,12 +28,13 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
+//seaching for the mappnig file. If its not defined, it then runs the class  
 #ifndef DEFAULT_CONTROLLER_MAPPINGS_H
 #define DEFAULT_CONTROLLER_MAPPINGS_H
 
 class DefaultControllerMappings {
 public:
-	static const char *mappings[];
+	static const char *mappings[]; //initialises the mapping file
 };
 
 #endif // DEFAULT_CONTROLLER_MAPPINGS_H

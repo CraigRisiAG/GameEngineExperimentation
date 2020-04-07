@@ -9,7 +9,7 @@ import subprocess
 
 JSON_SERIALIZABLE_TYPES = (bool, int, float, str)
 
-
+# Helsp to get the application to run and build on differt platforms
 def run_in_subprocess(builder_function):
 
     @functools.wraps(builder_function)
@@ -69,7 +69,7 @@ def run_in_subprocess(builder_function):
 
     return wrapper
 
-
+#JSON file will store al lthe relevant data for the machine and execute on it accordingly
 def subprocess_main(namespace):
 
     with open(sys.argv[1]) as json_file:
