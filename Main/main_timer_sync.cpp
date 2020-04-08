@@ -7,6 +7,7 @@
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
 /* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
+/* Copyright (c) 2020 Craig Risi   										 */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -28,6 +29,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
+//this file keeps the program in sync with the required computer to ensure 
+// it operates at an optimal performance and frame rate
 #include "main_timer_sync.h"
 
 void MainFrameTime::clamp_idle(float min_idle_step, float max_idle_step) {

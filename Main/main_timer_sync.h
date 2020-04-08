@@ -28,7 +28,10 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#ifndef MAIN_TIMER_SYNC_H
+//this file sets the global variable for main timer file which controls the 
+//visual refresh rate of the application
+
+#ifndef MAIN_TIMER_SYNC_H //if main timer settings are not found, load defaults
 #define MAIN_TIMER_SYNC_H
 
 #include "core/engine.h"
