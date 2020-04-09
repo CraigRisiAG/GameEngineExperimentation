@@ -1,4 +1,4 @@
-This is a modified engine based off the Godot Engine. It is intended as mroe of an opprotnutiy to learn and play around with game engine dynamics and not for any further releae and so may not always work perfectly and is not intended to be actively supported. For a more stablle, updated and worknig version of the Godot Game Engine, rather follow the links to the Godot Open Source Engine below:
+This is a modified engine based off the Godot Engine. It is intended as more of an opportunity to learn and play around with game engine dynamics and not for any further release and so may not always work perfectly and is not intended to be actively supported. For a more stable, updated and working version of the Godot Game Engine, rather follow the links to the Godot Open Source Engine below:
 
 Homepage: https://godotengine.org
 
