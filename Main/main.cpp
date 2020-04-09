@@ -28,7 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#include "main.h"
+//this brings all the main include files together when compiling
+#include "main.h" 
 
 #include "core/crypto/crypto.h"
 #include "core/debugger/engine_debugger.h"

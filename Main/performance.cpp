@@ -28,6 +28,9 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
+
+//manages the overall rendering performnce of the engine against a given machine
+ 
 #include "performance.h"
 
 #include "core/message_queue.h"
