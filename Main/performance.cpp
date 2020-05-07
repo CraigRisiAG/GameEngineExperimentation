@@ -29,7 +29,7 @@
 /*************************************************************************/
 
 
-//manages the overall rendering performnce of the engine against a given machine
+//manages the overall rendering performance of the engine against a given machine
  
 #include "performance.h"
 
@@ -165,37 +165,12 @@ float Performance::get_monitor(Monitor p_monitor) const {
 
 Performance::MonitorType Performance::get_monitor_type(Monitor p_monitor) const {
 	ERR_FAIL_INDEX_V(p_monitor, MONITOR_MAX, MONITOR_TYPE_QUANTITY);
-	// ugly
+	// updated to remove unnecessary parameters
 	static const MonitorType types[MONITOR_MAX] = {
 
 		MONITOR_TYPE_QUANTITY,
 		MONITOR_TYPE_TIME,
-		MONITOR_TYPE_TIME,
 		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_MEMORY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_QUANTITY,
-		MONITOR_TYPE_TIME,
-
 	};
 
 	return types[p_monitor];
