@@ -1,7 +1,5 @@
 This is a modified engine based off the Godot Engine. It is intended as more of an opportunity to learn and play around with game engine dynamics and not for any further release and so may not always work perfectly and is not intended to be actively supported. For a more stable, updated and working version of the Godot Game Engine, rather follow the links to the Godot Open Source Engine below:
 
-Homepage: https://godotengine.org
-
 #### 2D and 3D cross-platform game engine
 
 Godot Engine is a feature-packed, cross-platform game engine to create 2D and
@@ -13,7 +11,7 @@ the major desktop platforms (Linux, Mac OSX, Windows) as well as mobile
 
 #### Free, open source and community-driven
 
-Godot is completely free and open source under the very permissive MIT license.
+This project is completely free and open source under the very permissive MIT license.
 No strings attached, no royalties, nothing. The users' games are theirs, down
 to the last line of engine code. Godot's development is fully independent and
 community-driven, empowering users to help shape their engine to match their
@@ -26,26 +24,7 @@ years as an in-house engine, used to publish several work-for-hire titles.
 
 ![Screenshot of a 3D scene in Godot Engine](https://raw.githubusercontent.com/godotengine/godot-design/master/screenshots/editor_tps_demo_1920x1080.jpg)
 
-### Getting the engine
-
-#### Binary downloads
-
-Official binaries for the Godot editor and the export templates can be found
-[on the homepage](https://godotengine.org/download).
-
-#### Compiling from source
-
-[See the official docs](https://docs.godotengine.org/en/latest/development/compiling/)
-for compilation instructions for every supported platform.
-
 ### Community and contributing
-
-Godot is not only an engine but an ever-growing community of users and engine
-developers. The main community channels are listed [on the homepage](https://godotengine.org/community).
-
-To get in touch with the developers, the best way is to join the
-[#godotengine IRC channel](https://webchat.freenode.net/?channels=godotengine)
-on Freenode.
 
 To get started contributing to the project, see the [contributing guide](CONTRIBUTING.md).
 
