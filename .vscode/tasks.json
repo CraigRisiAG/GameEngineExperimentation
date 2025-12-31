@@ -1,0 +1,136 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-debug-windows",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build/debug",
+                "-S",
+                ".",
+                "-G",
+                "Visual Studio 17 2022",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "build-debug-linux",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build/debug",
+                "-S",
+                ".",
+                "-G",
+                "Unix Makefiles",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_CXX_COMPILER=/usr/bin/g++"
+            ],
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build-release-windows",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build/release",
+                "-S",
+                ".",
+                "-G",
+                "Visual Studio 17 2022",
+                "-DCMAKE_BUILD_TYPE=Release"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build-release-linux",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build/release",
+                "-S",
+                ".",
+                "-G",
+                "Unix Makefiles",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_CXX_COMPILER=/usr/bin/g++"
+            ],
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "compile-current-file",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/std:c++17",
+                "${file}",
+                "/Fo${fileDirname}\\",
+                "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$msCompile"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "clean-build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/debug",
+                "--target",
+                "clean"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}

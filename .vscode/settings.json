@@ -1,0 +1,29 @@
+{
+    "C_Cpp.default.configurationName": "Windows (MSVC)",
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": true
+    },
+    "C_Cpp.formatting": "Default",
+    "C_Cpp.codeAnalysis.enabled": true,
+    "C_Cpp.codeAnalysis.runAutomatically": true,
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",
+    "files.associations": {
+        "*.h": "cpp",
+        "*.hpp": "cpp",
+        "*.cpp": "cpp",
+        "*.c": "c"
+    },
+    "editor.rulers": [80, 100, 120],
+    "editor.wordWrap": "on",
+    "C_Cpp.errorSquiggles": "enabled",
+    "cmake.autoSelectActiveFolder": false,
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+}

@@ -1,0 +1,109 @@
+{
+    "configurations": [
+        {
+            "name": "Windows (MSVC)",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/core",
+                "${workspaceFolder}/scene",
+                "${workspaceFolder}/servers",
+                "${workspaceFolder}/Main",
+                "${workspaceFolder}/modules",
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/platform",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.22000.0/um",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.22000.0/shared",
+                "C:/Program Files (x86)/Windows Kits/10/Include/10.0.22000.0/ucrt",
+                "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include"
+            ],
+            "defines": [
+                "WINDOWS_ENABLED",
+                "MSVC",
+                "_DEBUG",
+                "_WINDOWS",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.VC.db"
+            }
+        },
+        {
+            "name": "Linux (GCC)",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/core",
+                "${workspaceFolder}/scene",
+                "${workspaceFolder}/servers",
+                "${workspaceFolder}/Main",
+                "${workspaceFolder}/modules",
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/platform",
+                "/usr/include",
+                "/usr/include/c++/11",
+                "/usr/include/x86_64-linux-gnu/c++/11"
+            ],
+            "defines": [
+                "LINUX_ENABLED",
+                "GCC",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.VC.db"
+            }
+        },
+        {
+            "name": "macOS (Clang)",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/core",
+                "${workspaceFolder}/scene",
+                "${workspaceFolder}/servers",
+                "${workspaceFolder}/Main",
+                "${workspaceFolder}/modules",
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/platform",
+                "/usr/local/include",
+                "/Library/Developer/CommandLineTools/usr/include/c++/v1",
+                "/Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include"
+            ],
+            "defines": [
+                "OSX_ENABLED",
+                "CLANG",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.VC.db"
+            }
+        }
+    ],
+    "version": 4
+}
