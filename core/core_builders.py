@@ -1,9 +1,32 @@
-"""Functions used to generate source files during build time
 
-All such functions are invoked in a subprocess on Windows to prevent build flakiness.
-"""
 
 from platform_methods import subprocess_main
+"""
+Core builders module for generating C header files from various source data.
+This module provides functions to generate C header files containing embedded data such as
+certificates, author information, donor credits, and license information. These generated
+headers are typically used in build systems (like SCons) to embed static data into compiled
+applications.
+Functions:
+    escape_string(s): Converts a string to a C-compatible escaped string format, handling
+        UTF-8 encoding and special characters using octal escape sequences.
+    make_certs_header(target, source, env): Generates a C header file containing compressed
+        certificate data. Takes source certificate file and compresses it using zlib,
+        then outputs as a static byte array in the target header file.
+    make_authors_header(target, source, env): Generates a C header file with author
+        information parsed from a markdown-formatted source file. Organizes authors
+        into sections (Founders, Lead Developer, Project Manager, Developers).
+    make_donors_header(target, source, env): Generates a C header file with donor and
+        sponsor information parsed from a markdown-formatted source file. Organizes
+        donors into sections (Platinum, Gold, Silver, Bronze sponsors and donors).
+    make_license_header(target, source, env): Generates a comprehensive C header file
+        containing copyright information and license text. Parses copyright data from
+        a structured copyright file and license text from a license file, outputting
+        organized data structures for runtime access.
+Usage:
+    This module is typically invoked through a build system (SCons) using the
+    subprocess_main() function with the globals() dictionary.
+"""
 
 
 def escape_string(s):

@@ -1,34 +1,111 @@
-/*************************************************************************/
-/*  main_timer_sync.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/* Copyright (c) 2020 Craig Risi   										 */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file main_timer_sync.cpp
+ * @brief Frame timing and physics synchronization system for game engine
+ * 
+ * This module manages the synchronization between the rendering frame rate and physics
+ * simulation step rate. It maintains frame timing consistency, tracks physics step history,
+ * and adjusts idle time to prevent accumulation errors and jitter.
+ * 
+ * Key Features:
+ * - Adaptive physics step calculation based on frame time
+ * - Jitter compensation through physics step history tracking
+ * - Time accumulator management for smooth physics-render integration
+ * - Support for fixed FPS mode
+ * - Interpolation fraction calculation for smooth rendering between physics frames
+ */
+
+/**
+ * @brief Clamps the idle_step value within specified bounds
+ * @param min_idle_step Minimum allowed idle step value
+ * @param max_idle_step Maximum allowed idle step value
+ */
+void MainFrameTime::clamp_idle(float min_idle_step, float max_idle_step);
+
+/**
+ * @brief Retrieves the physics jitter fix threshold from engine singleton
+ * @return Fraction of frame slice that triggers physics step adjustments
+ */
+float MainTimerSync::get_physics_jitter_fix();
+
+/**
+ * @brief Calculates average physics steps per frame with consistency bounds
+ * @param p_min Output parameter: minimum average physics steps
+ * @param p_max Output parameter: maximum average physics steps
+ * @return Number of frames back for which data is consistent (0 to CONTROL_STEPS)
+ */
+int MainTimerSync::get_average_physics_steps(float &p_min, float &p_max);
+
+/**
+ * @brief Core physics clock advancement and step calculation
+ * 
+ * Accumulates time and determines the appropriate number of physics steps to simulate.
+ * Applies jitter correction based on historical step patterns to maintain consistency.
+ * 
+ * @param p_frame_slice Time duration of one physics frame in seconds
+ * @param p_iterations_per_second Physics simulation frequency (Hz)
+ * @param p_idle_step Wall clock time elapsed since last frame
+ * @return MainFrameTime structure containing physics steps and updated idle step
+ */
+MainFrameTime MainTimerSync::advance_core(float p_frame_slice, int p_iterations_per_second, float p_idle_step);
+
+/**
+ * @brief Advanced frame advancement with deficit compensation and clamping
+ * 
+ * Wraps advance_core with additional compensation mechanisms:
+ * - Applies accumulated time deficit from previous frames
+ * - Enforces consistency constraints based on typical physics step patterns
+ * - Limits clock deviation to prevent temporal jitter
+ * - Maintains time accumulator within valid range for physics-render synchronization
+ * - Calculates interpolation fraction for smooth visual rendering
+ * 
+ * @param p_frame_slice Time duration of one physics frame in seconds
+ * @param p_iterations_per_second Physics simulation frequency (Hz)
+ * @param p_idle_step Wall clock time elapsed since last frame
+ * @return MainFrameTime structure with constrained physics steps and interpolation data
+ */
+MainFrameTime MainTimerSync::advance_checked(float p_frame_slice, int p_iterations_per_second, float p_idle_step);
+
+/**
+ * @brief Calculates elapsed wall clock time since last frame
+ * @return CPU idle step duration in seconds
+ */
+float MainTimerSync::get_cpu_idle_step();
+
+/**
+ * @brief Constructor - initializes timer synchronization state
+ */
+MainTimerSync::MainTimerSync();
+
+/**
+ * @brief Initializes the timer with current CPU tick count
+ * @param p_cpu_ticks_usec Current wall clock time in microseconds
+ */
+void MainTimerSync::init(uint64_t p_cpu_ticks_usec);
+
+/**
+ * @brief Updates the current measured wall clock time
+ * @param p_cpu_ticks_usec Current wall clock time in microseconds
+ */
+void MainTimerSync::set_cpu_ticks_usec(uint64_t p_cpu_ticks_usec);
+
+/**
+ * @brief Sets fixed frame rate mode (overrides wall clock timing)
+ * @param p_fixed_fps Target fixed frames per second (-1 to disable fixed mode)
+ */
+void MainTimerSync::set_fixed_fps(int p_fixed_fps);
+
+/**
+ * @brief Main frame advancement function - public entry point
+ * 
+ * Retrieves the wall clock time delta and advances the frame timer,
+ * returning the physics steps to execute for the current frame.
+ * 
+ * @param p_frame_slice Time duration of one physics frame in seconds
+ * @param p_iterations_per_second Physics simulation frequency (Hz)
+ * @return MainFrameTime structure with physics steps and timing data for frame
+ */
+MainFrameTime MainTimerSync::advance(float p_frame_slice, int p_iterations_per_second);
 //this file keeps the program in sync with the required computer to ensure 
 // it operates at an optimal performance and frame rate
 #include "main_timer_sync.h"

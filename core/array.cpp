@@ -1,33 +1,224 @@
-/*************************************************************************/
-/*  array.cpp                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/// @class Array
+/// @brief A dynamic array container that holds Variant values with reference counting.
+/// 
+/// The Array class provides a flexible, dynamically-sized container for storing Variant objects.
+/// It uses reference counting for memory management and supports standard array operations like
+/// insertion, removal, searching, and sorting.
+/// 
+/// @note Array uses copy-on-write semantics through reference counting. Multiple Array instances
+/// can share the same underlying data until one is modified.
+/// 
+/// @example
+/// @code
+/// Array arr;
+/// arr.push_back(42);
+/// arr.push_back("Hello");
+/// arr.insert(1, 3.14);
+/// int index = arr.find(3.14);
+/// @endcode
+
+/// @fn void Array::_ref(const Array &p_from) const
+/// @brief Increases reference count and assigns internal pointer from another array.
+/// @param p_from The source array to reference.
+/// @note This is an internal method. Does nothing if already referencing the same array.
+
+/// @fn void Array::_unref() const
+/// @brief Decreases reference count and deletes internal data if no longer referenced.
+/// @note This is an internal method.
+
+/// @fn Variant &Array::operator[](int p_idx)
+/// @brief Returns a mutable reference to the variant at the given index.
+/// @param p_idx The index of the element.
+/// @return Mutable reference to the Variant at the specified index.
+
+/// @fn const Variant &Array::operator[](int p_idx) const
+/// @brief Returns a const reference to the variant at the given index.
+/// @param p_idx The index of the element.
+/// @return Const reference to the Variant at the specified index.
+
+/// @fn int Array::size() const
+/// @brief Returns the number of elements in the array.
+/// @return The size of the array.
+
+/// @fn bool Array::empty() const
+/// @brief Checks if the array is empty.
+/// @return True if the array contains no elements, false otherwise.
+
+/// @fn void Array::clear()
+/// @brief Removes all elements from the array.
+
+/// @fn bool Array::operator==(const Array &p_array) const
+/// @brief Compares two arrays for equality based on reference identity.
+/// @param p_array The array to compare with.
+/// @return True if both arrays reference the same internal data, false otherwise.
+
+/// @fn uint32_t Array::hash() const
+/// @brief Computes a hash value for the array based on its contents.
+/// @return A 32-bit hash value.
+
+/// @fn void Array::operator=(const Array &p_array)
+/// @brief Assigns another array to this array using reference counting.
+/// @param p_array The source array to assign.
+
+/// @fn void Array::push_back(const Variant &p_value)
+/// @brief Appends a variant to the end of the array.
+/// @param p_value The value to append.
+
+/// @fn Error Array::resize(int p_new_size)
+/// @brief Resizes the array to the specified size.
+/// @param p_new_size The new size of the array.
+/// @return Error code indicating success or failure.
+
+/// @fn void Array::insert(int p_pos, const Variant &p_value)
+/// @brief Inserts a variant at the specified position.
+/// @param p_pos The position to insert at.
+/// @param p_value The value to insert.
+
+/// @fn void Array::erase(const Variant &p_value)
+/// @brief Removes the first occurrence of a variant value.
+/// @param p_value The value to erase.
+
+/// @fn Variant Array::front() const
+/// @brief Returns the first element in the array.
+/// @return The first Variant, or an empty Variant if the array is empty.
+
+/// @fn Variant Array::back() const
+/// @brief Returns the last element in the array.
+/// @return The last Variant, or an empty Variant if the array is empty.
+
+/// @fn int Array::find(const Variant &p_value, int p_from) const
+/// @brief Finds the index of the first occurrence of a value.
+/// @param p_value The value to search for.
+/// @param p_from The starting index for the search.
+/// @return The index of the first match, or -1 if not found.
+
+/// @fn int Array::rfind(const Variant &p_value, int p_from) const
+/// @brief Finds the index of the last occurrence of a value.
+/// @param p_value The value to search for.
+/// @param p_from The starting index for reverse search (negative for offset from end).
+/// @return The index of the last match, or -1 if not found.
+
+/// @fn int Array::find_last(const Variant &p_value) const
+/// @brief Finds the index of the last occurrence of a value.
+/// @param p_value The value to search for.
+/// @return The index of the last match, or -1 if not found.
+
+/// @fn int Array::count(const Variant &p_value) const
+/// @brief Counts occurrences of a specific value in the array.
+/// @param p_value The value to count.
+/// @return The number of times the value appears in the array.
+
+/// @fn bool Array::has(const Variant &p_value) const
+/// @brief Checks if the array contains a specific value.
+/// @param p_value The value to search for.
+/// @return True if the value is found, false otherwise.
+
+/// @fn void Array::remove(int p_pos)
+/// @brief Removes the element at the specified position.
+/// @param p_pos The index of the element to remove.
+
+/// @fn void Array::set(int p_idx, const Variant &p_value)
+/// @brief Sets the value at the specified index.
+/// @param p_idx The index to set.
+/// @param p_value The new value.
+
+/// @fn const Variant &Array::get(int p_idx) const
+/// @brief Gets the value at the specified index.
+/// @param p_idx The index to retrieve.
+/// @return Const reference to the Variant at the specified index.
+
+/// @fn Array Array::duplicate(bool p_deep) const
+/// @brief Creates a copy of the array.
+/// @param p_deep If true, recursively duplicates all contained Variants.
+/// @return A new Array with duplicated elements.
+
+/// @fn int Array::_fix_slice_index(int p_index, int p_arr_len, int p_top_mod)
+/// @brief Internal method to normalize slice indices.
+/// @param p_index The index to normalize.
+/// @param p_arr_len The length of the array.
+/// @param p_top_mod Modulo adjustment for boundary.
+/// @return The normalized index.
+
+/// @fn int Array::_clamp_index(int p_index) const
+/// @brief Internal method to clamp an index within valid bounds.
+/// @param p_index The index to clamp.
+/// @return The clamped index.
+
+/// @fn Array Array::slice(int p_begin, int p_end, int p_step, bool p_deep) const
+/// @brief Extracts a slice of the array with optional step and deep copy.
+/// @param p_begin The starting index (inclusive).
+/// @param p_end The ending index (inclusive).
+/// @param p_step The step between elements (default 1, can be negative).
+/// @param p_deep If true, deeply copies all extracted elements.
+/// @return A new Array containing the sliced elements.
+
+/// @fn Array &Array::sort()
+/// @brief Sorts the array using the default variant comparison operator.
+/// @return Reference to this array for method chaining.
+
+/// @fn Array &Array::sort_custom(Object *p_obj, const StringName &p_function)
+/// @brief Sorts the array using a custom comparison function from an object.
+/// @param p_obj The object containing the comparison method.
+/// @param p_function The name of the comparison method.
+/// @return Reference to this array for method chaining.
+
+/// @fn void Array::shuffle()
+/// @brief Randomly shuffles the elements of the array.
+/// @note Uses pseudo-random number generation.
+
+/// @fn int Array::bsearch(const Variant &p_value, bool p_before)
+/// @brief Performs a binary search on a sorted array.
+/// @param p_value The value to search for.
+/// @param p_before If true, returns position before the value; otherwise, position after.
+/// @return The index where the value is or should be inserted.
+
+/// @fn int Array::bsearch_custom(const Variant &p_value, Object *p_obj, const StringName &p_function, bool p_before)
+/// @brief Performs a binary search using a custom comparison function.
+/// @param p_value The value to search for.
+/// @param p_obj The object containing the comparison method.
+/// @param p_function The name of the comparison method.
+/// @param p_before If true, returns position before the value; otherwise, position after.
+/// @return The index where the value is or should be inserted.
+
+/// @fn Array &Array::invert()
+/// @brief Reverses the order of elements in the array.
+/// @return Reference to this array for method chaining.
+
+/// @fn void Array::push_front(const Variant &p_value)
+/// @brief Inserts a variant at the beginning of the array.
+/// @param p_value The value to insert.
+
+/// @fn Variant Array::pop_back()
+/// @brief Removes and returns the last element.
+/// @return The last element, or an empty Variant if the array is empty.
+
+/// @fn Variant Array::pop_front()
+/// @brief Removes and returns the first element.
+/// @return The first element, or an empty Variant if the array is empty.
+
+/// @fn Variant Array::min() const
+/// @brief Finds the minimum value in the array using variant comparison.
+/// @return The minimum Variant, or an empty Variant if comparison is invalid.
+
+/// @fn Variant Array::max() const
+/// @brief Finds the maximum value in the array using variant comparison.
+/// @return The maximum Variant, or an empty Variant if comparison is invalid.
+
+/// @fn const void *Array::id() const
+/// @brief Returns the internal pointer ID of the underlying data.
+/// @return A const void pointer to the internal array data.
+
+/// @fn Array::Array(const Array &p_from)
+/// @brief Copy constructor that creates an array referencing the same data.
+/// @param p_from The source array to copy from.
+
+/// @fn Array::Array()
+/// @brief Default constructor that creates an empty array.
+
+/// @fn Array::~Array()
+/// @brief Destructor that unreferences the internal data.
 #include "array.h"
 
 #include "core/hashfuncs.h"

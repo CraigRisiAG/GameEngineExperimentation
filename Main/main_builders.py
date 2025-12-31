@@ -1,4 +1,16 @@
+
 """Functions used to generate source files during build time
+Module for generating source files during build time.
+This module contains builder functions that are invoked during the build process,
+typically in a subprocess on Windows to prevent build flakiness. Each function takes
+target, source, and environment parameters and generates C/C++ header files from
+binary or text source files.
+Functions:
+    make_splash: Converts a binary splash screen image to a C++ header file.
+    make_splash_editor: Converts a binary editor splash screen image to a C++ header file.
+    make_app_icon: Converts a binary app icon image to a C++ header file.
+    make_default_controller_mappings: Generates a C++ header file with default controller
+                                       mappings from multiple platform-specific mapping files.
 
 All such functions are invoked in a subprocess on Windows to prevent build flakiness.
 
