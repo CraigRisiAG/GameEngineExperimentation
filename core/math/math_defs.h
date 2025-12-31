@@ -1,33 +1,13 @@
-/*************************************************************************/
-/*  math_defs.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file math_defs.h
+ * @brief Math-related constants, macros, and type definitions.
+ *
+ * Provides floating-point tolerances, mathematical constants (e.g., π, e, τ),
+ * time conversion helpers, and enums for clock direction, orientation,
+ * alignment, margins, and corners. Also defines the configurable `real_t` type
+ * for single- or double-precision real numbers.
+ */
 #ifndef MATH_DEFS_H
 #define MATH_DEFS_H
 
@@ -50,62 +30,59 @@
 #define MATH_CHECKS
 #endif
 
-//this epsilon is for values related to a unit size (scalar or vector len)
+// this epsilon is for values related to a unit size (scalar or vector len)
 #ifdef PRECISE_MATH_CHECKS
 #define UNIT_EPSILON 0.00001
 #else
-//tolerate some more floating point error normally
+// tolerate some more floating point error normally
 #define UNIT_EPSILON 0.001
 #endif
 
 #define USEC_TO_SEC(m_usec) ((m_usec) / 1000000.0)
 
-enum ClockDirection {
-	CLOCKWISE,
-	COUNTERCLOCKWISE
-};
+enum ClockDirection { CLOCKWISE, COUNTERCLOCKWISE };
 
 enum Orientation {
 
-	HORIZONTAL,
-	VERTICAL
+  HORIZONTAL,
+  VERTICAL
 };
 
 enum HAlign {
 
-	HALIGN_LEFT,
-	HALIGN_CENTER,
-	HALIGN_RIGHT
+  HALIGN_LEFT,
+  HALIGN_CENTER,
+  HALIGN_RIGHT
 };
 
 enum VAlign {
 
-	VALIGN_TOP,
-	VALIGN_CENTER,
-	VALIGN_BOTTOM
+  VALIGN_TOP,
+  VALIGN_CENTER,
+  VALIGN_BOTTOM
 };
 
 enum Margin {
 
-	MARGIN_LEFT,
-	MARGIN_TOP,
-	MARGIN_RIGHT,
-	MARGIN_BOTTOM
+  MARGIN_LEFT,
+  MARGIN_TOP,
+  MARGIN_RIGHT,
+  MARGIN_BOTTOM
 };
 
 enum Corner {
 
-	CORNER_TOP_LEFT,
-	CORNER_TOP_RIGHT,
-	CORNER_BOTTOM_RIGHT,
-	CORNER_BOTTOM_LEFT
+  CORNER_TOP_LEFT,
+  CORNER_TOP_RIGHT,
+  CORNER_BOTTOM_RIGHT,
+  CORNER_BOTTOM_LEFT
 };
 
 /**
-  * The "Real" type is an abstract type used for real numbers, such as 1.5,
-  * in contrast to integer numbers. Precision can be controlled with the
-  * presence or absence of the REAL_T_IS_DOUBLE define.
-  */
+ * The "Real" type is an abstract type used for real numbers, such as 1.5,
+ * in contrast to integer numbers. Precision can be controlled with the
+ * presence or absence of the REAL_T_IS_DOUBLE define.
+ */
 #ifdef REAL_T_IS_DOUBLE
 typedef double real_t;
 #else

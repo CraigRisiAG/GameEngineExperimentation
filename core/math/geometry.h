@@ -1,33 +1,18 @@
-/*************************************************************************/
-/*  geometry.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file geometry.h
+ * @brief Utility routines for 2D/3D computational geometry.
+ *
+ * Defines the Geometry class, a collection of static methods for common
+ * operations on vectors, segments, polygons, and polyhedra. Functions include
+ * computing closest points and distances between segments, intersection tests
+ * with triangles, spheres, cylinders, and convex volumes, as well as point-in-
+ * shape queries. Provides helpers for polygon clipping, Boolean operations,
+ * triangulation (including Delaunay), convex hull generation, and mesh building.
+ * Enumerations describe Boolean polygon operations, join types, and end types
+ * for offsetting polylines/polygons. Also includes utilities for atlas packing
+ * and generating primitive plane sets for basic shapes.
+ */
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 

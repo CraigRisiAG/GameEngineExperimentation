@@ -1,17 +1,20 @@
 
 /**
- * Expression
+ * @file expression.h
+ * @brief Provides the Expression class for parsing and executing scripted
+ * expressions.
  *
- * Provides parsing and execution of dynamic expressions with support for
- * built-in math, logic, type conversion, text utilities, and data structure
- * construction. Users can define inputs by name, parse an expression string,
- * and then execute it against provided arguments and an optional object
- * instance context. The class builds an internal expression tree of nodes
- * (inputs, constants, operators, function calls, arrays, dictionaries, etc.)
- * and evaluates it safely, reporting parsing or execution errors via error text
- * accessors. Built-in functions and tokens are enumerated for validation and
- * lookup, and execution supports Variant-based operations consistent with
- * engine types and operators.
+ * The Expression class parses text expressions into an internal AST of nodes
+ * (inputs, constants, operators, function calls, arrays, dictionaries, and
+ * constructors), then evaluates them against a set of provided inputs and an
+ * optional base object. It supports a suite of built-in mathematical, logical,
+ * type, and utility functions, as well as indexing, named indexing, and method
+ * calls on objects. Parsing includes tokenization of identifiers, operators,
+ * built-in functions, and literals, while execution handles variant typing,
+ * error reporting, and optional error visibility. The class also maintains
+ * input metadata, execution error state, and exposes methods to parse
+ * expressions, execute them, inspect errors, and query built-in function
+ * information.
  */
 #ifndef EXPRESSION_H
 #define EXPRESSION_H

@@ -1,51 +1,40 @@
-/*************************************************************************/
-/*  math_fieldwise.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @brief Copies a single named component from one Variant into another of the
+ * same type.
+ *
+ * This utility verifies that both input Variants share the same underlying type
+ * and then, based on the provided field name, assigns the corresponding member
+ * from the source into the target. Supported field names span common math types
+ * (e.g. vectors, rectangles, planes, quaternions, AABBs, 2D/3D transforms),
+ * covering positional, size, orientation, and basis elements.
+ *
+ * @param p_target The Variant to update with the specified field value.
+ * @param p_source The Variant providing the field value to copy.
+ * @param p_field The string identifier of the field to transfer (e.g. "x", "y",
+ * "zz", "ox").
+ * @return The modified Variant with the requested field updated; returns the
+ * original target if types differ or the field is unsupported.
+ */
 #ifdef TOOLS_ENABLED
 
 #include "math_fieldwise.h"
 
-#define SETUP_TYPE(m_type)    \
-	m_type source = p_source; \
-	m_type target = p_target;
-#define TRY_TRANSFER_FIELD(m_name, m_member) \
-	if (p_field == m_name) {                 \
-		target.m_member = source.m_member;   \
-	}
+#define SETUP_TYPE(m_type)                                                     \
+  m_type source = p_source;                                                    \
+  m_type target = p_target;
+#define TRY_TRANSFER_FIELD(m_name, m_member)                                   \
+  if (p_field == m_name) {                                                     \
+    target.m_member = source.m_member;                                         \
+  }
 
-Variant fieldwise_assign(const Variant &p_target, const Variant &p_source, const String &p_field) {
+Variant fieldwise_assign(const Variant &p_target, const Variant &p_source,
+                         const String &p_field) {
 
-	ERR_FAIL_COND_V(p_target.get_type() != p_source.get_type(), p_target);
+  ERR_FAIL_COND_V(p_target.get_type() != p_source.get_type(), p_target);
 
-	/* clang-format makes a mess of this macro usage */
-	/* clang-format off */
+  /* clang-format makes a mess of this macro usage */
+  /* clang-format off */
 
 	switch (p_source.get_type()) {
 
@@ -175,7 +164,7 @@ Variant fieldwise_assign(const Variant &p_target, const Variant &p_source, const
 			ERR_FAIL_V(p_target);
 		}
 	}
-	/* clang-format on */
+  /* clang-format on */
 }
 
 #endif // TOOLS_ENABLED
