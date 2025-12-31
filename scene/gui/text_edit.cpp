@@ -3,6 +3,12 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
+
+/**
+ * @file text_edit.cpp
+ * @brief Implementation of text_edit functionality.
+ */
+
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */

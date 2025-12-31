@@ -3,6 +3,12 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
+
+/**
+ * @file nine_patch_rect.h
+ * @brief Implementation of NinePatchRect class.
+ */
+
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */

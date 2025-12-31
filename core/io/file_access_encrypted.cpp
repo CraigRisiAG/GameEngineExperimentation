@@ -3,6 +3,12 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
+
+/**
+ * @file file_access_encrypted.cpp
+ * @brief Implementation of file_access_encrypted functionality.
+ */
+
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */

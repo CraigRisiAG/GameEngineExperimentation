@@ -3,6 +3,12 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
+
+/**
+ * @file thread_work_pool.cpp
+ * @brief Implementation of thread_work_pool functionality.
+ */
+
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */

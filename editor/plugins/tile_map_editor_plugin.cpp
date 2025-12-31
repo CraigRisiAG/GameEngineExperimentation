@@ -3,6 +3,12 @@
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
+
+/**
+ * @file tile_map_editor_plugin.cpp
+ * @brief Definition of _PaletteEntry data structure.
+ */
+
 /*                      https://godotengine.org                          */
 /*************************************************************************/
 /* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
