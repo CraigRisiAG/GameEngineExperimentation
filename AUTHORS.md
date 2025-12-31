@@ -1,4 +1,4 @@
-This is a modiffied version of the Godot Engine, the autohors of whom can be found below:
+This is a heavily modified version of the Godot Engine, the original authors of whom can be found below:
 
 
 # Godot Engine authors

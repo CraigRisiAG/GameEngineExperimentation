@@ -1,33 +1,21 @@
-/*************************************************************************/
-/*  disjoint_set.h                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @brief A generic disjoint-set (union–find) data structure with path compression and union by rank.
+ *
+ * @tparam T  Type of the elements managed by the disjoint set.
+ * @tparam C  Comparator type used for ordering elements in the internal map (defaults to Comparator<T>).
+ * @tparam AL Allocator type used for memory management (defaults to DefaultAllocator).
+ *
+ * This class supports insertion of elements, union of sets by representative elements,
+ * and querying of set representatives and members. It leverages path compression in
+ * find operations and union by rank to ensure near-constant time performance.
+ *
+ * Public interface:
+ * - insert(T object): Ensure an element exists in the disjoint set.
+ * - create_union(T a, T b): Merge the sets containing elements a and b.
+ * - get_representatives(Vector<T>& out_roots): Collect all root representatives of current sets.
+ * - get_members(Vector<T>& out_members, T representative): Collect all members belonging to the set of the given representative.
+ */
 #ifndef DISJOINT_SET_H
 #define DISJOINT_SET_H
 

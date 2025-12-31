@@ -1,33 +1,260 @@
-/*************************************************************************/
-/*  camera_matrix.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class CameraMatrix
+ * @brief Represents a 4x4 matrix used for camera transformations and projections.
+ * 
+ * This class provides functionality for setting up various camera projection types
+ * (perspective, orthogonal, frustum), extracting projection planes, and performing
+ * matrix operations. It supports both standard and stereoscopic (VR/HMD) camera setups.
+ * 
+ * @details The matrix is stored in column-major order and can be used for:
+ *   - Perspective and orthogonal projections
+ *   - Stereoscopic rendering for VR/HMD devices
+ *   - Frustum culling with plane extraction
+ *   - Matrix transformations and inversions
+ *   - Viewport and field-of-view calculations
+ */
+
+/**
+ * @fn void set_identity()
+ * @brief Sets the matrix to the identity matrix.
+ */
+
+/**
+ * @fn void set_zero()
+ * @brief Sets all matrix elements to zero.
+ */
+
+/**
+ * @fn Plane xform4(const Plane &p_vec4) const
+ * @brief Transforms a plane by this matrix.
+ * @param p_vec4 The plane to transform.
+ * @return The transformed plane.
+ */
+
+/**
+ * @fn void set_perspective(real_t p_fovy_degrees, real_t p_aspect, real_t p_z_near, real_t p_z_far, bool p_flip_fov)
+ * @brief Sets up a standard perspective projection matrix.
+ * @param p_fovy_degrees Field of view angle in degrees (vertical).
+ * @param p_aspect Aspect ratio (width/height).
+ * @param p_z_near Distance to near clipping plane.
+ * @param p_z_far Distance to far clipping plane.
+ * @param p_flip_fov Whether to flip the field of view calculation.
+ */
+
+/**
+ * @fn void set_perspective(real_t p_fovy_degrees, real_t p_aspect, real_t p_z_near, real_t p_z_far, bool p_flip_fov, int p_eye, real_t p_intraocular_dist, real_t p_convergence_dist)
+ * @brief Sets up a stereoscopic perspective projection matrix for VR rendering.
+ * @param p_fovy_degrees Field of view angle in degrees (vertical).
+ * @param p_aspect Aspect ratio (width/height).
+ * @param p_z_near Distance to near clipping plane.
+ * @param p_z_far Distance to far clipping plane.
+ * @param p_flip_fov Whether to flip the field of view calculation.
+ * @param p_eye Eye index (1 = left, 2 = right, other = mono).
+ * @param p_intraocular_dist Distance between the eyes.
+ * @param p_convergence_dist Convergence distance for stereoscopic rendering.
+ */
+
+/**
+ * @fn void set_for_hmd(int p_eye, real_t p_aspect, real_t p_intraocular_dist, real_t p_display_width, real_t p_display_to_lens, real_t p_oversample, real_t p_z_near, real_t p_z_far)
+ * @brief Sets up a projection matrix optimized for head-mounted displays (HMD).
+ * @param p_eye Eye index (1 = left, 2 = right, other = mono).
+ * @param p_aspect Aspect ratio (width/height).
+ * @param p_intraocular_dist Distance between the eyes.
+ * @param p_display_width Width of the display.
+ * @param p_display_to_lens Distance from display to lens.
+ * @param p_oversample Oversampling factor to increase field of view.
+ * @param p_z_near Distance to near clipping plane.
+ * @param p_z_far Distance to far clipping plane.
+ */
+
+/**
+ * @fn void set_orthogonal(real_t p_left, real_t p_right, real_t p_bottom, real_t p_top, real_t p_znear, real_t p_zfar)
+ * @brief Sets up an orthogonal projection matrix with explicit boundaries.
+ * @param p_left Left plane boundary.
+ * @param p_right Right plane boundary.
+ * @param p_bottom Bottom plane boundary.
+ * @param p_top Top plane boundary.
+ * @param p_znear Distance to near clipping plane.
+ * @param p_zfar Distance to far clipping plane.
+ */
+
+/**
+ * @fn void set_orthogonal(real_t p_size, real_t p_aspect, real_t p_znear, real_t p_zfar, bool p_flip_fov)
+ * @brief Sets up an orthogonal projection matrix with size and aspect ratio.
+ * @param p_size Size of the viewport.
+ * @param p_aspect Aspect ratio (width/height).
+ * @param p_znear Distance to near clipping plane.
+ * @param p_zfar Distance to far clipping plane.
+ * @param p_flip_fov Whether to flip the field of view calculation.
+ */
+
+/**
+ * @fn void set_frustum(real_t p_left, real_t p_right, real_t p_bottom, real_t p_top, real_t p_near, real_t p_far)
+ * @brief Sets up a frustum projection matrix with explicit boundaries.
+ * @param p_left Left plane boundary.
+ * @param p_right Right plane boundary.
+ * @param p_bottom Bottom plane boundary.
+ * @param p_top Top plane boundary.
+ * @param p_near Distance to near clipping plane.
+ * @param p_far Distance to far clipping plane.
+ */
+
+/**
+ * @fn void set_frustum(real_t p_size, real_t p_aspect, Vector2 p_offset, real_t p_near, real_t p_far, bool p_flip_fov)
+ * @brief Sets up a frustum projection matrix with offset.
+ * @param p_size Size of the frustum.
+ * @param p_aspect Aspect ratio (width/height).
+ * @param p_offset Offset applied to frustum planes.
+ * @param p_near Distance to near clipping plane.
+ * @param p_far Distance to far clipping plane.
+ * @param p_flip_fov Whether to flip the field of view calculation.
+ */
+
+/**
+ * @fn real_t get_z_far() const
+ * @brief Extracts the far clipping plane distance from the matrix.
+ * @return The far clipping plane distance.
+ */
+
+/**
+ * @fn real_t get_z_near() const
+ * @brief Extracts the near clipping plane distance from the matrix.
+ * @return The near clipping plane distance.
+ */
+
+/**
+ * @fn Vector2 get_viewport_half_extents() const
+ * @brief Calculates the half extents of the viewport at the near plane.
+ * @return Vector2 containing half width and height.
+ */
+
+/**
+ * @fn void get_far_plane_size(real_t &r_width, real_t &r_height) const
+ * @brief Calculates the size of the far clipping plane.
+ * @param r_width Output parameter for plane width.
+ * @param r_height Output parameter for plane height.
+ */
+
+/**
+ * @fn bool get_endpoints(const Transform &p_transform, Vector3 *p_8points) const
+ * @brief Extracts the 8 corner points of the frustum.
+ * @param p_transform Transform to apply to the points.
+ * @param p_8points Array to store the 8 corner points.
+ * @return True if successful, false otherwise.
+ */
+
+/**
+ * @fn Vector<Plane> get_projection_planes(const Transform &p_transform) const
+ * @brief Extracts the 6 frustum planes from the matrix.
+ * @param p_transform Transform to apply to the planes.
+ * @return Vector containing the 6 projection planes (near, far, left, top, right, bottom).
+ */
+
+/**
+ * @fn CameraMatrix inverse() const
+ * @brief Returns the inverse of this matrix.
+ * @return A new CameraMatrix that is the inverse of this one.
+ */
+
+/**
+ * @fn void invert()
+ * @brief Inverts this matrix in place using Gaussian elimination with partial pivoting.
+ */
+
+/**
+ * @fn void flip_y()
+ * @brief Flips the Y-axis of the projection (negates the second row).
+ */
+
+/**
+ * @fn CameraMatrix operator*(const CameraMatrix &p_matrix) const
+ * @brief Multiplies this matrix by another matrix.
+ * @param p_matrix The matrix to multiply with.
+ * @return The resulting matrix product.
+ */
+
+/**
+ * @fn void set_depth_correction(bool p_flip_y)
+ * @brief Sets up a depth correction matrix for rendering API compatibility.
+ * @param p_flip_y Whether to flip the Y-axis.
+ */
+
+/**
+ * @fn void set_light_bias()
+ * @brief Sets up a matrix for light space rendering with bias.
+ */
+
+/**
+ * @fn void set_light_atlas_rect(const Rect2 &p_rect)
+ * @brief Sets up a matrix for rendering to a light atlas rectangle.
+ * @param p_rect The rectangular area in the light atlas.
+ */
+
+/**
+ * @fn operator String() const
+ * @brief Converts the matrix to a string representation.
+ * @return String representation of the matrix.
+ */
+
+/**
+ * @fn real_t get_aspect() const
+ * @brief Extracts the aspect ratio from the projection.
+ * @return The aspect ratio (width/height).
+ */
+
+/**
+ * @fn int get_pixels_per_meter(int p_for_pixel_width) const
+ * @brief Calculates pixels per meter for a given pixel width.
+ * @param p_for_pixel_width The pixel width to use for calculation.
+ * @return Pixels per meter value.
+ */
+
+/**
+ * @fn bool is_orthogonal() const
+ * @brief Checks if this matrix represents an orthogonal projection.
+ * @return True if orthogonal, false if perspective.
+ */
+
+/**
+ * @fn real_t get_fov() const
+ * @brief Extracts the field of view angle from the matrix.
+ * @return Field of view in degrees.
+ */
+
+/**
+ * @fn void make_scale(const Vector3 &p_scale)
+ * @brief Sets up a scaling matrix.
+ * @param p_scale The scale factors for each axis.
+ */
+
+/**
+ * @fn void scale_translate_to_fit(const AABB &p_aabb)
+ * @brief Creates a matrix that scales and translates to fit an AABB.
+ * @param p_aabb The bounding box to fit.
+ */
+
+/**
+ * @fn operator Transform() const
+ * @brief Converts the matrix to a Transform object.
+ * @return A Transform representation of this matrix.
+ */
+
+/**
+ * @fn CameraMatrix(const Transform &p_transform)
+ * @brief Constructs a CameraMatrix from a Transform.
+ * @param p_transform The transform to convert.
+ */
+
+/**
+ * @fn CameraMatrix()
+ * @brief Default constructor that initializes the matrix to identity.
+ */
+
+/**
+ * @fn ~CameraMatrix()
+ * @brief Destructor.
+ */
 #include "camera_matrix.h"
 
 #include "core/math/math_funcs.h"
