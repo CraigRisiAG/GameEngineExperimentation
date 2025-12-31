@@ -1,33 +1,32 @@
-/*************************************************************************/
-/*  variant_parser.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file variant_parser.cpp
+ * @brief Implementation of variant parsing and writing functionality for the game engine.
+ * 
+ * This file contains the implementation of the VariantParser and VariantWriter classes,
+ * which handle serialization and deserialization of Variant types. It supports parsing
+ * from file and string streams, as well as writing variants to string output.
+ * 
+ * Key Features:
+ * - Tokenization of input streams (StreamFile and StreamString)
+ * - Token type definitions and name mappings
+ * - Parsing of complex data types including:
+ *   - Primitive types (bool, int, float, string)
+ *   - Vector types (Vector2, Vector3, Vector2i, Vector3i)
+ *   - Matrix types (Transform2D, Basis, Transform)
+ *   - Collection types (Array, Dictionary)
+ *   - Packed array types (PackedByteArray, PackedFloat32Array, etc.)
+ *   - Specialized types (Color, NodePath, RID, Resource)
+ * - Support for escape sequences in strings
+ * - Unicode support via UTF-8 parsing
+ * - Recursive parsing of nested structures
+ * - Tag-based parsing for configuration files
+ * - Variant serialization with customizable resource encoding
+ * 
+ * @note The parser handles both old-style and new-style configuration formats.
+ * @note Resource encoding can be customized via callback functions.
+ */
 #include "variant_parser.h"
 
 #include "core/io/resource_loader.h"

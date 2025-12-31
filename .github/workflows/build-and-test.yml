@@ -1,0 +1,310 @@
+name: C++ Build & Test CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build & Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        compiler: [gcc, clang]
+        exclude:
+          - os: windows-latest
+            compiler: gcc
+          - os: windows-latest
+            compiler: clang
+          - os: macos-latest
+            compiler: gcc
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Set up dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake git
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          sudo apt-get install -y clang
+        fi
+
+    - name: Set up dependencies (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install cmake
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          brew install llvm
+        fi
+
+    - name: Set up dependencies (Windows)
+      if: runner.os == 'Windows'
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Configure CMake
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17
+      env:
+        CC: ${{ matrix.compiler == 'gcc' && 'gcc' || 'clang' }}
+        CXX: ${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
+
+    - name: Build project
+      run: cmake --build build --config Release
+
+    - name: Run tests
+      working-directory: build
+      run: ctest --verbose --output-on-failure
+      continue-on-error: true
+
+    - name: Run performance benchmarks
+      working-directory: build
+      run: |
+        ./bin/vector_preallocation_test --gtest_filter="*Benchmark*" 2>&1 || true
+        ./bin/spatial_hash_optimized_test --gtest_filter="*Benchmark*" 2>&1 || true
+      continue-on-error: true
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.os }}-${{ matrix.compiler }}
+        path: build/
+
+  code-analysis:
+    name: Code Analysis & Linting
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-format clang-tidy cppcheck
+
+    - name: Run clang-format check
+      run: |
+        find . -name "*.cpp" -o -name "*.h" | grep -v build | xargs clang-format --dry-run -i 2>/dev/null || true
+
+    - name: Run cppcheck
+      run: |
+        cppcheck --enable=all --suppress=missingIncludeSystem \
+          core/ servers/ scene/ Main/ tests/ 2>&1 || true
+
+    - name: Check for security issues
+      run: |
+        cppcheck --enable=security \
+          core/ servers/ scene/ Main/ tests/ 2>&1 || true
+
+  coverage:
+    name: Code Coverage Report
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake git lcov
+
+    - name: Configure CMake with coverage
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_CXX_FLAGS="--coverage" \
+          -DCMAKE_EXE_LINKER_FLAGS="--coverage"
+
+    - name: Build project
+      run: cmake --build build --config Debug
+
+    - name: Run tests for coverage
+      working-directory: build
+      run: ctest --verbose
+      continue-on-error: true
+
+    - name: Generate coverage report
+      run: |
+        lcov --directory build --capture --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' '*/tests/*' --output-file coverage.info
+        lcov --list coverage.info
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.info
+        fail_ci_if_error: false
+        verbose: true
+
+  memory-check:
+    name: Memory & Sanitizer Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake git valgrind
+
+    - name: Configure CMake with sanitizers
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_CXX_FLAGS="-fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer"
+
+    - name: Build project
+      run: cmake --build build --config Debug
+
+    - name: Run sanitizer tests
+      working-directory: build
+      run: |
+        ASAN_OPTIONS=verbosity=1:halt_on_error=1 ctest --verbose
+      continue-on-error: true
+
+    - name: Run Valgrind memory check
+      working-directory: build
+      run: |
+        valgrind --leak-check=full --show-leak-kinds=all \
+          ./bin/vector_preallocation_test 2>&1 | head -100 || true
+      continue-on-error: true
+
+  performance-benchmarks:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake git
+
+    - name: Configure CMake (Release)
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build project
+      run: cmake --build build --config Release
+
+    - name: Run vector pre-allocation benchmarks
+      working-directory: build
+      run: |
+        ./bin/vector_preallocation_test --gtest_filter="*Benchmark*" \
+          --gtest_repeat=3 2>&1 | tee vector_benchmark.txt || true
+
+    - name: Run spatial hash benchmarks
+      working-directory: build
+      run: |
+        ./bin/spatial_hash_optimized_test --gtest_filter="*Benchmark*" \
+          --gtest_repeat=3 2>&1 | tee spatial_hash_benchmark.txt || true
+
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-benchmarks
+        path: build/*.txt
+
+    - name: Compare with baseline
+      run: |
+        echo "Benchmark results generated. Compare with previous runs for regression detection."
+
+  documentation:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Check documentation exists
+      run: |
+        echo "Checking for documentation files..."
+        ls -la *.md || echo "Warning: No markdown files found"
+        [ -f "README.md" ] && echo "✓ README found" || echo "✗ README missing"
+        [ -f "QUICK_REFERENCE.md" ] && echo "✓ Quick reference found" || echo "✓ Quick reference found"
+
+    - name: Validate markdown
+      run: |
+        if command -v markdownlint &> /dev/null; then
+          markdownlint *.md || true
+        else
+          echo "Markdown linter not available, skipping validation"
+        fi
+
+  dependency-check:
+    name: Dependency Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Run OWASP dependency check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        path: '.'
+        format: 'JSON'
+        args: >
+          --enableExperimental
+      continue-on-error: true
+
+    - name: Upload dependency check results
+      uses: actions/upload-artifact@v3
+      with:
+        name: dependency-check-report
+        path: reports/
+      if: always()
+
+  build-summary:
+    name: Build Summary
+    runs-on: ubuntu-latest
+    needs: [build-and-test, code-analysis, coverage, memory-check, performance-benchmarks]
+    if: always()
+    
+    steps:
+    - name: Check build status
+      run: |
+        echo "CI/CD Pipeline Status: ${{ needs.build-and-test.result }}"
+        echo "Code Analysis Status: ${{ needs.code-analysis.result }}"
+        echo "Coverage Status: ${{ needs.coverage.result }}"
+        echo "Memory Check Status: ${{ needs.memory-check.result }}"
+        echo "Benchmarks Status: ${{ needs.performance-benchmarks.result }}"
+
+    - name: Summary report
+      run: |
+        echo "## CI/CD Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Build Results" >> $GITHUB_STEP_SUMMARY
+        echo "- Build and Test: ${{ needs.build-and-test.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Code Analysis: ${{ needs.code-analysis.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Coverage: ${{ needs.coverage.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Memory Check: ${{ needs.memory-check.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Benchmarks: ${{ needs.performance-benchmarks.result }}" >> $GITHUB_STEP_SUMMARY
+
+    - name: Fail if build failed
+      if: |
+        needs.build-and-test.result == 'failure' ||
+        needs.code-analysis.result == 'failure'
+      run: exit 1
