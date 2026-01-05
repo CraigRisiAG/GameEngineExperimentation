@@ -1,33 +1,97 @@
-/*************************************************************************/
-/*  haiku_direct_window.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file haiku_direct_window.cpp
+ * @brief Haiku platform implementation of a direct window for Godot game engine.
+ * 
+ * This file implements the HaikuDirectWindow class, which manages a Haiku BDirectWindow
+ * and handles all input events including mouse, keyboard, and window resize operations.
+ * It processes these events and forwards them to the engine's input system.
+ * 
+ * @class HaikuDirectWindow
+ * @brief A Haiku native window implementation that receives and processes input events.
+ * 
+ * @details
+ * HaikuDirectWindow extends BDirectWindow and serves as the main window for the Godot
+ * engine on the Haiku operating system. It manages:
+ * - OpenGL view attachment and direct mode rendering
+ * - Mouse input events (button presses, movement, wheel scrolling)
+ * - Keyboard input events and modifier state changes
+ * - Window resize events
+ * - Main loop iteration and message dispatching
+ * 
+ * @method HaikuDirectWindow(BRect p_frame)
+ * @brief Constructor that initializes the window with given frame dimensions.
+ * @param p_frame The window frame rectangle.
+ * 
+ * @method void SetHaikuGLView(HaikuGLView *p_view)
+ * @brief Attaches an OpenGL view to this window.
+ * @param p_view Pointer to the HaikuGLView to attach.
+ * 
+ * @method void StartMessageRunner()
+ * @brief Starts a message runner that triggers redraws at 60 FPS.
+ * 
+ * @method void StopMessageRunner()
+ * @brief Stops the message runner and cleans up resources.
+ * 
+ * @method void SetInput(InputDefault *p_input)
+ * @brief Sets the input handler for this window.
+ * @param p_input Pointer to the input handler.
+ * 
+ * @method void SetMainLoop(MainLoop *p_main_loop)
+ * @brief Sets the main game loop for this window.
+ * @param p_main_loop Pointer to the main loop.
+ * 
+ * @method bool QuitRequested()
+ * @brief Handles window close request and notifies the main loop.
+ * @return Always false to prevent immediate window closure.
+ * 
+ * @method void DirectConnected(direct_buffer_info *info)
+ * @brief Called when direct buffer access is established.
+ * @param info Direct buffer information structure.
+ * 
+ * @method void MessageReceived(BMessage *message)
+ * @brief Processes messages sent to this window.
+ * @param message The message to process.
+ * 
+ * @method void DispatchMessage(BMessage *message, BHandler *handler)
+ * @brief Dispatches messages to appropriate input event handlers.
+ * @param message The message to dispatch.
+ * @param handler The handler that will receive the message.
+ * 
+ * @method void HandleMouseButton(BMessage *message)
+ * @brief Processes mouse button press/release events.
+ * @param message Message containing mouse button data.
+ * 
+ * @method void HandleMouseMoved(BMessage *message)
+ * @brief Processes mouse movement events and calculates relative movement.
+ * @param message Message containing mouse position data.
+ * 
+ * @method void HandleMouseWheelChanged(BMessage *message)
+ * @brief Processes mouse wheel scroll events.
+ * @param message Message containing wheel delta data.
+ * 
+ * @method void HandleKeyboardEvent(BMessage *message)
+ * @brief Processes keyboard key press/release events with Unicode support.
+ * @param message Message containing keyboard data.
+ * 
+ * @method void HandleKeyboardModifierEvent(BMessage *message)
+ * @brief Processes modifier key state changes (Shift, Ctrl, Alt, Cmd).
+ * @param message Message containing modifier state data.
+ * 
+ * @method void HandleWindowResized(BMessage *message)
+ * @brief Processes window resize events and updates video mode dimensions.
+ * @param message Message containing window dimensions.
+ * 
+ * @method void GetKeyModifierState(Ref<InputEventWithModifiers> event, uint32 p_state)
+ * @brief Updates input event with current modifier key states.
+ * @param event The input event to update.
+ * @param p_state The modifier state flags from Haiku.
+ * 
+ * @method int GetMouseButtonState(uint32 p_state)
+ * @brief Converts Haiku mouse button state to engine button mask.
+ * @param p_state Haiku mouse button state flags.
+ * @return Button mask for the input system.
+ */
 #include <UnicodeChar.h>
 
 #include "core/os/keyboard.h"

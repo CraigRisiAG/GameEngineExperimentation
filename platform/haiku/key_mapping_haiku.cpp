@@ -1,33 +1,54 @@
-/*************************************************************************/
-/*  key_mapping_haiku.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file key_mapping_haiku.cpp
+ * @brief Haiku platform keyboard key mapping implementation.
+ * 
+ * Provides translation between Haiku OS key codes and the engine's keyboard constants.
+ * Handles standard keys, function keys, modifier keys, and keypad mappings.
+ */
+
+/**
+ * @struct _HaikuTranslatePair
+ * @brief Maps between engine key symbols and Haiku OS key codes.
+ * @member keysym Engine's keyboard constant (e.g., KEY_SHIFT, KEY_F1)
+ * @member keycode Haiku OS key code constant (e.g., B_SHIFT_KEY, B_F1_KEY)
+ */
+
+/**
+ * @brief Maps modifier keys to their corresponding engine key symbols.
+ * Includes single modifiers and left/right variants for shift, control, alt/command, and option keys.
+ */
+
+/**
+ * @brief Maps function keys (F1-F12) to their corresponding engine key symbols.
+ * Also includes special keys like print, scroll lock, and pause.
+ */
+
+/**
+ * @brief Maps Haiku key codes to engine key symbols.
+ * Covers alphanumeric characters, navigation keys, special characters, and keypad keys.
+ */
+
+/**
+ * @brief Translates a Haiku raw character code and key code to an engine key symbol.
+ * 
+ * Handles keypad special cases where the raw_char value indicates a keypad key,
+ * then falls back to function key or standard key mapping based on the raw_char value.
+ * 
+ * @param raw_char The raw character code from Haiku OS
+ * @param key The key code from Haiku OS
+ * @return The corresponding engine key symbol, or KEY_UNKNOWN if no mapping exists
+ */
+
+/**
+ * @brief Translates a Haiku modifier key code to an engine key symbol.
+ * 
+ * Performs bitwise AND operation to check if the modifier key is present in the key bitmask.
+ * Returns the first matching modifier key symbol found.
+ * 
+ * @param key The modifier key bitmask from Haiku OS
+ * @return The corresponding engine modifier key symbol, or KEY_UNKNOWN if no mapping exists
+ */
 #include <InterfaceDefs.h>
 
 #include "core/os/keyboard.h"

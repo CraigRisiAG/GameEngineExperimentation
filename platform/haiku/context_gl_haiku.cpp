@@ -1,33 +1,77 @@
-/*************************************************************************/
-/*  context_gl_haiku.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file context_gl_haiku.cpp
+ * @brief OpenGL context implementation for the Haiku operating system.
+ * 
+ * This file provides the platform-specific OpenGL context management for Haiku,
+ * including window binding, buffer swapping, and vsync control.
+ */
+
+/**
+ * @brief Constructs an OpenGL context for a Haiku window.
+ * 
+ * @param p_window Pointer to the HaikuDirectWindow that will host the OpenGL context.
+ * 
+ * Creates a new HaikuGLView with RGB double-buffered rendering and depth buffer support.
+ * VSync is disabled by default.
+ */
+
+/**
+ * @brief Destroys the OpenGL context and associated view.
+ * 
+ * Cleans up the HaikuGLView allocated during construction.
+ */
+
+/**
+ * @brief Initializes the OpenGL context and attaches it to the window.
+ * 
+ * @return Error code (OK on success).
+ * 
+ * Adds the OpenGL view as a child to the window and registers it as the active
+ * OpenGL view for the window.
+ */
+
+/**
+ * @brief Releases the current OpenGL context from the calling thread.
+ * 
+ * Unlocks the OpenGL context, allowing other threads to use it.
+ */
+
+/**
+ * @brief Makes this OpenGL context current for the calling thread.
+ * 
+ * Locks the OpenGL context for exclusive use by the current thread.
+ */
+
+/**
+ * @brief Swaps the front and back buffers to display rendered content.
+ * 
+ * Respects the current vsync setting when performing the buffer swap.
+ */
+
+/**
+ * @brief Retrieves the current window width in pixels.
+ * 
+ * @return The width of the window's bounds.
+ */
+
+/**
+ * @brief Retrieves the current window height in pixels.
+ * 
+ * @return The height of the window's bounds.
+ */
+
+/**
+ * @brief Sets whether vertical sync (vsync) should be enabled.
+ * 
+ * @param p_use True to enable vsync, false to disable it.
+ */
+
+/**
+ * @brief Checks if vertical sync (vsync) is currently enabled.
+ * 
+ * @return True if vsync is enabled, false otherwise.
+ */
 #include "context_gl_haiku.h"
 
 #if defined(OPENGL_ENABLED)

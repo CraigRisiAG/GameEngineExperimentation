@@ -1,4 +1,22 @@
+"""
+Haiku platform detection and configuration module for SCons build system.
+This module provides platform detection and build configuration for the Haiku OS.
+It handles compiler settings, optimization flags, and dependency management through
+pkg-config for various libraries including graphics, audio, video, and networking.
+Functions:
+    is_active(): Checks if the Haiku platform is available.
+    get_name(): Returns the platform name.
+    can_build(): Validates if the platform can be built on the current system.
+    get_opts(): Returns SCons build options for debug symbols configuration.
+    get_flags(): Returns platform-specific compiler flags.
+    configure(env): Configures the SCons environment with Haiku-specific settings,
+                   including compiler selection, optimization levels, and library
+                   dependencies (libwebp, freetype, libpng, bullet, enet, squish,
+                   zstd, theora, vpx, vorbis, opus, ogg, wslay, mbedtls, miniupnpc,
+                   pcre2, and system libraries like be, game, media, network).
+"""
 import os
+
 import sys
 
 

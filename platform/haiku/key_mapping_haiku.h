@@ -1,33 +1,35 @@
-/*************************************************************************/
-/*  key_mapping_haiku.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class KeyMappingHaiku
+ * @brief Provides key mapping utilities for the Haiku operating system platform.
+ * 
+ * This class handles the conversion of raw character codes and key values
+ * from the Haiku operating system into cross-platform keysym representations.
+ * It serves as a platform-specific abstraction layer for keyboard input handling.
+ */
+
+/**
+ * @brief Converts a raw character and key code to a platform-independent keysym.
+ * 
+ * Maps Haiku-specific key input (raw character and key code) to a standard
+ * keysym value that can be used uniformly across the application.
+ * 
+ * @param raw_char The raw character code from the Haiku keyboard event
+ * @param key The key code from the Haiku keyboard event
+ * 
+ * @return An unsigned integer representing the cross-platform keysym value
+ */
+
+/**
+ * @brief Converts a Haiku modifier key code to its corresponding keysym.
+ * 
+ * Translates modifier keys (such as Shift, Control, Alt) from Haiku's
+ * key representation into standard keysym values.
+ * 
+ * @param key The Haiku modifier key code
+ * 
+ * @return An unsigned integer representing the modifier keysym value
+ */
 #ifndef KEY_MAPPING_HAIKU_H
 #define KEY_MAPPING_HAIKU_H
 

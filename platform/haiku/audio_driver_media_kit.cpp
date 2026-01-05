@@ -1,33 +1,91 @@
-/*************************************************************************/
-/*  audio_driver_media_kit.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file audio_driver_media_kit.cpp
+ * @brief Audio driver implementation for Haiku OS using the MediaKit library.
+ * 
+ * This file provides audio output functionality for the game engine on Haiku OS
+ * by implementing the AudioDriverMediaKit class. It manages audio initialization,
+ * buffer processing, and playback through the BeOS/Haiku MediaKit BSoundPlayer API.
+ * 
+ * @class AudioDriverMediaKit
+ * @brief Haiku OS audio driver using MediaKit BSoundPlayer.
+ * 
+ * Handles audio configuration, mixing, and real-time playback on Haiku systems.
+ * Uses a callback-based approach where PlayBuffer is invoked by the BSoundPlayer
+ * to fill audio buffers with mixed audio data.
+ */
+
+/**
+ * @var int32_t *AudioDriverMediaKit::samples_in
+ * @brief Static buffer storing mixed audio samples between callback invocations.
+ */
+
+/**
+ * @fn Error AudioDriverMediaKit::init()
+ * @brief Initializes the audio driver and creates the BSoundPlayer instance.
+ * 
+ * Configures audio parameters (mix rate, channels, buffer size), allocates
+ * sample buffer memory, sets up the MediaKit audio format, and starts playback.
+ * 
+ * @return Error code: OK on success, ERR_CANT_OPEN if BSoundPlayer creation fails.
+ */
+
+/**
+ * @fn void AudioDriverMediaKit::PlayBuffer(void *cookie, void *buffer, size_t size, const media_raw_audio_format &format)
+ * @brief Static callback invoked by BSoundPlayer to fill audio buffers.
+ * 
+ * Processes audio by calling the audio server mixer when active, or fills the
+ * buffer with silence. Copies the mixed samples to the output buffer.
+ * 
+ * @param cookie Pointer to the AudioDriverMediaKit instance.
+ * @param buffer Output audio buffer to fill.
+ * @param size Size of the buffer in bytes.
+ * @param format MediaKit audio format specification.
+ */
+
+/**
+ * @fn void AudioDriverMediaKit::start()
+ * @brief Activates audio processing and playback.
+ */
+
+/**
+ * @fn int AudioDriverMediaKit::get_mix_rate() const
+ * @brief Returns the configured audio mix rate in Hz.
+ * @return Mix rate value.
+ */
+
+/**
+ * @fn SpeakerMode AudioDriverMediaKit::get_speaker_mode() const
+ * @brief Returns the speaker configuration mode.
+ * @return Current speaker mode (stereo).
+ */
+
+/**
+ * @fn void AudioDriverMediaKit::lock()
+ * @brief Acquires the audio mutex for thread-safe access.
+ */
+
+/**
+ * @fn void AudioDriverMediaKit::unlock()
+ * @brief Releases the audio mutex.
+ */
+
+/**
+ * @fn void AudioDriverMediaKit::finish()
+ * @brief Shuts down the audio driver and releases resources.
+ * 
+ * Deletes the BSoundPlayer instance and deallocates the sample buffer.
+ */
+
+/**
+ * @fn AudioDriverMediaKit::AudioDriverMediaKit()
+ * @brief Constructor. Initializes player pointer to NULL.
+ */
+
+/**
+ * @fn AudioDriverMediaKit::~AudioDriverMediaKit()
+ * @brief Destructor.
+ */
 #include "audio_driver_media_kit.h"
 
 #ifdef MEDIA_KIT_ENABLED

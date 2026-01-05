@@ -1,33 +1,102 @@
-/*************************************************************************/
-/*  audio_driver_media_kit.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class AudioDriverMediaKit
+ * @brief Audio driver implementation using Haiku's Media Kit.
+ * 
+ * Provides audio output functionality for the Haiku operating system by leveraging
+ * the Media Kit's sound playback capabilities. Manages audio buffering, format
+ * conversion, and playback thread synchronization.
+ * 
+ * @note This driver is only compiled when MEDIA_KIT_ENABLED is defined.
+ * 
+ * @see AudioDriver
+ * @see BSoundPlayer
+ */
+
+/**
+ * @brief Mutex for thread-safe access to audio driver resources.
+ */
+
+/**
+ * @brief Pointer to the BSoundPlayer instance managing audio playback.
+ */
+
+/**
+ * @brief Static buffer holding audio samples for playback.
+ */
+
+/**
+ * @brief Audio playback callback function invoked by the Media Kit.
+ * 
+ * @param cookie User-defined context pointer.
+ * @param buffer Pointer to the audio buffer to be filled.
+ * @param size Size of the buffer in bytes.
+ * @param format Audio format specification for the current playback session.
+ */
+
+/**
+ * @brief Audio sampling rate in Hz (e.g., 44100, 48000).
+ */
+
+/**
+ * @brief Speaker configuration mode (mono, stereo, surround, etc.).
+ */
+
+/**
+ * @brief Size of each audio buffer in samples.
+ */
+
+/**
+ * @brief Number of audio channels (1 for mono, 2 for stereo, etc.).
+ */
+
+/**
+ * @brief Indicates whether audio playback is currently active.
+ */
+
+/**
+ * @brief Retrieves the driver name.
+ * @return The string "MediaKit".
+ */
+
+/**
+ * @brief Initializes the audio driver and Media Kit resources.
+ * @return OK on success, or an error code on failure.
+ */
+
+/**
+ * @brief Starts audio playback.
+ */
+
+/**
+ * @brief Retrieves the current audio mix rate.
+ * @return The mix rate in Hz.
+ */
+
+/**
+ * @brief Retrieves the current speaker mode configuration.
+ * @return The active speaker mode.
+ */
+
+/**
+ * @brief Acquires the audio driver mutex for thread-safe operations.
+ */
+
+/**
+ * @brief Releases the audio driver mutex.
+ */
+
+/**
+ * @brief Stops audio playback and releases all driver resources.
+ */
+
+/**
+ * @brief Constructs an AudioDriverMediaKit instance.
+ */
+
+/**
+ * @brief Destructs the AudioDriverMediaKit instance and cleans up resources.
+ */
 #include "servers/audio_server.h"
 
 #ifdef MEDIA_KIT_ENABLED

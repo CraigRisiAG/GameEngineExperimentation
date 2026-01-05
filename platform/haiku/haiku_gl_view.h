@@ -1,33 +1,41 @@
-/*************************************************************************/
-/*  haiku_gl_view.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @brief OpenGL view implementation for the Haiku operating system
+ * 
+ * HaikuGLView is a specialized GLView class that provides OpenGL rendering
+ * capabilities within the Haiku BeOS-compatible operating system. It manages
+ * the creation and rendering of OpenGL contexts in Haiku windows.
+ * 
+ * @class HaikuGLView
+ * @extends BGLView
+ */
+
+/**
+ * @brief Constructs a HaikuGLView with the specified frame and type
+ * 
+ * Initializes a new OpenGL view that will be rendered within the given frame
+ * rectangle with the specified OpenGL context type.
+ * 
+ * @param frame The rectangular area where this view will be displayed
+ * @param type The OpenGL context type/mode for this view
+ */
+
+/**
+ * @brief Called when the view is attached to a window
+ * 
+ * Performs initialization tasks when this view is attached to a parent window.
+ * This is typically used to set up OpenGL context and any window-related state.
+ */
+
+/**
+ * @brief Renders the view for the specified update rectangle
+ * 
+ * Called by the system to redraw the view. This method should contain all
+ * OpenGL drawing commands needed to render the contents of the specified
+ * update region.
+ * 
+ * @param updateRect The rectangular region that needs to be redrawn
+ */
 #ifndef HAIKU_GL_VIEW_H
 #define HAIKU_GL_VIEW_H
 

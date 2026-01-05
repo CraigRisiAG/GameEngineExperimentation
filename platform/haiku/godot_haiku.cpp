@@ -1,33 +1,22 @@
-/*************************************************************************/
-/*  godot_haiku.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \brief Entry point for the Haiku operating system platform.
+///
+/// Initializes the Godot Engine for the Haiku platform, sets up the main OS instance,
+/// and handles the engine lifecycle including setup, execution, and cleanup.
+///
+/// \param argc Number of command-line arguments passed to the program.
+/// \param argv Array of command-line argument strings.
+///
+/// \return Exit code indicating program termination status:
+///         - 0 if the program completed successfully
+///         - 255 if engine setup failed
+///         - Other values based on OS_Haiku::get_exit_code()
+///
+/// \note This function manages the following stages:
+///       1. OS_Haiku initialization
+///       2. Engine setup via Main::setup()
+///       3. Engine start and main loop execution via os.run()
+///       4. Engine cleanup via Main::cleanup()
 #include "main/main.h"
 #include "os_haiku.h"
 
