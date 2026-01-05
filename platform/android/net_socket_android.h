@@ -1,33 +1,71 @@
-/*************************************************************************/
-/*  net_socket_android.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class NetSocketAndroid
+ * @brief Android-specific NetSocket implementation with MulticastLock support
+ * 
+ * @details
+ * Extends NetSocketPosix to provide Android-specific functionality for managing
+ * multicast and broadcast operations. Android devices require a MulticastLock to be
+ * held before sockets can receive broadcast and multicast packets. This class
+ * automatically acquires and releases the lock through JNI calls to Java code when:
+ * - Broadcasting is enabled or disabled on a socket
+ * - A socket joins or leaves a multicast group
+ * 
+ * @note
+ * All static JNI references (net_utils, cls, method IDs) must be initialized via
+ * setup() before creating instances.
+ * 
+ * @see NetSocketPosix
+ * @see IP_Address
+ */
+
+/**
+ * @brief Acquires the MulticastLock from Java/Android
+ * @details Private static method that calls into Java code to acquire the lock
+ */
+
+/**
+ * @brief Releases the MulticastLock from Java/Android
+ * @details Private static method that calls into Java code to release the lock
+ */
+
+/**
+ * @brief Makes NetSocketAndroid the default socket implementation
+ * @see _create_func()
+ */
+
+/**
+ * @brief Initializes JNI references for Android interop
+ * @param p_net_utils jobject reference to Android NetUtils Java class
+ * @details Must be called once during engine initialization before creating sockets
+ */
+
+/**
+ * @brief Closes the socket and releases any held MulticastLocks
+ */
+
+/**
+ * @brief Enables or disables broadcasting on this socket
+ * @param p_enabled true to enable broadcasting, false to disable
+ * @return Error code indicating success or failure
+ * @details Automatically acquires/releases MulticastLock as needed
+ */
+
+/**
+ * @brief Joins a multicast group on the specified interface
+ * @param p_multi_address The multicast address to join
+ * @param p_if_name The network interface name to join on
+ * @return Error code indicating success or failure
+ * @details Automatically acquires MulticastLock when joining the first group
+ */
+
+/**
+ * @brief Leaves a multicast group on the specified interface
+ * @param p_multi_address The multicast address to leave
+ * @param p_if_name The network interface name to leave on
+ * @return Error code indicating success or failure
+ * @details Automatically releases MulticastLock when leaving the last group
+ */
 #ifndef NET_SOCKET_ANDROID_H
 #define NET_SOCKET_ANDROID_H
 

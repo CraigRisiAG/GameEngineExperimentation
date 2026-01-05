@@ -1,33 +1,30 @@
-/*************************************************************************/
-/*  java_godot_wrapper.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class GodotJavaWrapper
+ * @brief Wrapper class for calling Java methods from C++ in the Godot Android engine.
+ * 
+ * This class provides C++ bindings to Java methods defined in org/godotengine/godot/Godot.java,
+ * enabling seamless communication between the native C++ layer and the Java/Android layer.
+ * 
+ * @note The class name was intentionally swapped (Java_Godot instead of Godot_Java) to
+ *       organize all Java wrappers together in the file structure.
+ * 
+ * @section Usage
+ * Instantiate with a valid JNI environment and Godot instance object.
+ * All public methods automatically handle JNI method lookups and invocations.
+ * 
+ * @section Methods
+ * - Video/Graphics: on_video_init(), get_gles_version_code()
+ * - Activity Management: restart(), force_quit(), is_activity_resumed()
+ * - Screen Control: set_keep_screen_on()
+ * - User Interaction: alert(), vibrate()
+ * - Clipboard Operations: get_clipboard(), set_clipboard(), has_get_clipboard(), has_set_clipboard()
+ * - Permission Handling: request_permission(), request_permissions(), get_granted_permissions()
+ * - Input: init_input_devices(), get_input_fallback_mapping()
+ * - Surface Management: get_surface()
+ * - Lifecycle: on_godot_main_loop_started()
+ * - Utilities: get_activity(), get_class_loader(), get_member_object()
+ */
 // note, swapped java and godot around in the file name so all the java
 // wrappers are together
 

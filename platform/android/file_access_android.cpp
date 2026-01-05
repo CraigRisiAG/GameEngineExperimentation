@@ -1,33 +1,39 @@
-/*************************************************************************/
-/*  file_access_android.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file file_access_android.cpp
+ * @brief Android platform-specific file access implementation using AAssetManager
+ * 
+ * This file provides file access functionality for Android applications by wrapping
+ * the Android NDK's AAssetManager API. It enables reading files from the application's
+ * asset directory in a way compatible with the engine's FileAccess interface.
+ * 
+ * @note Write operations are not supported on Android assets and will fail with ERR_UNAVAILABLE.
+ * @note This implementation only supports read-only access to asset files.
+ * 
+ * @class FileAccessAndroid
+ * @brief Implements file access operations for Android assets
+ * 
+ * Static Members:
+ * - asset_manager: Pointer to the AAssetManager instance managing application assets
+ * 
+ * Key Methods:
+ * - create_android(): Factory method to instantiate FileAccessAndroid objects
+ * - _open(): Opens an asset file for reading, supporting both absolute and resource paths
+ * - close(): Closes the currently open asset
+ * - seek(): Seeks to an absolute position in the file
+ * - seek_end(): Seeks relative to the end of the file
+ * - get_8(): Reads a single byte from the file
+ * - get_buffer(): Reads multiple bytes into a buffer
+ * - file_exists(): Checks if an asset file exists
+ * 
+ * Path Handling:
+ * - Supports absolute paths (strips leading '/')
+ * - Supports resource paths (strips 'res://' prefix)
+ * - Normalizes paths using simplify_path()
+ * 
+ * @see FileAccess base class for interface contract
+ * @see AAssetManager Android NDK documentation
+ */
 #include "file_access_android.h"
 #include "core/print_string.h"
 

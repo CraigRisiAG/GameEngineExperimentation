@@ -1,33 +1,109 @@
-/*************************************************************************/
-/*  audio_driver_jandroid.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file audio_driver_jandroid.cpp
+ * @brief Android audio driver implementation using JNI for audio processing.
+ * 
+ * This file implements the AudioDriverAndroid class, which provides audio output
+ * functionality on Android platforms by interfacing with Java audio APIs through JNI.
+ * 
+ * @class AudioDriverAndroid
+ * @brief JNI-based audio driver for Android platform.
+ * 
+ * Manages audio initialization, mixing, and playback on Android devices.
+ * Uses a separate thread to handle audio processing and communicates with Java
+ * audio components through JNI method calls.
+ * 
+ * @member s_ad
+ * @brief Static pointer to the singleton AudioDriverAndroid instance.
+ * 
+ * @member io
+ * @brief JNI reference to the Java GodotIO audio handler object.
+ * 
+ * @member _init_audio
+ * @brief JNI method ID for Java audioInit(int, int) method.
+ * 
+ * @member _write_buffer
+ * @brief JNI method ID for Java audioWriteShortBuffer(short[]) method.
+ * 
+ * @member _quit
+ * @brief JNI method ID for Java audioQuit() method.
+ * 
+ * @member _pause
+ * @brief JNI method ID for Java audioPause(boolean) method.
+ * 
+ * @member active
+ * @brief Flag indicating if the audio driver is actively processing audio.
+ * 
+ * @member cls
+ * @brief Global JNI reference to the GodotIO Java class.
+ * 
+ * @member audioBufferFrames
+ * @brief Number of audio frames in the buffer.
+ * 
+ * @member mix_rate
+ * @brief Audio mixing sample rate in Hz (default 44100).
+ * 
+ * @member quit
+ * @brief Flag signaling the audio thread to exit.
+ * 
+ * @member audioBuffer
+ * @brief JNI reference to the Java short array audio buffer.
+ * 
+ * @member audioBufferPinned
+ * @brief Pinned memory pointer to the audio buffer for direct access.
+ * 
+ * @member mutex
+ * @brief Synchronization mutex for thread-safe audio buffer access.
+ * 
+ * @member audioBuffer32
+ * @brief 32-bit audio buffer for internal processing before conversion to 16-bit.
+ * 
+ * @method get_name()
+ * @brief Returns the audio driver name.
+ * @return const char* - "Android"
+ * 
+ * @method init()
+ * @brief Initializes the audio driver and allocates audio buffers.
+ * Retrieves audio configuration from project settings and sets up JNI references.
+ * @return Error - OK on success, ERR_INVALID_PARAMETER if buffer allocation fails.
+ * 
+ * @method start()
+ * @brief Starts audio processing by setting the active flag.
+ * 
+ * @method setup(jobject p_io)
+ * @brief Configures JNI method references for Java audio calls.
+ * @param p_io - JNI reference to the GodotIO Java object.
+ * 
+ * @method thread_func(JNIEnv* env)
+ * @brief Main audio processing thread function.
+ * Continuously reads audio data from the audio server, converts to 16-bit format,
+ * and sends to Java audio output. Runs until quit flag is set.
+ * @param env - JNI environment pointer.
+ * 
+ * @method get_mix_rate() const
+ * @brief Returns the current audio mixing sample rate.
+ * @return int - Mix rate in Hz.
+ * 
+ * @method get_speaker_mode() const
+ * @brief Returns the audio speaker configuration.
+ * @return AudioDriver::SpeakerMode - SPEAKER_MODE_STEREO.
+ * 
+ * @method lock()
+ * @brief Acquires the audio buffer mutex for synchronization.
+ * 
+ * @method unlock()
+ * @brief Releases the audio buffer mutex.
+ * 
+ * @method finish()
+ * @brief Cleans up audio resources and releases JNI references.
+ * 
+ * @method set_pause(bool p_pause)
+ * @brief Pauses or resumes audio playback.
+ * @param p_pause - True to pause, false to resume.
+ * 
+ * @method AudioDriverAndroid()
+ * @brief Constructor. Initializes the driver as inactive and sets singleton instance.
+ */
 #include "audio_driver_jandroid.h"
 
 #include "core/os/os.h"

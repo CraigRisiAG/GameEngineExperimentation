@@ -1,33 +1,35 @@
-/*************************************************************************/
-/*  dir_access_jandroid.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file dir_access_jandroid.cpp
+ * @brief Android directory access implementation using JNI.
+ * 
+ * Provides directory listing, traversal, and file system operations for Android
+ * by interfacing with Java methods through the Java Native Interface (JNI).
+ * Supports reading from APK resources and the Android file system.
+ * 
+ * @class DirAccessJAndroid
+ * @brief Directory access handler for Android platform using JNI callbacks.
+ * 
+ * This class implements directory operations by delegating to Java methods
+ * called through JNI. It maintains a directory listing state and provides
+ * iteration through directory contents.
+ * 
+ * @note Operations like make_dir, rename, and remove are not supported on
+ * APK resources and return ERR_UNAVAILABLE.
+ * 
+ * @static jobject io - Java object providing directory I/O operations
+ * @static jclass cls - Cached Java class reference for method lookups
+ * @static jmethodID _dir_open - Method ID for opening directories
+ * @static jmethodID _dir_next - Method ID for getting next directory entry
+ * @static jmethodID _dir_close - Method ID for closing directories
+ * @static jmethodID _dir_is_dir - Method ID for checking if entry is directory
+ * 
+ * @member id - Current directory listing handle (0 when not listing)
+ * @member current_dir - Currently accessed directory path
+ * 
+ * @see ThreadAndroid
+ * @see FileAccessJAndroid
+ */
 #include "dir_access_jandroid.h"
 #include "core/print_string.h"
 #include "file_access_jandroid.h"

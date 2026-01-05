@@ -1,33 +1,53 @@
-/*************************************************************************/
-/*  thread_jandroid.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class ThreadAndroid
+ * @brief Android-specific thread implementation using POSIX pthread with JNI support.
+ * 
+ * Provides thread management for Android platform, integrating with the Java Virtual Machine
+ * through JNI (Java Native Interface). Extends the base Thread class to provide platform-specific
+ * thread creation, management, and JVM environment handling.
+ * 
+ * @note This class manages pthread lifecycle and maintains JVM environment for JNI calls.
+ * 
+ * Static Members:
+ *   - thread_id_key: pthread key for thread-local storage of thread IDs
+ *   - next_thread_id: Counter for generating unique thread IDs
+ *   - jvm_key: pthread key for thread-local JVM storage
+ *   - java_vm: Reference to the Java Virtual Machine
+ * 
+ * Member Variables:
+ *   - pthread: POSIX thread handle
+ *   - pthread_attr: POSIX thread attributes
+ *   - callback: User-defined thread callback function
+ *   - user: User data passed to callback
+ *   - id: Unique thread identifier
+ * 
+ * @see Thread
+ */
+
+/**
+ * @brief Initializes the ThreadAndroid subsystem with JVM reference.
+ * @param p_java_vm Pointer to the Java Virtual Machine instance
+ */
+
+/**
+ * @brief Sets up JNI environment for the current thread.
+ * @note Must be called once per thread that needs JNI access
+ */
+
+/**
+ * @brief Retrieves the JNI environment for the current thread.
+ * @return Pointer to JNIEnv for the calling thread
+ */
+
+/**
+ * @brief Gets the unique identifier of the current thread.
+ * @return Thread ID of the calling thread
+ */
+
+/**
+ * @brief Destructor. Cleans up thread resources and detaches from JVM.
+ */
 #ifndef THREAD_POSIX_H
 #define THREAD_POSIX_H
 

@@ -1,33 +1,90 @@
-/*************************************************************************/
-/*  audio_driver_opensl.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file audio_driver_opensl.cpp
+ * @brief Android audio driver implementation using OpenSL ES
+ * 
+ * This file implements audio playback and recording functionality for Android
+ * devices using the OpenSL ES audio engine. It provides:
+ * - Audio output through buffer queue callbacks
+ * - Audio input/recording with PCM format support
+ * - Thread-safe audio mixing
+ * - Pause/resume functionality
+ * - 44.1 kHz stereo audio support
+ * 
+ * @note Requires OpenSL ES libraries and RECORD_AUDIO permission for capture
+ * @see audio_driver_opensl.h
+ */
+
+/**
+ * @brief Callback function for audio buffer queue processing
+ * 
+ * Handles audio mixing and buffer enqueueing for playback. Converts 32-bit
+ * mixed audio samples to 16-bit PCM format for OpenSL ES output.
+ * 
+ * @param queueItf The buffer queue interface for enqueueing processed buffers
+ * @thread This is called from the OpenSL ES audio engine thread
+ */
+
+/**
+ * @brief Static wrapper for buffer callback to allow member function usage
+ * 
+ * @param queueItf The buffer queue interface
+ * @param pContext Pointer to AudioDriverOpenSL instance
+ */
+
+/**
+ * @brief Initializes the OpenSL ES engine
+ * 
+ * Creates and realizes the OpenSL ES engine with thread-safe option enabled.
+ * 
+ * @return OK on success, ERR_INVALID_PARAMETER on OpenSL ES initialization failure
+ */
+
+/**
+ * @brief Starts audio playback and initializes audio buffers
+ * 
+ * Allocates buffer memory, creates audio player, registers callbacks,
+ * and begins playback.
+ * 
+ * @note Sets up 2-channel 44.1 kHz PCM audio output
+ */
+
+/**
+ * @brief Captures audio from input device buffer
+ * 
+ * Processes recorded audio samples and writes them to the input buffer.
+ * 
+ * @param queueItf The record buffer queue interface
+ */
+
+/**
+ * @brief Static wrapper for record buffer callback
+ * 
+ * @param queueItf The record buffer queue interface
+ * @param pContext Pointer to AudioDriverOpenSL instance
+ */
+
+/**
+ * @brief Initializes audio capture device
+ * 
+ * Creates and configures the audio recorder with buffer queue and PCM format.
+ * 
+ * @return OK on success, ERR_CANT_OPEN on initialization failure
+ */
+
+/**
+ * @brief Requests RECORD_AUDIO permission and starts capture
+ * 
+ * @return OK if permission granted and device initialized, OK otherwise
+ */
+
+/**
+ * @brief Stops audio recording
+ * 
+ * Sets record state to stopped and clears the record buffer queue.
+ * 
+ * @return OK on success, ERR_CANT_OPEN on failure
+ */
 #include "audio_driver_opensl.h"
 
 #include <string.h>

@@ -1,33 +1,32 @@
-/*************************************************************************/
-/*  android_keys_utils.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file android_keys_utils.h
+ * @brief Android key code mapping utilities for game engine input handling.
+ *
+ * This header provides mappings between Android key codes (AKEYCODE_*) and the game engine's
+ * keyboard constants (KEY_*). It enables cross-platform key event translation for Android
+ * platform support.
+ *
+ * @details
+ * - Defines a comprehensive enum of Android key codes based on Android NDK KeyEvent.h
+ * - Provides a lookup table (_ak_to_keycode) to translate Android key codes to engine key codes
+ * - Includes gamepad/controller button mappings (AKEYCODE_BUTTON_*)
+ * - Supports media control keys and device-specific buttons
+ *
+ * @note
+ * When adding new key codes, updates may be required in:
+ * - frameworks/base/core/java/android/view/KeyEvent.java
+ * - Related platform input handling modules
+ *
+ * @see android_get_keysym() - Function to retrieve the mapped key symbol for an Android key code
+ * @see core/os/keyboard.h - Engine keyboard constant definitions
+ *
+ * @todo
+ * Several Android key codes currently lack mappings to engine key codes:
+ * AKEYCODE_SOFT_LEFT, AKEYCODE_SOFT_RIGHT, AKEYCODE_CALL, AKEYCODE_ENDCALL,
+ * AKEYCODE_STAR, AKEYCODE_POUND, AKEYCODE_POWER, AKEYCODE_CAMERA, and others.
+ * Consider implementing these mappings as needed for full Android input support.
+ */
 #ifndef ANDROID_KEYS_UTILS_H
 #define ANDROID_KEYS_UTILS_H
 

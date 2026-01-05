@@ -1,4 +1,24 @@
+
 import os
+"""
+Android platform detection and configuration module for SCons build system.
+This module provides functions to detect Android platform availability and configure
+the build environment for Android NDK compilation. It handles architecture-specific
+settings, compiler configuration, and linker flags for Android native development.
+Functions:
+    is_active(): Check if Android platform detection is active.
+    get_name(): Return the platform name.
+    can_build(): Verify if Android NDK is available in environment.
+    get_platform(platform): Extract API level from platform string.
+    get_opts(): Return list of Android-specific build options.
+    get_flags(): Return platform flags (tools disabled for Android).
+    create(env): Create a new SCons environment for Android with appropriate tools.
+    configure(env): Configure the build environment with Android NDK paths, compiler settings,
+                    and flags based on selected architecture and target settings.
+    get_ndk_version(path): Extract NDK version from source.properties file.
+Supported architectures: armv7, arm64v8, x86, x86_64
+Supported target types: debug, release, release_debug
+"""
 import sys
 import platform
 from distutils.version import LooseVersion

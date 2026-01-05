@@ -1,33 +1,45 @@
-/*************************************************************************/
-/*  os_android.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file os_android.h
+ * @brief Android operating system abstraction layer for the game engine.
+ * 
+ * Implements OS_Android class which extends OS_Unix to provide Android-specific
+ * functionality including input handling, audio/video drivers, sensor processing,
+ * and Java interop for the Android platform.
+ */
+
+/**
+ * @class OS_Android
+ * @brief Android operating system implementation.
+ * 
+ * Provides platform-specific OS functionality for Android including:
+ * - Video and audio driver management
+ * - Touch input and sensor processing (accelerometer, gyroscope, magnetometer)
+ * - Virtual keyboard and screen orientation management
+ * - Java Native Interface (JNI) wrapper access
+ * - Joypad/gamepad event handling
+ * - Native video playback support
+ * 
+ * @extends OS_Unix
+ */
+
+/**
+ * @struct TouchPos
+ * @brief Represents a single touch point on the screen.
+ * @member id Touch point identifier
+ * @member pos Screen position of the touch point
+ */
+
+/**
+ * @struct JoypadEvent
+ * @brief Represents a joypad/gamepad input event.
+ * @member device Device index
+ * @member type Event type (button, axis, or hat)
+ * @member index Input index
+ * @member pressed Button state
+ * @member value Axis value
+ * @member hat Hat/D-pad direction
+ */
 #ifndef OS_ANDROID_H
 #define OS_ANDROID_H
 

@@ -1,33 +1,29 @@
-/*************************************************************************/
-/*  file_access_jandroid.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class FileAccessJAndroid
+ * @brief Android-specific file access implementation using JNI.
+ * 
+ * This class provides file I/O operations on Android by interfacing with Java
+ * methods through JNI (Java Native Interface). It inherits from FileAccess and
+ * implements platform-specific file operations for the Android platform.
+ * 
+ * @details
+ * The class maintains static references to Java objects and method IDs required
+ * for JNI calls. Each file instance is identified by an integer ID that maps to
+ * the corresponding Java file handle.
+ * 
+ * Supported operations include:
+ * - Opening and closing files
+ * - Reading and writing data
+ * - Seeking to specific positions
+ * - Checking file existence and status
+ * 
+ * @note This implementation is specific to Android and relies on JNI bindings
+ * to communicate with the Java layer for actual file system access.
+ * 
+ * @see FileAccess
+ * @see java_godot_lib_jni.h
+ */
 #ifndef FILE_ACCESS_JANDROID_H
 #define FILE_ACCESS_JANDROID_H
 

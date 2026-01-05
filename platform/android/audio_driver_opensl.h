@@ -1,33 +1,40 @@
-/*************************************************************************/
-/*  audio_driver_opensl.h                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * AudioDriverOpenSL - OpenSL ES audio driver for Android platform
+ * 
+ * Implements audio playback and recording functionality using OpenSL ES API.
+ * Manages audio buffers, mixing, and device communication through callback-based
+ * queue processing.
+ * 
+ * @class AudioDriverOpenSL
+ * @extends AudioDriver
+ * 
+ * Key Features:
+ * - Dual-buffer audio playback system (BUFFER_COUNT = 2)
+ * - Real-time audio mixing with configurable buffer size
+ * - Audio recording capability with separate buffer queue
+ * - Thread-safe operations via mutex locking
+ * - Dynamic pause/resume functionality
+ * 
+ * Private Members:
+ * - active: Indicates if driver is actively processing audio
+ * - pause: Pause state flag
+ * - buffer_size: Size of audio buffers in samples
+ * - buffers[BUFFER_COUNT]: Ring buffers for audio playback data
+ * - mixdown_buffer: Temporary buffer for audio mixing (32-bit)
+ * - rec_buffer: Recording buffer for captured audio
+ * - sl, EngineItf, OutputMix: OpenSL ES engine and output configuration
+ * - player, recorder: OpenSL ES audio objects for playback/recording
+ * - bufferQueueItf, recordBufferQueueItf: Queue interfaces for buffer management
+ * 
+ * Callback Methods:
+ * - _buffer_callback(): Processes playback buffer completion events
+ * - _record_buffer_callback(): Processes recording buffer completion events
+ * - Static callback wrappers for C-style OpenSL ES callback interface
+ * 
+ * @note Requires SLES/OpenSLES.h and Android-specific extensions
+ * @note Uses singleton pattern for global driver access
+ */
 #ifndef AUDIO_DRIVER_OPENSL_H
 #define AUDIO_DRIVER_OPENSL_H
 

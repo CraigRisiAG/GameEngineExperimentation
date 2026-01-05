@@ -1,33 +1,33 @@
-/*************************************************************************/
-/*  java_godot_lib_jni.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file java_godot_lib_jni.cpp
+ * @brief JNI bridge implementation for Godot Android engine integration
+ * 
+ * This file implements the JNI (Java Native Interface) functions that serve as the bridge
+ * between the Android Java layer and the native Godot C++ engine. It handles:
+ * - Engine initialization and shutdown
+ * - Input events (touch, keyboard, gamepad, accelerometer, gyroscope, magnetometer)
+ * - Display and rendering management
+ * - Audio processing
+ * - Permission handling
+ * - Application lifecycle events (pause, resume, focus)
+ * - Object method invocation from Java
+ * 
+ * @details
+ * The implementation uses static global pointers to maintain references to:
+ * - OS_Android: The main Android operating system abstraction
+ * - GodotJavaWrapper: Wrapper for Java-side Godot instance
+ * - GodotIOJavaWrapper: Wrapper for Java-side I/O operations
+ * - JavaClassWrapper: Wrapper for dynamic Java class access
+ * 
+ * A step-based initialization system ensures proper sequencing of engine setup:
+ * - step 0: Java initialization complete, waiting for setup
+ * - step 1: Main thread setup and game loop start
+ * - step 2+: Normal game loop iteration
+ * - step -1: Error or termination state
+ * 
+ * All functions are declared with JNIEXPORT and JNICALL to be callable from Java code.
+ */
 #include "java_godot_lib_jni.h"
 #include "java_godot_io_wrapper.h"
 #include "java_godot_wrapper.h"

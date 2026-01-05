@@ -1,33 +1,68 @@
-/*************************************************************************/
-/*  jni_utils.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file jni_utils.h
+ * @brief JNI utility functions and classes for interfacing with Java from C++
+ * 
+ * This header provides utilities for converting between Godot Variant types and JNI types,
+ * as well as a singleton wrapper for calling Java methods from C++.
+ */
+
+/**
+ * @struct jvalret
+ * @brief Structure to hold the result of a Variant to JValue conversion
+ * 
+ * @member obj jobject - Java object reference (NULL if conversion didn't produce an object)
+ * @member val jvalue - The converted JNI value
+ */
+
+/**
+ * @brief Converts a Godot Variant to a JNI jvalue
+ * @param env JNI environment pointer
+ * @param p_type The Variant type to convert from
+ * @param p_arg Pointer to the Variant argument to convert
+ * @param force_jobject If true, forces conversion to a jobject
+ * @return jvalret structure containing the converted value and any created object reference
+ */
+
+/**
+ * @brief Retrieves the class name from a JNI class reference
+ * @param env JNI environment pointer
+ * @param cls The JNI class to get the name from
+ * @param array Output parameter indicating if the class is an array type
+ * @return String containing the class name
+ */
+
+/**
+ * @brief Converts a Java object to a Godot Variant
+ * @param env JNI environment pointer
+ * @param obj The Java object to convert
+ * @return Variant containing the converted value
+ */
+
+/**
+ * @brief Determines the Godot Variant type from a JNI type string
+ * @param p_type String representation of the JNI type
+ * @return The corresponding Variant::Type
+ */
+
+/**
+ * @brief Gets the JNI type signature string for a given type
+ * @param p_type String representation of the type
+ * @return C-string containing the JNI type signature
+ */
+
+/**
+ * @class JNISingleton
+ * @brief Wrapper class for calling Java methods from C++ code
+ * 
+ * Manages a reference to a Java object instance and provides functionality to call
+ * its methods with type conversion between Godot Variants and JNI types.
+ * 
+ * @method call Invokes a Java method by name with Variant arguments and returns a Variant result
+ * @method get_instance Returns the wrapped Java object instance
+ * @method set_instance Sets the Java object instance to wrap
+ * @method add_method Registers a Java method with its signature and return type
+ */
 #ifndef JNI_UTILS_H
 #define JNI_UTILS_H
 
