@@ -1,3 +1,39 @@
+
+/**
+ * Utility object containing helper functions for game engine operations.
+ */
+
+/**
+ * Creates a rewrite function that maps file paths to executable-specific paths.
+ * @param {string} execName - The name of the executable
+ * @returns {Function} A rewrite function that takes a path and returns the mapped executable path
+ */
+
+/**
+ * Creates a promise-based WebAssembly instantiation function.
+ * @param {Promise} wasmLoader - A promise that resolves with an XMLHttpRequest containing the WASM binary
+ * @returns {Function} An instantiation function compatible with Emscripten's instantiateWasm callback
+ */
+
+/**
+ * Copies a buffer to the filesystem, creating directories as needed.
+ * @param {Object} fs - The filesystem object (typically from Emscripten)
+ * @param {string} path - The target file path
+ * @param {ArrayBuffer} buffer - The buffer data to write
+ * @throws {Error} If directory creation fails with an error other than ENOENT
+ */
+
+/**
+ * Finds the first canvas element in the document.
+ * @returns {HTMLCanvasElement} The first canvas element found
+ * @throws {Error} If no canvas element is found
+ */
+
+/**
+ * Checks if WebGL is available in the current browser.
+ * @param {number} [majorVersion=1] - The WebGL major version to check (1 or 2)
+ * @returns {boolean} True if WebGL context of the specified version is available, false otherwise
+ */
 var Utils = {
 
 	createLocateRewrite: function(execName) {

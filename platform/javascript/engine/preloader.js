@@ -1,3 +1,28 @@
+
+/**
+ * Preloader constructor for managing file downloads and preloading.
+ * Handles XMLHttpRequest-based file loading with retry logic and progress tracking.
+ * 
+ * @constructor
+ * @property {Array<{path: string, buffer: ArrayBuffer|Uint8Array}>} preloadedFiles - Array of preloaded files
+ * 
+ * @method loadPromise(file) - Returns a Promise that resolves when a file is loaded
+ * @param {string} file - The file path to load
+ * @returns {Promise<XMLHttpRequest>} Promise that resolves with the XMLHttpRequest object
+ * 
+ * @method preload(pathOrBuffer, destPath) - Preloads a file or buffer to memory
+ * @param {string|ArrayBuffer|Uint8Array} pathOrBuffer - File path or buffer data to preload
+ * @param {string} [destPath] - Destination path for the preloaded file (optional, defaults to source path)
+ * @returns {Promise<void>} Promise that resolves when preloading is complete
+ * 
+ * @method setProgressFunc(callback) - Sets a callback function to track loading progress
+ * @param {Function} callback - Callback function with signature (loaded: number, total: number)
+ * 
+ * @method animateProgress() - Animates and tracks progress of all loading files
+ * Uses requestAnimationFrame to continuously update progress until all files are loaded
+ * 
+ * @throws {Promise} Rejects with error if preload() is called with invalid object type
+ */
 var Preloader = /** @constructor */ function() {
 
 	var DOWNLOAD_ATTEMPTS_MAX = 4;

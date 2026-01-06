@@ -1,3 +1,99 @@
+
+/**
+ * Game Engine initialization and management class.
+ * Handles WebAssembly loading, canvas setup, and game execution.
+ * 
+ * @class Engine
+ * @global
+ * 
+ * @example
+ * const engine = new Engine();
+ * engine.setCanvas(document.getElementById('canvas'));
+ * engine.startGame('game', 'main.pck');
+ */
+
+/**
+ * Loads the WebAssembly engine file from the specified base path.
+ * @param {string} basePath - The base path to load the engine from
+ * @returns {Promise<void>} Promise that resolves when loading is complete
+ */
+
+/**
+ * Unloads the engine resources.
+ * @returns {void}
+ */
+
+/**
+ * Initializes the engine with optional base path.
+ * @param {string=} basePath - Optional base path for engine initialization
+ * @returns {Promise<void>} Promise that resolves when initialization is complete
+ */
+
+/**
+ * Preloads a file for use during game execution.
+ * @param {string} file - The filename to preload
+ * @param {string} path - The file path/URL
+ * @returns {Object} Preload object with status
+ */
+
+/**
+ * Starts the engine with the given arguments.
+ * @param {...string} args - Command line arguments to pass to the engine
+ * @returns {Promise<void>} Promise that resolves when the engine starts
+ */
+
+/**
+ * Starts the game with the specified executable and main package.
+ * @param {string} execName - The executable name
+ * @param {string} mainPack - The main package file path
+ * @returns {Promise<void>} Promise that resolves when game starts
+ */
+
+/**
+ * Sets the WebAssembly filename extension override.
+ * @param {string} override - The new extension (e.g., '.wasm')
+ * @throws {Error} If override is an empty string
+ */
+
+/**
+ * Sets whether to unload after initialization.
+ * @param {boolean} enabled - True to unload after init, false otherwise
+ */
+
+/**
+ * Sets the canvas element for rendering.
+ * @param {HTMLCanvasElement} canvasElem - The canvas element to use
+ */
+
+/**
+ * Sets whether the canvas should be resized on start.
+ * @param {boolean} enabled - True to resize canvas on start
+ */
+
+/**
+ * Sets the locale for the engine.
+ * @param {string} locale - Locale string (e.g., 'en_US')
+ */
+
+/**
+ * Sets the executable name.
+ * @param {string} newName - The executable name
+ */
+
+/**
+ * Sets the progress callback function.
+ * @param {Function} func - Callback function for progress updates
+ */
+
+/**
+ * Sets the stdout output function.
+ * @param {Function} func - Callback function for stdout messages
+ */
+
+/**
+ * Sets the stderr output function.
+ * @param {Function} func - Callback function for stderr messages
+ */
 Function('return this')()['Engine'] = (function() {
 
 	var unloadAfterInit = true;
