@@ -1,33 +1,89 @@
-/*************************************************************************/
-/*  context_gl_osx.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class ContextGL_OSX
+ * @brief OpenGL context management for macOS/OSX platform
+ * 
+ * Handles the creation, configuration, and management of OpenGL rendering contexts
+ * on macOS. This class wraps NSOpenGLContext and provides platform-specific
+ * functionality for OpenGL initialization, buffer swapping, and context switching.
+ * 
+ * @note This class is only compiled when OPENGL_ENABLED or GLES_ENABLED is defined.
+ */
+
+/**
+ * @brief Releases the current OpenGL context
+ */
+void release_current();
+
+/**
+ * @brief Makes this context the active rendering context
+ */
+void make_current();
+
+/**
+ * @brief Updates the OpenGL context state
+ */
+void update();
+
+/**
+ * @brief Sets the opacity level of the rendering context
+ * 
+ * @param p_opacity The opacity value to set
+ */
+void set_opacity(GLint p_opacity);
+
+/**
+ * @brief Retrieves the width of the associated window
+ * 
+ * @return The window width in pixels
+ */
+int get_window_width();
+
+/**
+ * @brief Retrieves the height of the associated window
+ * 
+ * @return The window height in pixels
+ */
+int get_window_height();
+
+/**
+ * @brief Swaps the front and back buffers for display
+ */
+void swap_buffers();
+
+/**
+ * @brief Initializes the OpenGL context
+ * 
+ * @return Error code indicating success or failure
+ */
+Error initialize();
+
+/**
+ * @brief Enables or disables vertical sync (vsync)
+ * 
+ * @param p_use True to enable vsync, false to disable
+ */
+void set_use_vsync(bool p_use);
+
+/**
+ * @brief Checks if vertical sync is currently enabled
+ * 
+ * @return True if vsync is enabled, false otherwise
+ */
+bool is_using_vsync() const;
+
+/**
+ * @brief Constructs an OpenGL context for the specified view
+ * 
+ * @param p_view The NSView to attach this context to
+ * @param p_opengl_3_context True to create an OpenGL 3.x context, false otherwise
+ */
+ContextGL_OSX(id p_view, bool p_opengl_3_context);
+
+/**
+ * @brief Destructs the OpenGL context and releases associated resources
+ */
+~ContextGL_OSX();
 #ifndef CONTEXT_GL_OSX_H
 #define CONTEXT_GL_OSX_H
 

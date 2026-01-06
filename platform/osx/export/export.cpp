@@ -1,33 +1,118 @@
-/*************************************************************************/
-/*  export.cpp                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * EditorExportPlatformOSX
+ * 
+ * Handles exporting Godot projects to macOS (OSX) platform.
+ * 
+ * This exporter manages the complete export workflow for OSX including:
+ * - Extracting and processing application templates
+ * - Configuring application metadata (name, identifier, version, etc.)
+ * - Generating and embedding application icons in ICNS format
+ * - Code signing applications (when OSX_ENABLED)
+ * - Creating DMG disk images (when OSX_ENABLED)
+ * - Packaging as ZIP files
+ * - Handling texture format options (S3TC, ETC, ETC2)
+ * 
+ * The class supports both debug and release builds, custom export templates,
+ * and platform-specific features like code signing and hardened runtime options.
+ * 
+ * Key features:
+ * - Icon conversion to Apple ICNS format with multiple resolutions
+ * - PackBits RLE encoding for legacy icon formats
+ * - Plist file template substitution for app configuration
+ * - DMG creation and code signing (macOS only)
+ * - Shared object/framework handling
+ * - Privacy usage descriptions (camera, microphone)
+ */
+
+/**
+ * _rgba8_to_packbits_encode
+ * 
+ * Encodes a single color channel from RGBA8 image data using PackBits RLE compression.
+ * 
+ * @param p_ch - Color channel index (0=R, 1=G, 2=B, 3=A)
+ * @param p_size - Width/height of square image
+ * @param p_source - Source RGBA8 image data
+ * @param p_dest - Destination buffer for encoded data
+ * 
+ * Implements PackBits run-length encoding as specified by Apple for icon data.
+ * Sequences of 3+ identical bytes are compressed, while isolated bytes are stored literally.
+ */
+
+/**
+ * _make_icon
+ * 
+ * Converts an Image to Apple ICNS format with multiple resolutions.
+ * 
+ * @param p_icon - Source image to convert
+ * @param p_data - Output buffer containing ICNS data
+ * 
+ * Generates ICNS file with:
+ * - 10 different icon sizes (16x16 to 1024x1024)
+ * - PNG-encoded icons for modern resolutions
+ * - RLE-compressed RGB + uncompressed alpha for legacy sizes
+ */
+
+/**
+ * _fix_plist
+ * 
+ * Substitutes export preset variables into Info.plist template.
+ * 
+ * @param p_preset - Export preset containing app metadata
+ * @param plist - Plist file data to modify in-place
+ * @param p_binary - Application binary name
+ * 
+ * Replaces placeholders like $binary, $name, $identifier, $version, etc.
+ * with actual values from the export preset.
+ */
+
+/**
+ * _code_sign
+ * 
+ * Code signs a macOS application using the codesign tool.
+ * 
+ * @param p_preset - Export preset with code signing configuration
+ * @param p_path - Path to file/bundle to sign
+ * @return OK if successful, FAILED on error
+ * 
+ * Applies code signing with timestamp, hardened runtime, entitlements,
+ * and custom codesign options as configured in the preset.
+ */
+
+/**
+ * _create_dmg
+ * 
+ * Creates a DMG disk image from an application bundle.
+ * 
+ * @param p_dmg_path - Output DMG file path
+ * @param p_pkg_name - Volume name for the DMG
+ * @param p_app_path_name - Path to application bundle to package
+ * @return OK if successful, FAILED on error
+ * 
+ * Uses hdiutil to create a read-only DMG containing the app bundle.
+ */
+
+/**
+ * export_project
+ * 
+ * Main export function that packages a Godot project for macOS distribution.
+ * 
+ * @param p_preset - Export preset with all configuration
+ * @param p_debug - Export debug or release build
+ * @param p_path - Output file path (*.dmg or *.zip)
+ * @param p_flags - Export flags
+ * @return Error code
+ * 
+ * Workflow:
+ * 1. Extract OSX template ZIP
+ * 2. Process and modify template files
+ * 3. Replace application icon
+ * 4. Update Info.plist with metadata
+ * 5. Create output as DMG (macOS) or ZIP (portable)
+ * 6. Code sign if enabled
+ * 7. Package shared objects/frameworks
+ */
 #include "export.h"
 
 #include "core/io/marshalls.h"

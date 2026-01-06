@@ -1,33 +1,73 @@
-/*************************************************************************/
-/*  joypad_osx.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file joypad_osx.h
+ * @brief macOS joypad/gamepad input handling using IOKit HID framework.
+ * 
+ * This module provides joypad input support for macOS through the IOKit
+ * Human Interface Device (HID) framework. It handles device detection,
+ * input polling, and force feedback functionality for game controllers.
+ */
+
+/**
+ * @struct rec_element
+ * @brief Represents a single HID element (axis, button, or hat) from a joypad.
+ * 
+ * @var rec_element::ref
+ *      Reference to the IOKit HID element.
+ * @var rec_element::cookie
+ *      Cookie identifier for the HID element.
+ * @var rec_element::usage
+ *      HID usage code identifying the element type.
+ * @var rec_element::min
+ *      Minimum value range for the element.
+ * @var rec_element::max
+ *      Maximum value range for the element.
+ * @var rec_element::Comparator
+ *      Comparator functor for sorting elements by usage.
+ */
+
+/**
+ * @struct joypad
+ * @brief Represents a connected joypad device with all its input and force feedback data.
+ * 
+ * @var joypad::device_ref
+ *      IOKit device reference for this joypad.
+ * @var joypad::axis_elements
+ *      Vector of analog axis elements (joysticks, triggers).
+ * @var joypad::button_elements
+ *      Vector of button input elements.
+ * @var joypad::hat_elements
+ *      Vector of directional pad (hat) elements.
+ * @var joypad::id
+ *      Unique identifier assigned to this joypad.
+ * @var joypad::ffservice
+ *      Force feedback service interface (0 if not supported).
+ * @var joypad::ff_constant_force
+ *      Force feedback constant force parameters.
+ * @var joypad::ff_device
+ *      Force feedback device object reference.
+ * @var joypad::ff_object
+ *      Force feedback effect object reference.
+ * @var joypad::ff_timestamp
+ *      Timestamp of last force feedback effect.
+ * @var joypad::ff_directions
+ *      Array of force feedback effect directions.
+ * @var joypad::ff_effect
+ *      Force feedback effect structure.
+ * @var joypad::ff_axes
+ *      Array of force feedback axes.
+ */
+
+/**
+ * @class JoypadOSX
+ * @brief Manages multiple joypad devices connected to the macOS system.
+ * 
+ * Handles IOKit HID manager operations including device enumeration, polling,
+ * and vibration control for up to 16 connected joypads simultaneously.
+ * 
+ * @note Maximum of 16 joypads can be managed concurrently.
+ */
 #ifndef JOYPADOSX_H
 #define JOYPADOSX_H
 

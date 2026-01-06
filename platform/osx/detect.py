@@ -1,4 +1,39 @@
+
 import os
+"""
+OSX platform detection and configuration module for the game engine build system.
+This module handles the detection of OSX/macOS systems and configures the build
+environment with appropriate compiler flags, optimization settings, and framework
+linkage for OSX targets.
+Functions:
+    is_active() -> bool:
+        Returns whether this platform module is active.
+    get_name() -> str:
+        Returns the platform name identifier "OSX".
+    can_build() -> bool:
+        Checks if the current system can build for OSX (native Darwin or OSXCross).
+    get_opts() -> list:
+        Returns available SCons build options for OSX configuration including:
+        - osxcross_sdk: OSXCross SDK version
+        - MACOS_SDK_PATH: Path to macOS SDK
+        - use_static_mvk: Static MoltenVK linking option
+        - debug_symbols: Debug symbol inclusion level
+        - separate_debug_symbols: Separate debug symbol file creation
+        - use_ubsan/asan/tsan: Sanitizer options
+    get_flags() -> list:
+        Returns OSX-specific compiler flags (currently empty).
+    configure(env) -> None:
+        Configures the SCons build environment for OSX compilation by:
+        - Setting optimization flags based on target and optimization level
+        - Configuring debug symbols based on target type
+        - Setting 64-bit architecture
+        - Configuring compiler toolchain (native clang or osxcross)
+        - Setting up macOS SDK paths
+        - Adding framework dependencies (Cocoa, Metal, etc.)
+        - Configuring Vulkan support with MoltenVK
+        - Setting minimum macOS version to 10.12
+        - Applying sanitizer configurations if requested
+"""
 import sys
 import subprocess
 from methods import detect_darwin_sdk_path

@@ -1,9 +1,23 @@
-"""Functions used to generate source files during build time
 
-All such functions are invoked in a subprocess on Windows to prevent build flakiness.
-
-"""
 import os
+"""
+Generate debug symbols for macOS executables and strip the binary.
+This function creates a dSYM (debug symbols) file for a macOS target binary
+and then strips the executable. It supports both MacPorts LLVM and the system
+dsymutil tool.
+Args:
+    target: List containing the target executable path (target[0] is used).
+    source: List of source files (unused in this function).
+    env: Build environment dictionary containing:
+        - macports_clang (str): MacPorts LLVM version or 'no' to use system dsymutil.
+Returns:
+    None
+Side Effects:
+    - Creates a .dSYM file alongside the target executable.
+    - Strips the target executable of debug symbols and other content.
+Note:
+    Requires either MacPorts LLVM tools or macOS dsymutil to be installed.
+"""
 from platform_methods import subprocess_main
 
 
