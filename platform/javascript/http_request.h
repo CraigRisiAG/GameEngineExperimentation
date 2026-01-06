@@ -1,33 +1,123 @@
-/*************************************************************************/
-/*  http_request.h                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file http_request.h
+ * @brief HTTP request interface for JavaScript/Web platform
+ * 
+ * This header defines the C API for XMLHttpRequest (XHR) functionality on the JavaScript platform.
+ * It provides functions to create, configure, send HTTP requests, and retrieve responses.
+ */
+
+/**
+ * @enum godot_xhr_ready_state_t
+ * @brief Enumeration of XMLHttpRequest ready states
+ * 
+ * Represents the current state of an XMLHttpRequest object throughout its lifecycle.
+ * 
+ * @var XHR_READY_STATE_UNSENT
+ *      Request has been created but not yet opened
+ * @var XHR_READY_STATE_OPENED
+ *      open() has been called
+ * @var XHR_READY_STATE_HEADERS_RECEIVED
+ *      send() has been called and response headers are available
+ * @var XHR_READY_STATE_LOADING
+ *      Response body is being received
+ * @var XHR_READY_STATE_DONE
+ *      Request operation is complete
+ */
+
+/**
+ * @brief Create a new XMLHttpRequest instance
+ * @return ID of the newly created XHR object
+ */
+
+/**
+ * @brief Reset an XMLHttpRequest to its initial state
+ * @param p_xhr_id ID of the XHR object to reset
+ */
+
+/**
+ * @brief Free resources associated with an XMLHttpRequest
+ * @param p_xhr_id ID of the XHR object to free
+ * @return true if successfully freed, false otherwise
+ */
+
+/**
+ * @brief Initialize an HTTP request
+ * @param p_xhr_id ID of the XHR object
+ * @param p_method HTTP method (e.g., "GET", "POST")
+ * @param p_url Target URL
+ * @param p_user Optional username for authentication
+ * @param p_password Optional password for authentication
+ * @return Status code of the open operation
+ */
+
+/**
+ * @brief Set a request header
+ * @param p_xhr_id ID of the XHR object
+ * @param p_header Header name
+ * @param p_value Header value
+ */
+
+/**
+ * @brief Send HTTP request with no body
+ * @param p_xhr_id ID of the XHR object
+ */
+
+/**
+ * @brief Send HTTP request with string body
+ * @param p_xhr_id ID of the XHR object
+ * @param p_data String data to send
+ */
+
+/**
+ * @brief Send HTTP request with binary data
+ * @param p_xhr_id ID of the XHR object
+ * @param p_data Pointer to binary data
+ * @param p_len Length of the data in bytes
+ */
+
+/**
+ * @brief Abort an in-progress request
+ * @param p_xhr_id ID of the XHR object
+ */
+
+/**
+ * @brief Get the HTTP response status code
+ * @param p_xhr_id ID of the XHR object
+ * @return HTTP status code (HTTPClient::ResponseCode)
+ */
+
+/**
+ * @brief Get the current ready state of the request
+ * @param p_xhr_id ID of the XHR object
+ * @return Current godot_xhr_ready_state_t value
+ */
+
+/**
+ * @brief Get the total length of response headers
+ * @param p_xhr_id ID of the XHR object
+ * @return Length of response headers in bytes
+ */
+
+/**
+ * @brief Retrieve response headers
+ * @param p_xhr_id ID of the XHR object
+ * @param r_dst Destination buffer for headers
+ * @param p_len Maximum length to read
+ */
+
+/**
+ * @brief Get the total length of the response body
+ * @param p_xhr_id ID of the XHR object
+ * @return Length of response body in bytes
+ */
+
+/**
+ * @brief Retrieve response body
+ * @param p_xhr_id ID of the XHR object
+ * @param r_dst Destination buffer for response data
+ * @param p_len Maximum length to read
+ */
 #ifndef HTTP_REQUEST_H
 #define HTTP_REQUEST_H
 

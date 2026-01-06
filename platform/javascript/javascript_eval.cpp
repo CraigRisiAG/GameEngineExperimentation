@@ -1,33 +1,28 @@
-/*************************************************************************/
-/*  javascript_eval.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * Evaluates JavaScript code and returns the result as a Godot Variant.
+ *
+ * This function executes JavaScript code in the Emscripten environment and converts
+ * the result back to a Godot Variant type. It supports multiple return types including
+ * booleans, numbers, strings, and PackedByteArrays.
+ *
+ * @param p_code The JavaScript code to evaluate as a UTF-8 string.
+ * @param p_use_global_exec_context If true, uses indirect eval call to grant global
+ *        execution context. If false, uses local execution context.
+ *
+ * @return A Variant containing the result of the JavaScript evaluation. Possible return
+ *         types are:
+ *         - BOOL: JavaScript boolean values
+ *         - FLOAT: JavaScript numbers (stored as double)
+ *         - STRING: JavaScript strings (memory is freed after conversion)
+ *         - PACKED_BYTE_ARRAY: JavaScript Uint8Array, ArrayBuffer, or TypedArray views
+ *         - NIL: For null values, undefined, or unsupported types
+ *
+ * @note This function is only available when JAVASCRIPT_EVAL_ENABLED is defined.
+ * @note String return values are automatically converted from UTF-8 and the original
+ *       JavaScript-allocated memory is freed.
+ * @note If string allocation fails in JavaScript, the function returns NIL and logs an error.
+ */
 #ifdef JAVASCRIPT_EVAL_ENABLED
 
 #include "api/javascript_eval.h"

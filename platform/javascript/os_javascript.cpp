@@ -1,33 +1,32 @@
-/*************************************************************************/
-/*  os_javascript.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \file os_javascript.cpp
+/// \brief Operating System abstraction layer for JavaScript/Emscripten platform.
+///
+/// This file implements the OS_JavaScript class, providing platform-specific
+/// functionality for running Godot engine on the web via Emscripten compilation.
+/// It handles window management, input events (keyboard, mouse, touch, gamepad),
+/// video and audio driver initialization, clipboard operations, and file system
+/// persistence through IndexedDB.
+///
+/// Key Features:
+/// - Canvas-based rendering with fullscreen and window maximization support
+/// - Comprehensive input handling: keyboard, mouse (with custom cursors), touch, and gamepad
+/// - Emscripten callback integration for DOM events
+/// - Clipboard read/write via JavaScript interop
+/// - IndexedDB-based persistent file system synchronization
+/// - Locale detection and environment variable setup
+/// - PNG cursor and icon support via blob conversion
+///
+/// Dependencies:
+/// - Emscripten SDK (html5.h for event callbacks)
+/// - libpng for image encoding
+/// - JavaScript interop via EM_ASM macros
+///
+/// Platform Limitations:
+/// - Mouse mode confined is not supported
+/// - Process execution and management unavailable
+/// - Fullscreen requests must originate from input callbacks
+/// - Pointer lock requires appropriate user input context
 #include "os_javascript.h"
 
 #include "core/io/file_access_buffered_fa.h"

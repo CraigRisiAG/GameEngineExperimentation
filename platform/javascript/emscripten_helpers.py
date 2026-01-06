@@ -1,5 +1,41 @@
+"""
+Parse the Emscripten configuration file and extract relevant settings.
+Reads the Emscripten configuration file from the EM_CONFIG environment variable
+or from the default location ~/.emscripten. The configuration file is executed
+as Python code to extract settings.
+Returns:
+    dict: A normalized dictionary containing:
+        - 'EMCC_ROOT': The Emscripten root directory
+        - 'NODE_JS': The path to the Node.js executable
+        - 'CLOSURE_BIN': The path to the Google Closure Compiler binary
+Raises:
+    RuntimeError: If the configuration file does not exist or is invalid Python code.
+"""
+"""
+Generate a command string to run the Google Closure Compiler on JavaScript files.
+Constructs a command to invoke the Closure Compiler with advanced optimizations
+on the provided source files, applying any specified extern declarations.
+Args:
+    target: The target file(s) where compiled output will be written.
+    source: List of source JavaScript files to compile.
+    env: SCons environment containing 'JSEXTERNS' list of extern files and 'NODE_JS' path.
+    for_signature: SCons signature parameter (unused).
+Returns:
+    str: The complete Closure Compiler command as a space-joined string.
+"""
+"""
+Create an engine JavaScript file, either compiled or concatenated.
+Decides whether to compile JavaScript files using the Closure Compiler or
+simply concatenate them based on the 'use_closure_compiler' environment flag.
+Args:
+    env: SCons environment with 'use_closure_compiler' flag and build methods.
+    target: The target file to create.
+    source: List of source JavaScript files to process.
+    externs: List of extern declarations to pass to the Closure Compiler.
+Returns:
+    The result of either BuildJS() or Textfile() depending on compilation settings.
+"""
 import os
-
 def parse_config():
     em_config_file = os.getenv('EM_CONFIG') or os.path.expanduser('~/.emscripten')
     if not os.path.exists(em_config_file):

@@ -1,32 +1,117 @@
-/*************************************************************************/
-/*  http_request.js                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+
+/**
+ * Godot HTTP Request Module
+ * Provides a wrapper around XMLHttpRequest for Godot engine's HTTP functionality
+ * 
+ * @namespace GodotHTTPRequest
+ */
+
+/**
+ * Internal storage for XMLHttpRequest objects
+ * @type {Array<XMLHttpRequest|null>}
+ */
+
+/**
+ * Finds an unused request ID slot or creates a new one
+ * @returns {number} Unused request ID
+ */
+
+/**
+ * Configures an XMLHttpRequest with Godot-specific settings
+ * @param {XMLHttpRequest} xhr - The XMLHttpRequest object to configure
+ */
+
+/**
+ * Creates a new XMLHttpRequest and returns its ID
+ * @returns {number} The ID of the new request
+ */
+
+/**
+ * Resets an existing XMLHttpRequest with a new instance
+ * @param {number} xhrId - The ID of the request to reset
+ */
+
+/**
+ * Aborts and frees an XMLHttpRequest
+ * @param {number} xhrId - The ID of the request to free
+ */
+
+/**
+ * Opens an XMLHttpRequest with the specified parameters
+ * @param {number} xhrId - The ID of the request
+ * @param {number} method - Pointer to the HTTP method string
+ * @param {number} url - Pointer to the URL string
+ * @param {number} user - Pointer to the username string (0 if null)
+ * @param {number} password - Pointer to the password string (0 if null)
+ */
+
+/**
+ * Sets a request header on the XMLHttpRequest
+ * @param {number} xhrId - The ID of the request
+ * @param {number} header - Pointer to the header name string
+ * @param {number} value - Pointer to the header value string
+ */
+
+/**
+ * Sends the XMLHttpRequest with no body
+ * @param {number} xhrId - The ID of the request
+ */
+
+/**
+ * Sends the XMLHttpRequest with a string body
+ * @param {number} xhrId - The ID of the request
+ * @param {number} strPtr - Pointer to the request body string
+ */
+
+/**
+ * Sends the XMLHttpRequest with binary data
+ * @param {number} xhrId - The ID of the request
+ * @param {number} ptr - Pointer to the data buffer
+ * @param {number} len - Length of the data buffer in bytes
+ */
+
+/**
+ * Aborts an XMLHttpRequest
+ * @param {number} xhrId - The ID of the request
+ */
+
+/**
+ * Gets the HTTP status code of the response
+ * @param {number} xhrId - The ID of the request
+ * @returns {number} The HTTP status code
+ */
+
+/**
+ * Gets the ready state of the XMLHttpRequest
+ * @param {number} xhrId - The ID of the request
+ * @returns {number} The ready state (0-4)
+ */
+
+/**
+ * Gets the byte length of the response headers string
+ * @param {number} xhrId - The ID of the request
+ * @returns {number} The length in bytes of the response headers
+ */
+
+/**
+ * Copies response headers to the destination buffer
+ * @param {number} xhrId - The ID of the request
+ * @param {number} dst - Pointer to the destination buffer
+ * @param {number} len - Maximum length to copy
+ */
+
+/**
+ * Gets the byte length of the response body
+ * @param {number} xhrId - The ID of the request
+ * @returns {number} The length in bytes of the response body
+ */
+
+/**
+ * Copies the response body to the destination buffer
+ * @param {number} xhrId - The ID of the request
+ * @param {number} dst - Pointer to the destination buffer
+ * @param {number} len - Maximum length to copy
+ */
 var GodotHTTPRequest = {
 
 	$GodotHTTPRequest: {

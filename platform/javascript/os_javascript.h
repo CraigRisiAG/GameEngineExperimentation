@@ -1,33 +1,25 @@
-/*************************************************************************/
-/*  os_javascript.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class OS_JavaScript
+ * @brief JavaScript/Emscripten implementation of the operating system interface.
+ * 
+ * This class extends OS_Unix to provide platform-specific functionality for running
+ * Godot Engine in a JavaScript/WebAssembly environment via Emscripten. It handles:
+ * - Video mode and window management (fullscreen, maximized state)
+ * - Input processing (keyboard, mouse, touch, gamepad events)
+ * - Cursor management with custom cursor support
+ * - Audio driver initialization
+ * - Clipboard operations
+ * - Process and system information queries
+ * - IndexedDB availability detection for persistent storage
+ * 
+ * @note This class uses Emscripten callbacks for event handling. All callback methods
+ *       are static and use p_user_data to access the singleton instance.
+ * 
+ * @see OS_Unix
+ * @see InputDefault
+ * @see AudioDriverJavaScript
+ */
 #ifndef OS_JAVASCRIPT_H
 #define OS_JAVASCRIPT_H
 

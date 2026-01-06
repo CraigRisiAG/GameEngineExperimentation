@@ -1,33 +1,45 @@
-/*************************************************************************/
-/*  javascript_main.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file javascript_main.cpp
+ * @brief Main entry point for the Godot Engine running on Emscripten/WebAssembly.
+ * 
+ * This file handles the initialization of the JavaScript/Emscripten platform.
+ * It manages IndexedDB filesystem synchronization and delegates to the platform-specific
+ * OS_JavaScript class for further setup and execution.
+ * 
+ * @details
+ * The initialization flow:
+ * 1. main() sets up the IndexedDB filesystem mount point at '/userfs'
+ * 2. Synchronizes persistent IndexedDB data into the Emscripten FS
+ * 3. Calls main_after_fs_sync() once synchronization completes
+ * 4. main_after_fs_sync() configures resource loading and starts the main engine loop asynchronously
+ */
+
+/**
+ * @fn void main_after_fs_sync(char *p_idbfs_err)
+ * @brief Callback function invoked after IndexedDB filesystem synchronization completes.
+ * 
+ * @param p_idbfs_err C-string containing error message from IndexedDB sync, or empty string on success
+ * 
+ * @details
+ * Configures the OS singleton with IndexedDB availability status, sets resource loader
+ * to not abort on missing resources for better web compatibility, and initiates the
+ * main engine setup and async runtime loop.
+ */
+
+/**
+ * @fn int main(int argc, char *argv[])
+ * @brief Entry point for the Emscripten/JavaScript build of the Godot Engine.
+ * 
+ * @param argc Argument count
+ * @param argv Argument vector
+ * @return int Exit status (execution continues asynchronously via callback)
+ * 
+ * @details
+ * Initializes the IndexedDB filesystem, mounts it at '/userfs', and synchronizes
+ * persisted data before delegating to main_after_fs_sync() via callback.
+ * The actual engine startup is deferred until filesystem sync completes.
+ */
 #include "core/io/resource_loader.h"
 #include "main/main.h"
 #include "os_javascript.h"

@@ -1,4 +1,25 @@
+
 import os
+"""
+JavaScript platform detection and configuration module for Emscripten-based builds.
+This module provides platform detection, build options, and compiler configuration
+for building JavaScript/WebAssembly targets using Emscripten. It handles build flags,
+optimization settings, threading support, and closure compiler integration.
+Functions:
+    is_active(): Checks if the JavaScript platform is active.
+    get_name(): Returns the platform name as 'JavaScript'.
+    can_build(): Verifies if Emscripten is available via EM_CONFIG environment
+                 variable or ~/.emscripten configuration file.
+    get_opts(): Returns build options including JavaScript eval support, threading,
+                and closure compiler usage as BoolVariables.
+    get_flags(): Returns platform-specific build flags, disabling tools, PCRE2 JIT,
+                 and mbedtls module to reduce file size.
+    configure(env): Configures the SCons build environment for JavaScript targets,
+                    including compiler settings, optimization levels, Emscripten
+                    toolchain setup, and WebAssembly-specific linker flags. Handles
+                    debug/release builds, threading, memory management, and module
+                    exports.
+"""
 
 from emscripten_helpers import parse_config, run_closure_compiler, create_engine_file
 

@@ -1,33 +1,32 @@
-/*************************************************************************/
-/*  http_client_javascript.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @file http_client_javascript.cpp
+ * @brief JavaScript/HTML5 platform implementation of HTTPClient
+ * 
+ * This module provides HTTP client functionality for the HTML5/JavaScript platform
+ * using XMLHttpRequest (XHR). It implements the core HTTPClient interface with
+ * platform-specific limitations and behaviors.
+ * 
+ * Key Features:
+ * - Asynchronous HTTP request handling via XMLHttpRequest
+ * - Support for HTTP and HTTPS protocols
+ * - Host resolution and connection management
+ * - Request header and body handling
+ * - Response header and body retrieval
+ * - Chunked response reading with configurable chunk size
+ * 
+ * Platform Limitations:
+ * - Host verification cannot be disabled for HTTPS connections
+ * - Direct StreamPeer access is not supported
+ * - HTTP TRACE and CONNECT methods are not supported
+ * - Blocking mode is not supported
+ * - Requests are asynchronous and cannot be forced to complete synchronously
+ * - Multiple polls within a single frame will generate warnings in debug mode
+ * 
+ * The implementation manages connection state through a state machine with the
+ * following states: DISCONNECTED, RESOLVING, CONNECTING, CONNECTED, REQUESTING,
+ * BODY, and CONNECTION_ERROR.
+ */
 #include "core/io/http_client.h"
 #include "http_request.h"
 
