@@ -1,33 +1,43 @@
-/*************************************************************************/
-/*  gl_view.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class GLView
+ * @brief A UIView subclass for rendering OpenGL ES graphics on iOS devices.
+ * 
+ * GLView provides a complete OpenGL ES rendering surface with support for:
+ * - OpenGL ES 1.0 rendering with framebuffer and renderbuffer management
+ * - Animation control via CADisplayLink (iOS 3.1+) or NSTimer fallback
+ * - Text input through UIKeyInput protocol implementation
+ * - AVPlayer integration for video playback
+ * - Keyboard input handling with delegate callback support
+ * - Audio route change detection
+ * 
+ * @properties
+ *   delegate: GLViewDelegate - The delegate responsible for drawing operations
+ *   avAsset: AVAsset - The media asset for playback
+ *   avPlayerItem: AVPlayerItem - The current player item
+ *   avPlayer: AVPlayer - The video player instance
+ *   avPlayerLayer: AVPlayerLayer - The layer for video rendering
+ *   backgroundWindow: UIWindow - Background window for video rendering
+ *   autocorrectionType: UITextAutocorrectionType - Text input autocorrection setting
+ *   animationInterval: NSTimeInterval - Time interval between animation frames
+ *   useCADisplayLink: BOOL - Whether to use CADisplayLink for animation synchronization
+ * 
+ * @methods
+ *   startAnimation - Begin the animation loop
+ *   stopAnimation - Stop the animation loop
+ *   drawView - Manually trigger a drawing update
+ *   open_keyboard - Display the on-screen keyboard
+ *   hide_keyboard - Hide the on-screen keyboard
+ *   deleteBackward - Handle backspace key input
+ *   hasText - Check if text input field has content
+ *   insertText: - Insert text from keyboard input
+ *   initGLES - Initialize OpenGL ES context
+ *   createFramebuffer - Create the renderbuffer and framebuffer objects
+ *   destroyFramebuffer - Release renderbuffer and framebuffer resources
+ *   audioRouteChangeListenerCallback: - Handle audio route changes
+ *   keyboardOnScreen: - Handle keyboard appearance notification
+ *   keyboardHidden: - Handle keyboard disappearance notification
+ */
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <OpenGLES/EAGL.h>

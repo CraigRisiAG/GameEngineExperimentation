@@ -1,33 +1,69 @@
-/*************************************************************************/
-/*  icloud.h                                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/**
+ * @class ICloud
+ * @brief iCloud integration for iOS platform
+ * 
+ * Provides an interface for interacting with Apple's iCloud service on iOS devices.
+ * This class allows storing and retrieving key-value pairs in iCloud, synchronizing
+ * data across devices, and handling asynchronous events.
+ * 
+ * This class is only available when ICLOUD_ENABLED is defined.
+ * 
+ * @note This is a singleton class. Use get_singleton() to access the instance.
+ */
+
+/**
+ * @brief Removes a key from iCloud storage
+ * 
+ * @param p_param Variant containing the key to remove
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Sets one or more key-value pairs in iCloud
+ * 
+ * @param p_param Variant containing the key-value pairs to set
+ * @return Variant with the result of the operation
+ */
+
+/**
+ * @brief Retrieves a single value from iCloud by key
+ * 
+ * @param p_param Variant containing the key to retrieve
+ * @return Variant containing the value associated with the key
+ */
+
+/**
+ * @brief Synchronizes all key-value pairs with iCloud servers
+ * 
+ * Triggers an upload/download of changes with the remote iCloud service.
+ * 
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Retrieves all key-value pairs currently stored in iCloud
+ * 
+ * @return Variant containing all key-value pairs
+ */
+
+/**
+ * @brief Gets the number of pending iCloud events
+ * 
+ * @return Number of events waiting to be processed
+ */
+
+/**
+ * @brief Retrieves and removes the next pending event from the queue
+ * 
+ * @return Variant containing the event data, or empty if no events pending
+ */
+
+/**
+ * @brief Returns the singleton instance of the ICloud class
+ * 
+ * @return Pointer to the ICloud singleton instance
+ */
 #ifdef ICLOUD_ENABLED
 
 #ifndef ICLOUD_H

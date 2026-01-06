@@ -1,4 +1,18 @@
+
 import os
+"""
+iOS platform detection and configuration module for the game engine build system.
+This module provides platform detection, build option configuration, and compiler
+setup for iOS builds. It handles multiple architectures (x86, x86_64, arm, arm64),
+build optimization levels, and iOS-specific framework linking.
+Key functionalities:
+- Detects iOS platform availability (native macOS or osxcross)
+- Configures compiler flags for different iOS architectures and simulators
+- Sets up linker flags and framework dependencies (Metal, GameController, etc.)
+- Manages iOS-specific features (GameCenter, StoreKit, iCloud)
+- Handles Vulkan/MoltenVK configuration for graphics
+- Supports ccache integration for faster builds
+"""
 import sys
 from methods import detect_darwin_sdk_path
 

@@ -1,33 +1,47 @@
-/*************************************************************************/
-/*  in_app_store.h                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class InAppStore
+/// @brief Manages in-app purchases and store transactions for iPhone platform.
+///
+/// This class provides an interface to interact with Apple's StoreKit framework,
+/// enabling product information requests, purchase transactions, and purchase restoration.
+/// It maintains a queue of pending events that can be processed asynchronously.
+///
+/// @note This class is only available when STOREKIT_ENABLED is defined.
+
+/// @brief Requests product information from the App Store.
+/// @param p_params Variant containing product identifiers and request parameters.
+/// @return Error code indicating success or failure of the request.
+/// @see Error
+
+/// @brief Restores previously purchased products for the user.
+/// @return Error code indicating success or failure of the restoration.
+/// @see Error
+
+/// @brief Initiates a purchase transaction for a product.
+/// @param p_params Variant containing product identifier and purchase details.
+/// @return Error code indicating success or failure of the purchase initiation.
+/// @see Error
+
+/// @brief Gets the number of pending events in the queue.
+/// @return The count of pending events.
+
+/// @brief Retrieves and removes the next pending event from the queue.
+/// @return A Variant containing the event data, or empty if queue is empty.
+
+/// @brief Marks a transaction as finished and removes it from processing.
+/// @param product_id The product identifier of the transaction to finish.
+
+/// @brief Sets whether transactions should be automatically finished.
+/// @param b True to enable auto-finish, false to disable.
+
+/// @brief Posts an event to the pending events queue (internal use).
+/// @param p_event The event Variant to queue.
+
+/// @brief Records a purchase internally (internal use).
+/// @param product_id The product identifier that was purchased.
+
+/// @brief Gets the singleton instance of InAppStore.
+/// @return Pointer to the InAppStore singleton instance.
 #ifdef STOREKIT_ENABLED
 
 #ifndef IN_APP_STORE_H
