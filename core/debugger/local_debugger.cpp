@@ -1,39 +1,47 @@
-/*************************************************************************/
-/*  local_debugger.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file local_debugger.cpp
- * @brief Definition of LocalDebugger data structure.
+ * @brief Implementation of the LocalDebugger class for script debugging and profiling.
+ *
+ * This file contains the core debugging functionality for a game engine, including:
+ * - Interactive debugging commands (step, next, finish, breakpoints)
+ * - Stack frame navigation and inspection
+ * - Variable inspection (locals, globals, members)
+ * - Expression evaluation
+ * - Script profiling with performance metrics
+ *
+ * @class LocalDebugger
+ * @brief Provides local debugging capabilities for script execution.
+ *
+ * @struct LocalDebugger::ScriptsProfiler
+ * @brief Profiles script execution performance across all script languages.
+ * Tracks frame times, call counts, and self/total execution times for profiling functions.
+ *
+ * @method void debug(bool p_can_continue, bool p_is_error_breakpoint)
+ * @brief Main debugger loop handling user commands and execution control.
+ * Provides an interactive command-line interface for debugging scripts.
+ * Supports commands: continue, step, next, finish, breakpoint management, variable inspection.
+ *
+ * @method void print_variables(const List<String> &names, const List<Variant> &values, const String &variable_prefix)
+ * @brief Displays a list of variables with their values, with optional prefixing for multi-line output.
+ *
+ * @method Pair<String, int> to_breakpoint(const String &p_line)
+ * @brief Parses a breakpoint command string and extracts source file and line number.
+ * Expected format: "command source:line"
+ *
+ * @method void send_message(const String &p_message, const Array &p_args)
+ * @brief Sends a debug message (currently unimplemented).
+ *
+ * @method void send_error(const String &p_func, const String &p_file, int p_line, const String &p_err, const String &p_descr, ErrorHandlerType p_type)
+ * @brief Sends and displays error information during debugging.
+ *
+ * @constructor LocalDebugger()
+ * @brief Initializes the debugger with default options and registers the scripts profiler.
+ *
+ * @destructor ~LocalDebugger()
+ * @brief Cleans up debugger resources and unregisters the profiler.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "local_debugger.h"
 
 #include "core/debugger/script_debugger.h"

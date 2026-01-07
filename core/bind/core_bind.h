@@ -1,39 +1,152 @@
-/*************************************************************************/
-/*  core_bind.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file core_bind.h
- * @brief Implementation of _ResourceLoader class.
+ * @brief Binding classes for core engine functionality to the scripting API.
+ * 
+ * This header defines wrapper classes that expose core engine systems to the scripting layer.
+ * These classes provide access to resource loading/saving, OS operations, geometry utilities,
+ * file I/O, threading, and other fundamental engine features.
+ * 
+ * @author Godot Engine Contributors
+ * @version 4.0+
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class _ResourceLoader
+ * @brief Wrapper for resource loading functionality accessible from scripts.
+ * 
+ * Provides synchronous and asynchronous resource loading capabilities, including
+ * threaded loading with status tracking, caching management, and format detection.
+ * 
+ * @see ResourceLoader
+ */
 
+/**
+ * @class _ResourceSaver
+ * @brief Wrapper for resource saving functionality accessible from scripts.
+ * 
+ * Enables saving resources to disk with various flags for controlling behavior such as
+ * path handling, compression, and endianness.
+ * 
+ * @see ResourceSaver
+ */
+
+/**
+ * @class _OS
+ * @brief Comprehensive OS-level functionality wrapper for scripting access.
+ * 
+ * Provides access to system information, window management, input handling, time operations,
+ * file system paths, process control, video/audio driver information, and hardware capabilities.
+ * Includes enums for video drivers, weekdays, months, screen orientation, and system directories.
+ * 
+ * @see OS
+ */
+
+/**
+ * @class _Geometry
+ * @brief Geometric calculation and polygon manipulation utilities.
+ * 
+ * Provides 2D and 3D geometric operations including intersection detection, closest point
+ * calculations, polygon boolean operations, triangulation, convex hull computation, and
+ * polygon offsetting.
+ * 
+ * @see Geometry
+ */
+
+/**
+ * @class _File
+ * @brief File I/O operations wrapper with encryption and compression support.
+ * 
+ * Enables reading and writing files with support for various data types, endian swapping,
+ * compression modes, encryption, and both text and binary operations.
+ * 
+ * @see FileAccess
+ */
+
+/**
+ * @class _Directory
+ * @brief Directory navigation and file system operations wrapper.
+ * 
+ * Provides directory listing, creation, navigation, file checking, and file operations
+ * such as copy, rename, and remove.
+ * 
+ * @see DirAccess
+ */
+
+/**
+ * @class _Marshalls
+ * @brief Data serialization and encoding utilities (base64, variant conversion).
+ * 
+ * Singleton providing conversion between Variant objects and base64/raw data formats,
+ * useful for data persistence and network transmission.
+ */
+
+/**
+ * @class _Mutex
+ * @brief Thread synchronization primitive for mutual exclusion.
+ * 
+ * Reference-counted mutex for protecting shared resources in multi-threaded contexts.
+ * 
+ * @see Mutex
+ */
+
+/**
+ * @class _Semaphore
+ * @brief Thread synchronization primitive for signaling between threads.
+ * 
+ * Reference-counted semaphore allowing threads to wait and signal each other.
+ * 
+ * @see Semaphore
+ */
+
+/**
+ * @class _Thread
+ * @brief Thread management and execution wrapper.
+ * 
+ * Enables creation and execution of background threads with callback support,
+ * priority levels, and return value collection.
+ * 
+ * @see Thread
+ */
+
+/**
+ * @class _ClassDB
+ * @brief Reflection interface for accessing class metadata and introspection.
+ * 
+ * Provides runtime class information including inheritance relationships, signals,
+ * properties, methods, integer constants, and instantiation capabilities.
+ * 
+ * @see ClassDB
+ */
+
+/**
+ * @class _Engine
+ * @brief Core engine state and configuration singleton.
+ * 
+ * Provides access to engine iteration rates, physics parameters, time scaling,
+ * performance metrics, version information, and editor hints.
+ * 
+ * @see Engine
+ */
+
+/**
+ * @class JSONParseResult
+ * @brief Result object containing JSON parse outcome with error information.
+ * 
+ * Holds the parsed variant result, error code, error message, and line number
+ * where parsing failed (if applicable).
+ */
+
+/**
+ * @class _JSON
+ * @brief JSON serialization and parsing utilities.
+ * 
+ * Singleton providing conversion between Variant objects and JSON strings,
+ * with optional formatting, sorting, and error reporting.
+ * 
+ * @see JSON
+ */
 #ifndef CORE_BIND_H
 #define CORE_BIND_H
 

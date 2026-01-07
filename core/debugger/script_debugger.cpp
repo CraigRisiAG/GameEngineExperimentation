@@ -1,39 +1,105 @@
-/*************************************************************************/
-/*  script_debugger.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
- * @file script_debugger.cpp
- * @brief Implementation of script_debugger functionality.
+ * @class ScriptDebugger
+ * @brief Manages script debugging functionality including breakpoints and debug sessions.
+ * 
+ * Provides an interface for managing breakpoints, controlling script execution flow,
+ * and handling debug information. Acts as a bridge between script languages and the
+ * engine debugger.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Sets the number of lines remaining to execute before pausing.
+ * @param p_left The number of lines to execute.
+ */
 
+/**
+ * @brief Gets the number of lines remaining to execute.
+ * @return The number of lines left to execute.
+ */
+
+/**
+ * @brief Sets the current stack depth.
+ * @param p_depth The depth value to set.
+ */
+
+/**
+ * @brief Gets the current stack depth.
+ * @return The current stack depth.
+ */
+
+/**
+ * @brief Inserts a breakpoint at the specified line in the given source.
+ * @param p_line The line number where the breakpoint should be placed.
+ * @param p_source The source file identifier.
+ */
+
+/**
+ * @brief Removes a breakpoint from the specified line in the given source.
+ * @param p_line The line number of the breakpoint to remove.
+ * @param p_source The source file identifier.
+ */
+
+/**
+ * @brief Checks if a breakpoint exists at the specified line and source.
+ * @param p_line The line number to check.
+ * @param p_source The source file identifier.
+ * @return True if a breakpoint exists at the location, false otherwise.
+ */
+
+/**
+ * @brief Checks if any breakpoint exists at the specified line.
+ * @param p_line The line number to check.
+ * @return True if any breakpoint exists at the line, false otherwise.
+ */
+
+/**
+ * @brief Finds the source file based on the provided source identifier.
+ * @param p_source The source identifier.
+ * @return The resolved source file path.
+ */
+
+/**
+ * @brief Clears all existing breakpoints.
+ */
+
+/**
+ * @brief Sets whether breakpoints should be skipped during execution.
+ * @param p_skip_breakpoints True to skip breakpoints, false to respect them.
+ */
+
+/**
+ * @brief Checks if breakpoints are currently being skipped.
+ * @return True if breakpoints are being skipped, false otherwise.
+ */
+
+/**
+ * @brief Initiates a debug session for the specified script language.
+ * @param p_lang The script language to debug.
+ * @param p_can_continue Whether execution can continue after the debug break.
+ * @param p_is_error_breakpoint Whether this break was triggered by an error.
+ */
+
+/**
+ * @brief Sends error information to the engine debugger with stack information.
+ * @param p_func The function name where the error occurred.
+ * @param p_file The file where the error occurred.
+ * @param p_line The line number where the error occurred.
+ * @param p_err The error message.
+ * @param p_descr The error description.
+ * @param p_type The type of error handler.
+ * @param p_stack_info The stack information associated with the error.
+ */
+
+/**
+ * @brief Retrieves the stack information from the most recent error.
+ * @return A vector containing the error stack information.
+ */
+
+/**
+ * @brief Gets the script language that is currently in a debug break.
+ * @return Pointer to the script language in debug mode, or nullptr if none.
+ */
 #include "script_debugger.h"
 
 #include "core/debugger/engine_debugger.h"

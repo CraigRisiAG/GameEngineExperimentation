@@ -1,39 +1,184 @@
-/*************************************************************************/
-/*  crypto_core.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
  * @file crypto_core.cpp
- * @brief Implementation of crypto_core functionality.
+ * @brief Cryptographic operations implementation using mbedTLS library.
+ * 
+ * This file provides implementations for various cryptographic algorithms:
+ * - MD5 hashing with context-based API
+ * - SHA1 hashing with context-based API
+ * - SHA256 hashing with context-based API
+ * - AES encryption/decryption with ECB mode
+ * - Base64 encoding/decoding
+ * 
+ * All hash and cipher contexts manage their own memory allocation and
+ * follow RAII principles for proper resource cleanup.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class CryptoCore::MD5Context
+ * @brief MD5 hashing context wrapper.
+ * 
+ * Manages MD5 hash computation with incremental update capability.
+ * Memory is automatically allocated in constructor and freed in destructor.
+ */
 
+/**
+ * @brief Initialize MD5 hashing context.
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Update MD5 hash with new data.
+ * @param p_src Pointer to input data
+ * @param p_len Length of input data in bytes
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Finalize MD5 hash computation.
+ * @param r_hash Output buffer for 16-byte MD5 hash
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @class CryptoCore::SHA1Context
+ * @brief SHA1 hashing context wrapper.
+ * 
+ * Manages SHA1 hash computation with incremental update capability.
+ * Memory is automatically allocated in constructor and freed in destructor.
+ */
+
+/**
+ * @brief Initialize SHA1 hashing context.
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Update SHA1 hash with new data.
+ * @param p_src Pointer to input data
+ * @param p_len Length of input data in bytes
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Finalize SHA1 hash computation.
+ * @param r_hash Output buffer for 20-byte SHA1 hash
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @class CryptoCore::SHA256Context
+ * @brief SHA256 hashing context wrapper.
+ * 
+ * Manages SHA256 hash computation with incremental update capability.
+ * Memory is automatically allocated in constructor and freed in destructor.
+ */
+
+/**
+ * @brief Initialize SHA256 hashing context.
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Update SHA256 hash with new data.
+ * @param p_src Pointer to input data
+ * @param p_len Length of input data in bytes
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Finalize SHA256 hash computation.
+ * @param r_hash Output buffer for 32-byte SHA256 hash
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @class CryptoCore::AESContext
+ * @brief AES encryption/decryption context wrapper.
+ * 
+ * Manages AES cipher operations in ECB mode.
+ * Supports both encryption and decryption with separate key setup.
+ * Memory is automatically allocated in constructor and freed in destructor.
+ */
+
+/**
+ * @brief Set AES encryption key.
+ * @param p_key Pointer to key data
+ * @param p_bits Key size in bits (128, 192, or 256)
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Set AES decryption key.
+ * @param p_key Pointer to key data
+ * @param p_bits Key size in bits (128, 192, or 256)
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Encrypt 16-byte block using AES-ECB.
+ * @param p_src Input 16-byte plaintext block
+ * @param r_dst Output 16-byte ciphertext block
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Decrypt 16-byte block using AES-ECB.
+ * @param p_src Input 16-byte ciphertext block
+ * @param r_dst Output 16-byte plaintext block
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Encode binary data to Base64 string.
+ * @param p_src Pointer to input binary data
+ * @param p_src_len Length of input data in bytes
+ * @return Base64-encoded string, empty string on error
+ */
+
+/**
+ * @brief Encode binary data to Base64.
+ * @param r_dst Output buffer for Base64 data
+ * @param p_dst_len Size of output buffer
+ * @param r_len Pointer to store actual output length
+ * @param p_src Pointer to input binary data
+ * @param p_src_len Length of input data in bytes
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Decode Base64 data to binary.
+ * @param r_dst Output buffer for decoded binary data
+ * @param p_dst_len Size of output buffer
+ * @param r_len Pointer to store actual output length
+ * @param p_src Pointer to Base64 input data
+ * @param p_src_len Length of input data in bytes
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Compute MD5 hash of data.
+ * @param p_src Pointer to input data
+ * @param p_src_len Length of input data in bytes
+ * @param r_hash Output buffer for 16-byte MD5 hash
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Compute SHA1 hash of data.
+ * @param p_src Pointer to input data
+ * @param p_src_len Length of input data in bytes
+ * @param r_hash Output buffer for 20-byte SHA1 hash
+ * @return OK on success, FAILED on error
+ */
+
+/**
+ * @brief Compute SHA256 hash of data.
+ * @param p_src Pointer to input data
+ * @param p_src_len Length of input data in bytes
+ * @param r_hash Output buffer for 32-byte SHA256 hash
+ * @return OK on success, FAILED on error
+ */
 #include "crypto_core.h"
 
 #include <mbedtls/aes.h>

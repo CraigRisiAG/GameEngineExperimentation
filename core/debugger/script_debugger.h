@@ -1,39 +1,23 @@
-/*************************************************************************/
-/*  script_debugger.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file script_debugger.h
- * @brief Implementation of ScriptDebugger class.
+ * @class ScriptDebugger
+ * @brief Manages script debugging functionality including breakpoints, execution flow control, and error handling.
+ * 
+ * ScriptDebugger provides a comprehensive debugging interface for script languages. It handles breakpoint
+ * management, execution stepping, language-specific debugging operations, and error stack tracking.
+ * 
+ * @details
+ * The debugger maintains a collection of breakpoints organized by line number and source file, tracks
+ * execution depth and remaining lines before stopping, and manages the currently active debugging language.
+ * It supports operations such as stepping through code, skipping breakpoints, and capturing error information
+ * with full stack traces.
+ * 
+ * @note This class works in conjunction with ScriptLanguage implementations to provide language-specific
+ * debugging capabilities.
+ * 
+ * @see ScriptLanguage
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SCRIPT_DEBUGGER_H
 #define SCRIPT_DEBUGGER_H
 

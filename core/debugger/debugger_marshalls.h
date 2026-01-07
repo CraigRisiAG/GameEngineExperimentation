@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  debugger_marshalls.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file debugger_marshalls.h
- * @brief Implementation of ScriptFunctionSignature class.
+ * @brief Marshalling structures for debugger data serialization and deserialization.
+ * 
+ * This header defines a collection of data structures used by the debugger to package,
+ * serialize, and deserialize various profiling and diagnostic information including:
+ * - Resource memory usage statistics
+ * - Network profiler data for multiplayer nodes
+ * - Script profiler function signatures and performance metrics
+ * - Server profiler frame data and function timing information
+ * - Script stack traces and call stacks
+ * - Runtime errors with full context information
+ * - Visual profiler frame statistics
+ * 
+ * Each structure provides serialize() and deserialize() methods to convert data to/from
+ * Array format for transmission or storage.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef DEBUGGER_MARSHARLLS_H
 #define DEBUGGER_MARSHARLLS_H
 

@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  remote_debugger_peer.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file remote_debugger_peer.cpp
- * @brief Implementation of remote_debugger_peer functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// RemoteDebuggerPeerTCP
+/// Handles TCP communication for remote debugging.
+/// 
+/// This class manages bidirectional communication with a remote debugger over TCP.
+/// It maintains separate input and output queues for messages and uses threading
+/// to asynchronously handle network I/O operations.
+/// 
+/// Key Features:
+/// - Asynchronous message queuing with mutex protection
+/// - Configurable maximum queue size
+/// - 8 MiB buffer allocation for send/receive operations
+/// - Thread-based polling when NO_THREADS is not defined
+/// - Automatic reconnection attempts with exponential backoff
+/// - Variant-based message serialization/deserialization
+/// 
+/// Thread Safety:
+/// Input and output queues are protected by a mutex lock to ensure thread-safe
+/// access from both the polling thread and main thread contexts.
+/// 
+/// Memory:
+/// Allocates approximately 16 MiB of memory for input/output buffers upon instantiation.
 #include "remote_debugger_peer.h"
 
 #include "core/io/marshalls.h"

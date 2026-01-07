@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  debugger_marshalls.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
  * @file debugger_marshalls.cpp
- * @brief Implementation of debugger_marshalls functionality.
+ * @brief Serialization and deserialization utilities for debugger message marshalling.
+ * 
+ * This file implements serialize() and deserialize() methods for various debugger data structures
+ * used in communication between the game engine and script debugger. Each structure converts to/from
+ * a flat Array format for transmission.
+ * 
+ * Key structures:
+ * - ResourceUsage: Tracks resource paths, formats, types, and VRAM usage
+ * - ScriptFunctionSignature: Function name and ID metadata
+ * - NetworkProfilerFrame: Network RPC and RSET statistics per node
+ * - ServersProfilerFrame: Frame timing and server function profiling data
+ * - ScriptStackDump: Call stack information (file, line, function)
+ * - ScriptStackVariable: Variable name, type, and serialized value
+ * - OutputError: Error/warning details with timestamp and call stack
+ * - VisualProfilerFrame: GPU/CPU profiling metrics by area
+ * 
+ * All deserialization methods include size validation macros (CHECK_SIZE, CHECK_END)
+ * to ensure message integrity and prevent buffer overflows.
+ * 
+ * @note Array format is specified as: first element = total data count, followed by
+ *       packed data elements. Data is organized in fixed-size groups (e.g., 4 elements
+ *       per ResourceInfo, 6 per NetworkProfilerFrame info, etc.)
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "debugger_marshalls.h"
 
 #include "core/io/marshalls.h"

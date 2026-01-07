@@ -1,39 +1,103 @@
-/*************************************************************************/
-/*  crypto_core.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
- * @file crypto_core.h
- * @brief Implementation of CryptoCore class.
+ * @class CryptoCore
+ * @brief Provides cryptographic operations including hashing, encryption, and encoding.
+ * 
+ * This class offers static methods and nested context classes for performing various
+ * cryptographic operations such as MD5, SHA1, SHA256 hashing, AES encryption/decryption,
+ * and Base64 encoding/decoding.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class CryptoCore::MD5Context
+ * @brief Context class for MD5 hash computation.
+ * 
+ * Manages the state of an MD5 hash operation. Use start() to initialize,
+ * update() to process data, and finish() to retrieve the final hash.
+ * 
+ * @see start(), update(), finish()
+ */
 
+/**
+ * @class CryptoCore::SHA1Context
+ * @brief Context class for SHA1 hash computation.
+ * 
+ * Manages the state of a SHA1 hash operation. Use start() to initialize,
+ * update() to process data, and finish() to retrieve the final hash.
+ * 
+ * @see start(), update(), finish()
+ */
+
+/**
+ * @class CryptoCore::SHA256Context
+ * @brief Context class for SHA256 hash computation.
+ * 
+ * Manages the state of a SHA256 hash operation. Use start() to initialize,
+ * update() to process data, and finish() to retrieve the final hash.
+ * 
+ * @see start(), update(), finish()
+ */
+
+/**
+ * @class CryptoCore::AESContext
+ * @brief Context class for AES encryption and decryption operations.
+ * 
+ * Manages the state of AES encryption/decryption. Set keys using set_encode_key()
+ * or set_decode_key(), then use encrypt_ecb() or decrypt_ecb() for block operations.
+ * 
+ * @see set_encode_key(), set_decode_key(), encrypt_ecb(), decrypt_ecb()
+ */
+
+/**
+ * @brief Encodes data to Base64 string representation.
+ * @param p_src Source data buffer
+ * @param p_src_len Length of source data
+ * @return Base64 encoded string
+ */
+
+/**
+ * @brief Encodes data to Base64 format.
+ * @param r_dst Destination buffer for encoded data
+ * @param p_dst_len Maximum length of destination buffer
+ * @param r_len Output parameter containing the encoded data length
+ * @param p_src Source data buffer
+ * @param p_src_len Length of source data
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Decodes Base64 formatted data.
+ * @param r_dst Destination buffer for decoded data
+ * @param p_dst_len Maximum length of destination buffer
+ * @param r_len Output parameter containing the decoded data length
+ * @param p_src Base64 encoded source buffer
+ * @param p_src_len Length of source data
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Computes MD5 hash of data.
+ * @param p_src Source data buffer
+ * @param p_src_len Length of source data
+ * @param r_hash Output hash array (16 bytes)
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Computes SHA1 hash of data.
+ * @param p_src Source data buffer
+ * @param p_src_len Length of source data
+ * @param r_hash Output hash array (20 bytes)
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @brief Computes SHA256 hash of data.
+ * @param p_src Source data buffer
+ * @param p_src_len Length of source data
+ * @param r_hash Output hash array (32 bytes)
+ * @return Error code indicating success or failure
+ */
 #ifndef CRYPTO_CORE_H
 #define CRYPTO_CORE_H
 

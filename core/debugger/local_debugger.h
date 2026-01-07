@@ -1,39 +1,47 @@
-/*************************************************************************/
-/*  local_debugger.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file local_debugger.h
- * @brief Implementation of LocalDebugger class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class LocalDebugger
+/// @brief Local debugger implementation for engine debugging and script profiling.
+/// 
+/// LocalDebugger extends EngineDebugger to provide local debugging capabilities including
+/// breakpoint management, variable inspection, and script profiling functionality.
+/// 
+/// @details
+/// - Manages script profiling through an internal ScriptsProfiler
+/// - Handles breakpoint parsing and execution
+/// - Provides variable inspection and printing utilities
+/// - Supports inter-process debugging communication via messages and errors
 
+/// @brief Parses a string line into a breakpoint pair.
+/// @param p_line The input line to parse as a breakpoint
+/// @return A Pair containing the breakpoint location (String) and line number (int)
+/// @note Used internally to convert user input to breakpoint data structures
+
+/// @brief Prints variables with their corresponding values.
+/// @param names List of variable names to display
+/// @param values List of variable values corresponding to each name
+/// @param variable_prefix Prefix string to prepend to variable names in output
+/// @details Formats and outputs variable information for debugging inspection
+
+/// @brief Executes debug break with continuation and error state options.
+/// @param p_can_continue Whether execution can resume from this breakpoint
+/// @param p_is_error_breakpoint Whether this breakpoint was triggered by an error condition
+
+/// @brief Sends a debug message to connected debugger clients.
+/// @param p_message The message string to transmit
+/// @param p_args Array of arguments to include with the message
+
+/// @brief Reports an error to the debugger with full context information.
+/// @param p_func Function name where error occurred
+/// @param p_file Source file path where error occurred
+/// @param p_line Line number in source file where error occurred
+/// @param p_err Error code or type identifier
+/// @param p_descr Human-readable error description
+/// @param p_type Category of error (ErrorHandlerType)
+
+/// @brief Constructs a new LocalDebugger instance.
+
+/// @brief Destructs the LocalDebugger instance, cleaning up profiler resources.
 #ifndef LOCAL_DEBUGGER_H
 #define LOCAL_DEBUGGER_H
 

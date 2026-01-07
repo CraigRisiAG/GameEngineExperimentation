@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  remote_debugger.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file remote_debugger.cpp
- * @brief Definition of RemoteDebugger data structure.
+ * @brief Remote debugger implementation for game engine debugging over network.
+ * 
+ * Provides remote debugging capabilities including:
+ * - Network profiling (bandwidth, multiplayer node tracking)
+ * - Script profiling (function signatures, call counts, timing)
+ * - Server profiling (audio, physics, custom servers)
+ * - Visual profiling (GPU/CPU frame timing)
+ * - Performance monitoring
+ * - Error and print output handling with rate limiting
+ * - Debug breakpoint management
+ * - Stack frame variable inspection
+ * 
+ * The remote debugger communicates with a debugger client over a network peer,
+ * sending profiling data, errors, warnings, and debug information. It includes
+ * rate limiting mechanisms to prevent network saturation and implements message
+ * capture handlers for extensible command processing.
+ * 
+ * Key components:
+ * - NetworkProfiler: Tracks network bandwidth and RPC/RSET calls
+ * - ScriptsProfiler: Profiles script execution with function-level granularity
+ * - ServersProfiler: Monitors server subsystems (physics, audio, rendering)
+ * - VisualProfiler: Captures visual server frame profile data
+ * - PerformanceProfiler: Monitors engine performance metrics
+ * 
+ * Error and print handlers are registered with the engine to capture and
+ * transmit output to the remote debugger client with configurable rate limits.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "remote_debugger.h"
 
 #include "core/debugger/debugger_marshalls.h"

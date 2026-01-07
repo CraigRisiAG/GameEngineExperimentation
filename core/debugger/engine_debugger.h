@@ -1,39 +1,71 @@
-/*************************************************************************/
-/*  engine_debugger.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file engine_debugger.h
- * @brief Central engine singleton managing core subsystems.
+ * @class EngineDebugger
+ * @brief Main debugger interface for the game engine.
+ * 
+ * EngineDebugger is a singleton class that manages debugging functionality including profiling,
+ * message capturing, and script debugging. It provides a bridge between the engine and debugging tools.
+ * 
+ * @details
+ * The class manages two main debugging mechanisms:
+ * - Profilers: Monitor and report performance metrics (frame time, idle time, physics time)
+ * - Captures: Handle custom debug messages and commands
+ * 
+ * @note This is a singleton pattern implementation. Use get_singleton() to access the instance.
+ * 
+ * @see Profiler, Capture, ScriptDebugger
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @typedef ProfilingToggle
+ * @brief Callback function for enabling/disabling profilers.
+ * @param p_user User data pointer
+ * @param p_enable Enable or disable the profiler
+ * @param p_opts Array of options for the profiler
+ */
 
+/**
+ * @typedef ProfilingTick
+ * @brief Callback function for profiler frame updates.
+ * @param p_user User data pointer
+ * @param p_frame_time Time spent in the current frame
+ * @param p_idle_time Time spent idling
+ * @param p_physics_time Time spent in physics calculations
+ * @param p_physics_frame_time Physics frame duration
+ */
+
+/**
+ * @typedef ProfilingAdd
+ * @brief Callback function for adding profiling data.
+ * @param p_user User data pointer
+ * @param p_arr Array of profiling data to add
+ */
+
+/**
+ * @typedef CaptureFunc
+ * @brief Callback function for capturing debug messages.
+ * @param p_user User data pointer
+ * @param p_msg Debug message string
+ * @param p_args Array of message arguments
+ * @param r_captured Output parameter indicating if message was captured
+ * @return Error code if any error occurred
+ */
+
+/**
+ * @class Profiler
+ * @brief Container for profiler callbacks and data.
+ * 
+ * Stores function pointers and user data for a profiler instance.
+ * Allows the debugger to toggle profiling and receive performance data.
+ */
+
+/**
+ * @class Capture
+ * @brief Container for message capture callbacks and data.
+ * 
+ * Stores function pointer and user data for handling custom debug messages.
+ */
 #ifndef ENGINE_DEBUGGER_H
 #define ENGINE_DEBUGGER_H
 

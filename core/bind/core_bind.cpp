@@ -1,39 +1,114 @@
-/*************************************************************************/
-/*  core_bind.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
- * @file core_bind.cpp
- * @brief Definition of Date data structure.
+ * @class _ResourceLoader
+ * @brief Singleton wrapper for the ResourceLoader system providing script bindings.
+ * 
+ * Provides methods to load resources asynchronously, get recognized file extensions,
+ * check for cached resources, and manage resource loading with thread support.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class _ResourceSaver
+ * @brief Singleton wrapper for the ResourceSaver system providing script bindings.
+ * 
+ * Provides methods to save resources with various flags (relative paths, compression, etc.)
+ * and query recognized file extensions for resource types.
+ */
 
+/**
+ * @class _OS
+ * @brief Singleton wrapper providing OS-level functionality and system information.
+ * 
+ * Exposes window management, input/output, clipboard operations, datetime utilities,
+ * video/audio driver information, process management, and various system queries.
+ * Includes comprehensive time conversion utilities for epoch time calculations.
+ */
+
+/**
+ * @class _Geometry
+ * @brief Singleton providing geometric computation utilities.
+ * 
+ * Offers 2D and 3D geometric operations including intersection tests, polygon operations,
+ * triangulation, convex hull computation, and polygon clipping/offsetting.
+ */
+
+/**
+ * @class _File
+ * @brief File I/O wrapper with support for encrypted and compressed file access.
+ * 
+ * Provides read/write operations for various data types (integers, floats, strings),
+ * buffer operations, CSV parsing, and optional encryption/compression support.
+ */
+
+/**
+ * @class _Directory
+ * @brief Directory traversal and file system manipulation wrapper.
+ * 
+ * Allows listing directory contents, creating/removing directories, checking file/directory
+ * existence, and copying/renaming files. Supports both relative and absolute paths.
+ */
+
+/**
+ * @class _Marshalls
+ * @brief Data marshalling utilities for encoding/decoding data to Base64 and UTF-8.
+ * 
+ * Provides conversion between Variants and Base64 strings, raw byte arrays to Base64,
+ * and UTF-8 string encoding/decoding operations.
+ */
+
+/**
+ * @class _Semaphore
+ * @brief Thread synchronization primitive allowing threads to wait and signal.
+ * 
+ * Implements semaphore operations: wait, try_wait, and post for inter-thread coordination.
+ */
+
+/**
+ * @class _Mutex
+ * @brief Thread synchronization primitive for mutual exclusion.
+ * 
+ * Provides lock, try_lock, and unlock operations to protect shared resources from
+ * concurrent access.
+ */
+
+/**
+ * @class _Thread
+ * @brief Wrapper for thread creation and management.
+ * 
+ * Allows starting threads with a target method, user data parameter, and priority level.
+ * Supports querying thread status and waiting for thread completion with return values.
+ */
+
+/**
+ * @class _ClassDB
+ * @brief Reflection API wrapper providing runtime class introspection.
+ * 
+ * Enables querying class hierarchy, properties, methods, signals, constants, and
+ * instantiation of classes at runtime.
+ */
+
+/**
+ * @class _Engine
+ * @brief Singleton providing access to engine configuration and timing information.
+ * 
+ * Exposes engine settings like iterations per second, target FPS, time scale, version info,
+ * license information, and main loop management.
+ */
+
+/**
+ * @class JSONParseResult
+ * @brief Result object from JSON parsing operations containing error information.
+ * 
+ * Stores parse error state, error description, line number of error, and the parsed result.
+ */
+
+/**
+ * @class _JSON
+ * @brief Singleton providing JSON serialization and deserialization.
+ * 
+ * Converts between Variant objects and JSON strings with optional indentation and key sorting.
+ * Provides parsing with detailed error reporting.
+ */
 #include "core_bind.h"
 
 #include "core/crypto/crypto_core.h"

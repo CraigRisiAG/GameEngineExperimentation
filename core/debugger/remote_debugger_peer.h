@@ -1,39 +1,117 @@
-/*************************************************************************/
-/*  remote_debugger_peer.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file remote_debugger_peer.h
- * @brief Implementation of RemoteDebuggerPeer class.
+ * @class RemoteDebuggerPeer
+ * @brief Abstract base class for remote debugger peer connections.
+ * 
+ * Provides an interface for communicating with a remote debugger over a network connection.
+ * Handles message queuing and transmission of debugging information.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @var int RemoteDebuggerPeer::max_queued_messages
+ * @brief Maximum number of messages that can be queued before dropping new ones. Default is 4096.
+ */
 
+/**
+ * @fn static Ref<RemoteDebuggerPeer> RemoteDebuggerPeer::create_from_uri(const String p_uri)
+ * @brief Factory method to create a debugger peer from a URI string.
+ * @param p_uri The connection URI (e.g., "tcp://localhost:6007")
+ * @return A reference to the created RemoteDebuggerPeer instance.
+ */
+
+/**
+ * @fn virtual bool RemoteDebuggerPeer::is_peer_connected()
+ * @brief Checks if the peer is currently connected.
+ * @return true if connected, false otherwise.
+ */
+
+/**
+ * @fn virtual bool RemoteDebuggerPeer::has_message()
+ * @brief Checks if there are incoming messages waiting to be processed.
+ * @return true if messages are available, false otherwise.
+ */
+
+/**
+ * @fn virtual Error RemoteDebuggerPeer::put_message(const Array &p_arr)
+ * @brief Queues a message to be sent to the remote debugger.
+ * @param p_arr The message array to send.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @fn virtual Array RemoteDebuggerPeer::get_message()
+ * @brief Retrieves the next incoming message from the queue.
+ * @return The message array, or an empty array if none available.
+ */
+
+/**
+ * @fn virtual void RemoteDebuggerPeer::close()
+ * @brief Closes the peer connection and cleans up resources.
+ */
+
+/**
+ * @fn virtual void RemoteDebuggerPeer::poll()
+ * @brief Processes pending network operations and message handling.
+ */
+
+/**
+ * @fn virtual int RemoteDebuggerPeer::get_max_message_size() const
+ * @brief Retrieves the maximum size of a single message that can be transmitted.
+ * @return Maximum message size in bytes.
+ */
+
+/**
+ * @class RemoteDebuggerPeerTCP
+ * @brief TCP implementation of the RemoteDebuggerPeer for network-based debugging.
+ * 
+ * Manages TCP socket communication with a remote debugger, using a background thread
+ * for non-blocking message transmission and reception.
+ */
+
+/**
+ * @var Ref<StreamPeerTCP> RemoteDebuggerPeerTCP::tcp_client
+ * @brief The underlying TCP stream peer for socket operations.
+ */
+
+/**
+ * @var Mutex RemoteDebuggerPeerTCP::mutex
+ * @brief Synchronization primitive for thread-safe queue access.
+ */
+
+/**
+ * @var Thread* RemoteDebuggerPeerTCP::thread
+ * @brief Background thread handling asynchronous network I/O.
+ */
+
+/**
+ * @var List<Array> RemoteDebuggerPeerTCP::in_queue
+ * @brief Queue of incoming messages from the remote debugger.
+ */
+
+/**
+ * @var List<Array> RemoteDebuggerPeerTCP::out_queue
+ * @brief Queue of outgoing messages to be sent to the remote debugger.
+ */
+
+/**
+ * @fn Error RemoteDebuggerPeerTCP::connect_to_host(const String &p_host, uint16_t p_port)
+ * @brief Establishes a TCP connection to the specified host and port.
+ * @param p_host The hostname or IP address to connect to.
+ * @param p_port The port number to connect to.
+ * @return OK on success, or an error code on failure.
+ */
+
+/**
+ * @fn RemoteDebuggerPeerTCP::RemoteDebuggerPeerTCP(Ref<StreamPeerTCP> p_stream)
+ * @brief Constructs a TCP debugger peer with optional pre-configured stream.
+ * @param p_stream Optional existing StreamPeerTCP instance to use for communication.
+ */
+
+/**
+ * @fn RemoteDebuggerPeerTCP::~RemoteDebuggerPeerTCP()
+ * @brief Destructor that closes the connection and cleans up the background thread.
+ */
 #ifndef REMOTE_DEBUGGER_PEER_H
 #define REMOTE_DEBUGGER_PEER_H
 

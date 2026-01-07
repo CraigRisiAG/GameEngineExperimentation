@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  remote_debugger.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file remote_debugger.h
- * @brief Implementation of RemoteDebugger class.
+ * @class RemoteDebugger
+ * @brief Remote debugger implementation for engine debugging over network connections.
+ * 
+ * RemoteDebugger extends EngineDebugger to provide remote debugging capabilities,
+ * allowing communication with a debugger client over a network peer connection.
+ * It manages profiling data (network, servers, visual, performance), error/warning
+ * throttling, and thread-safe message marshalling.
+ * 
+ * Key responsibilities:
+ * - Maintain network connection with remote debugger peer
+ * - Collect and throttle error/warning messages and output
+ * - Manage multiple profiler instances (network, servers, visual, performance)
+ * - Thread-safe message queuing and flushing
+ * - Handle print and error callbacks from the engine
+ * - Capture profiling and debug data on request
+ * 
+ * Thread Safety:
+ * - Mutex protects message handlers and send_message operations
+ * - Flushing state and thread ID tracked to ensure single flush operation
+ * 
+ * @see EngineDebugger
+ * @see RemoteDebuggerPeer
+ * @see DebuggerMarshalls
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef REMOTE_DEBUGGER_H
 #define REMOTE_DEBUGGER_H
 

@@ -1,39 +1,48 @@
-/*************************************************************************/
-/*  hashing_context.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file hashing_context.cpp
- * @brief Implementation of hashing_context functionality.
- */
+/// @class HashingContext
+/// @brief Provides an interface for computing cryptographic hashes with support for MD5, SHA1, and SHA256 algorithms.
+/// 
+/// HashingContext allows incremental hashing of data through a three-step process: start(), update(), and finish().
+/// The context maintains internal state for the selected hash algorithm and ensures proper resource management.
+/// 
+/// @note Only one hashing operation can be active at a time per HashingContext instance.
+/// @note The finish() method automatically cleans up the internal context.
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @enum HashType
+/// @brief Enumeration of supported hash algorithms.
+/// @var HASH_MD5 - MD5 hash algorithm (128-bit output)
+/// @var HASH_SHA1 - SHA-1 hash algorithm (160-bit output)
+/// @var HASH_SHA256 - SHA-256 hash algorithm (256-bit output)
 
+/// @method Error start(HashType p_type)
+/// @brief Initializes a new hashing context with the specified hash algorithm.
+/// @param p_type The hash algorithm type to use (HASH_MD5, HASH_SHA1, or HASH_SHA256)
+/// @return OK if successful, ERR_ALREADY_IN_USE if a context is already active, ERR_UNAVAILABLE if initialization fails
+/// @note Must be called before update() and finish()
+
+/// @method Error update(PackedByteArray p_chunk)
+/// @brief Updates the hash with the provided data chunk.
+/// @param p_chunk The data to hash
+/// @return OK if successful, ERR_UNCONFIGURED if start() was not called, FAILED if the chunk is empty
+/// @note Can be called multiple times to hash data incrementally
+
+/// @method PackedByteArray finish()
+/// @brief Finalizes the hash computation and returns the digest.
+/// @return The computed hash as a PackedByteArray (16 bytes for MD5, 20 for SHA1, 32 for SHA256), or empty array on error
+/// @note Automatically cleans up the internal context after completion
+
+/// @method void _create_ctx(HashType p_type)
+/// @brief Internal helper that allocates and initializes the appropriate hash context.
+/// @param p_type The hash algorithm type to initialize
+/// @private
+
+/// @method void _delete_ctx()
+/// @brief Internal helper that deallocates the current hash context.
+/// @private
+
+/// @method void _bind_methods()
+/// @brief Binds the class methods to the scripting interface.
+/// @private
 #include "hashing_context.h"
 
 #include "core/crypto/crypto_core.h"
