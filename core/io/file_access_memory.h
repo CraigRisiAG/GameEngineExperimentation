@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  file_access_memory.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file file_access_memory.h
- * @brief Implementation of FileAccessMemory class.
+ * @class FileAccessMemory
+ * @brief In-memory file access implementation for reading and writing data stored in RAM.
+ * 
+ * This class provides a FileAccess interface for working with data buffers stored in memory
+ * rather than on disk. It allows registering named memory buffers and accessing them through
+ * the standard file access API.
+ * 
+ * @note This implementation does not support actual file system operations like checking
+ * modification times or Unix permissions.
+ * 
+ * Usage:
+ *   - Register a memory buffer with register_file() before opening
+ *   - Open the registered buffer using _open() with the registered name
+ *   - Use standard FileAccess methods to read/write data
+ *   - Call cleanup() to free registered buffers when done
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILE_ACCESS_MEMORY_H
 #define FILE_ACCESS_MEMORY_H
 

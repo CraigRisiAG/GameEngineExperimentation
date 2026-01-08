@@ -1,39 +1,25 @@
-/*************************************************************************/
-/*  file_access_encrypted.h                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file file_access_encrypted.h
- * @brief Implementation of FileAccessEncrypted class.
+ * @class FileAccessEncrypted
+ * @brief Provides encrypted file access with AES256 encryption support.
+ * 
+ * FileAccessEncrypted is a specialized file access class that extends FileAccess
+ * to support reading and writing encrypted files. It wraps an existing FileAccess
+ * object and handles encryption/decryption transparently.
+ * 
+ * @details
+ * The class supports two operational modes:
+ * - MODE_READ: Reading and decrypting existing encrypted files
+ * - MODE_WRITE_AES256: Writing and encrypting files using AES256 algorithm
+ * 
+ * Files can be opened using either a raw binary key or a password-derived key.
+ * The class maintains an internal buffer of decrypted data for read operations
+ * and handles seek operations within the encrypted content.
+ * 
+ * @note All read/write operations work on the decrypted data transparently.
+ *       The underlying FileAccess object manages the actual encrypted file I/O.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILE_ACCESS_ENCRYPTED_H
 #define FILE_ACCESS_ENCRYPTED_H
 

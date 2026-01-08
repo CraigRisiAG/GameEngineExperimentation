@@ -1,39 +1,37 @@
-/*************************************************************************/
-/*  config_file.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file config_file.h
- * @brief Implementation of ConfigFile class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class ConfigFile
+/// @brief A utility class for reading and writing configuration files.
+///
+/// ConfigFile provides functionality to manage key-value pairs organized into sections,
+/// similar to INI file format. It supports loading from and saving to files, with optional
+/// encryption capabilities.
+///
+/// The configuration data is stored internally as a nested map structure where each section
+/// contains a map of keys to variant values. This allows flexible storage of various data types.
+///
+/// @note ConfigFile extends the Reference class and is designed to be used with Godot's
+/// reference counting system.
+///
+/// ## Features:
+/// - Load and save configuration files from disk
+/// - Parse configuration from string data
+/// - Encrypt and decrypt configuration files
+/// - Organize settings into named sections
+/// - Store values of any Variant type
+/// - Query sections and keys with existence checks
+///
+/// ## Usage Example:
+/// @code
+/// var config = ConfigFile.new()
+/// config.set_value("player", "name", "John")
+/// config.set_value("player", "level", 10)
+/// config.save("user://config.cfg")
+///
+/// var config2 = ConfigFile.new()
+/// config2.load("user://config.cfg")
+/// var player_name = config2.get_value("player", "name", "Unknown")
+/// @endcode
 #ifndef CONFIG_FILE_H
 #define CONFIG_FILE_H
 

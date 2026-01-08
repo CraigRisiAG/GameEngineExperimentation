@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  file_access_network.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file file_access_network.cpp
- * @brief Implementation of file_access_network functionality.
+ * @brief Network-based file access implementation for remote file operations.
+ * 
+ * This module provides network file access functionality with the following key components:
+ * 
+ * FileAccessNetworkClient:
+ * - Manages network communication with a remote file server
+ * - Implements thread-safe mutex locking/unlocking for concurrent access
+ * - Provides 32-bit and 64-bit integer serialization/deserialization
+ * - Runs a background thread to handle server responses and block requests
+ * - Supports connection establishment with password authentication
+ * 
+ * FileAccessNetwork:
+ * - Implements file access interface for remote files over network
+ * - Uses page-based buffering system for efficient block reading
+ * - Supports file operations: open, close, seek, read (8-bit buffer reads)
+ * - Implements read-ahead caching for performance optimization
+ * - Handles file metadata queries: exists, modified time, permissions
+ * - Thread-safe page management with mutex protection
+ * 
+ * Key Features:
+ * - Asynchronous network communication via background thread
+ * - Configurable page size and read-ahead buffer count via project settings
+ * - Semaphore-based synchronization between main and network threads
+ * - Page buffering with automatic prefetching
+ * - Error handling with status responses from remote server
+ * - Read-only file access mode (writes not supported)
+ * 
+ * Network Protocol:
+ * - Command-response based communication
+ * - Supported commands: OPEN_FILE, CLOSE, READ_BLOCK, FILE_EXISTS, GET_MODTIME
+ * - Binary data transmission with uint32/uint64 encoding
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "file_access_network.h"
 
 #include "core/io/ip.h"

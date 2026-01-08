@@ -1,39 +1,72 @@
-/*************************************************************************/
-/*  ip.h                                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file ip.h
- * @brief Implementation of IP class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class IP
+/// @brief Provides IP address resolution and network interface information.
+///
+/// The IP class is a singleton that handles both synchronous and asynchronous
+/// hostname resolution, as well as querying local network interfaces and addresses.
+/// It serves as an abstract base class with platform-specific implementations.
+///
+/// @note This is a Godot Engine networking utility class.
+///
+/// @enum ResolverStatus
+/// @brief Status of an asynchronous hostname resolution request.
+/// - RESOLVER_STATUS_NONE: No resolution in progress
+/// - RESOLVER_STATUS_WAITING: Resolution is pending
+/// - RESOLVER_STATUS_DONE: Resolution completed successfully
+/// - RESOLVER_STATUS_ERROR: Resolution failed
+///
+/// @enum Type
+/// @brief IP address type filter for resolution.
+/// - TYPE_NONE: No type specified
+/// - TYPE_IPV4: IPv4 addresses only
+/// - TYPE_IPV6: IPv6 addresses only
+/// - TYPE_ANY: Both IPv4 and IPv6 addresses
+///
+/// @struct Interface_Info
+/// @brief Information about a network interface.
+/// @var name: System interface name
+/// @var name_friendly: Human-readable interface name
+/// @var index: Interface index identifier
+/// @var ip_addresses: List of IP addresses bound to this interface
+///
+/// @method resolve_hostname
+/// @brief Synchronously resolve a hostname to an IP address.
+/// @param p_hostname The hostname to resolve
+/// @param p_type IP address type filter (default: TYPE_ANY)
+/// @return IP_Address of the resolved hostname
+///
+/// @method resolve_hostname_queue_item
+/// @brief Queue an asynchronous hostname resolution request.
+/// @param p_hostname The hostname to resolve
+/// @param p_type IP address type filter (default: TYPE_ANY)
+/// @return ResolverID identifier for tracking the async request
+///
+/// @method get_resolve_item_status
+/// @brief Get the status of a queued resolution request.
+/// @param p_id The ResolverID returned from resolve_hostname_queue_item
+/// @return ResolverStatus indicating the current state
+///
+/// @method get_resolve_item_address
+/// @brief Get the resolved IP address from a completed request.
+/// @param p_id The ResolverID returned from resolve_hostname_queue_item
+/// @return IP_Address of the resolved hostname
+///
+/// @method get_local_addresses
+/// @brief Retrieve all local IP addresses.
+/// @param r_addresses Output list to populate with local IP addresses
+///
+/// @method get_local_interfaces
+/// @brief Retrieve detailed information about all network interfaces.
+/// @param r_interfaces Output map to populate with interface information
+///
+/// @method erase_resolve_item
+/// @brief Cancel and remove a queued or completed resolution request.
+/// @param p_id The ResolverID to erase
+///
+/// @method clear_cache
+/// @brief Clear hostname resolution cache.
+/// @param p_hostname Specific hostname to clear, or empty string to clear all
 #ifndef IP_H
 #define IP_H
 

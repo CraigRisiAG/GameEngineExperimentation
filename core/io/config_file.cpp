@@ -1,39 +1,143 @@
-/*************************************************************************/
-/*  config_file.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file config_file.cpp
- * @brief Implementation of config_file functionality.
+ * @brief Configuration file management implementation
+ * 
+ * Provides functionality for reading, writing, and manipulating configuration files
+ * in INI-like format with support for encryption.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Retrieves all section names as a packed string array
+ * @return PackedStringArray containing all section names
+ */
 
+/**
+ * @brief Retrieves all keys in a given section as a packed string array
+ * @param p_section The section name to retrieve keys from
+ * @return PackedStringArray containing all keys in the section
+ */
+
+/**
+ * @brief Sets a configuration value
+ * @param p_section The section name
+ * @param p_key The key name
+ * @param p_value The value to set (use Variant::NIL to erase)
+ */
+
+/**
+ * @brief Retrieves a configuration value
+ * @param p_section The section name
+ * @param p_key The key name
+ * @param p_default The default value if key is not found
+ * @return The configuration value or default if not found
+ */
+
+/**
+ * @brief Checks if a section exists
+ * @param p_section The section name
+ * @return true if section exists, false otherwise
+ */
+
+/**
+ * @brief Checks if a key exists in a section
+ * @param p_section The section name
+ * @param p_key The key name
+ * @return true if key exists in section, false otherwise
+ */
+
+/**
+ * @brief Populates a list with all section names
+ * @param r_sections Pointer to list to populate with section names
+ */
+
+/**
+ * @brief Populates a list with all keys in a section
+ * @param p_section The section name
+ * @param r_keys Pointer to list to populate with key names
+ */
+
+/**
+ * @brief Erases an entire section
+ * @param p_section The section name to erase
+ */
+
+/**
+ * @brief Erases a key from a section
+ * @param p_section The section name
+ * @param p_key The key name to erase
+ */
+
+/**
+ * @brief Saves configuration to an unencrypted file
+ * @param p_path The file path
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Saves configuration to an AES256-encrypted file using a key
+ * @param p_path The file path
+ * @param p_key The encryption key as a byte vector
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Saves configuration to an AES256-encrypted file using a password
+ * @param p_path The file path
+ * @param p_pass The encryption password
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Internal method to write configuration data to file
+ * @param file Pointer to FileAccess object for writing
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Loads configuration from an unencrypted file
+ * @param p_path The file path
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Loads configuration from an AES256-encrypted file using a key
+ * @param p_path The file path
+ * @param p_key The decryption key as a byte vector
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Loads configuration from an AES256-encrypted file using a password
+ * @param p_path The file path
+ * @param p_pass The decryption password
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Internal method to read configuration data from file
+ * @param p_path The file path for error reporting
+ * @param f Pointer to FileAccess object for reading
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Parses configuration from a string
+ * @param p_data The configuration data as a string
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Internal parsing method for configuration data
+ * @param p_path The data source path for error reporting
+ * @param p_stream Pointer to variant parser stream
+ * @return Error code (OK on success)
+ */
+
+/**
+ * @brief Binds configuration file methods to the scripting engine
+ */
 #include "config_file.h"
 
 #include "core/io/file_access_encrypted.h"

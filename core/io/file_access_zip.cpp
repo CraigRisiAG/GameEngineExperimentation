@@ -1,39 +1,53 @@
-/*************************************************************************/
-/*  file_access_zip.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file file_access_zip.cpp
- * @brief Implementation of file_access_zip functionality.
+ * @brief ZIP archive file access implementation for reading compressed files.
+ * 
+ * This module provides functionality to open, read, and manage files within ZIP archives
+ * (with .zip or .pcz extensions). It integrates with the engine's file access system using
+ * minizip library callbacks.
+ * 
+ * @class ZipArchive
+ * @brief Singleton manager for ZIP archive packages and file access.
+ * 
+ * Maintains a collection of open ZIP packages and provides file handles for reading
+ * individual files within archives. Uses custom zlib file function callbacks to integrate
+ * with the engine's FileAccess system.
+ * 
+ * @method close_handle(unzFile p_file)
+ * @brief Closes and cleans up a ZIP file handle.
+ * @param p_file The unzFile handle to close
+ * 
+ * @method get_file_handle(String p_file)
+ * @brief Retrieves an open file handle for a file within a ZIP archive.
+ * @param p_file The virtual path of the file to open
+ * @return unzFile handle or NULL on failure
+ * 
+ * @method try_open_pack(const String &p_path, bool p_replace_files)
+ * @brief Attempts to open and register a ZIP archive package.
+ * @param p_path Path to the ZIP file
+ * @param p_replace_files Whether to replace existing files with same names
+ * @return true if successfully opened, false otherwise
+ * 
+ * @class FileAccessZip
+ * @brief File access wrapper for reading individual files from ZIP archives.
+ * 
+ * Implements sequential read-only access to compressed files within ZIP packages.
+ * Provides seek, position tracking, and EOF detection capabilities.
+ * 
+ * @method _open(const String &p_path, int p_mode_flags)
+ * @brief Opens a file from a ZIP archive for reading.
+ * @param p_path Virtual path of the file within archive
+ * @param p_mode_flags File access mode flags (must be READ mode)
+ * @return OK on success, FAILED otherwise
+ * 
+ * @method get_buffer(uint8_t *p_dst, int p_length)
+ * @brief Reads a buffer of data from the current file position.
+ * @param p_dst Destination buffer
+ * @param p_length Number of bytes to read
+ * @return Number of bytes read, or negative on error
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifdef MINIZIP_ENABLED
 
 #include "file_access_zip.h"

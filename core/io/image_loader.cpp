@@ -1,39 +1,91 @@
-/*************************************************************************/
-/*  image_loader.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file image_loader.cpp
- * @brief Implementation of image_loader functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// \file image_loader.cpp
+/// \brief Implementation of image loading functionality for the game engine.
+///
+/// This file provides the core image loading system that manages multiple image format loaders
+/// and handles the loading of image files in various formats. It includes:
+/// - ImageFormatLoader: Base class for format-specific image loaders
+/// - ImageLoader: Manager for multiple image format loaders
+/// - ResourceFormatLoaderImage: Resource loader for image files with custom format detection
 
+/// \class ImageFormatLoader
+/// \brief Abstract base class for image format loaders.
+/// 
+/// Provides interface for recognizing and loading specific image formats.
+
+/// \fn bool ImageFormatLoader::recognize(const String &p_extension) const
+/// \brief Determines if this loader can handle the given file extension.
+/// \param p_extension The file extension to check
+/// \return true if this loader recognizes the extension, false otherwise
+
+/// \class ImageLoader
+/// \brief Manager class for registering and using multiple image format loaders.
+/// 
+/// Maintains a collection of image format loaders and coordinates loading operations
+/// across different supported image formats.
+
+/// \fn Error ImageLoader::load_image(String p_file, Ref<Image> p_image, FileAccess *p_custom, bool p_force_linear, float p_scale)
+/// \brief Loads an image file into an Image object using the appropriate format loader.
+/// \param p_file Path to the image file
+/// \param p_image Reference to the Image object to populate
+/// \param p_custom Optional custom FileAccess object; if null, a new one is opened
+/// \param p_force_linear Whether to force linear color space
+/// \param p_scale Scale factor for the image
+/// \return Error code indicating success or failure
+
+/// \fn void ImageLoader::get_recognized_extensions(List<String> *p_extensions)
+/// \brief Collects all recognized file extensions from all registered loaders.
+/// \param p_extensions Pointer to list that will be populated with extensions
+
+/// \fn ImageFormatLoader *ImageLoader::recognize(const String &p_extension)
+/// \brief Finds a loader that recognizes the given file extension.
+/// \param p_extension The file extension to match
+/// \return Pointer to the appropriate ImageFormatLoader, or NULL if none found
+
+/// \fn void ImageLoader::add_image_format_loader(ImageFormatLoader *p_loader)
+/// \brief Registers a new image format loader.
+/// \param p_loader Pointer to the loader to register
+
+/// \fn void ImageLoader::remove_image_format_loader(ImageFormatLoader *p_loader)
+/// \brief Unregisters an image format loader.
+/// \param p_loader Pointer to the loader to remove
+
+/// \fn const Vector<ImageFormatLoader *> &ImageLoader::get_image_format_loaders()
+/// \brief Returns the collection of all registered loaders.
+/// \return Const reference to the vector of loaders
+
+/// \fn void ImageLoader::cleanup()
+/// \brief Removes all registered image format loaders.
+
+/// \class ResourceFormatLoaderImage
+/// \brief Resource loader for loading image files with engine-specific format detection.
+/// 
+/// Handles loading of image resources that are wrapped in a custom container format
+/// with a "GDIM" header followed by the image format identifier and data.
+
+/// \fn RES ResourceFormatLoaderImage::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress)
+/// \brief Loads an image resource from disk.
+/// \param p_path Path to the image file
+/// \param p_original_path Original path before any processing
+/// \param r_error Pointer to store error code
+/// \param p_use_sub_threads Whether sub-threads can be used for loading
+/// \param r_progress Pointer to store loading progress
+/// \return Resource handle to the loaded Image
+
+/// \fn void ResourceFormatLoaderImage::get_recognized_extensions(List<String> *p_extensions) const
+/// \brief Returns the file extensions this resource loader handles.
+/// \param p_extensions Pointer to list to populate with recognized extensions
+
+/// \fn bool ResourceFormatLoaderImage::handles_type(const String &p_type) const
+/// \brief Checks if this loader handles the specified resource type.
+/// \param p_type Resource type name
+/// \return true if the loader handles this type
+
+/// \fn String ResourceFormatLoaderImage::get_resource_type(const String &p_path) const
+/// \brief Determines the resource type of a file at the given path.
+/// \param p_path Path to the file
+/// \return Resource type name or empty string if not recognized
 #include "image_loader.h"
 
 #include "core/print_string.h"

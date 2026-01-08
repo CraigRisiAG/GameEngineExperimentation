@@ -1,39 +1,61 @@
-/*************************************************************************/
-/*  compression.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
- * @file compression.cpp
- * @brief Implementation of compression functionality.
+ * @class Compression
+ * @brief Provides compression and decompression functionality supporting multiple algorithms.
+ * 
+ * This class implements compression and decompression operations using three different algorithms:
+ * FastLZ, Deflate/Gzip, and Zstandard (ZSTD). It manages compression levels and parameters for
+ * each algorithm.
+ * 
+ * @note Static member variables control compression parameters:
+ *       - zlib_level: Compression level for deflate/gzip (default: Z_DEFAULT_COMPRESSION)
+ *       - gzip_level: Compression level for gzip (default: Z_DEFAULT_COMPRESSION)
+ *       - zstd_level: Compression level for Zstandard (default: 3)
+ *       - zstd_long_distance_matching: Enable long distance matching for ZSTD (default: false)
+ *       - zstd_window_log_size: Window log size for ZSTD (default: 27)
+ * 
+ * @enum Mode
+ * @brief Compression algorithm modes
+ * - MODE_FASTLZ: FastLZ compression algorithm
+ * - MODE_DEFLATE: Deflate compression algorithm
+ * - MODE_GZIP: Gzip compression algorithm
+ * - MODE_ZSTD: Zstandard compression algorithm
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Compresses data using the specified compression mode.
+ * 
+ * @param[out] p_dst Destination buffer for compressed data
+ * @param[in] p_src Source data to compress
+ * @param[in] p_src_size Size of source data in bytes
+ * @param[in] p_mode Compression algorithm mode to use
+ * @return Compressed data size in bytes, or -1 on failure
+ * 
+ * @note For FastLZ with source size < 16 bytes, the buffer is padded with zeros
+ */
 
+/**
+ * @brief Calculates the maximum possible compressed buffer size.
+ * 
+ * @param[in] p_src_size Size of source data in bytes
+ * @param[in] p_mode Compression algorithm mode
+ * @return Maximum required buffer size for compressed data, or -1 on failure
+ * 
+ * @note This method should be called before compression to allocate adequate output buffer
+ */
+
+/**
+ * @brief Decompresses data using the specified compression mode.
+ * 
+ * @param[out] p_dst Destination buffer for decompressed data
+ * @param[in] p_dst_max_size Maximum size of destination buffer
+ * @param[in] p_src Compressed source data
+ * @param[in] p_src_size Size of compressed data in bytes
+ * @param[in] p_mode Compression algorithm mode used during compression
+ * @return Decompressed data size in bytes, or -1 on failure
+ * 
+ * @note For FastLZ with destination size < 16 bytes, decompression uses a temporary buffer
+ */
 #include "compression.h"
 
 #include "core/io/zip_io.h"

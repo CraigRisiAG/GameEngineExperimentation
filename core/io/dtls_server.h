@@ -1,39 +1,58 @@
-/*************************************************************************/
-/*  dtls_server.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file dtls_server.h
- * @brief Implementation of DTLSServer class.
+ * @class DTLSServer
+ * @brief Manages DTLS (Datagram Transport Layer Security) server connections.
+ * 
+ * DTLSServer is a reference-counted class that handles the setup and management
+ * of secure UDP connections using DTLS protocol. It provides methods to initialize
+ * the server with cryptographic credentials and to accept incoming DTLS connections.
+ * 
+ * @note This class is a virtual interface that must be implemented by a platform-specific backend.
+ * 
+ * @see PacketPeerDTLS
+ * @see CryptoKey
+ * @see X509Certificate
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn static bool DTLSServer::is_available()
+ * @brief Checks if DTLS server support is available on the current platform.
+ * 
+ * @return true if DTLS server is supported, false otherwise.
+ */
 
+/**
+ * @fn static DTLSServer* DTLSServer::create()
+ * @brief Creates a new instance of the platform-specific DTLSServer implementation.
+ * 
+ * @return A new DTLSServer instance, or nullptr if creation fails.
+ */
+
+/**
+ * @fn virtual Error DTLSServer::setup(Ref<CryptoKey> p_key, Ref<X509Certificate> p_cert, Ref<X509Certificate> p_ca_chain)
+ * @brief Initializes the DTLS server with cryptographic credentials.
+ * 
+ * @param p_key The private key used for the server.
+ * @param p_cert The X.509 certificate for the server.
+ * @param p_ca_chain Optional CA certificate chain for validation.
+ * 
+ * @return Error code indicating success (OK) or failure.
+ */
+
+/**
+ * @fn virtual void DTLSServer::stop()
+ * @brief Stops the DTLS server and releases associated resources.
+ */
+
+/**
+ * @fn virtual Ref<PacketPeerDTLS> DTLSServer::take_connection(Ref<PacketPeerUDP> p_peer)
+ * @brief Accepts and wraps an incoming UDP peer connection in a DTLS wrapper.
+ * 
+ * @param p_peer The UDP peer connection to wrap with DTLS.
+ * 
+ * @return A new PacketPeerDTLS instance wrapping the UDP peer, or nullptr on failure.
+ */
 #ifndef DTLS_SERVER_H
 #define DTLS_SERVER_H
 

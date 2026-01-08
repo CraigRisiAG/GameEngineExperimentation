@@ -1,39 +1,53 @@
-/*************************************************************************/
-/*  http_client.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file http_client.h
- * @brief Implementation of HTTPClient class.
+ * @class HTTPClient
+ * @brief HTTP client for making HTTP requests and handling HTTP responses.
+ * 
+ * HTTPClient provides functionality to connect to HTTP/HTTPS servers, send requests,
+ * and receive responses. It supports various HTTP methods, handles different response
+ * codes, and manages connection states.
+ * 
+ * @note On non-JavaScript platforms, HTTPClient maintains internal state for connection
+ * management, SSL handling, and response parsing including chunked transfer encoding.
+ * 
+ * @enum ResponseCode
+ * @brief HTTP response status codes organized by category (1xx, 2xx, 3xx, 4xx, 5xx).
+ * 
+ * @enum Method
+ * @brief Supported HTTP request methods (GET, HEAD, POST, PUT, DELETE, OPTIONS, TRACE, CONNECT, PATCH).
+ * 
+ * @enum Status
+ * @brief Connection and request status states.
+ * Possible states: DISCONNECTED, RESOLVING, CANT_RESOLVE, CONNECTING, CANT_CONNECT,
+ * CONNECTED, REQUESTING, BODY, CONNECTION_ERROR, SSL_HANDSHAKE_ERROR.
+ * 
+ * @method connect_to_host(const String &p_host, int p_port = -1, bool p_ssl = false, bool p_verify_host = true)
+ * @brief Establishes a connection to the specified host.
+ * @param p_host The hostname or IP address to connect to.
+ * @param p_port The port number (default: 80 for HTTP, 443 for HTTPS if not specified).
+ * @param p_ssl Whether to use SSL/TLS encryption.
+ * @param p_verify_host Whether to verify the SSL certificate hostname.
+ * @return Error code indicating success or failure.
+ * 
+ * @method request(Method p_method, const String &p_url, const Vector<String> &p_headers, const String &p_body = String())
+ * @brief Sends an HTTP request with the specified method, URL, headers, and body.
+ * @param p_method The HTTP method to use.
+ * @param p_url The request URL path.
+ * @param p_headers Array of header strings in "key: value" format.
+ * @param p_body The optional request body as a string.
+ * @return Error code indicating success or failure.
+ * 
+ * @method read_response_body_chunk()
+ * @brief Reads a chunk of the response body.
+ * @return A PackedByteArray containing the chunk data.
+ * @note Use this method to read response bodies that may be encoded (UTF-8, gzip, etc.).
+ * 
+ * @method poll()
+ * @brief Polls the HTTP client for updates on the connection and request state.
+ * @return Error code indicating the result of the poll operation.
+ * @note Should be called regularly to process network events.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef HTTP_CLIENT_H
 #define HTTP_CLIENT_H
 

@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  ip.cpp                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file ip.cpp
- * @brief Definition of _IP_ResolverPrivate data structure.
+ * @brief IP address resolution and local network interface management implementation
+ * 
+ * This file implements the IP class which provides hostname resolution services,
+ * including both synchronous and asynchronous (queue-based) resolution, caching,
+ * and local network interface enumeration.
+ * 
+ * @class IP
+ * @brief Singleton class for IP address operations and hostname resolution
+ * 
+ * The IP class manages:
+ * - Synchronous hostname resolution with caching
+ * - Asynchronous hostname resolution via a dedicated resolver thread
+ * - Local IP address and network interface enumeration
+ * - Thread-safe access to resolver queue and cache via mutex protection
+ * 
+ * @struct _IP_ResolverPrivate
+ * @brief Private implementation details for the hostname resolver
+ * 
+ * Manages a queue of resolution requests processed by a background thread,
+ * with a HashMap cache for storing previously resolved addresses.
+ * 
+ * @struct QueueItem
+ * @brief Represents a single hostname resolution request in the resolver queue
+ * 
+ * @member status - Current resolution status (WAITING, DONE, ERROR, NONE)
+ * @member response - The resolved IP address
+ * @member hostname - The hostname being resolved
+ * @member type - IP address type filter (IPV4, IPV6, ANY, NONE)
+ * 
+ * @method resolve_hostname() - Synchronously resolves a hostname with caching
+ * @method resolve_hostname_queue_item() - Asynchronously queues a hostname for resolution
+ * @method get_resolve_item_status() - Checks the status of a queued resolution
+ * @method get_resolve_item_address() - Retrieves the result of a completed resolution
+ * @method erase_resolve_item() - Clears a resolution result from the queue
+ * @method get_local_addresses() - Gets all local IP addresses
+ * @method get_local_interfaces() - Gets detailed local network interface information
+ * @method clear_cache() - Clears the hostname resolution cache
+ * @method _bind_methods() - Binds public methods to the scripting API
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "ip.h"
 
 #include "core/hash_map.h"

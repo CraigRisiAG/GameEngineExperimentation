@@ -1,39 +1,53 @@
-/*************************************************************************/
-/*  file_access_encrypted.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file file_access_encrypted.cpp
- * @brief Implementation of file_access_encrypted functionality.
+ * @class FileAccessEncrypted
+ * @brief Handles encrypted file I/O operations using AES-256 encryption.
+ * 
+ * This class provides functionality to read and write encrypted files using AES-256 ECB mode.
+ * Files are encrypted with an MD5 hash for integrity verification. Data is kept in memory
+ * during read/write operations and only written to disk upon closing.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Opens and parses an encrypted file with a binary key.
+ * 
+ * @param p_base Pointer to the base FileAccess object to read from/write to.
+ * @param p_key Vector containing the 32-byte encryption key.
+ * @param p_mode The file access mode (MODE_READ or MODE_WRITE_AES256).
+ * 
+ * @return Error code. Returns ERR_OK on success, or appropriate error code on failure.
+ *         Possible errors include ERR_ALREADY_IN_USE, ERR_INVALID_PARAMETER,
+ *         ERR_FILE_UNRECOGNIZED, ERR_FILE_CORRUPT.
+ */
 
+/**
+ * @brief Opens and parses an encrypted file with a string password.
+ * 
+ * Converts the password string to an MD5 hash, then calls open_and_parse().
+ * 
+ * @param p_base Pointer to the base FileAccess object.
+ * @param p_key String password to use as encryption key.
+ * @param p_mode The file access mode.
+ * 
+ * @return Error code from open_and_parse().
+ */
+
+/**
+ * @brief Closes the encrypted file and writes encrypted data to disk if in write mode.
+ * 
+ * In write mode, encrypts buffered data and writes it with magic number, mode, MD5 hash,
+ * and encrypted payload. In read mode, simply closes the underlying file.
+ */
+
+/**
+ * @brief Stores a buffer of bytes to the encrypted file.
+ * 
+ * @param p_src Pointer to source data buffer.
+ * @param p_length Number of bytes to store.
+ * 
+ * Only valid in write mode. Data is buffered in memory until close() is called.
+ */
 #include "file_access_encrypted.h"
 
 #include "core/crypto/crypto_core.h"

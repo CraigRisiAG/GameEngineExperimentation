@@ -1,39 +1,74 @@
-/*************************************************************************/
-/*  file_access_buffered.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
- * @file file_access_buffered.cpp
- * @brief Implementation of file_access_buffered functionality.
+ * @class FileAccessBuffered
+ * @brief A buffered file access utility class for efficient file reading with caching.
+ * 
+ * This class provides buffered access to files, implementing a cache mechanism to optimize
+ * read operations. It maintains file position tracking and handles data caching to reduce
+ * direct file I/O operations.
+ * 
+ * @method set_error(Error p_error)
+ * @brief Sets the last error state.
+ * @param p_error The error code to set.
+ * @return The error code that was set.
+ * 
+ * @method set_cache_size(int p_size)
+ * @brief Sets the size of the internal cache buffer.
+ * @param p_size The desired cache size in bytes.
+ * 
+ * @method get_cache_size()
+ * @brief Retrieves the current cache size.
+ * @return The cache size in bytes.
+ * 
+ * @method cache_data_left()
+ * @brief Calculates the amount of cached data remaining from the current file position.
+ * @return Number of bytes available in cache, or the result of read_data_block if cache miss.
+ * 
+ * @method seek(size_t p_position)
+ * @brief Moves the file position to an absolute position.
+ * @param p_position The target position in the file.
+ * 
+ * @method seek_end(int64_t p_position)
+ * @brief Seeks to a position relative to the end of the file.
+ * @param p_position The offset from the end (negative for positions before end).
+ * 
+ * @method get_position()
+ * @brief Gets the current file position.
+ * @return The current file offset.
+ * 
+ * @method get_len()
+ * @brief Gets the total file size.
+ * @return The file size in bytes.
+ * 
+ * @method eof_reached()
+ * @brief Checks if the end of file has been reached.
+ * @return True if file offset exceeds file size, false otherwise.
+ * 
+ * @method get_8()
+ * @brief Reads a single byte from the file.
+ * @return The byte read, or 0 if file is not open.
+ * @note Increments file position after reading.
+ * 
+ * @method get_buffer(uint8_t *p_dest, int p_length)
+ * @brief Reads a buffer of data from the file into destination memory.
+ * @param p_dest Pointer to destination buffer.
+ * @param p_length Number of bytes to read.
+ * @return Number of bytes actually read, or -1 if file is not open.
+ * 
+ * @method is_open()
+ * @brief Checks if the file is currently open.
+ * @return True if file is open, false otherwise.
+ * 
+ * @method get_error()
+ * @brief Retrieves the last error that occurred.
+ * @return The last error code.
+ * 
+ * @constructor FileAccessBuffered()
+ * @brief Initializes a new FileAccessBuffered instance with default cache size.
+ * 
+ * @destructor ~FileAccessBuffered()
+ * @brief Cleans up the FileAccessBuffered instance.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "file_access_buffered.h"
 
 #include "core/error_macros.h"

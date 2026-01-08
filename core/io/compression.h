@@ -1,39 +1,13 @@
-/*************************************************************************/
-/*  compression.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file compression.h
- * @brief Implementation of Compression class.
- */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class Compression
+/// @brief Provides static methods and configuration for data compression and decompression.
+/// 
+/// This class offers a unified interface for multiple compression algorithms including FastLZ, DEFLATE, Zstandard (ZSTD),
+/// and GZIP. It allows configuration of compression levels and ZSTD-specific parameters to balance between compression
+/// ratio and performance based on application requirements.
+/// 
+/// @note All compression methods are static and can be called without instantiating the class.
+/// @note The default compression mode is MODE_ZSTD.
 #ifndef COMPRESSION_H
 #define COMPRESSION_H
 
@@ -42,12 +16,23 @@
 class Compression {
 
 public:
+	/// @brief Compression level for zlib (DEFLATE). Higher values result in better compression but slower speed.
 	static int zlib_level;
+
+	/// @brief Compression level for GZIP. Higher values result in better compression but slower speed.
 	static int gzip_level;
+
+	/// @brief Compression level for Zstandard (ZSTD). Higher values result in better compression but slower speed.
 	static int zstd_level;
+
+	/// @brief Enable long distance matching for ZSTD compression.
 	static bool zstd_long_distance_matching;
+
+	/// @brief Window log size for ZSTD compression. Controls the maximum back-reference distance.
 	static int zstd_window_log_size;
 
+	/// @enum Mode
+	/// @brief Supported compression algorithms.
 	enum Mode {
 		MODE_FASTLZ,
 		MODE_DEFLATE,

@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  file_access_compressed.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
  * @file file_access_compressed.cpp
- * @brief Implementation of file_access_compressed functionality.
+ * @brief Implementation of compressed file access operations.
+ * 
+ * This file provides functionality for reading and writing compressed files
+ * with support for multiple compression modes and block-based compression.
+ * Files are compressed in configurable blocks and include metadata for
+ * decompression and verification.
+ * 
+ * @class FileAccessCompressed
+ * @brief Manages compressed file I/O operations with block-based compression.
+ * 
+ * Supports both reading and writing compressed files. When writing, data is
+ * buffered in memory and compressed in blocks upon file closure. When reading,
+ * compressed blocks are decompressed on-demand as the file is traversed.
+ * 
+ * File format:
+ * - 4 bytes: Magic number (default "GCMP")
+ * - 4 bytes: Compression mode
+ * - 4 bytes: Block size
+ * - 4 bytes: Total uncompressed data size
+ * - N x 4 bytes: Compressed block sizes
+ * - Compressed data blocks
+ * - 4 bytes: Magic number (footer)
+ * 
+ * @method configure()
+ * @brief Sets compression parameters before opening a file for writing.
+ * @param p_magic The magic identifier string (max 4 characters)
+ * @param p_mode The compression algorithm to use
+ * @param p_block_size The size of uncompressed data per block
+ * 
+ * @method open_after_magic()
+ * @brief Initializes reading after magic bytes have been verified.
+ * @param p_base The underlying FileAccess object
+ * @return OK on success, ERR_FILE_CORRUPT if block size is invalid
+ * 
+ * @method close()
+ * @brief Finalizes and closes the compressed file, writing all blocks to disk.
+ * 
+ * @method seek()
+ * @brief Positions the file pointer at the specified byte offset.
+ * Decompresses the required block if necessary for read mode.
+ * 
+ * @method get_8()
+ * @brief Reads a single byte, decompressing the next block if needed.
+ * 
+ * @method get_buffer()
+ * @brief Reads a buffer of bytes, handling block boundaries transparently.
+ * 
+ * @method store_8()
+ * @brief Writes a single byte to the output buffer.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "file_access_compressed.h"
 
 #include "core/print_string.h"

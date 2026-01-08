@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  file_access_network.h                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file file_access_network.h
- * @brief Implementation of FileAccessNetworkClient class.
+ * @class FileAccessNetworkClient
+ * @brief Manages network communication for remote file access operations.
+ * 
+ * Handles client-side networking for the FileAccessNetwork system. It maintains
+ * a connection to a remote file server and processes block requests asynchronously
+ * via a dedicated thread. Supports concurrent file access through ID-based mapping
+ * and provides thread-safe operations using mutexes and semaphores.
+ * 
+ * @class FileAccessNetwork
+ * @brief Provides network-based file access with intelligent caching.
+ * 
+ * Extends FileAccess to support reading files over a network connection. Implements
+ * a page-based caching system with read-ahead capability to optimize performance
+ * for remote file operations. Maintains pages in memory and queues requests to the
+ * FileAccessNetworkClient for asynchronous data retrieval.
+ * 
+ * @details
+ * - Uses a page-based buffer system for efficient remote file reading
+ * - Supports read-ahead prefetching to reduce latency
+ * - Tracks file position and EOF state for standard file operations
+ * - Provides activity tracking for intelligent cache management
+ * - Commands include file open, block read, close, existence check, and modification time
+ * - Responses are handled asynchronously with error reporting
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILE_ACCESS_NETWORK_H
 #define FILE_ACCESS_NETWORK_H
 

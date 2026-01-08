@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  file_access_buffered_fa.h                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file file_access_buffered_fa.h
- * @brief Implementation of FileAccessBufferedFA class.
+ * @class FileAccessBufferedFA
+ * @brief Template-based buffered file access wrapper for type-agnostic file I/O operations.
+ * 
+ * This template class extends FileAccessBuffered to provide a generic buffered file access
+ * implementation that can work with any file access type T. It manages reading and writing
+ * data with internal caching mechanisms and delegates file operations to the underlying
+ * template type.
+ * 
+ * @tparam T The underlying file access type that implements file operations (must have
+ *           methods like is_open(), seek(), get_buffer(), store_8(), store_buffer(),
+ *           file_exists(), _open(), close(), _get_modified_time(), _get_unix_permissions(),
+ *           _set_unix_permissions(), flush(), and _set_access_type())
+ * 
+ * @details
+ * - Maintains an internal cache for buffered read operations
+ * - Supports both direct writes to destination buffers and cached reads
+ * - Tracks file metadata including size, offset, name, and access flags
+ * - Provides file existence checking and Unix permission handling
+ * - Thread-safe for the underlying type T
+ * 
+ * @note The class uses a const_cast pattern in read_data_block to allow seeking
+ *       in a const context, indicating the operation is logically non-mutating.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILE_ACCESS_BUFFERED_FA_H
 #define FILE_ACCESS_BUFFERED_FA_H
 

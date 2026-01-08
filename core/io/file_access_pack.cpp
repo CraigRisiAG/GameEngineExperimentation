@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  file_access_pack.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file file_access_pack.cpp
- * @brief Implementation of file_access_pack functionality.
+ * @brief Implementation of packed data file access and directory navigation for game engine resource packs.
+ * 
+ * This file provides functionality for:
+ * - Managing packed resource files (PCK format)
+ * - Loading and parsing pack file headers and metadata
+ * - Accessing individual files within packed resources
+ * - Navigating directory structures within packed data
+ * - Supporting nested directory hierarchies in packed resources
+ * 
+ * Key Classes:
+ * - PackedData: Singleton that manages all loaded packs and maintains the directory tree
+ * - PackedSourcePCK: Handles reading and parsing PCK format pack files
+ * - FileAccessPack: Provides read-only file access to files within packs
+ * - DirAccessPack: Enables directory traversal and file enumeration within packs
+ * 
+ * Features:
+ * - Multiple pack file support with optional file replacement
+ * - MD5 checksum validation for packed files
+ * - Version checking for pack compatibility
+ * - Support for self-contained executables with embedded packs
+ * - Recursive directory structure management with memory management
+ * - Read-only access to packed resources with position tracking and EOF detection
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "file_access_pack.h"
 
 #include "core/version.h"

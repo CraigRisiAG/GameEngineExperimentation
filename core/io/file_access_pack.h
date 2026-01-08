@@ -1,39 +1,31 @@
-/*************************************************************************/
-/*  file_access_pack.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file file_access_pack.h
- * @brief Implementation of PackedData class.
+ * @brief File and directory access system for packed/archived data.
+ * 
+ * This module provides functionality to read files and navigate directories within
+ * packed archive files. It implements a virtual file system layer that allows
+ * transparent access to packed resources as if they were regular files.
+ * 
+ * Key components:
+ * - PackedData: Central manager for packed file resources and metadata
+ * - PackSource: Abstract interface for different pack format implementations
+ * - PackedSourcePCK: Concrete implementation for PCK (Godot packed) format
+ * - FileAccessPack: Virtual file access interface for reading packed files
+ * - DirAccessPack: Virtual directory access interface for navigating packed archives
+ * 
+ * Pack Format:
+ * - Magic Header: GDPC (0x43504447)
+ * - Format Version: 1
+ * 
+ * The system uses MD5 hashing of file paths for efficient lookup and supports
+ * file replacement, erasure, and integrity verification via MD5 checksums.
+ * 
+ * @note This is part of a game engine experimentation project
+ * @see core/os/file_access.h
+ * @see core/os/dir_access.h
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILE_ACCESS_PACK_H
 #define FILE_ACCESS_PACK_H
 

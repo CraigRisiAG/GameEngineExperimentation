@@ -1,39 +1,97 @@
-/*************************************************************************/
-/*  ip_address.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file ip_address.cpp
- * @brief Implementation of ip_address functionality.
+ * @brief Implementation of IP address parsing and conversion functionality.
+ * 
+ * This file contains the implementation for handling both IPv4 and IPv6 addresses.
+ * IPv4 addresses are internally mapped to IPv6 format for unified storage and processing.
+ * 
+ * Key functionalities:
+ * - String to IP address parsing (supports IPv4, IPv6, and wildcard formats)
+ * - IP address to string conversion
+ * - IPv4 and IPv6 getter/setter methods
+ * - Hexadecimal and decimal parsing utilities
+ * - Internal representation using 16 uint8_t fields (128 bits)
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Converts IP_Address object to String representation.
+ * @return String representation of the IP address (IPv4 dotted notation or IPv6 colon notation).
+ *         Returns "*" for wildcard, empty string for invalid addresses.
+ */
 
+/**
+ * @brief Parses a hexadecimal segment from an IPv6 address string.
+ * @param p_string The source IPv6 address string.
+ * @param p_start The starting position in the string.
+ * @param p_dst Pointer to destination 2-byte buffer for parsed value.
+ */
+
+/**
+ * @brief Parses an IPv6 address string and populates internal field16 array.
+ * @param p_string The IPv6 address string to parse (e.g., "2001:db8::1").
+ * @note Handles compressed notation (::) and mixed IPv4/IPv6 addresses.
+ */
+
+/**
+ * @brief Parses an IPv4 address string into byte array.
+ * @param p_string The IPv4 address string to parse.
+ * @param p_start Starting position in the string.
+ * @param p_ret Pointer to destination 4-byte buffer for parsed IPv4 octets.
+ * @note Validates that exactly 4 octets are present.
+ */
+
+/**
+ * @brief Resets IP address to empty/invalid state.
+ */
+
+/**
+ * @brief Checks if the current IP address is IPv4 (mapped in IPv6 format).
+ * @return True if address is IPv4, false if IPv6.
+ */
+
+/**
+ * @brief Retrieves pointer to IPv4 address bytes.
+ * @return Pointer to 4-byte IPv4 address buffer.
+ * @note Returns mapped IPv4 portion even if stored as IPv6.
+ */
+
+/**
+ * @brief Sets the IP address from IPv4 bytes.
+ * @param p_ip Pointer to 4-byte IPv4 address buffer.
+ */
+
+/**
+ * @brief Retrieves pointer to IPv6 address bytes.
+ * @return Pointer to 16-byte IPv6 address buffer.
+ */
+
+/**
+ * @brief Sets the IP address from IPv6 bytes.
+ * @param p_buf Pointer to 16-byte IPv6 address buffer.
+ */
+
+/**
+ * @brief Constructs IP_Address from string representation.
+ * @param p_string IP address string (supports "*" for wildcard, IPv4 dotted notation, IPv6 colon notation).
+ * @note Automatically detects format and parses accordingly.
+ */
+
+/**
+ * @brief Constructs IP_Address from four 32-bit components.
+ * @param p_a First 32-bit component.
+ * @param p_b Second 32-bit component.
+ * @param p_c Third 32-bit component.
+ * @param p_d Fourth 32-bit component.
+ * @param is_v6 True for IPv6 format, false for IPv4 (default).
+ */
+
+/**
+ * @brief Helper function to convert 32-bit integer to network byte order (big-endian).
+ * @param p_dst Pointer to 4-byte destination buffer.
+ * @param p_n 32-bit value to convert.
+ */
 #include "ip_address.h"
 /*
 IP_Address::operator Variant() const {
