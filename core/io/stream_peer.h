@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  stream_peer.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file stream_peer.h
- * @brief Implementation of StreamPeer class.
+ * @class StreamPeer
+ * @brief Abstract base class for network stream communication.
+ * 
+ * StreamPeer provides an interface for reading and writing data over a network stream.
+ * It supports both blocking and non-blocking operations with configurable endianness.
+ * Derived classes must implement the pure virtual methods for data transmission.
+ * 
+ * @note This class is part of the networking subsystem and should be used through
+ *       derived implementations like StreamPeerBuffer.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @class StreamPeerBuffer
+ * @brief In-memory buffer implementation of StreamPeer.
+ * 
+ * StreamPeerBuffer provides a simple in-memory buffer for serializing and deserializing
+ * data. It maintains an internal data vector and a read/write pointer for sequential
+ * access to buffered data.
+ * 
+ * This implementation is useful for testing, data serialization, and scenarios where
+ * network I/O is not required.
+ * 
+ * @note All operations are non-blocking since data is stored in memory.
+ */
 #ifndef STREAM_PEER_H
 #define STREAM_PEER_H
 

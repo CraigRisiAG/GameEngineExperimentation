@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  multiplayer_api.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file multiplayer_api.cpp
- * @brief Implementation of multiplayer_api functionality.
+ * @brief Implementation of the MultiplayerAPI class for handling networked RPC calls and property synchronization.
+ * 
+ * This file implements the core multiplayer functionality including:
+ * - RPC (Remote Procedure Call) transmission and reception
+ * - RSET (Remote Property Set) synchronization
+ * - Node path caching and compression
+ * - Variant encoding/decoding with compression
+ * - Network peer management and packet processing
+ * 
+ * The implementation uses bit-level compression for network packets to minimize bandwidth:
+ * - Node IDs are compressed to 8, 16, or 32 bits based on their values
+ * - Method/property IDs are compressed to 8 or 16 bits
+ * - Variant types use 5 bits with encoding modes for optimal size
+ * 
+ * Key features:
+ * - Support for different RPC modes (DISABLED, REMOTE, MASTER, PUPPET, REMOTESYNC, MASTERSYNC, PUPPETSYNC)
+ * - Automatic path caching to reduce redundant node path transmission
+ * - Bandwidth profiling support in debug builds
+ * - Thread-safe network peer handling with signal emission
+ * - Raw packet support for custom network protocols
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "multiplayer_api.h"
 
 #include "core/debugger/engine_debugger.h"

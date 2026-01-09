@@ -1,39 +1,35 @@
-/*************************************************************************/
-/*  pck_packer.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file pck_packer.cpp
- * @brief Implementation of pck_packer functionality.
+ * @brief PCK package file packer implementation.
+ * 
+ * This file implements the PCKPacker class, which is responsible for creating
+ * and writing PCK (pack) files. PCK files are binary archives that contain
+ * multiple files with their metadata and content.
+ * 
+ * The packer handles:
+ * - Creating a new PCK file with proper header and format version information
+ * - Adding files to the pack queue with their source paths and destination paths
+ * - Writing the complete pack file with proper alignment and offset management
+ * - Storing file metadata (paths, sizes, offsets, MD5 hashes)
+ * 
+ * Key Features:
+ * - Alignment support for optimal data layout
+ * - Efficient buffered file writing (64KB buffer)
+ * - Proper file offset tracking and index management
+ * - Reserved header space for future extensions
+ * - Progress reporting during flush operations
+ * 
+ * Usage:
+ * 1. Call pck_start() to create and initialize a new PCK file
+ * 2. Call add_file() multiple times to queue files for packing
+ * 3. Call flush() to write all queued files to the PCK archive
+ * 
+ * @note This implementation assumes little-endian byte order for integer storage.
+ * @note MD5 hash storage is reserved but currently filled with zeros.
+ * @dependencies core/io/file_access_pack.h, core/os/file_access.h, core/version.h
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "pck_packer.h"
 
 #include "core/io/file_access_pack.h" // PACK_HEADER_MAGIC, PACK_FORMAT_VERSION

@@ -1,39 +1,35 @@
-/*************************************************************************/
-/*  stream_peer.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file stream_peer.cpp
- * @brief Implementation of stream_peer functionality.
+ * @brief Implementation of StreamPeer and StreamPeerBuffer classes for binary data serialization.
+ * 
+ * This file provides functionality for reading and writing binary data with support for:
+ * - Various integer types (8, 16, 32, 64-bit signed and unsigned)
+ * - Floating-point types (float, double)
+ * - String serialization (ASCII and UTF-8)
+ * - Variant encoding/decoding
+ * - Big-endian/little-endian byte order conversion
+ * 
+ * StreamPeer is an abstract base class that defines the interface for binary I/O operations.
+ * StreamPeerBuffer is a concrete implementation that uses an internal buffer for data storage.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class StreamPeer
+ * @brief Abstract base class for binary stream I/O operations.
+ * 
+ * Provides methods for serializing and deserializing various data types with
+ * configurable endianness support.
+ */
 
+/**
+ * @class StreamPeerBuffer
+ * @brief Concrete implementation of StreamPeer using an internal byte buffer.
+ * 
+ * Implements buffered stream operations with support for seeking, resizing,
+ * and data array access. Maintains an internal pointer for current position.
+ */
 #include "stream_peer.h"
 
 #include "core/io/marshalls.h"

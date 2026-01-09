@@ -1,39 +1,50 @@
-/*************************************************************************/
-/*  resource_format_binary.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file resource_format_binary.cpp
- * @brief Base class for serializable engine resources.
+ * @brief Binary resource format loader and saver implementation.
+ * 
+ * This file implements the binary resource serialization system for the game engine.
+ * It provides functionality to load and save resources in a custom binary format with
+ * support for:
+ * - Variant type serialization (primitives, vectors, matrices, etc.)
+ * - External and internal resource references
+ * - String compression and deduplication
+ * - Big-endian/little-endian conversion
+ * - Compressed file access (RSCC format)
+ * - Resource dependency tracking and remapping
+ * 
+ * The format supports versioning to maintain backward compatibility across engine updates.
+ * Resources can be stored internally (embedded) or externally (as references).
+ * 
+ * @class ResourceLoaderBinary
+ * @brief Handles reading and parsing binary resource files.
+ * 
+ * Manages the deserialization of binary resource data including:
+ * - File header validation and format version checking
+ * - String table loading
+ * - External and internal resource indexing
+ * - Variant parsing for all supported data types
+ * - Optional threaded resource loading for dependencies
+ * 
+ * @class ResourceFormatSaverBinaryInstance
+ * @brief Handles writing resources to binary format files.
+ * 
+ * Manages the serialization of resources including:
+ * - Resource discovery and dependency resolution
+ * - Variant type serialization
+ * - String table generation and optimization
+ * - External/internal resource table creation
+ * - Support for resource path remapping and relative paths
+ * - Metadata and offset table management
+ * 
+ * @enum Format Constants
+ * @brief Variant type identifiers and format version constants.
+ * 
+ * Defines type IDs for binary serialization (non-contiguous to allow future expansion)
+ * and object storage modes (empty, internal, external, indexed).
+ * FORMAT_VERSION tracks the binary format version for compatibility checking.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "resource_format_binary.h"
 
 #include "core/image.h"

@@ -1,39 +1,141 @@
-/*************************************************************************/
-/*  xml_parser.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file xml_parser.h
- * @brief Implementation of XMLParser class.
+ * @class XMLParser
+ * @brief XML parser for reading and processing XML documents.
+ * 
+ * XMLParser is a lightweight XML parser based on irrXML, designed primarily for
+ * compatibility with Collada file loading. It provides functionality to read XML files,
+ * parse nodes, and extract node attributes and data.
+ * 
+ * @note Based on irrXML (see their zlib license).
+ * 
+ * @section Usage
+ * 1. Call open() or open_buffer() to load XML data
+ * 2. Call read() to parse the next node
+ * 3. Use getter methods to access node properties (name, type, attributes, etc.)
+ * 4. Call close() when finished
+ * 
+ * @section Supported Formats
+ * - ASCII
+ * - UTF-8
+ * - UTF-16 (Big Endian and Little Endian)
+ * - UTF-32 (Big Endian and Little Endian)
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum SourceFormat
+ * @brief Enumeration of all supported source text file formats.
+ */
 
+/**
+ * @enum NodeType
+ * @brief Enumeration of XML node types that can be encountered during parsing.
+ */
+
+/**
+ * @brief Reads and parses the next node in the XML document.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @brief Returns the type of the current node.
+ * @return The NodeType of the current node.
+ */
+
+/**
+ * @brief Returns the name of the current node.
+ * @return String containing the node name.
+ */
+
+/**
+ * @brief Returns the text data contained within the current node.
+ * @return String containing the node data.
+ */
+
+/**
+ * @brief Returns the byte offset of the current node in the XML file.
+ * @return The offset position as uint64_t.
+ */
+
+/**
+ * @brief Returns the number of attributes in the current node.
+ * @return Integer count of attributes.
+ */
+
+/**
+ * @brief Returns the name of an attribute by index.
+ * @param p_idx The attribute index.
+ * @return String containing the attribute name.
+ */
+
+/**
+ * @brief Returns the value of an attribute by index.
+ * @param p_idx The attribute index.
+ * @return String containing the attribute value.
+ */
+
+/**
+ * @brief Checks if the current node has a specific attribute.
+ * @param p_name The attribute name to search for.
+ * @return True if the attribute exists, false otherwise.
+ */
+
+/**
+ * @brief Returns the value of an attribute by name.
+ * @param p_name The attribute name.
+ * @return String containing the attribute value.
+ */
+
+/**
+ * @brief Returns the value of an attribute by name without printing errors if not found.
+ * @param p_name The attribute name.
+ * @return String containing the attribute value, or empty string if not found.
+ */
+
+/**
+ * @brief Checks if the current element node is self-closing (empty).
+ * @return True if the element is empty, false otherwise.
+ */
+
+/**
+ * @brief Returns the current line number in the XML document.
+ * @return The line number as an integer.
+ */
+
+/**
+ * @brief Skips the current XML section and advances to the next sibling node.
+ */
+
+/**
+ * @brief Seeks to a specific position in the XML document.
+ * @param p_pos The byte offset to seek to.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @brief Opens and loads an XML file from the specified file path.
+ * @param p_path The file path to the XML document.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @brief Opens and parses XML data from a buffer.
+ * @param p_buffer A vector of bytes containing the XML data.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @brief Closes the XML document and frees associated resources.
+ */
+
+/**
+ * @brief Constructs a new XMLParser instance.
+ */
+
+/**
+ * @brief Destructs the XMLParser instance, freeing all resources.
+ */
 #ifndef XML_PARSER_H
 #define XML_PARSER_H
 

@@ -1,39 +1,106 @@
-/*************************************************************************/
-/*  packet_peer.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file packet_peer.cpp
- * @brief Implementation of packet_peer functionality.
+ * @brief Implementation of PacketPeer and PacketPeerStream classes for packet-based network communication.
+ * 
+ * PacketPeer provides functionality for sending and receiving packets with support for:
+ * - Variant serialization/deserialization
+ * - Buffer management with configurable maximum encode buffer size
+ * - Error tracking for packet retrieval operations
+ * 
+ * PacketPeerStream extends PacketPeer to work with StreamPeer objects, providing:
+ * - Ring buffer-based packet streaming over stream peers
+ * - Separate input/output buffer management with configurable sizes
+ * - Automatic buffer polling and packet length encoding/decoding
+ * 
+ * @class PacketPeer
+ * @brief Base class for packet-oriented communication.
+ * 
+ * @method PacketPeer()
+ * @brief Initializes PacketPeer with default encode buffer size of 8 MiB.
+ * 
+ * @method set_encode_buffer_max_size(int p_max_size)
+ * @brief Sets maximum encode buffer size with validation (1024 bytes to 256 MiB).
+ * @param p_max_size Maximum buffer size in bytes
+ * 
+ * @method get_encode_buffer_max_size() const
+ * @brief Returns the current maximum encode buffer size.
+ * @return Maximum encode buffer size in bytes
+ * 
+ * @method get_packet_buffer(Vector<uint8_t> &r_buffer)
+ * @brief Retrieves a packet and copies its data into the provided buffer.
+ * @param r_buffer Output buffer to store packet data
+ * @return Error status
+ * 
+ * @method put_packet_buffer(const Vector<uint8_t> &p_buffer)
+ * @brief Sends a packet from the provided buffer.
+ * @param p_buffer Buffer containing packet data to send
+ * @return Error status
+ * 
+ * @method get_var(Variant &r_variant, bool p_allow_objects)
+ * @brief Deserializes a Variant from an incoming packet.
+ * @param r_variant Output variant
+ * @param p_allow_objects Whether to allow object deserialization
+ * @return Error status
+ * 
+ * @method put_var(const Variant &p_packet, bool p_full_objects)
+ * @brief Serializes and sends a Variant as a packet.
+ * @param p_packet Variant to send
+ * @param p_full_objects Whether to serialize full object data
+ * @return Error status
+ * 
+ * @class PacketPeerStream
+ * @brief PacketPeer implementation using StreamPeer with ring buffer management.
+ * 
+ * @method set_stream_peer(const Ref<StreamPeer> &p_peer)
+ * @brief Sets the underlying StreamPeer for data transmission.
+ * @param p_peer StreamPeer reference to use for I/O
+ * 
+ * @method get_stream_peer() const
+ * @brief Returns the current StreamPeer.
+ * @return Reference to the current StreamPeer
+ * 
+ * @method _poll_buffer() const
+ * @brief Polls the stream peer for available data and fills the ring buffer.
+ * @return Error status
+ * 
+ * @method get_available_packet_count() const
+ * @brief Counts complete packets available in the input buffer.
+ * @return Number of available packets
+ * 
+ * @method get_packet(const uint8_t **r_buffer, int &r_buffer_size)
+ * @brief Retrieves the next complete packet from the ring buffer.
+ * @param r_buffer Output pointer to packet data
+ * @param r_buffer_size Output packet size
+ * @return Error status
+ * 
+ * @method put_packet(const uint8_t *p_buffer, int p_buffer_size)
+ * @brief Sends a packet by writing length prefix and data to stream peer.
+ * @param p_buffer Packet data to send
+ * @param p_buffer_size Size of packet data in bytes
+ * @return Error status
+ * 
+ * @method set_input_buffer_max_size(int p_max_size)
+ * @brief Sets the maximum input buffer size. Fails if buffer contains data.
+ * @param p_max_size Maximum input buffer size in bytes
+ * 
+ * @method set_output_buffer_max_size(int p_max_size)
+ * @brief Sets the maximum output buffer size.
+ * @param p_max_size Maximum output buffer size in bytes
+ * 
+ * @method get_input_buffer_max_size() const
+ * @brief Returns the current input buffer maximum size.
+ * @return Maximum input buffer size in bytes
+ * 
+ * @method get_output_buffer_max_size() const
+ * @brief Returns the current output buffer maximum size.
+ * @return Maximum output buffer size in bytes
+ * 
+ * @method get_max_packet_size() const
+ * @brief Returns the maximum packet size based on output buffer capacity.
+ * @return Maximum packet size in bytes
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "packet_peer.h"
 
 #include "core/io/marshalls.h"

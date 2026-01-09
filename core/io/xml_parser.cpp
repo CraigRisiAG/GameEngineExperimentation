@@ -1,39 +1,125 @@
-/*************************************************************************/
-/*  xml_parser.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file xml_parser.cpp
- * @brief Implementation of xml_parser functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class XMLParser
+/// @brief A lightweight XML parser for reading and processing XML documents.
+/// 
+/// This class provides functionality to parse XML files and buffers, with support for:
+/// - Reading XML elements, text content, comments, and CDATA sections
+/// - Parsing and accessing element attributes
+/// - Replacing XML special characters (&amp;, &lt;, &gt;, &quot;, &apos;)
+/// - Seeking to specific positions in the document
+/// - Skipping entire XML sections
+///
+/// @note The parser maintains an internal pointer that advances as nodes are read sequentially.
+///       Use seek() to jump to specific positions within the document.
 
+/// @brief Replaces XML special character entities with their actual characters.
+/// @param origstr The original string containing XML entities (e.g., "&amp;", "&lt;")
+/// @return A new string with all XML entities replaced by their corresponding characters
+/// @details Recognized entities: &amp; (&), &lt; (<), &gt; (>), &quot; ("), &apos; (')
+
+/// @brief Determines if a character is whitespace.
+/// @param c The character to check
+/// @return true if the character is space, tab, newline, or carriage return; false otherwise
+
+/// @brief Processes and stores text content found in the XML.
+/// @param start Pointer to the beginning of the text
+/// @param end Pointer to the end of the text
+/// @return true if the text was significant and stored; false if it contains only whitespace
+/// @details Text shorter than 3 characters is only stored if it contains non-whitespace
+
+/// @brief Parses a closing XML element tag (e.g., </element>).
+/// @details Sets node_type to NODE_ELEMENT_END and extracts the element name
+
+/// @brief Parses an XML declaration or processing instruction.
+/// @details Sets node_type to NODE_UNKNOWN
+
+/// @brief Parses a CDATA section (Character Data).
+/// @return true if CDATA was successfully parsed; false if the format is invalid
+/// @details CDATA sections preserve whitespace and special characters literally
+
+/// @brief Parses an XML comment.
+/// @details Sets node_type to NODE_COMMENT and extracts the comment text
+
+/// @brief Parses an opening XML element tag and its attributes.
+/// @details Extracts element name, attributes with their values, and detects self-closing tags
+
+/// @brief Parses the current node starting from the internal pointer position.
+/// @details Identifies the node type and calls the appropriate parsing method
+
+/// @brief Retrieves the byte offset of the current node from the start of the document.
+/// @return The offset in bytes
+
+/// @brief Moves the internal pointer to a specific position and reads the next node.
+/// @param p_pos The byte position to seek to
+/// @return OK on success; ERR_FILE_EOF if the position is out of bounds
+
+/// @brief Binds C++ methods to the scripting interface.
+/// @details Registers all public methods and enum constants for script access
+
+/// @brief Reads and parses the next node in the XML document.
+/// @return OK if a node was successfully read; ERR_FILE_EOF if the end of document is reached
+
+/// @brief Retrieves the type of the current node.
+/// @return The NodeType enumeration value
+
+/// @brief Retrieves text content of the current node.
+/// @return The text content; empty string if current node is not NODE_TEXT
+/// @pre Current node type must be NODE_TEXT
+
+/// @brief Retrieves the name of the current node.
+/// @return The element or comment name; empty string if node is NODE_TEXT
+
+/// @brief Retrieves the number of attributes in the current element.
+/// @return The attribute count
+
+/// @brief Retrieves the name of an attribute by index.
+/// @param p_idx The attribute index
+/// @return The attribute name; empty string if index is invalid
+
+/// @brief Retrieves the value of an attribute by index.
+/// @param p_idx The attribute index
+/// @return The attribute value; empty string if index is invalid
+
+/// @brief Checks if an attribute with the given name exists.
+/// @param p_name The attribute name to search for
+/// @return true if the attribute exists; false otherwise
+
+/// @brief Retrieves the value of an attribute by name.
+/// @param p_name The attribute name
+/// @return The attribute value
+/// @pre The attribute must exist; use has_attribute() to verify first
+
+/// @brief Safely retrieves the value of an attribute by name.
+/// @param p_name The attribute name
+/// @return The attribute value; empty string if the attribute does not exist
+/// @note This method does not generate an error if the attribute is missing
+
+/// @brief Checks if the current element is self-closing (empty).
+/// @return true if the element is empty (e.g., <tag/>); false otherwise
+
+/// @brief Loads XML data from a byte buffer.
+/// @param p_buffer The buffer containing XML data
+/// @return OK on success; ERR_INVALID_DATA if buffer is empty
+
+/// @brief Loads XML data from a file.
+/// @param p_path The file path to open
+/// @return OK on success; ERR_FILE_CORRUPT if file is too small; error code from file access on failure
+
+/// @brief Skips the current element and all its children.
+/// @details Advances the internal pointer until the closing tag of the current element is encountered
+
+/// @brief Closes the XML document and releases resources.
+/// @details Deallocates internal buffers and resets all state
+
+/// @brief Retrieves the current line number in the XML document.
+/// @return The line number (currently returns 0; line tracking not implemented)
+
+/// @brief Constructor.
+/// @details Initializes the parser and sets up the special character entity map
+
+/// @brief Destructor.
+/// @details Releases the internal data buffer
 #include "xml_parser.h"
 
 #include "core/print_string.h"

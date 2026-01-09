@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  json.cpp                                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
 /**
  * @file json.cpp
- * @brief Implementation of json functionality.
+ * @brief JSON parsing and serialization implementation
+ * 
+ * This file implements JSON encoding and decoding functionality for Variant types.
+ * It provides methods to parse JSON strings into Variant objects and serialize
+ * Variant objects back to JSON format with optional formatting and key sorting.
+ * 
+ * The implementation uses a tokenizer-based approach to parse JSON syntax including:
+ * - Objects (dictionaries)
+ * - Arrays
+ * - Strings (with escape sequence handling)
+ * - Numbers (integers and floats)
+ * - Booleans and null values
+ * 
+ * @note Token types are defined in the JSON header (TK_* enums)
+ * @note The parser handles Unicode escape sequences (\uXXXX) in strings
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "json.h"
 
 #include "core/print_string.h"

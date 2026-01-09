@@ -1,39 +1,38 @@
-/*************************************************************************/
-/*  packet_peer_dtls.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file packet_peer_dtls.cpp
- * @brief Implementation of packet_peer_dtls functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class PacketPeerDTLS
+/// @brief Handles DTLS (Datagram Transport Layer Security) connections for packet-based communication.
+///
+/// PacketPeerDTLS provides secure UDP-based communication using the DTLS protocol.
+/// It allows establishing encrypted connections to peer packet sockets with optional
+/// certificate validation.
+///
+/// @note This class uses a factory pattern for instantiation via the static create() method.
+///       Availability depends on the underlying platform implementation.
+///
+/// @example
+/// @code
+/// var dtls_peer = PacketPeerDTLS.new()
+/// dtls_peer.connect_to_peer(packet_peer, true, "example.com")
+/// dtls_peer.poll()
+/// var status = dtls_peer.get_status()
+/// @endcode
 
+/// @fn static PacketPeerDTLS* PacketPeerDTLS::create()
+/// @brief Creates a new instance of PacketPeerDTLS.
+/// @return A pointer to a new PacketPeerDTLS instance, or nullptr if creation fails.
+
+/// @fn static bool PacketPeerDTLS::is_available()
+/// @brief Checks if DTLS support is available on the current platform.
+/// @return true if DTLS is available, false otherwise.
+
+/// @fn void PacketPeerDTLS::_bind_methods()
+/// @brief Binds C++ methods to the scripting API.
+/// @details Exposes poll(), connect_to_peer(), get_status(), disconnect_from_peer() 
+///          methods and connection status enum constants to GDScript.
+
+/// @fn PacketPeerDTLS::PacketPeerDTLS()
+/// @brief Constructs a new PacketPeerDTLS instance.
 #include "packet_peer_dtls.h"
 #include "core/os/file_access.h"
 #include "core/project_settings.h"

@@ -1,39 +1,38 @@
-/*************************************************************************/
-/*  stream_peer_tcp.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file stream_peer_tcp.cpp
- * @brief Implementation of stream_peer_tcp functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \class StreamPeerTCP
+/// \brief TCP socket peer for network communication.
+///
+/// StreamPeerTCP provides functionality to establish TCP connections and perform
+/// bidirectional data transmission over the network. It supports both blocking and
+/// non-blocking operations with connection timeout management.
+///
+/// \section Connection
+/// - connect_to_host(): Initiates a TCP connection to a remote host
+/// - accept_socket(): Accepts an incoming connection from a socket
+/// - disconnect_from_host(): Closes the connection and cleans up resources
+/// - is_connected_to_host(): Checks if currently connected
+/// - get_status(): Returns the current connection status
+///
+/// \section Data Transfer
+/// - put_data(): Sends data with blocking behavior
+/// - put_partial_data(): Sends data with non-blocking behavior
+/// - get_data(): Receives data with blocking behavior
+/// - get_partial_data(): Receives data with non-blocking behavior
+/// - poll(): Polls the socket for specific events with timeout
+///
+/// \section Connection Information
+/// - get_connected_host(): Returns the IP address of the connected peer
+/// - get_connected_port(): Returns the port of the connected peer
+/// - get_available_bytes(): Returns the number of bytes available to read
+///
+/// \section Socket Options
+/// - set_no_delay(): Enables/disables TCP_NODELAY to reduce latency
+///
+/// \remarks Connection attempts include a configurable timeout managed through
+/// project settings (network/limits/tcp/connect_timeout_seconds). Non-blocking
+/// operations return immediately and may not complete the full requested operation.
 #include "stream_peer_tcp.h"
 
 #include "core/project_settings.h"

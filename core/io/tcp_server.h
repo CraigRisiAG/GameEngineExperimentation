@@ -1,39 +1,64 @@
-/*************************************************************************/
-/*  tcp_server.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file tcp_server.h
- * @brief Implementation of TCP_Server class.
+ * @class TCP_Server
+ * @brief A TCP server implementation for accepting incoming client connections.
+ * 
+ * TCP_Server manages a listening socket and handles incoming TCP connections.
+ * It allows applications to listen on a specified port and accept connections
+ * from remote clients.
+ * 
+ * @details
+ * The server maintains a queue of pending connections (up to MAX_PENDING_CONNECTIONS).
+ * Clients can poll for available connections and accept them as StreamPeerTCP objects
+ * for communication.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Maximum number of pending connections that can be queued.
+ */
 
+/**
+ * @fn Error listen(uint16_t p_port, const IP_Address &p_bind_address = IP_Address("*"))
+ * @brief Starts listening for incoming connections on the specified port.
+ * @param p_port The port number to listen on (0-65535).
+ * @param p_bind_address The IP address to bind to. Defaults to "*" (all interfaces).
+ * @return Error code indicating success or failure of the operation.
+ */
+
+/**
+ * @fn bool is_listening() const
+ * @brief Checks if the server is currently listening for connections.
+ * @return true if the server is actively listening, false otherwise.
+ */
+
+/**
+ * @fn bool is_connection_available() const
+ * @brief Checks if there are pending connections waiting to be accepted.
+ * @return true if at least one connection is available, false otherwise.
+ */
+
+/**
+ * @fn Ref<StreamPeerTCP> take_connection()
+ * @brief Accepts and returns the next pending connection.
+ * @return A reference to a StreamPeerTCP object for the accepted connection,
+ *         or null if no connections are available.
+ */
+
+/**
+ * @fn void stop()
+ * @brief Stops the server from listening for new connections.
+ */
+
+/**
+ * @fn TCP_Server()
+ * @brief Constructs a new TCP_Server instance.
+ */
+
+/**
+ * @fn ~TCP_Server()
+ * @brief Destructs the TCP_Server and releases associated resources.
+ */
 #ifndef TCP_SERVER_H
 #define TCP_SERVER_H
 

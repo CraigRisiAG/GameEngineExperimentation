@@ -1,39 +1,54 @@
-/*************************************************************************/
-/*  stream_peer_ssl.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file stream_peer_ssl.cpp
- * @brief Implementation of stream_peer_ssl functionality.
+ * @class StreamPeerSSL
+ * @brief Manages SSL/TLS connections for stream-based peer communication.
+ * 
+ * StreamPeerSSL provides functionality to establish secure SSL/TLS connections
+ * over stream peers. It supports both client-side connections and server-side
+ * acceptance of encrypted streams with certificate validation and blocking
+ * handshake control.
+ * 
+ * @note This class uses a factory pattern (_create) for platform-specific
+ * implementations.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn static StreamPeerSSL* create()
+ * @brief Factory method to create a platform-specific StreamPeerSSL instance.
+ * @return Pointer to a new StreamPeerSSL instance, or NULL if creation is not available.
+ */
 
+/**
+ * @fn static bool is_available()
+ * @brief Checks if SSL/TLS support is available on the current platform.
+ * @return true if SSL/TLS is available, false otherwise.
+ */
+
+/**
+ * @fn void set_blocking_handshake_enabled(bool p_enabled)
+ * @brief Enables or disables blocking mode for the SSL handshake process.
+ * @param p_enabled true to enable blocking handshake, false for non-blocking.
+ */
+
+/**
+ * @fn bool is_blocking_handshake_enabled() const
+ * @brief Retrieves the current blocking handshake setting.
+ * @return true if blocking handshake is enabled, false otherwise.
+ */
+
+/**
+ * @fn void _bind_methods()
+ * @brief Binds all exposed methods and properties to the script interface.
+ * Exposes methods for polling, stream connection/acceptance, status checking,
+ * and handshake configuration to the scripting language.
+ */
+
+/**
+ * @fn StreamPeerSSL()
+ * @brief Default constructor that initializes the SSL peer with blocking
+ * handshake enabled by default.
+ */
 #include "stream_peer_ssl.h"
 
 #include "core/engine.h"

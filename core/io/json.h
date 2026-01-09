@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  json.h                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file json.h
- * @brief Implementation of JSON class.
+ * @class JSON
+ * @brief A utility class for parsing and printing JSON data.
+ *
+ * This class provides static methods to serialize Variant objects to JSON strings
+ * and deserialize JSON strings back into Variant objects. It handles all standard
+ * JSON data types including objects, arrays, strings, numbers, and booleans.
+ *
+ * @details
+ * The class uses a tokenizer-based approach to parse JSON strings. It validates
+ * the JSON structure and provides detailed error reporting including line numbers
+ * and error descriptions.
+ *
+ * @note All methods are static; this class should not be instantiated.
+ *
+ * @enum TokenType
+ * Enumeration of all valid JSON tokens recognized by the parser.
+ * - TK_CURLY_BRACKET_OPEN: Opening brace '{'
+ * - TK_CURLY_BRACKET_CLOSE: Closing brace '}'
+ * - TK_BRACKET_OPEN: Opening bracket '['
+ * - TK_BRACKET_CLOSE: Closing bracket ']'
+ * - TK_IDENTIFIER: Unquoted identifier (null, true, false)
+ * - TK_STRING: Quoted string literal
+ * - TK_NUMBER: Numeric literal
+ * - TK_COLON: Colon separator ':'
+ * - TK_COMMA: Comma separator ','
+ * - TK_EOF: End of file marker
+ *
+ * @enum Expecting
+ * Enumeration of parser states indicating what token is expected next.
+ *
+ * @struct Token
+ * Represents a single parsed JSON token.
+ * - type: The TokenType of this token
+ * - value: The parsed value of the token
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef JSON_H
 #define JSON_H
 

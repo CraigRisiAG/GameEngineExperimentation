@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  logger.cpp                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file logger.cpp
- * @brief Implementation of logger functionality.
+ * @brief Implementation of logging system with support for multiple logger types.
+ * 
+ * This file implements a flexible logging architecture that supports:
+ * - Error logging with categorization (ERROR, WARNING, SCRIPT ERROR, SHADER ERROR)
+ * - Formatted string logging (similar to printf)
+ * - Rotating file-based logging with automatic backup management
+ * - Standard output/error logging
+ * - Composite logging to multiple outputs simultaneously
+ * 
+ * @note Handles platform-specific differences (MINGW, MSVC, GCC) for va_copy and sprintf
+ * 
+ * @class Logger
+ * Base logger interface with error and formatted logging capabilities.
+ * 
+ * @class RotatedFileLogger
+ * Logs to a file with automatic rotation when file size/time thresholds are exceeded.
+ * Maintains a configurable number of backup files with timestamp naming.
+ * 
+ * @class StdLogger
+ * Logs to standard output (stdout) for regular messages and standard error (stderr) for errors.
+ * 
+ * @class CompositeLogger
+ * Aggregates multiple loggers and forwards all log calls to each of them.
+ * Allows simultaneous logging to multiple destinations.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "logger.h"
 
 #include "core/os/dir_access.h"

@@ -1,39 +1,31 @@
-/*************************************************************************/
-/*  networked_multiplayer_peer.cpp                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file networked_multiplayer_peer.cpp
- * @brief Implementation of networked_multiplayer_peer functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \class NetworkedMultiplayerPeer
+/// \brief Base class for networked multiplayer peer implementations.
+/// 
+/// This class provides the foundation for implementing multiplayer networking functionality.
+/// It defines the interface for managing peer connections, data transfer modes, and connection states.
+/// 
+/// \section Transfer Modes
+/// - TRANSFER_MODE_UNRELIABLE: Packets may be lost or arrive out of order
+/// - TRANSFER_MODE_UNRELIABLE_ORDERED: Packets maintain order but may be lost
+/// - TRANSFER_MODE_RELIABLE: All packets are guaranteed to arrive in order
+/// 
+/// \section Connection States
+/// - CONNECTION_DISCONNECTED: Peer is not connected
+/// - CONNECTION_CONNECTING: Peer is in the process of connecting
+/// - CONNECTION_CONNECTED: Peer is actively connected
+/// 
+/// \section Target Peers
+/// - TARGET_PEER_BROADCAST: Send data to all connected peers
+/// - TARGET_PEER_SERVER: Send data to the server peer
+/// 
+/// \section Signals
+/// - peer_connected(id): Emitted when a peer connects
+/// - peer_disconnected(id): Emitted when a peer disconnects
+/// - server_disconnected(): Emitted when the server disconnects
+/// - connection_succeeded(): Emitted when connection is established
+/// - connection_failed(): Emitted when connection attempt fails
 #include "networked_multiplayer_peer.h"
 
 void NetworkedMultiplayerPeer::_bind_methods() {

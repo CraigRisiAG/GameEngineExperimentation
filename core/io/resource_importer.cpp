@@ -1,39 +1,163 @@
-/*************************************************************************/
-/*  resource_importer.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file resource_importer.cpp
- * @brief Base class for serializable engine resources.
+ * @class ResourceFormatImporter
+ * @brief Handles importing of resources from external files into the engine.
+ * 
+ * ResourceFormatImporter manages the resource import pipeline, coordinating between
+ * various ResourceImporter implementations to load and process external files.
+ * It reads import metadata from .import files and delegates actual loading to
+ * appropriate importers based on file type and extension.
+ * 
+ * @note This class uses the singleton pattern for global access.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Comparator for sorting importers by name.
+ * @param p_a First importer to compare.
+ * @param p_b Second importer to compare.
+ * @return true if p_a's name is lexicographically less than p_b's name.
+ */
 
+/**
+ * @brief Parses import metadata from a .import file.
+ * @param p_path Path to the resource file (without .import extension).
+ * @param r_path_and_type Output structure containing parsed path, type, importer, and metadata.
+ * @param r_valid Optional pointer to validity flag set based on import file contents.
+ * @return OK if parsing succeeded, error code otherwise.
+ * @details Reads the .import file and extracts resource path, type, importer name,
+ *          group file, and metadata. Feature-specific paths take priority over generic paths.
+ */
+
+/**
+ * @brief Loads a resource using the import system.
+ * @param p_path Path to the resource file.
+ * @param p_original_path Original path of the resource.
+ * @param r_error Output error code.
+ * @param p_use_sub_threads Whether to use sub-threads for loading.
+ * @param r_progress Optional pointer to progress value.
+ * @return Loaded resource or null if loading failed.
+ */
+
+/**
+ * @brief Gets all file extensions recognized by any importer.
+ * @param p_extensions Output list to populate with recognized extensions.
+ */
+
+/**
+ * @brief Gets file extensions recognized for a specific resource type.
+ * @param p_type Resource type to filter by (empty string gets all extensions).
+ * @param p_extensions Output list to populate with recognized extensions.
+ */
+
+/**
+ * @brief Checks if an import file exists for the given path.
+ * @param p_path Path to check.
+ * @return true if .import file exists, false otherwise.
+ */
+
+/**
+ * @brief Checks if the importer can handle the given path.
+ * @param p_path Path to check.
+ * @param p_for_type Unused type parameter.
+ * @return true if .import file exists for the path.
+ */
+
+/**
+ * @brief Checks if the resource can be imported.
+ * @param p_path Path to the resource file.
+ * @return true if the resource can be imported by any registered importer.
+ */
+
+/**
+ * @brief Gets the import order priority for a resource.
+ * @param p_path Path to the resource file.
+ * @return Import priority value (higher = imported first).
+ */
+
+/**
+ * @brief Checks if the importer handles a specific resource type.
+ * @param p_type Resource type to check.
+ * @return true if any importer handles this type.
+ */
+
+/**
+ * @brief Gets the internal resource path from import metadata.
+ * @param p_path Path to the resource file.
+ * @return Internal resource path or empty string on error.
+ */
+
+/**
+ * @brief Gets all internal resource paths for a file.
+ * @param p_path Path to the resource file.
+ * @param r_paths Output list to populate with internal resource paths.
+ */
+
+/**
+ * @brief Gets the group file for an imported resource.
+ * @param p_path Path to the resource file.
+ * @return Group file path or empty string if not valid.
+ */
+
+/**
+ * @brief Checks if import metadata is valid for a resource.
+ * @param p_path Path to the resource file.
+ * @return true if the import file is marked as valid.
+ */
+
+/**
+ * @brief Gets the resource type from import metadata.
+ * @param p_path Path to the resource file.
+ * @return Resource type string or empty string on error.
+ */
+
+/**
+ * @brief Gets custom metadata for an imported resource.
+ * @param p_path Path to the resource file.
+ * @return Metadata variant or empty variant on error.
+ */
+
+/**
+ * @brief Gets dependencies of an imported resource.
+ * @param p_path Path to the resource file.
+ * @param p_dependencies Output list to populate with dependency paths.
+ * @param p_add_types Whether to include type information in dependencies.
+ */
+
+/**
+ * @brief Finds an importer by its name.
+ * @param p_name Name of the importer to find.
+ * @return Reference to the importer or null if not found.
+ */
+
+/**
+ * @brief Gets all importers that handle a specific file extension.
+ * @param p_extension File extension to search for.
+ * @param r_importers Output list to populate with matching importers.
+ */
+
+/**
+ * @brief Gets the best importer for a file extension based on priority.
+ * @param p_extension File extension to search for.
+ * @return Reference to the highest priority importer or null if none found.
+ */
+
+/**
+ * @brief Generates the base path for imported resources.
+ * @param p_for_file Source file path.
+ * @return Base path where imported resources are stored.
+ */
+
+/**
+ * @brief Validates import settings for a resource.
+ * @param p_path Path to the resource file.
+ * @return true if all import settings are valid according to the importer.
+ */
+
+/**
+ * @brief Generates a hash of all import settings.
+ * @return MD5 hash of all registered importers and their settings.
+ */
 #include "resource_importer.h"
 
 #include "core/os/os.h"

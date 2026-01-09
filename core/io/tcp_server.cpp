@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  tcp_server.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file tcp_server.cpp
- * @brief Implementation of tcp_server functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class TCP_Server
+/// @brief A TCP server implementation for handling incoming socket connections.
+///
+/// TCP_Server provides functionality to listen for incoming TCP connections on a specified port
+/// and bind address. It manages a non-blocking socket and allows accepting individual client
+/// connections as StreamPeerTCP objects.
+///
+/// @method listen(uint16_t p_port, const IP_Address &p_bind_address) -> Error
+/// @brief Start listening for incoming TCP connections.
+/// @param p_port The port number to listen on.
+/// @param p_bind_address The IP address to bind to (use "*" for all interfaces).
+/// @return OK on success, ERR_UNAVAILABLE if socket is invalid, ERR_ALREADY_IN_USE if already listening,
+///         ERR_INVALID_PARAMETER if bind address is invalid, ERR_CANT_CREATE if socket creation fails.
+///
+/// @method is_listening() const -> bool
+/// @brief Check if the server is currently listening for connections.
+/// @return true if the server socket is open and listening, false otherwise.
+///
+/// @method is_connection_available() const -> bool
+/// @brief Check if there is an incoming connection waiting to be accepted.
+/// @return true if a connection is available, false otherwise.
+///
+/// @method take_connection() -> Ref<StreamPeerTCP>
+/// @brief Accept and retrieve the next pending incoming connection.
+/// @return A StreamPeerTCP object representing the accepted connection, or null if no connection is available.
+///
+/// @method stop() -> void
+/// @brief Stop listening and close the server socket.
 #include "tcp_server.h"
 
 void TCP_Server::_bind_methods() {

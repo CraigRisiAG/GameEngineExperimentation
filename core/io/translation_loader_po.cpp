@@ -1,39 +1,67 @@
-/*************************************************************************/
-/*  translation_loader_po.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file translation_loader_po.cpp
- * @brief Implementation of translation_loader_po functionality.
+ * @class TranslationLoaderPO
+ * @brief Loads translation data from PO (Portable Object) files.
+ * 
+ * This class handles parsing and loading of PO format translation files,
+ * which are commonly used for internationalization (i18n) in software projects.
+ * It extracts message IDs and their corresponding translations, along with
+ * language configuration metadata.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @function load_translation
+ * @brief Parses a PO file and creates a Translation resource.
+ * 
+ * Reads a PO file line by line, extracting msgid/msgstr pairs and configuration
+ * metadata. Handles multi-line strings, escape sequences, and fuzzy translations.
+ * 
+ * @param f FileAccess pointer to the opened PO file
+ * @param r_error Pointer to Error variable to store result status
+ * @return RES A Translation resource containing parsed messages and locale info
+ * 
+ * @note Sets r_error to ERR_FILE_CORRUPT on initialization, OK on success
+ * @note Cleans up file handle internally
+ */
 
+/**
+ * @function load
+ * @brief Opens and loads a translation file from the specified path.
+ * 
+ * @param p_path Path to the PO file to load
+ * @param p_original_path Original path (unused in implementation)
+ * @param r_error Pointer to Error variable for status reporting
+ * @param p_use_sub_threads Whether to use sub-threads (unused)
+ * @param r_progress Pointer to progress float (unused)
+ * @return RES Loaded Translation resource
+ * 
+ * @note Sets r_error to ERR_CANT_OPEN on file open failure
+ */
+
+/**
+ * @function get_recognized_extensions
+ * @brief Returns file extensions this loader handles.
+ * 
+ * @param p_extensions Pointer to list to populate with supported extensions
+ * @note Currently supports "po" format
+ */
+
+/**
+ * @function handles_type
+ * @brief Checks if this loader handles the specified resource type.
+ * 
+ * @param p_type Resource type string to check
+ * @return bool True if type is "Translation", false otherwise
+ */
+
+/**
+ * @function get_resource_type
+ * @brief Determines the resource type for a given file path.
+ * 
+ * @param p_path File path to check
+ * @return String "Translation" if file has .po extension, empty string otherwise
+ */
 #include "translation_loader_po.h"
 
 #include "core/os/file_access.h"

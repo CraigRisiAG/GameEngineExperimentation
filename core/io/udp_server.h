@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  udp_server.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file udp_server.h
- * @brief Implementation of UDPServer class.
+ * @class UDPServer
+ * @brief A UDP server implementation for handling incoming UDP connections.
+ * 
+ * This class manages a UDP server socket that listens for incoming UDP packets
+ * and allows accepting connections as PacketPeerUDP instances.
+ * 
+ * @note Inherits from Reference for automatic memory management.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @brief Starts listening for UDP connections on the specified port and address.
+/// @param p_port The port number to listen on (0-65535).
+/// @param p_bind_address The IP address to bind to. Defaults to "*" (all interfaces).
+/// @return Error code indicating success or failure of the operation.
+Error listen(uint16_t p_port, const IP_Address &p_bind_address = IP_Address("*"));
 
+/// @brief Checks if the server is currently listening for connections.
+/// @return True if the server is actively listening, false otherwise.
+bool is_listening() const;
+
+/// @brief Checks if a new UDP connection is available to be accepted.
+/// @return True if at least one connection is waiting to be accepted, false otherwise.
+bool is_connection_available() const;
+
+/// @brief Accepts and returns the next available UDP connection.
+/// @return A Ref<PacketPeerUDP> representing the accepted connection, or null if none available.
+/// @note Must call is_connection_available() first to ensure a connection is waiting.
+Ref<PacketPeerUDP> take_connection();
+
+/// @brief Stops the server and closes the listening socket.
+void stop();
 #ifndef UDP_SERVER_H
 #define UDP_SERVER_H
 

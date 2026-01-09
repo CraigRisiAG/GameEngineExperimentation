@@ -1,39 +1,24 @@
-/*************************************************************************/
-/*  multiplayer_api.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file multiplayer_api.h
- * @brief Implementation of MultiplayerAPI class.
+ * @class MultiplayerAPI
+ * @brief Manages multiplayer RPC and property synchronization over networked peers.
+ * 
+ * MultiplayerAPI handles the transmission and reception of remote procedure calls (RPC)
+ * and remote property sets (RSET) across a network of connected peers. It manages
+ * node path caching, packet encoding/decoding, and coordinates communication between
+ * local and remote game instances.
+ * 
+ * @details
+ * The API supports various RPC modes (disabled, remote, master, puppet, and sync variants)
+ * to control how methods and properties are replicated across the network. It uses a
+ * caching system to optimize path transmission and maintains connection state for all
+ * connected peers.
+ * 
+ * Packet structure includes network commands for RPC calls, property sets, path simplification,
+ * and raw data transmission. Node IDs and method/property names are compressed using
+ * configurable compression modes to reduce bandwidth.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef MULTIPLAYER_API_H
 #define MULTIPLAYER_API_H
 

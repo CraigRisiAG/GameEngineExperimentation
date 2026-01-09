@@ -1,39 +1,101 @@
-/*************************************************************************/
-/*  networked_multiplayer_peer.h                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file networked_multiplayer_peer.h
- * @brief Implementation of NetworkedMultiplayerPeer class.
+ * @class NetworkedMultiplayerPeer
+ * @brief Abstract base class for networked multiplayer peer communication.
+ * 
+ * Provides an interface for handling networked multiplayer connections and packet transmission.
+ * Extends PacketPeer to support transfer modes, target peers, and connection status management.
+ * 
+ * @note This is an abstract class and cannot be instantiated directly.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum TARGET_PEER_BROADCAST
+ * @brief Constant indicating packets should be sent to all connected peers.
+ */
 
+/**
+ * @enum TARGET_PEER_SERVER
+ * @brief Constant indicating packets should be sent to the server.
+ */
+
+/**
+ * @enum TransferMode
+ * @brief Specifies the reliability mode for packet transmission.
+ * 
+ * @var TRANSFER_MODE_UNRELIABLE - Packets may be lost or arrive out of order.
+ * @var TRANSFER_MODE_UNRELIABLE_ORDERED - Packets may be lost but maintain order.
+ * @var TRANSFER_MODE_RELIABLE - All packets are guaranteed to arrive in order.
+ */
+
+/**
+ * @enum ConnectionStatus
+ * @brief Represents the current connection state of the peer.
+ * 
+ * @var CONNECTION_DISCONNECTED - Peer is not connected.
+ * @var CONNECTION_CONNECTING - Peer is in the process of connecting.
+ * @var CONNECTION_CONNECTED - Peer is successfully connected.
+ */
+
+/**
+ * @fn virtual void set_transfer_mode(TransferMode p_mode)
+ * @brief Sets the transfer mode for outgoing packets.
+ * @param p_mode The desired transfer mode.
+ */
+
+/**
+ * @fn virtual TransferMode get_transfer_mode() const
+ * @brief Retrieves the current transfer mode.
+ * @return The current transfer mode.
+ */
+
+/**
+ * @fn virtual void set_target_peer(int p_peer_id)
+ * @brief Sets the target peer for the next packet to be sent.
+ * @param p_peer_id The peer ID or TARGET_PEER_BROADCAST/TARGET_PEER_SERVER constant.
+ */
+
+/**
+ * @fn virtual int get_packet_peer() const
+ * @brief Gets the ID of the peer from which the last received packet originated.
+ * @return The peer ID of the packet source.
+ */
+
+/**
+ * @fn virtual bool is_server() const
+ * @brief Checks if this peer is the server.
+ * @return True if this peer is the server, false otherwise.
+ */
+
+/**
+ * @fn virtual void poll()
+ * @brief Processes incoming network events and updates connection state.
+ */
+
+/**
+ * @fn virtual int get_unique_id() const
+ * @brief Retrieves the unique identifier for this peer.
+ * @return The unique peer ID.
+ */
+
+/**
+ * @fn virtual void set_refuse_new_connections(bool p_enable)
+ * @brief Controls whether this peer accepts new incoming connections.
+ * @param p_enable True to refuse new connections, false to accept them.
+ */
+
+/**
+ * @fn virtual bool is_refusing_new_connections() const
+ * @brief Checks if this peer is refusing new connections.
+ * @return True if refusing new connections, false otherwise.
+ */
+
+/**
+ * @fn virtual ConnectionStatus get_connection_status() const
+ * @brief Retrieves the current connection status of this peer.
+ * @return The current connection status.
+ */
 #ifndef NETWORKED_MULTIPLAYER_PEER_H
 #define NETWORKED_MULTIPLAYER_PEER_H
 

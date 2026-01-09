@@ -1,39 +1,94 @@
-/*************************************************************************/
-/*  zip_io.h                                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file zip_io.h
- * @brief Header file for zip_io functionality.
+ * @brief ZIP I/O interface for minizip library integration
+ * 
+ * Provides a set of callback functions that bridge the minizip library with
+ * the engine's FileAccess abstraction layer. These functions enable reading,
+ * writing, and seeking operations within ZIP archives using the engine's
+ * file system.
+ * 
+ * @note Third-party minizip headers are included here for use in downstream
+ * compilation units (e.g., platform-specific export modules). It is recommended
+ * to minimize the exposure of third-party headers in public APIs.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Opens a file resource for ZIP operations
+ * @param data User-defined data pointer passed to minizip
+ * @param p_fname File name or path to open
+ * @param mode File access mode (read/write)
+ * @return Opaque file handle for subsequent operations, or nullptr on failure
+ */
 
+/**
+ * @brief Reads data from an open ZIP file resource
+ * @param data User-defined data pointer
+ * @param fdata File data handle returned by zipio_open()
+ * @param buf Buffer to store read data
+ * @param size Number of bytes to read
+ * @return Number of bytes actually read, or 0 on EOF/error
+ */
+
+/**
+ * @brief Writes data to an open ZIP file resource
+ * @param opaque User-defined data pointer
+ * @param stream File handle returned by zipio_open()
+ * @param buf Data buffer to write
+ * @param size Number of bytes to write
+ * @return Number of bytes actually written
+ */
+
+/**
+ * @brief Gets the current file position in a ZIP file resource
+ * @param opaque User-defined data pointer
+ * @param stream File handle returned by zipio_open()
+ * @return Current position in the file
+ */
+
+/**
+ * @brief Seeks to a position in a ZIP file resource
+ * @param opaque User-defined data pointer
+ * @param stream File handle returned by zipio_open()
+ * @param offset Position offset relative to origin
+ * @param origin Seek origin (SEEK_SET, SEEK_CUR, SEEK_END)
+ * @return New file position, or -1 on error
+ */
+
+/**
+ * @brief Closes an open ZIP file resource
+ * @param opaque User-defined data pointer
+ * @param stream File handle returned by zipio_open()
+ * @return 0 on success, non-zero on error
+ */
+
+/**
+ * @brief Tests for errors on a ZIP file resource
+ * @param opaque User-defined data pointer
+ * @param stream File handle returned by zipio_open()
+ * @return 0 if no error, non-zero if an error occurred
+ */
+
+/**
+ * @brief Allocates memory for ZIP operations
+ * @param opaque User-defined data pointer
+ * @param items Number of items to allocate
+ * @param size Size of each item in bytes
+ * @return Pointer to allocated memory, or nullptr on failure
+ */
+
+/**
+ * @brief Frees memory allocated by zipio_alloc()
+ * @param opaque User-defined data pointer
+ * @param address Pointer to memory to free
+ */
+
+/**
+ * @brief Creates a minizip I/O function definition from a FileAccess instance
+ * @param p_file Pointer to FileAccess pointer to use for ZIP operations
+ * @return zlib_filefunc_def structure initialized with ZIP I/O callbacks
+ */
 #ifndef ZIP_IO_H
 #define ZIP_IO_H
 

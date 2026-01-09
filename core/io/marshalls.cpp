@@ -1,39 +1,65 @@
-/*************************************************************************/
-/*  marshalls.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file marshalls.cpp
- * @brief Implementation of marshalls functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @file marshalls.cpp
+/// @brief Variant encoding and decoding utilities for serialization
+///
+/// This module provides functions to encode and decode Godot Variant types
+/// to/from binary format. It handles all primitive types, math types, collections,
+/// and packed arrays with proper padding and alignment.
+///
+/// Key Functions:
+/// - encode_variant(): Converts a Variant to binary format
+/// - decode_variant(): Converts binary data back to a Variant
+///
+/// The encoding format uses a type header followed by type-specific data.
+/// Special flags are used to indicate 64-bit variants and object references.
 
+/// @class EncodedObjectAsID
+/// @brief Wrapper class to store an ObjectID as a serializable object reference
+///
+/// Used during variant encoding/decoding to preserve object identity
+/// when full object serialization is not desired.
+
+/// @method EncodedObjectAsID::set_object_id(ObjectID p_id)
+/// @brief Sets the stored object ID
+/// @param p_id The ObjectID to store
+
+/// @method EncodedObjectAsID::get_object_id() const
+/// @brief Retrieves the stored object ID
+/// @return The stored ObjectID
+
+/// @function encode_variant(const Variant &p_variant, uint8_t *r_buffer, int &r_len, bool p_full_objects)
+/// @brief Encodes a Variant into binary format
+/// @param p_variant The variant to encode
+/// @param r_buffer Output buffer pointer (nullptr to calculate size only)
+/// @param r_len Output parameter for encoded data length in bytes
+/// @param p_full_objects If true, serialize full object data; if false, encode as ObjectID
+/// @return Error code (OK on success)
+
+/// @function decode_variant(Variant &r_variant, const uint8_t *p_buffer, int p_len, int *r_len, bool p_allow_objects)
+/// @brief Decodes binary data into a Variant
+/// @param r_variant Output variant to store decoded value
+/// @param p_buffer Input buffer containing encoded data
+/// @param p_len Available bytes in input buffer
+/// @param r_len Optional output parameter for bytes consumed
+/// @param p_allow_objects If true, permit deserialization of full objects
+/// @return Error code (OK on success, ERR_INVALID_DATA for corrupt data)
+
+/// @function _decode_string(const uint8_t *&buf, int &len, int *r_len, String &r_string)
+/// @brief Helper to decode UTF-8 strings with padding
+/// @param buf Reference to buffer pointer (updated on return)
+/// @param len Reference to remaining buffer length (updated on return)
+/// @param r_len Optional output for total bytes consumed including padding
+/// @param r_string Output string
+/// @return Error code
+/// @internal
+
+/// @function _encode_string(const String &p_string, uint8_t *&buf, int &r_len)
+/// @brief Helper to encode strings with UTF-8 and 4-byte padding
+/// @param p_string String to encode
+/// @param buf Output buffer pointer (nullptr to calculate size only)
+/// @param r_len Input/output for accumulated length
+/// @internal
 #include "marshalls.h"
 
 #include "core/os/keyboard.h"

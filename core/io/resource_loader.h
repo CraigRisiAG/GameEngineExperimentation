@@ -1,39 +1,57 @@
-/*************************************************************************/
-/*  resource_loader.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file resource_loader.h
- * @brief Base class for serializable engine resources.
+ * @class ResourceFormatLoader
+ * @brief Base class for custom resource format loaders.
+ * 
+ * ResourceFormatLoader is an abstract base class that defines the interface for loading
+ * resources of specific formats. Subclasses should override virtual methods to implement
+ * custom loading logic for their respective file formats.
+ * 
+ * @note This class inherits from Reference and is managed by Godot's reference counting system.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class ResourceLoader
+ * @brief Central resource loading system for managing resource file I/O operations.
+ * 
+ * ResourceLoader provides a static interface for loading resources from the filesystem.
+ * It supports multiple resource format loaders, threaded loading, dependency tracking,
+ * path remapping, and translation remapping. The system can handle both synchronous
+ * and asynchronous (threaded) resource loading operations.
+ * 
+ * @details
+ * - Manages up to MAX_LOADERS (64) custom ResourceFormatLoader instances
+ * - Supports threaded resource loading with progress tracking
+ * - Handles resource path remapping and translation remapping
+ * - Provides error notification callbacks for load and dependency errors
+ * - Tracks import validity and import order for resources
+ * 
+ * @note All public methods are static and thread-safe for multi-threaded loading operations.
+ * 
+ * @see ResourceFormatLoader
+ * @see ThreadLoadStatus
+ * @see ThreadLoadTask
+ */
 
+/**
+ * @enum ThreadLoadStatus
+ * @brief Status values for threaded resource loading operations.
+ * 
+ * @var THREAD_LOAD_INVALID_RESOURCE - The requested resource is invalid or does not exist
+ * @var THREAD_LOAD_IN_PROGRESS - The resource is currently being loaded
+ * @var THREAD_LOAD_FAILED - The resource loading operation failed
+ * @var THREAD_LOAD_LOADED - The resource has been successfully loaded
+ */
+
+/**
+ * @struct ThreadLoadTask
+ * @brief Internal structure representing a single threaded load operation.
+ * 
+ * @details Contains all necessary state for tracking and managing an asynchronous
+ * resource load operation, including thread information, semaphore synchronization,
+ * progress tracking, and sub-task management.
+ */
 #ifndef RESOURCE_LOADER_H
 #define RESOURCE_LOADER_H
 

@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  packet_peer.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file packet_peer.h
- * @brief Implementation of PacketPeer class.
+ * @class PacketPeer
+ * @brief Base class for packet-based communication protocol handling.
+ * 
+ * PacketPeer provides an abstract interface for sending and receiving packets of data.
+ * It manages packet buffering, encoding/decoding of variants, and serves as the foundation
+ * for packet-based network communication in the engine.
+ * 
+ * @note This is an abstract class and cannot be instantiated directly.
+ * @see StreamPeer, PacketPeerStream
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @class PacketPeerStream
+ * @brief Concrete implementation of PacketPeer that wraps a StreamPeer for packet communication.
+ * 
+ * PacketPeerStream extends PacketPeer to provide packet-based communication over a StreamPeer.
+ * It uses ring buffers and internal buffers to manage input and output data streams,
+ * allowing reliable packet transmission with configurable buffer sizes.
+ * 
+ * The class manages separate input and output buffers to handle asynchronous packet I/O
+ * operations efficiently.
+ * 
+ * @see PacketPeer, StreamPeer, RingBuffer
+ */
 #ifndef PACKET_PEER_H
 #define PACKET_PEER_H
 

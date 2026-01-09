@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  resource_loader.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file resource_loader.cpp
- * @brief Base class for serializable engine resources.
+ * @brief Resource loading system implementation
+ * 
+ * This file implements the ResourceLoader and ResourceFormatLoader classes which handle
+ * loading of resources from disk. It supports:
+ * - Multiple resource format loaders with priority ordering
+ * - Threaded resource loading with semaphore-based synchronization
+ * - Path remapping (translation-aware and generic)
+ * - Dependency tracking and recursive loading
+ * - Resource caching with thread-safe access
+ * - Custom script-based resource loaders
+ * 
+ * The ResourceFormatLoader is a base class that can be extended (via script or C++)
+ * to support custom resource formats. The ResourceLoader maintains a list of loaders
+ * and iterates through them to find one that can handle a given file.
+ * 
+ * Thread loading uses a semaphore-based pool system to limit concurrent loads while
+ * allowing the main thread to request and retrieve resources asynchronously.
+ * 
+ * @see ResourceLoader
+ * @see ResourceFormatLoader
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "resource_loader.h"
 
 #include "core/io/resource_importer.h"

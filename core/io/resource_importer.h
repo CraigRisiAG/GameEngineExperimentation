@@ -1,39 +1,54 @@
-/*************************************************************************/
-/*  resource_importer.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file resource_importer.h
- * @brief Base class for serializable engine resources.
+ * @brief Resource importing system for loading and managing various file formats.
+ * 
+ * This header defines the core resource importing infrastructure, consisting of two main classes:
+ * 
+ * @class ResourceFormatImporter
+ * A loader that manages multiple resource importers and handles the import pipeline.
+ * It maintains a collection of ResourceImporter instances and provides methods to:
+ * - Recognize and load resources by file path
+ * - Query supported file extensions and types
+ * - Retrieve resource metadata and import validity
+ * - Manage importer registration and retrieval
+ * - Compute import settings hashes for caching
+ * 
+ * @struct PathAndType
+ * Internal structure containing metadata about an imported resource path:
+ * - path: File system path to the resource
+ * - type: The resource type
+ * - importer: Name of the importer used
+ * - group_file: Optional associated group file
+ * - metadata: Additional resource metadata
+ * 
+ * @struct SortImporterByName
+ * Comparator for sorting importers by name to maintain consistent settings hash computation.
+ * 
+ * @class ResourceImporter
+ * Abstract base class that defines the interface for concrete resource importers.
+ * Subclasses must implement:
+ * - get_importer_name(): Unique identifier for the importer
+ * - get_visible_name(): Human-readable name
+ * - get_recognized_extensions(): File extensions this importer handles
+ * - get_save_extension(): Output file extension
+ * - get_resource_type(): Type of resources produced
+ * - get_import_options(): Available import configuration options
+ * - get_option_visibility(): Determines which options are visible based on settings
+ * - import(): Performs the actual import operation
+ * 
+ * @struct ImportOption
+ * Configuration option for the import process, containing:
+ * - option: PropertyInfo describing the option
+ * - default_value: Default value for the option
+ * 
+ * Optional methods allow importers to:
+ * - Report priority and import order
+ * - Support multiple presets
+ * - Handle group file imports
+ * - Validate import settings
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RESOURCE_IMPORTER_H
 #define RESOURCE_IMPORTER_H
 

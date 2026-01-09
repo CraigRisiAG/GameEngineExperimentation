@@ -1,39 +1,64 @@
-/*************************************************************************/
-/*  udp_server.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file udp_server.cpp
- * @brief Implementation of udp_server functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class UDPServer
+/// @brief A UDP server implementation for handling incoming UDP connections.
+/// 
+/// UDPServer provides functionality to listen on a UDP port and accept incoming
+/// UDP connections. It manages a single NetSocket for receiving connections and
+/// creates new PacketPeerUDP instances for each accepted connection.
+/// 
+/// @note This class is designed for single-threaded, non-blocking UDP operations.
 
+/// @brief Binds Godot script methods to the C++ class methods.
+/// 
+/// Exposes the following methods to GDScript:
+/// - listen(port: int, bind_address: String = "*") -> Error
+/// - is_connection_available() -> bool
+/// - is_listening() -> bool
+/// - take_connection() -> PacketPeerUDP
+/// - stop() -> void
+void UDPServer::_bind_methods();
+
+/// @brief Starts listening for incoming UDP connections on the specified port and address.
+/// 
+/// @param p_port The UDP port number to listen on (1-65535).
+/// @param p_bind_address The IP address to bind to. Use "*" or an empty address to bind to all interfaces.
+/// @return Error code: OK if successful, ERR_UNAVAILABLE if socket is invalid, 
+///         ERR_ALREADY_IN_USE if already listening, ERR_INVALID_PARAMETER if address is invalid,
+///         ERR_CANT_CREATE if socket creation fails.
+Error UDPServer::listen(uint16_t p_port, const IP_Address &p_bind_address);
+
+/// @brief Checks if the server is currently listening for connections.
+/// 
+/// @return true if the socket is open and listening, false otherwise.
+bool UDPServer::is_listening() const;
+
+/// @brief Checks if an incoming UDP connection is available to be accepted.
+/// 
+/// Uses non-blocking socket polling to check for incoming data without waiting.
+/// 
+/// @return true if a connection is available, false otherwise.
+bool UDPServer::is_connection_available() const;
+
+/// @brief Accepts and returns the next available UDP connection.
+/// 
+/// Creates a new PacketPeerUDP instance connected to the incoming socket,
+/// then creates a new listening socket to replace the current one.
+/// 
+/// @return A new PacketPeerUDP reference if a connection is available, 
+///         or a null reference if no connection is pending.
+Ref<PacketPeerUDP> UDPServer::take_connection();
+
+/// @brief Stops the UDP server and closes the listening socket.
+/// 
+/// Cleans up resources and resets the bind port and address.
+void UDPServer::stop();
+
+/// @brief Constructs a UDPServer instance with a new NetSocket.
+UDPServer::UDPServer();
+
+/// @brief Destructs the UDPServer instance, closing any open connections.
+UDPServer::~UDPServer();
 #include "udp_server.h"
 
 void UDPServer::_bind_methods() {

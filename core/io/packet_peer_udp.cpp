@@ -1,39 +1,116 @@
-/*************************************************************************/
-/*  packet_peer_udp.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file packet_peer_udp.cpp
- * @brief Implementation of packet_peer_udp functionality.
+ * @class PacketPeerUDP
+ * @brief UDP packet peer implementation for network communication.
+ * 
+ * Provides functionality for sending and receiving UDP packets, including support for
+ * multicast groups, broadcast, and both connected and connectionless modes.
+ * 
+ * @details
+ * This class wraps a NetSocket for UDP operations and manages:
+ * - Listening on a specified port and address
+ * - Connecting to remote hosts
+ * - Sending and receiving packets with address/port information
+ * - Multicast group management (join/leave)
+ * - Broadcast mode control
+ * - Non-blocking I/O with internal packet queueing
+ * 
+ * @note
+ * - Uses an internal ring buffer (rb) to queue received packets
+ * - Supports both IPv4 and IPv6 addresses
+ * - Can operate in connected or connectionless mode
+ * - Non-blocking socket operations by default
+ * 
+ * @see NetSocket, IP_Address, PacketPeer
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @brief Enables or disables blocking mode for socket operations.
+/// @param p_enable True to enable blocking mode, false for non-blocking.
+void set_blocking_mode(bool p_enable);
 
+/// @brief Sets broadcast mode for the UDP socket.
+/// @param p_enabled True to enable broadcasting, false to disable.
+void set_broadcast_enabled(bool p_enabled);
+
+/// @brief Joins a multicast group on the specified interface.
+/// @param p_multi_address The multicast address to join.
+/// @param p_if_name The network interface name (empty string for default).
+/// @return OK on success, error code otherwise.
+Error join_multicast_group(IP_Address p_multi_address, String p_if_name);
+
+/// @brief Leaves a previously joined multicast group.
+/// @param p_multi_address The multicast address to leave.
+/// @param p_if_name The network interface name.
+/// @return OK on success, error code otherwise.
+Error leave_multicast_group(IP_Address p_multi_address, String p_if_name);
+
+/// @brief Starts listening for incoming UDP packets on a specified port.
+/// @param p_port The port number to listen on.
+/// @param p_bind_address The address to bind to ("*" for wildcard).
+/// @param p_recv_buffer_size The size of the receive buffer (default 65536 bytes).
+/// @return OK on success, error code otherwise.
+Error listen(int p_port, const IP_Address &p_bind_address, int p_recv_buffer_size);
+
+/// @brief Connects to a remote UDP host.
+/// @param p_host The IP address of the remote host.
+/// @param p_port The port number of the remote host.
+/// @return OK on success, error code otherwise.
+Error connect_to_host(const IP_Address &p_host, int p_port);
+
+/// @brief Connects using an existing socket and receives initial packet.
+/// @param p_sock The NetSocket reference to use.
+/// @return OK on success, error code otherwise.
+Error connect_socket(Ref<NetSocket> p_sock);
+
+/// @brief Checks if the socket is connected to a host.
+/// @return True if connected, false otherwise.
+bool is_connected_to_host() const;
+
+/// @brief Closes the UDP socket and clears buffers.
+void close();
+
+/// @brief Waits for incoming data on the socket.
+/// @return OK on success, error code otherwise.
+Error wait();
+
+/// @brief Retrieves the next available packet from the queue.
+/// @param r_buffer Output pointer to the packet data.
+/// @param r_buffer_size Output variable containing packet size in bytes.
+/// @return OK on success, error code otherwise.
+Error get_packet(const uint8_t **r_buffer, int &r_buffer_size);
+
+/// @brief Sends a packet to the configured destination address.
+/// @param p_buffer Pointer to the packet data to send.
+/// @param p_buffer_size Size of the packet in bytes.
+/// @return OK on success, error code otherwise.
+Error put_packet(const uint8_t *p_buffer, int p_buffer_size);
+
+/// @brief Gets the number of available packets in the queue.
+/// @return Number of queued packets, or -1 on error.
+int get_available_packet_count() const;
+
+/// @brief Gets the maximum packet size supported.
+/// @return Maximum packet size in bytes.
+int get_max_packet_size() const;
+
+/// @brief Gets the IP address of the last received packet.
+/// @return IP address of the packet source.
+IP_Address get_packet_address() const;
+
+/// @brief Gets the port number of the last received packet.
+/// @return Port number of the packet source.
+int get_packet_port() const;
+
+/// @brief Checks if the socket is actively listening.
+/// @return True if listening, false otherwise.
+bool is_listening() const;
+
+/// @brief Sets the destination address for sending packets (connectionless mode).
+/// @param p_address The destination IP address.
+/// @param p_port The destination port number.
+/// @note Cannot be used for connected sockets.
+void set_dest_address(const IP_Address &p_address, int p_port);
 #include "packet_peer_udp.h"
 
 #include "core/io/ip.h"

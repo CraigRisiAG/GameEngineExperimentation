@@ -1,39 +1,51 @@
-/*************************************************************************/
-/*  resource_format_binary.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file resource_format_binary.h
- * @brief Base class for serializable engine resources.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// \file resource_format_binary.h
+/// \brief Binary resource format loader and saver implementations.
+///
+/// This header defines classes for loading and saving resources in a binary format.
+/// It provides functionality for:
+/// - Parsing binary resource files with support for external and internal resources
+/// - Managing resource dependencies and remapping
+/// - Serializing resources to binary format with various options
+/// - Handling string pooling and variant serialization
 
+/// \class ResourceLoaderBinary
+/// \brief Handles parsing and loading of binary resource files.
+///
+/// Manages the low-level reading of binary resource files, including:
+/// - String decompression and management via string_map
+/// - Variant parsing and reconstruction
+/// - External and internal resource references
+/// - Translation remapping and dependency tracking
+/// - Progress tracking for multi-threaded loading
+
+/// \class ResourceFormatLoaderBinary
+/// \brief Factory class for creating ResourceLoaderBinary instances.
+///
+/// Implements the ResourceFormatLoader interface to provide:
+/// - Resource file loading with optional multi-threading support
+/// - File type recognition and validation
+/// - Extension and type queries
+/// - Dependency extraction and remapping
+
+/// \class ResourceFormatSaverBinaryInstance
+/// \brief Handles serialization of resources to binary format.
+///
+/// Manages the binary encoding of resources including:
+/// - String pooling and compression
+/// - External and internal resource management
+/// - Property serialization with variant encoding
+/// - Path resolution (relative/absolute)
+/// - Endian conversion support
+
+/// \class ResourceFormatSaverBinary
+/// \brief Factory class for creating binary resource savers.
+///
+/// Implements the ResourceFormatSaver interface to provide:
+/// - Resource serialization to binary format
+/// - Format recognition for supported resource types
+/// - File extension queries
 #ifndef RESOURCE_FORMAT_BINARY_H
 #define RESOURCE_FORMAT_BINARY_H
 

@@ -1,39 +1,77 @@
-/*************************************************************************/
-/*  stream_peer_tcp.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file stream_peer_tcp.h
- * @brief Implementation of StreamPeerTCP class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class StreamPeerTCP
+/// @brief TCP stream peer for network communication.
+/// 
+/// StreamPeerTCP provides TCP socket functionality for reading and writing data over a network connection.
+/// It inherits from StreamPeer and manages the lifecycle of a TCP socket connection, including connection
+/// establishment, status tracking, and data transmission.
+/// 
+/// @note This class is part of the core networking I/O subsystem.
+/// 
+/// @enum Status
+/// @brief Connection status enumeration.
+/// @var STATUS_NONE - No connection established.
+/// @var STATUS_CONNECTING - Connection in progress.
+/// @var STATUS_CONNECTED - Successfully connected.
+/// @var STATUS_ERROR - Connection error occurred.
 
+/// @brief Accepts an incoming socket connection.
+/// @param p_sock Reference to the NetSocket to accept.
+/// @param p_host The IP address of the peer.
+/// @param p_port The port number of the peer.
+
+/// @brief Initiates a TCP connection to a remote host.
+/// @param p_host The IP address of the remote host.
+/// @param p_port The port number to connect to.
+/// @return Error code indicating success or failure.
+
+/// @brief Checks if currently connected to a host.
+/// @return true if connected, false otherwise.
+
+/// @brief Retrieves the IP address of the connected host.
+/// @return IP_Address of the peer host.
+
+/// @brief Retrieves the port number of the connected host.
+/// @return uint16_t port number.
+
+/// @brief Disconnects from the currently connected host.
+
+/// @brief Gets the number of available bytes to read.
+/// @return Number of bytes available in the receive buffer.
+
+/// @brief Retrieves the current connection status.
+/// @return Status enumeration value.
+
+/// @brief Enables or disables the TCP_NODELAY option.
+/// @param p_enabled true to disable Nagle's algorithm, false to enable it.
+
+/// @brief Polls the socket for readiness.
+/// @param p_type The type of poll operation (read, write, or error).
+/// @param timeout Timeout in milliseconds (0 = non-blocking).
+/// @return Error code indicating the result of the poll operation.
+
+/// @brief Writes data to the socket (blocking).
+/// @param p_data Pointer to the data buffer.
+/// @param p_bytes Number of bytes to send.
+/// @return Error code.
+
+/// @brief Writes data to the socket with partial send support.
+/// @param p_data Pointer to the data buffer.
+/// @param p_bytes Number of bytes to send.
+/// @param r_sent Reference to store the actual number of bytes sent.
+/// @return Error code.
+
+/// @brief Reads data from the socket (blocking).
+/// @param p_buffer Pointer to the buffer for received data.
+/// @param p_bytes Number of bytes to read.
+/// @return Error code.
+
+/// @brief Reads data from the socket with partial receive support.
+/// @param p_buffer Pointer to the buffer for received data.
+/// @param p_bytes Number of bytes to read.
+/// @param r_received Reference to store the actual number of bytes received.
+/// @return Error code.
 #ifndef STREAM_PEER_TCP_H
 #define STREAM_PEER_TCP_H
 

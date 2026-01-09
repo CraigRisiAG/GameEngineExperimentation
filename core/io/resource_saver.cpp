@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  resource_saver.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file resource_saver.cpp
- * @brief Base class for serializable engine resources.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @file resource_saver.cpp
+/// @brief Resource saving system implementation
+/// 
+/// This file implements the ResourceSaver and ResourceFormatSaver classes, which form the core
+/// of the engine's resource persistence layer. It provides functionality for saving resources
+/// to disk in various formats, managing multiple format savers, and supporting custom script-based
+/// savers.
+///
+/// Key Components:
+/// - ResourceFormatSaver: Abstract base class for format-specific savers
+/// - ResourceSaver: Manager class that coordinates multiple savers
+///
+/// Features:
+/// - Multiple format saver registration and management
+/// - Script-based custom resource savers via global class names
+/// - File extension matching and format recognition
+/// - Resource path localization
+/// - Save callbacks for tracking saved resources
+/// - Optional file modification timestamp tracking (tools only)
+///
+/// The system uses a priority-based saver list where savers can be inserted at the front
+/// for higher priority or at the back for lower priority. When saving a resource, savers
+/// are queried in order of priority until one recognizes the resource and file extension.
 #include "resource_saver.h"
 #include "core/io/resource_loader.h"
 #include "core/os/file_access.h"

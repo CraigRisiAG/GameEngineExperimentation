@@ -1,39 +1,57 @@
-/*************************************************************************/
-/*  translation_loader_po.h                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file translation_loader_po.h
- * @brief Implementation of TranslationLoaderPO class.
+ * @class TranslationLoaderPO
+ * @brief Loader for PO (Portable Object) translation files.
+ * 
+ * This class handles loading and parsing of PO format translation files,
+ * which are commonly used for internationalization (i18n) in applications.
+ * It extends the ResourceFormatLoader base class to integrate with the
+ * engine's resource loading system.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Loads a translation from a PO file.
+ * 
+ * @param f Pointer to the FileAccess object to read from.
+ * @param r_error Optional pointer to store error status.
+ * @return RES The loaded Translation resource, or null if loading fails.
+ */
 
+/**
+ * @brief Loads a translation resource from the specified file path.
+ * 
+ * @param p_path The file path to load.
+ * @param p_original_path The original path of the resource (optional).
+ * @param r_error Optional pointer to store error status.
+ * @param p_use_sub_threads Whether to use sub-threads for loading.
+ * @param r_progress Optional pointer to store loading progress (0.0 to 1.0).
+ * @return RES The loaded Translation resource.
+ */
+
+/**
+ * @brief Retrieves the file extensions recognized by this loader.
+ * 
+ * @param p_extensions Pointer to a list that will be populated with recognized extensions.
+ */
+
+/**
+ * @brief Checks if this loader handles the specified resource type.
+ * 
+ * @param p_type The resource type to check.
+ * @return bool True if this loader can handle the given type, false otherwise.
+ */
+
+/**
+ * @brief Gets the resource type for the file at the given path.
+ * 
+ * @param p_path The file path to check.
+ * @return String The resource type identifier.
+ */
+
+/**
+ * @brief Constructs a TranslationLoaderPO instance.
+ */
 #ifndef TRANSLATION_LOADER_PO_H
 #define TRANSLATION_LOADER_PO_H
 
