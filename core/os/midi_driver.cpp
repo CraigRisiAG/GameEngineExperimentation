@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  midi_driver.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file midi_driver.cpp
- * @brief Implementation of midi_driver functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class MIDIDriver
+/// @brief Handles MIDI input device communication and event processing.
+/// 
+/// This class manages MIDI (Musical Instrument Digital Interface) input from connected devices.
+/// It processes raw MIDI packets, interprets MIDI messages, and converts them into input events
+/// for the engine's input system.
+/// 
+/// Features:
+/// - Singleton pattern for global access
+/// - Support for MIDI running status
+/// - Handling of various MIDI message types (Note On/Off, Control Change, Pitch Bend, etc.)
+/// - Automatic conversion of zero-velocity Note On to Note Off events
+/// - Integration with the engine's input event system
+/// 
+/// @note This driver uses a singleton pattern. Use MIDIDriver::get_singleton() to access the instance.
 
+/// @brief Gets the singleton instance of the MIDI driver.
+/// @return Pointer to the MIDIDriver singleton instance, or NULL if not initialized.
+
+/// @brief Sets this instance as the singleton.
+/// @details Called automatically during construction.
+
+/// @brief Processes an incoming MIDI input packet.
+/// @param timestamp The timestamp when the MIDI data was received (in microseconds).
+/// @param data Pointer to the MIDI message data bytes.
+/// @param length The number of bytes in the MIDI message.
+/// 
+/// @details Parses raw MIDI data and creates InputEventMIDI events. Handles:
+/// - System common messages (0xF0 and above)
+/// - Channel voice messages with running status support
+/// - Multiple MIDI message types with appropriate parameter extraction
+/// 
+/// The parsed event is passed to the input system for further processing.
+
+/// @brief Retrieves a list of connected MIDI input device names.
+/// @return A PackedStringArray containing the names of available MIDI input devices.
+
+/// @brief Constructs a new MIDIDriver instance and sets it as the singleton.
 #include "midi_driver.h"
 
 #include "core/os/os.h"

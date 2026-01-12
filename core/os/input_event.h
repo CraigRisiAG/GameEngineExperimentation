@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  input_event.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file input_event.h
- * @brief Implementation of InputEvent class.
+ * @brief Input event system for handling user input across various devices.
+ * 
+ * This header defines a comprehensive input event hierarchy used throughout the engine's main loop.
+ * It provides classes and enumerations for handling keyboard, mouse, joypad, touch, gesture, and MIDI input.
+ * 
+ * @section Enumerations
+ * 
+ * ButtonList: Enumeration of mouse button indices and button masks.
+ * JoystickList: Enumeration of joypad buttons and axes with platform-specific mappings (Sony, Xbox, DS, Wii, VR, Oculus, OpenVR).
+ * MidiMessageList: Enumeration of MIDI message types.
+ * 
+ * @section Class Hierarchy
+ * 
+ * InputEvent (base class)
+ *   ├── InputEventWithModifiers
+ *   │   ├── InputEventKey
+ *   │   └── InputEventGesture
+ *   │       ├── InputEventMagnifyGesture
+ *   │       └── InputEventPanGesture
+ *   ├── InputEventMouse
+ *   │   ├── InputEventMouseButton
+ *   │   └── InputEventMouseMotion
+ *   ├── InputEventJoypadMotion
+ *   ├── InputEventJoypadButton
+ *   ├── InputEventScreenTouch
+ *   ├── InputEventScreenDrag
+ *   ├── InputEventAction
+ *   └── InputEventMIDI
+ * 
+ * @section Features
+ * 
+ * - Action mapping and matching system
+ * - Input modifier tracking (Shift, Alt, Control, Meta/Command)
+ * - Transform support for position-based events
+ * - Deadzone handling for analog inputs
+ * - Pressure and tilt support for advanced input devices
+ * - MIDI event support with channel and controller data
+ * - Text representation of input events for debugging
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef INPUT_EVENT_H
 #define INPUT_EVENT_H
 

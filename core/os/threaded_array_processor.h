@@ -1,39 +1,35 @@
-/*************************************************************************/
-/*  threaded_array_processor.h                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file threaded_array_processor.h
- * @brief Variant-based dynamic array container.
+ * @brief Provides utilities for processing array elements in parallel across multiple threads.
+ * 
+ * This header defines a template-based system for distributing array processing work across
+ * available CPU cores. It uses an atomic counter to distribute work dynamically to threads,
+ * ensuring efficient load balancing without explicit work partitioning.
+ * 
+ * @details
+ * - ThreadArrayProcessData: A data structure that encapsulates the processing context,
+ *   including the target array size, current index, instance pointer, user data, and the
+ *   member function to invoke on each element.
+ * 
+ * - process_array_thread: The thread worker function that atomically increments an index
+ *   counter and processes array elements until all elements are consumed. This allows
+ *   dynamic load distribution among threads.
+ * 
+ * - thread_process_array: The main entry point that initializes the processing pipeline.
+ *   When threading is enabled (NO_THREADS not defined), it spawns one thread per available
+ *   CPU core. The first element is processed on the calling thread, and remaining elements
+ *   are distributed among worker threads. When threading is disabled, processing occurs
+ *   sequentially on the calling thread.
+ * 
+ * @tparam C The class type containing the member function to be called.
+ * @tparam M The member function pointer type.
+ * @tparam U The user data type passed to each invocation.
+ * 
+ * @note This implementation requires atomic increment operations and thread management
+ *       facilities from the OS abstraction layer.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef THREADED_ARRAY_PROCESSOR_H
 #define THREADED_ARRAY_PROCESSOR_H
 

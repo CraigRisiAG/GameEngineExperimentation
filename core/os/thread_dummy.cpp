@@ -1,39 +1,49 @@
-/*************************************************************************/
-/*  thread_dummy.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file thread_dummy.cpp
- * @brief Implementation of thread_dummy functionality.
+ * @brief Dummy implementation of threading and synchronization primitives.
+ * 
+ * This file provides placeholder implementations of Thread and RWLock classes
+ * for single-threaded or non-threaded environments. These implementations
+ * ignore threading callbacks and settings, making them suitable for platforms
+ * or configurations that don't require true multithreading support.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Creates a dummy thread instance.
+ * 
+ * @param p_callback The thread callback function (ignored in dummy implementation).
+ * @param p_user User data to pass to the callback (ignored in dummy implementation).
+ * @param p_settings Thread configuration settings (ignored in dummy implementation).
+ * @return Thread* A new dummy thread instance allocated on the heap.
+ * 
+ * @note The returned thread does not execute the callback or support actual threading.
+ *       This is a no-op implementation for single-threaded environments.
+ */
 
+/**
+ * @brief Registers the dummy thread factory as the default thread creator.
+ * 
+ * This method sets the global Thread::create_func function pointer to use
+ * the ThreadDummy::create method for all subsequent thread creation calls.
+ */
+
+/**
+ * @brief Creates a dummy read-write lock instance.
+ * 
+ * @return RWLock* A new dummy RWLock instance allocated on the heap.
+ * 
+ * @note The returned lock does not provide actual synchronization.
+ *       This is a no-op implementation for single-threaded environments.
+ */
+
+/**
+ * @brief Registers the dummy RWLock factory as the default lock creator.
+ * 
+ * This method sets the global RWLock::create_func function pointer to use
+ * the RWLockDummy::create method for all subsequent lock creation calls.
+ */
 #include "thread_dummy.h"
 
 #include "core/os/memory.h"

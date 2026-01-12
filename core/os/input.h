@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  input.h                                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file input.h
- * @brief Implementation of Input class.
+ * @class Input
+ * @brief Abstract base class for handling all input events and device queries.
+ * 
+ * The Input class serves as the primary interface for querying input state and processing
+ * input events from keyboards, mice, joysticks, and touch/motion sensors. It follows the
+ * singleton pattern and provides both instantaneous state queries and action-based input handling.
+ * 
+ * @details
+ * This class defines pure virtual methods that must be implemented by platform-specific
+ * input handlers. It supports:
+ * - Keyboard input queries (key press states)
+ * - Mouse input (position, button states, cursor control)
+ * - Joystick/gamepad input (buttons, axes, vibration)
+ * - Touch and motion sensors (accelerometer, gyroscope, magnetometer)
+ * - Action mapping system (named input actions with strength values)
+ * - Custom cursor shapes and mouse emulation
+ * - Input event parsing and accumulation
+ * 
+ * @note This is an abstract class and cannot be instantiated directly.
+ * Use Input::get_singleton() to access the platform-specific implementation.
+ * 
+ * @see Object, MainLoop, ThreadSafe
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef INPUT_H
 #define INPUT_H
 

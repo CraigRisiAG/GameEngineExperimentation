@@ -1,39 +1,75 @@
-/*************************************************************************/
-/*  dir_access.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file dir_access.h
- * @brief Implementation of DirAccess class.
+ * @class DirAccess
+ * @brief Abstract base class for directory access operations across different filesystem types.
+ * 
+ * DirAccess provides a unified interface for directory and file operations, supporting multiple
+ * access types (resources, user data, and filesystem). It uses a factory pattern to create
+ * platform-specific implementations.
+ * 
+ * @note This class is an excellent candidate for thread-safety improvements across all methods.
+ * 
+ * @enum AccessType
+ * @brief Enumeration of supported access types.
+ * - ACCESS_RESOURCES: Access to engine resources
+ * - ACCESS_USERDATA: Access to user data directory
+ * - ACCESS_FILESYSTEM: Direct filesystem access
+ * - ACCESS_MAX: Sentinel value for array sizing
+ * 
+ * @note Uses factory pattern with CreateFunc function pointers for instantiation.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn virtual Error list_dir_begin()
+ * @brief Initializes directory listing iteration.
+ * @return Error code indicating success or failure.
+ */
 
+/**
+ * @fn virtual String get_next()
+ * @brief Retrieves the next entry in the current directory listing.
+ * @return Name of the next file or directory entry.
+ */
+
+/**
+ * @fn virtual Error make_dir_recursive(String p_dir)
+ * @brief Creates a directory and all parent directories if they don't exist.
+ * @param p_dir Path to the directory to create.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @fn Error copy_dir(String p_from, String p_to, int p_chmod_flags = -1)
+ * @brief Recursively copies a directory and its contents.
+ * @param p_from Source directory path.
+ * @param p_to Destination directory path.
+ * @param p_chmod_flags Optional chmod flags for file permissions.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @fn static void remove_file_or_error(String p_path)
+ * @brief Safely removes a file without custom error handling.
+ * @param p_path Path to the file to remove.
+ * @note Fails with ERR_FAIL_MSG if the file cannot be removed.
+ * @warning For editor code only. Use with caution.
+ */
+
+/**
+ * @fn static DirAccess* create(AccessType p_access)
+ * @brief Factory method to create a DirAccess instance for the specified access type.
+ * @param p_access The type of access required.
+ * @return Pointer to a newly created DirAccess implementation.
+ */
+
+/**
+ * @struct DirAccessRef
+ * @brief RAII wrapper for automatic DirAccess memory management.
+ * 
+ * Provides automatic deletion of DirAccess objects through destructor,
+ * with operator overloading for pointer-like access semantics.
+ */
 #ifndef DIR_ACCESS_H
 #define DIR_ACCESS_H
 

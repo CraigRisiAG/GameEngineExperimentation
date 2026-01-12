@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  dir_access.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file dir_access.cpp
- * @brief Implementation of DirChanger class.
+ * @brief Directory access implementation for resource, user data, and filesystem operations.
+ * 
+ * This file implements the DirAccess class which provides cross-platform directory
+ * manipulation functionality including:
+ * - Directory traversal and listing
+ * - Recursive directory creation and deletion
+ * - File and directory copying operations
+ * - Path resolution for different access types (resources, user data, filesystem)
+ * 
+ * The implementation supports three access types:
+ * - ACCESS_RESOURCES: Access to project resources via "res://" protocol
+ * - ACCESS_USERDATA: Access to user data via "user://" protocol
+ * - ACCESS_FILESYSTEM: Direct filesystem access
+ * 
+ * Key features:
+ * - Recursive directory operations with error handling
+ * - Automatic path normalization and root path resolution
+ * - Temporary directory changing with automatic restoration via DirChanger RAII class
+ * - File permission preservation during copy operations
+ * 
+ * @dependencies
+ * - core/os/file_access.h for file operations
+ * - core/os/memory.h for memory management
+ * - core/os/os.h for OS-specific functionality
+ * - core/project_settings.h for resource path resolution
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "dir_access.h"
 
 #include "core/os/file_access.h"

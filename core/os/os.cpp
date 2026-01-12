@@ -1,39 +1,23 @@
-/*************************************************************************/
-/*  os.cpp                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file os.cpp
- * @brief Implementation of os functionality.
+ * @brief Operating System abstraction layer implementation
+ *
+ * Provides core OS functionality including:
+ * - Time and date management (ticks, timestamps, timezone)
+ * - Resource management (printing, dumping, tracking)
+ * - System paths (data, config, cache directories)
+ * - Input handling (virtual keyboard, mouse, joystick)
+ * - Window management (fullscreen, cursor, position)
+ * - Hardware features (processors, MIDI, video/audio drivers)
+ * - Logging and error reporting
+ * - Performance settings (processor usage mode, vsync)
+ * - Clipboard and command-line argument management
+ *
+ * This is the base/default implementation with platform-specific overrides
+ * available in derived classes for different operating systems.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "os.h"
 
 #include "core/os/dir_access.h"

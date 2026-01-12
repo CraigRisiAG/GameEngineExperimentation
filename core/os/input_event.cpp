@@ -1,39 +1,37 @@
-/*************************************************************************/
-/*  input_event.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file input_event.cpp
- * @brief Implementation of input_event functionality.
+ * @brief Implementation of input event classes for handling various input types in the game engine.
+ * 
+ * This file implements a hierarchy of input event classes that represent different types of
+ * user input including keyboard, mouse, joypad, touch, gestures, and MIDI events.
+ * 
+ * Classes implemented:
+ * - InputEvent: Base class for all input events with device management and action checking
+ * - InputEventWithModifiers: Handles modifier keys (shift, alt, control, meta, command)
+ * - InputEventKey: Represents keyboard input with keycode and modifiers
+ * - InputEventMouse: Base class for mouse events with position tracking
+ * - InputEventMouseButton: Mouse button press/release events with double-click support
+ * - InputEventMouseMotion: Mouse movement events with relative motion and speed
+ * - InputEventJoypadMotion: Joypad analog stick movement with deadzone support
+ * - InputEventJoypadButton: Joypad button press/release with pressure sensitivity
+ * - InputEventScreenTouch: Touch screen input events
+ * - InputEventScreenDrag: Touch screen drag events with relative motion
+ * - InputEventAction: Custom action events with strength values
+ * - InputEventGesture: Base class for gesture events
+ * - InputEventMagnifyGesture: Pinch-to-zoom gesture events
+ * - InputEventPanGesture: Pan/swipe gesture events
+ * - InputEventMIDI: MIDI input events for musical instruments
+ * 
+ * @dependencies
+ * - core/input_map.h
+ * - core/os/keyboard.h
+ * - Transform2D for spatial transformations
+ * - StringName for action names
+ * 
+ * @note Device IDs: DEVICE_ID_TOUCH_MOUSE (-1), DEVICE_ID_INTERNAL (-2)
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "input_event.h"
 
 #include "core/input_map.h"

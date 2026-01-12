@@ -1,39 +1,62 @@
-/*************************************************************************/
-/*  file_access.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file file_access.h
- * @brief Implementation of FileAccess class.
+ * @class FileAccess
+ * @brief Multi-platform abstraction layer for file I/O operations.
+ * 
+ * Provides a unified interface for reading, writing, and managing files across different
+ * platforms. Supports various access types (resources, user data, filesystem) and handles
+ * endianness swapping for binary data compatibility.
+ * 
+ * @note This is an abstract base class. Use create() or open() factory methods to instantiate
+ *       platform-specific implementations.
+ * 
+ * @section Usage
+ * @code
+ * // Opening a file
+ * Error error;
+ * FileAccess *file = FileAccess::open("path/to/file.txt", FileAccess::READ, &error);
+ * if (file) {
+ *     String content = file->get_as_utf8_string();
+ *     file->close();
+ *     memdelete(file);
+ * }
+ * @endcode
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum AccessType
+ * @brief Enumeration of file access type contexts.
+ * @var ACCESS_RESOURCES - Access to engine resource files
+ * @var ACCESS_USERDATA - Access to user data directories
+ * @var ACCESS_FILESYSTEM - Access to general filesystem
+ * @var ACCESS_MAX - Sentinel value for array sizing
+ */
 
+/**
+ * @enum ModeFlags
+ * @brief File open mode flags.
+ * @var READ - Open file for reading
+ * @var WRITE - Open file for writing
+ * @var READ_WRITE - Open file for simultaneous reading and writing
+ * @var WRITE_READ - Open file for writing with read capability
+ */
+
+/**
+ * @typedef FileCloseFailNotify
+ * @brief Callback function type invoked when file close operation fails.
+ * @param p_file The path of the file that failed to close
+ */
+
+/**
+ * @struct FileAccessRef
+ * @brief RAII-style wrapper for FileAccess pointers.
+ * 
+ * Automatically manages FileAccess object lifetime, ensuring proper cleanup via
+ * memdelete() when the wrapper goes out of scope.
+ * 
+ * @note Acts as a smart pointer with automatic deletion on destruction.
+ */
 #ifndef FILE_ACCESS_H
 #define FILE_ACCESS_H
 

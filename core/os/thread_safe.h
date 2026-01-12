@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  thread_safe.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file thread_safe.h
- * @brief Header file for thread_safe functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @file thread_safe.h
+/// @brief Thread safety utilities using mutex-based synchronization.
+///
+/// This header provides preprocessor macros for easily adding thread-safe
+/// access to class members and methods. These macros encapsulate mutex
+/// locking/unlocking operations to protect shared resources from concurrent
+/// access.
+///
+/// @details
+/// - `_THREAD_SAFE_CLASS_`: Declares a mutable mutex member variable for
+///   thread-safe class instances.
+/// - `_THREAD_SAFE_METHOD_`: Creates an automatic lock guard within a method
+///   scope for method-level synchronization.
+/// - `_THREAD_SAFE_LOCK_`: Manually locks the class mutex.
+/// - `_THREAD_SAFE_UNLOCK_`: Manually unlocks the class mutex.
+///
+/// @warning
+/// - Manual lock/unlock macros should be used with caution to avoid deadlocks.
+/// - Prefer `_THREAD_SAFE_METHOD_` for automatic RAII-style lock management.
+/// - Requires the `core/os/mutex.h` header for Mutex and MutexLock definitions.
+///
+/// @see core/os/mutex.h
 #ifndef THREAD_SAFE_H
 #define THREAD_SAFE_H
 

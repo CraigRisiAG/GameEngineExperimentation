@@ -1,39 +1,53 @@
-/*************************************************************************/
-/*  midi_driver.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file midi_driver.h
- * @brief Implementation of MIDIDriver class.
+ * @class MIDIDriver
+ * @brief Multi-platform abstraction layer for MIDI input/output operations.
+ * 
+ * MIDIDriver provides a unified interface for accessing MIDI devices across different platforms.
+ * It follows the singleton pattern to ensure only one instance manages MIDI communication.
+ * 
+ * @note This is an abstract base class and should not be instantiated directly.
+ *       Derived classes must implement platform-specific MIDI functionality.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Gets the singleton instance of MIDIDriver.
+ * @return Pointer to the singleton MIDIDriver instance.
+ */
 
+/**
+ * @brief Sets this instance as the singleton.
+ */
+
+/**
+ * @brief Opens the MIDI driver and initializes connections to MIDI devices.
+ * @return Error code indicating success or failure.
+ */
+
+/**
+ * @brief Closes the MIDI driver and releases all MIDI device connections.
+ */
+
+/**
+ * @brief Retrieves an array of all connected MIDI input device names.
+ * @return PackedStringArray containing names of connected MIDI input devices.
+ */
+
+/**
+ * @brief Processes an incoming MIDI message packet.
+ * @param timestamp The timestamp in microseconds when the MIDI message was received.
+ * @param data Pointer to the MIDI message data buffer.
+ * @param length The length of the MIDI message data in bytes.
+ */
+
+/**
+ * @brief Constructs a MIDIDriver instance.
+ */
+
+/**
+ * @brief Destructs the MIDIDriver instance.
+ */
 #ifndef MIDI_DRIVER_H
 #define MIDI_DRIVER_H
 

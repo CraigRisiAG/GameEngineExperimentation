@@ -1,39 +1,55 @@
-/*************************************************************************/
-/*  rw_lock.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file rw_lock.h
- * @brief Implementation of RWLock class.
+ * @brief Reader-Writer lock interface and RAII wrapper classes
+ * 
+ * Provides a platform-independent interface for reader-writer locks that allow
+ * multiple concurrent readers or a single exclusive writer. Includes RAII wrapper
+ * classes for automatic lock management.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class RWLock
+ * @brief Abstract base class for reader-writer lock implementations
+ * 
+ * Defines the interface for reader-writer synchronization primitives. Derived classes
+ * must provide platform-specific implementations. The class uses a factory pattern
+ * via the create() static method to instantiate appropriate lock implementations.
+ */
 
+/**
+ * @class RWLockRead
+ * @brief RAII wrapper for acquiring read locks
+ * 
+ * Automatically acquires a read lock on construction and releases it on destruction.
+ * Allows multiple threads to hold read locks simultaneously. Safely handles null locks.
+ * 
+ * @note Uses const_cast to allow const references to be locked
+ * 
+ * @example
+ * const RWLock *lock = RWLock::create();
+ * {
+ *     RWLockRead read_guard(lock);
+ *     // Read-safe code here
+ * } // Lock automatically released
+ */
+
+/**
+ * @class RWLockWrite
+ * @brief RAII wrapper for acquiring write locks
+ * 
+ * Automatically acquires a write lock on construction and releases it on destruction.
+ * Ensures exclusive access - only one thread can hold a write lock at a time.
+ * Safely handles null locks.
+ * 
+ * @example
+ * RWLock *lock = RWLock::create();
+ * {
+ *     RWLockWrite write_guard(lock);
+ *     // Write-safe code here
+ * } // Lock automatically released
+ */
 #ifndef RW_LOCK_H
 #define RW_LOCK_H
 

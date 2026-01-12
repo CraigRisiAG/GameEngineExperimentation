@@ -1,39 +1,115 @@
-/*************************************************************************/
-/*  memory.h                                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file memory.h
- * @brief Implementation of Memory class.
+ * @brief Memory management utilities for the game engine.
+ * 
+ * This header provides a comprehensive memory management system including:
+ * - Static memory allocation/deallocation with optional alignment padding
+ * - Memory usage tracking and statistics (debug builds)
+ * - Custom new/delete operators for memory pooling and descriptions
+ * - Template-based memory management for single objects and arrays
+ * - Pre/post-initialization hooks for custom object lifecycle handling
+ * 
+ * @note PAD_ALIGN must be set to a value greater than 16 for alignment operations.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class Memory
+ * @brief Static memory management interface for allocation and deallocation.
+ * 
+ * Provides static methods for allocating, reallocating, and freeing memory with
+ * optional padding alignment. Tracks memory usage statistics in debug builds.
+ * 
+ * @var mem_usage Current memory usage (debug builds only)
+ * @var max_usage Maximum recorded memory usage (debug builds only)
+ * @var alloc_count Total number of active allocations
+ */
 
+/**
+ * @class DefaultAllocator
+ * @brief Default memory allocator wrapper for the Memory system.
+ * 
+ * Provides inline allocation and deallocation methods that delegate to
+ * Memory::alloc_static() and Memory::free_static() without alignment padding.
+ */
+
+/**
+ * @brief Creates a new object with optional memory description.
+ * @param p_size Size in bytes to allocate
+ * @param p_description Human-readable description for memory tracking
+ * @return Pointer to allocated memory
+ */
+
+/**
+ * @brief Creates a new object using a custom allocator function.
+ * @param p_size Size in bytes to allocate
+ * @param p_allocfunc Custom allocation function
+ * @return Pointer to allocated memory
+ */
+
+/**
+ * @brief Placement new operator for pre-allocated memory.
+ * @param p_size Size of the object
+ * @param p_pointer Pointer to pre-allocated memory
+ * @param check Size verification value
+ * @param p_description Memory description for tracking
+ * @return The provided p_pointer if valid
+ */
+
+/**
+ * @def memnew(m_class)
+ * @brief Allocates and constructs a single object.
+ * @param m_class Class type to instantiate
+ * @return Pointer to newly constructed object
+ */
+
+/**
+ * @def memnew_allocator(m_class, m_allocator)
+ * @brief Allocates and constructs an object using a custom allocator.
+ * @param m_class Class type to instantiate
+ * @param m_allocator Allocator class with alloc() method
+ * @return Pointer to newly constructed object
+ */
+
+/**
+ * @def memnew_placement(m_placement, m_class)
+ * @brief Constructs an object in pre-allocated memory.
+ * @param m_placement Pointer to pre-allocated memory
+ * @param m_class Class type to construct
+ * @return Pointer to constructed object
+ */
+
+/**
+ * @def memdelete_notnull(m_v)
+ * @brief Safely deletes an object only if pointer is non-null.
+ * @param m_v Pointer to object to delete
+ */
+
+/**
+ * @def memnew_arr(m_class, m_count)
+ * @brief Allocates and constructs an array of objects.
+ * @param m_class Element type
+ * @param m_count Number of elements
+ * @return Pointer to array of constructed objects
+ * 
+ * @note Array length can be retrieved with memarr_len()
+ */
+
+/**
+ * @brief Retrieves the length of an array allocated with memnew_arr().
+ * @tparam T Element type of the array
+ * @param p_class Pointer to array
+ * @return Number of elements in the array
+ */
+
+/**
+ * @brief Destructs and deallocates an array allocated with memnew_arr().
+ * @tparam T Element type of the array
+ * @param p_class Pointer to array to delete
+ * 
+ * @note Calls destructors for non-trivial types
+ */
 #ifndef MEMORY_H
 #define MEMORY_H
 

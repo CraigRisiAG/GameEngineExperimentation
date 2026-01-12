@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  keyboard.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file keyboard.h
- * @brief Header file for keyboard functionality.
+ * @brief Keyboard input handling and key code definitions for the game engine.
+ * 
+ * This header defines a comprehensive set of keyboard key codes and modifiers
+ * using a 32-bit unsigned integer encoding scheme. The upper 8 bits are reserved
+ * for special keys and modifiers, while the lower 24 bits contain Unicode values
+ * for printable characters.
+ * 
+ * Key Encoding Strategy:
+ * - Bits 0-23: Unicode character codes for printable characters (Latin 1)
+ * - Bit 24: Special key flag (SPKEY = 0x01000000)
+ * - Bits 25-30: Modifier flags (Shift, Alt, Meta, Ctrl, KPad, GroupSwitch)
+ * - Bit 31: Reserved (not used due to variant datatype limitations)
+ * 
+ * @details
+ * Special keys include:
+ * - Cursor keys (arrows, home, end, page up/down)
+ * - Function keys (F1-F16)
+ * - Modifier keys (shift, control, alt, meta)
+ * - Numeric keypad keys
+ * - Multimedia and browser control keys
+ * - System keys (escape, tab, enter, delete, etc.)
+ * 
+ * Printable keys include all ASCII and extended Latin 1 characters
+ * (0x0020 - 0x00FF).
+ * 
+ * @see KeyModifierMask for modifier flag definitions
+ * @see keycode_get_string() for converting key codes to strings
+ * @see keycode_has_unicode() for checking if a key has Unicode representation
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 

@@ -1,39 +1,60 @@
-/*************************************************************************/
-/*  main_loop.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file main_loop.cpp
- * @brief Implementation of main_loop functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \class MainLoop
+/// \brief Core class that manages the main event loop and script lifecycle for the game engine.
+///
+/// MainLoop provides the fundamental framework for handling input events, text input, frame iteration,
+/// and idle processing. It integrates with the scripting system to allow script instances to override
+/// virtual methods for custom game logic.
+///
+/// The lifecycle follows this sequence:
+/// 1. init() - Initializes the main loop and sets up the script instance
+/// 2. iteration(delta) - Called each frame with elapsed time
+/// 3. idle(delta) - Called during idle frames
+/// 4. finish() - Cleans up and finalizes the main loop
+///
+/// \method void _bind_methods()
+/// \brief Binds C++ methods and signals to the scripting engine.
+/// Registers callable methods, virtual methods for script override, notifications, and signals
+/// so they can be accessed from scripts.
+///
+/// \method void set_init_script(const Ref<Script> &p_init_script)
+/// \brief Sets the initialization script to be executed during init().
+/// \param p_init_script The script to initialize with
+///
+/// \method void input_text(const String &p_text)
+/// \brief Passes text input to the script instance via _input_text() callback.
+/// \param p_text The input text string
+///
+/// \method void input_event(const Ref<InputEvent> &p_event)
+/// \brief Passes input events to the script instance via _input_event() callback.
+/// \param p_event The input event to process
+///
+/// \method void init()
+/// \brief Initializes the main loop by setting the init script and calling _initialize() on script instances.
+///
+/// \method bool iteration(float p_time)
+/// \brief Processes one frame iteration, delegating to script's _iteration() method.
+/// \param p_time Delta time in seconds for this frame
+/// \return Boolean result from script's _iteration() or false if no script instance
+///
+/// \method bool idle(float p_time)
+/// \brief Processes idle time, delegating to script's _idle() method.
+/// \param p_time Delta time in seconds for idle period
+/// \return Boolean result from script's _idle() or false if no script instance
+///
+/// \method void drop_files(const Vector<String> &p_files, int p_from_screen)
+/// \brief Handles file drop events via _drop_files() script callback.
+/// \param p_files Vector of dropped file paths
+/// \param p_from_screen Screen index the files were dropped from
+///
+/// \method void global_menu_action(const Variant &p_id, const Variant &p_meta)
+/// \brief Handles global menu actions via _global_menu_action() script callback.
+/// \param p_id Identifier for the menu action
+/// \param p_meta Additional metadata for the action
+///
+/// \method void finish()
+/// \brief Finalizes the main loop by calling _finalize() and clearing the script instance.
 #include "main_loop.h"
 
 #include "core/script_language.h"

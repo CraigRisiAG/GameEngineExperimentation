@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  main_loop.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file main_loop.h
- * @brief Implementation of MainLoop class.
+ * @class MainLoop
+ * @brief Main loop class that handles the core event loop and lifecycle of the application.
+ * 
+ * MainLoop is responsible for managing the application's main event loop, including
+ * input handling, frame iteration, and idle processing. It receives system notifications
+ * such as window focus changes, file drops, and OS-level events.
+ * 
+ * This class serves as the base class for implementing custom main loop behavior and
+ * can be extended to handle specific application requirements.
+ * 
+ * @section Notifications
+ * - NOTIFICATION_WM_MOUSE_ENTER: Mouse cursor entered the window
+ * - NOTIFICATION_WM_MOUSE_EXIT: Mouse cursor left the window
+ * - NOTIFICATION_WM_FOCUS_IN: Window gained focus
+ * - NOTIFICATION_WM_FOCUS_OUT: Window lost focus
+ * - NOTIFICATION_WM_QUIT_REQUEST: System quit request received
+ * - NOTIFICATION_WM_GO_BACK_REQUEST: Back button request (mobile)
+ * - NOTIFICATION_WM_UNFOCUS_REQUEST: Unfocus request
+ * - NOTIFICATION_OS_MEMORY_WARNING: Low memory warning from OS
+ * - NOTIFICATION_TRANSLATION_CHANGED: Language/translation changed
+ * - NOTIFICATION_WM_ABOUT: About dialog requested
+ * - NOTIFICATION_CRASH: Application crash notification
+ * - NOTIFICATION_OS_IME_UPDATE: Input method editor update
+ * - NOTIFICATION_APP_RESUMED: Application resumed from pause
+ * - NOTIFICATION_APP_PAUSED: Application paused
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef MAIN_LOOP_H
 #define MAIN_LOOP_H
 

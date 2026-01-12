@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  mutex.cpp                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file mutex.cpp
- * @brief Implementation of mutex functionality.
+ * @brief Implementation of mutex synchronization primitives for thread-safe operations.
+ * 
+ * This file provides global mutex locking/unlocking functions and explicit template
+ * instantiations for mutex implementations supporting both recursive and non-recursive
+ * mutex types.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Global mutex instance for coordinating access to shared resources.
+ * 
+ * Static instance used by _global_lock() and _global_unlock() functions.
+ */
 
+/**
+ * @brief Acquires the global mutex lock.
+ * 
+ * Blocks the calling thread until the global mutex is acquired. Used for
+ * synchronizing critical sections across the application.
+ * 
+ * @thread_safety Thread-safe. Blocks if mutex is already locked.
+ * @note Must be paired with a corresponding _global_unlock() call.
+ */
+
+/**
+ * @brief Releases the global mutex lock.
+ * 
+ * Unlocks the global mutex, allowing other threads waiting on _global_lock()
+ * to proceed.
+ * 
+ * @thread_safety Thread-safe. Only should be called by the thread that acquired the lock.
+ * @note Must follow a corresponding _global_lock() call.
+ */
 #include "mutex.h"
 
 static Mutex _global_mutex;

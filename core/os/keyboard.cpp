@@ -1,39 +1,54 @@
-/*************************************************************************/
-/*  keyboard.cpp                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file keyboard.cpp
- * @brief Definition of _KeyCodeText data structure.
+ * @brief Keyboard key code mapping and utility functions.
+ * 
+ * This file provides functionality for mapping keyboard key codes to human-readable names
+ * and vice versa. It includes support for special keys, function keys, multimedia keys,
+ * and international character keys.
+ * 
+ * The core of this module is the _keycodes array, which maps key code constants to
+ * their string representations. Platform-specific variations (e.g., "Command" on OSX
+ * vs "Meta" on other platforms) are handled via preprocessor directives.
+ * 
+ * @section Functions
+ * 
+ * @fn bool keycode_has_unicode(uint32_t p_keycode)
+ * @brief Determines if a key code represents a key that produces Unicode characters.
+ * @param p_keycode The key code to check.
+ * @return true if the key can produce Unicode characters, false for control/function keys.
+ * 
+ * @fn String keycode_get_string(uint32_t p_code)
+ * @brief Converts a key code (with optional modifiers) to a human-readable string.
+ * @param p_code The key code, potentially combined with modifier masks (SHIFT, ALT, CTRL, META).
+ * @return A formatted string representation (e.g., "Ctrl+Shift+A").
+ * @details Extracts and prepends modifier names, then looks up the base key name.
+ * 
+ * @fn int find_keycode(const String &p_code)
+ * @brief Looks up a key code by its string name (case-insensitive).
+ * @param p_code The string name of the key to search for.
+ * @return The corresponding key code constant, or 0 if not found.
+ * 
+ * @fn const char* find_keycode_name(int p_keycode)
+ * @brief Retrieves the string name of a key code.
+ * @param p_keycode The key code to look up.
+ * @return A C-string containing the key name, or an empty string if not found.
+ * 
+ * @fn int keycode_get_count()
+ * @brief Returns the total number of key codes in the mapping table.
+ * @return The count of valid key code entries.
+ * 
+ * @fn int keycode_get_value_by_index(int p_index)
+ * @brief Retrieves a key code by its index in the mapping table.
+ * @param p_index The zero-based index into the key codes array.
+ * @return The key code constant at the specified index.
+ * 
+ * @fn const char* keycode_get_name_by_index(int p_index)
+ * @brief Retrieves a key name by its index in the mapping table.
+ * @param p_index The zero-based index into the key codes array.
+ * @return A C-string containing the key name at the specified index.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "keyboard.h"
 
 #include "core/os/os.h"

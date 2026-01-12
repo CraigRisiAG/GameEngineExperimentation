@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  memory.cpp                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file memory.cpp
- * @brief Implementation of memory functionality.
+ * @brief Memory allocation and deallocation management system.
+ * 
+ * This file implements custom memory management operators and static memory allocation
+ * functions with optional padding and alignment support. It includes memory usage tracking
+ * in debug builds and provides utilities for monitoring memory consumption.
+ * 
+ * @details
+ * - Overloads the global `new` operator to support custom allocators and descriptions
+ * - Provides static memory allocation with optional padding for memory tracking
+ * - Implements reallocation and deallocation with proper cleanup
+ * - Tracks memory usage statistics in DEBUG_ENABLED builds
+ * - Maintains allocation count for debugging purposes
+ * - Stores allocation size in memory padding for validation
+ * 
+ * @note
+ * - Placement delete operators on MSVC are not supported and will crash
+ * - Memory padding is always enabled in debug builds
+ * - Memory usage tracking is only available when DEBUG_ENABLED is defined
+ * - All static memory functions should be used instead of raw malloc/free
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "memory.h"
 
 #include "core/error_macros.h"
