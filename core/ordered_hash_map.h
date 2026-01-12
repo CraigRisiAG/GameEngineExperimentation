@@ -1,39 +1,37 @@
-/*************************************************************************/
-/*  ordered_hash_map.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file ordered_hash_map.h
- * @brief Template-based hash table implementation.
+ * OrderedHashMap - A hash map that maintains insertion order.
+ * 
+ * This template class provides a hash map implementation that allows iteration
+ * of elements in the order they were inserted. It combines the performance
+ * characteristics of a hash map with the ordering guarantees of a linked list.
+ * 
+ * Template Parameters:
+ *   K - The key type
+ *   V - The value type
+ *   Hasher - Hash function for keys (default: HashMapHasherDefault)
+ *   Comparator - Key comparison function (default: HashMapComparatorDefault<K>)
+ *   MIN_HASH_TABLE_POWER - Minimum power of 2 for hash table size (default: 3)
+ *   RELATIONSHIP - Hash table load factor ratio (default: 8)
+ * 
+ * Complexity:
+ *   - Insert: O(1) average case
+ *   - Lookup: O(1) average case
+ *   - Deletion: O(1) average case
+ *   - Iteration: O(n) where n is the number of elements
+ * 
+ * Features:
+ *   - Maintains insertion order for deterministic iteration
+ *   - Safe deletion during iteration (preserves order)
+ *   - API consistent with Map for coherence with codebase
+ *   - Supports const and mutable element access
+ *   - Copy construction and assignment supported
+ * 
+ * Nested Classes:
+ *   - Element: Mutable bidirectional iterator with key/value access
+ *   - ConstElement: Const bidirectional iterator with read-only access
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef ORDERED_HASH_MAP_H
 #define ORDERED_HASH_MAP_H
 

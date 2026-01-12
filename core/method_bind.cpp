@@ -1,39 +1,66 @@
-/*************************************************************************/
-/*  method_bind.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file method_bind.cpp
- * @brief Method binding for reflection and script exposure.
+ * @brief Implementation of MethodBind class for method introspection and binding.
+ * 
+ * This file provides the core functionality for binding C++ methods to the engine's
+ * reflection system. It manages method metadata, argument information, and method properties.
+ * 
+ * @note object.h must be included before method_bind.h to avoid potential circular dependencies.
+ * 
+ * @class MethodBind
+ * @brief Binds C++ methods for introspection and dynamic invocation.
+ * 
+ * Provides functionality to:
+ * - Store and retrieve method metadata (name, argument info, return type)
+ * - Manage method properties (const-ness, return value presence)
+ * - Handle default arguments for method parameters
+ * - Generate and maintain argument type information in DEBUG mode
+ * 
+ * @method get_argument_info(int p_argument)
+ * @brief Retrieves PropertyInfo for a specific argument.
+ * @param p_argument Zero-based index of the argument.
+ * @return PropertyInfo containing type and name information for the argument.
+ * @note Only available in DEBUG_METHODS_ENABLED mode.
+ * 
+ * @method get_return_info()
+ * @brief Retrieves PropertyInfo for the method's return type.
+ * @return PropertyInfo describing the return type.
+ * @note Only available in DEBUG_METHODS_ENABLED mode.
+ * 
+ * @method _set_const(bool p_const)
+ * @brief Marks the method as const or non-const.
+ * @param p_const True if the method is const-qualified.
+ * 
+ * @method _set_returns(bool p_returns)
+ * @brief Specifies whether the method returns a value.
+ * @param p_returns True if the method has a return value.
+ * 
+ * @method get_name() / set_name()
+ * @brief Gets or sets the method's name.
+ * @return The method's StringName identifier.
+ * 
+ * @method set_argument_names() / get_argument_names()
+ * @brief Manages argument name metadata.
+ * @note Only available in DEBUG_METHODS_ENABLED mode.
+ * 
+ * @method set_default_arguments()
+ * @brief Sets default argument values for method parameters.
+ * @param p_defargs Vector of Variant values representing default arguments.
+ * 
+ * @method _generate_argument_types(int p_count)
+ * @brief Generates and caches argument type information.
+ * @param p_count The number of arguments to generate type info for.
+ * @note Only available in DEBUG_METHODS_ENABLED mode.
+ * 
+ * @constructor MethodBind()
+ * @brief Initializes a MethodBind instance with default values.
+ * 
+ * @destructor ~MethodBind()
+ * @brief Cleans up allocated argument type information.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 // object.h needs to be the first include *before* method_bind.h
 // FIXME: Find out why and fix potential cyclical dependencies.
 #include "core/object.h"

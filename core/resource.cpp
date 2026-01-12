@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  resource.cpp                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file resource.cpp
- * @brief Base class for serializable engine resources.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \file resource.cpp
+/// \brief Implementation of the Resource class and ResourceCache system.
+///
+/// This file contains the core implementation for resource management, including:
+/// - Resource path and name management with caching
+/// - Resource duplication and local scene configuration
+/// - Resource owner tracking and change notifications
+/// - ResourceCache for efficient resource lookup and management
+/// - Thread-safe operations using read-write locks
+///
+/// Key classes:
+/// - Resource: Base class for all cacheable resources with path management
+/// - ResourceCache: Global cache system for managing loaded resources
+///
+/// Thread Safety:
+/// All ResourceCache operations use RWLock for thread-safe concurrent access.
+/// Write operations lock during cache modifications, read operations use read locks.
 #include "resource.h"
 
 #include "core/core_string_names.h"

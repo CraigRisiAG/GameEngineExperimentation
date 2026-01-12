@@ -1,39 +1,102 @@
-/*************************************************************************/
-/*  callable_method_pointer.h                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file callable_method_pointer.h
- * @brief Type-safe function/method wrapper for callbacks.
+ * @brief Provides callable wrapper classes for method pointers with variant argument handling.
+ *
+ * This header implements a system for wrapping C++ method pointers into callable objects that can
+ * be invoked with Variant arguments. It supports both void-returning and value-returning methods
+ * with arbitrary parameter lists.
+ *
+ * @class CallableCustomMethodPointerBase
+ * @brief Base class for callable method pointer wrappers.
+ * 
+ * Manages the comparison, hashing, and debug information for wrapped method pointers.
+ * Stores a pointer to method data and its size for comparison operations.
+ *
+ * @class VariantCasterAndValidate
+ * @brief Template specializations for casting and validating Variant arguments in DEBUG mode.
+ *
+ * Validates that arguments can be strictly converted to the expected types before casting.
+ * Provides three specializations: for plain types, references, and const references.
+ *
+ * @fn call_with_variant_args_helper()
+ * @brief Helper function that unpacks Variant arguments and calls the method.
+ *
+ * @tparam T The instance class type
+ * @tparam P Parameter types for the method
+ * @tparam Is Index sequence for unpacking arguments
+ * @param p_instance Pointer to the object instance
+ * @param p_method Pointer to the member function
+ * @param p_args Array of Variant pointers to pass as arguments
+ * @param r_error Output parameter for call error information
+ *
+ * @fn call_with_variant_args()
+ * @brief Validates argument count and delegates to the helper function for void methods.
+ *
+ * @tparam T The instance class type
+ * @tparam P Parameter types for the method
+ * @param p_instance Pointer to the object instance
+ * @param p_method Pointer to the member function
+ * @param p_args Array of Variant pointers
+ * @param p_argcount Number of arguments provided
+ * @param r_error Output parameter for call error information
+ *
+ * @class CallableCustomMethodPointer
+ * @brief Callable wrapper for void-returning member functions.
+ *
+ * @tparam T The instance class type
+ * @tparam P Parameter types for the method
+ *
+ * @fn call_with_variant_args_ret_helper()
+ * @brief Helper function that unpacks Variant arguments and calls a method with return value.
+ *
+ * @tparam T The instance class type
+ * @tparam R Return type of the method
+ * @tparam P Parameter types for the method
+ * @tparam Is Index sequence for unpacking arguments
+ * @param p_instance Pointer to the object instance
+ * @param p_method Pointer to the member function
+ * @param p_args Array of Variant pointers to pass as arguments
+ * @param r_ret Output parameter for the return value as a Variant
+ * @param r_error Output parameter for call error information
+ *
+ * @fn call_with_variant_args_ret()
+ * @brief Validates argument count and delegates to the helper function for methods with return values.
+ *
+ * @tparam T The instance class type
+ * @tparam R Return type of the method
+ * @tparam P Parameter types for the method
+ * @param p_instance Pointer to the object instance
+ * @param p_method Pointer to the member function
+ * @param p_args Array of Variant pointers
+ * @param p_argcount Number of arguments provided
+ * @param r_ret Output parameter for the return value as a Variant
+ * @param r_error Output parameter for call error information
+ *
+ * @class CallableCustomMethodPointerRet
+ * @brief Callable wrapper for member functions with return values.
+ *
+ * @tparam T The instance class type
+ * @tparam R Return type of the method
+ * @tparam P Parameter types for the method
+ *
+ * @fn create_custom_callable_function_pointer()
+ * @brief Factory function to create callable wrappers for method pointers.
+ *
+ * Provides two overloads: one for void-returning methods and one for value-returning methods.
+ * In DEBUG mode, accepts an optional string representation of the method for debugging purposes.
+ *
+ * @macro callable_mp(I, M)
+ * @brief Convenience macro for creating callable wrappers from method pointers.
+ *
+ * In DEBUG mode, automatically passes the method name as a string. In release mode,
+ * omits the debug string for minimal overhead.
+ *
+ * @param I Pointer to the object instance
+ * @param M Member function pointer
+ * @return Callable object wrapping the method
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef CALLABLE_METHOD_POINTER_H
 #define CALLABLE_METHOD_POINTER_H
 

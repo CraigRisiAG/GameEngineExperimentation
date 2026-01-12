@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  class_db.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file class_db.h
- * @brief Reflection system database for class introspection and binding.
+ * @brief Core class database system for runtime reflection and method binding.
+ * 
+ * This file provides the ClassDB system which manages:
+ * - Class registration and instantiation
+ * - Method binding with support for default parameters (up to 8)
+ * - Property management (getters/setters)
+ * - Signal definitions
+ * - Virtual method registration
+ * - Integer constants and enumerations
+ * - API type categorization (Core, Editor, None)
+ * 
+ * The system supports both debug mode (with full method introspection) and
+ * release mode (with minimal overhead). Method names and argument names are
+ * only tracked in DEBUG_METHODS_ENABLED builds.
+ * 
+ * @note For methods with more than 6 parameters, include "core/method_bind_ext.gen.inc"
+ * 
+ * @see MethodBind, MethodInfo, PropertyInfo, Object
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef CLASS_DB_H
 #define CLASS_DB_H
 

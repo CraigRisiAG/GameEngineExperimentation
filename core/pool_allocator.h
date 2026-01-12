@@ -1,39 +1,128 @@
-/*************************************************************************/
-/*  pool_allocator.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file pool_allocator.h
- * @brief Implementation of PoolAllocator class.
+ * @class PoolAllocator
+ * @brief Generic memory pool allocator with locking, compacting, and alignment support.
+ * 
+ * A thread-safe memory pool allocator designed to manage allocation in specific memory regions
+ * such as texture memory, audio sample memory, or general-purpose memory. It provides efficient
+ * allocation, deallocation, and resizing of memory blocks with optional locking mechanisms.
+ * 
+ * @note Alignment support is currently a TODO item.
+ * @note Platform-specific abstraction for non-reachable memory (e.g., GPU memory) is a TODO item.
+ * 
+ * @author Juan Linietsky <reduzio@gmail.com>
+ * 
+ * @see POOL_ALLOCATOR_INVALID_ID for error handling
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Allocates memory from the pool.
+ * @param p_size The size in bytes of memory to allocate.
+ * @return An ID representing the allocated memory block on success, or POOL_ALLOCATOR_INVALID_ID on failure.
+ */
 
+/**
+ * @brief Frees a previously allocated memory block.
+ * @param p_mem The ID of the memory block to free.
+ */
+
+/**
+ * @brief Resizes an existing memory allocation.
+ * @param p_mem The ID of the memory block to resize.
+ * @param p_new_size The new size in bytes.
+ * @return An error code indicating success or failure.
+ */
+
+/**
+ * @brief Retrieves the size of an allocated memory block.
+ * @param p_mem The ID of the memory block.
+ * @return The size in bytes of the allocated memory block.
+ */
+
+/**
+ * @brief Gets the total free memory available in the pool.
+ * @return The amount of free memory in bytes.
+ */
+
+/**
+ * @brief Gets the total memory currently in use.
+ * @return The amount of used memory in bytes.
+ */
+
+/**
+ * @brief Gets the peak free memory recorded since pool creation.
+ * @return The peak free memory in bytes.
+ */
+
+/**
+ * @brief Locks an allocated memory block to prevent compaction.
+ * @param p_mem The ID of the memory block to lock.
+ * @return An error code indicating success or failure.
+ * @note This method is a TODO and may be moved elsewhere.
+ */
+
+/**
+ * @brief Retrieves a pointer to the allocated memory block.
+ * @param p_mem The ID of the memory block.
+ * @return A pointer to the memory block, or nullptr if invalid.
+ */
+
+/**
+ * @brief Retrieves a const pointer to the allocated memory block.
+ * @param p_mem The ID of the memory block.
+ * @return A const pointer to the memory block, or nullptr if invalid.
+ */
+
+/**
+ * @brief Unlocks a previously locked memory block.
+ * @param p_mem The ID of the memory block to unlock.
+ */
+
+/**
+ * @brief Checks if a memory block is currently locked.
+ * @param p_mem The ID of the memory block.
+ * @return true if the memory block is locked, false otherwise.
+ */
+
+/**
+ * @brief Constructs a PoolAllocator with a specified size.
+ * @param p_size The total size of the memory pool in bytes.
+ * @param p_needs_locking Whether to enable thread-safe locking (default: false).
+ * @param p_max_entries The maximum number of allocations allowed (default: DEFAULT_MAX_ALLOCS).
+ */
+
+/**
+ * @brief Constructs a PoolAllocator using externally provided memory.
+ * @param p_mem Pointer to the pre-allocated memory region.
+ * @param p_size The total size of the memory region in bytes.
+ * @param p_align The alignment requirement in bytes (default: 1).
+ * @param p_needs_locking Whether to enable thread-safe locking (default: false).
+ * @param p_max_entries The maximum number of allocations allowed (default: DEFAULT_MAX_ALLOCS).
+ */
+
+/**
+ * @brief Constructs a PoolAllocator with alignment and size parameters.
+ * @param p_align The alignment requirement in bytes.
+ * @param p_size The total size of the memory pool in bytes.
+ * @param p_needs_locking Whether to enable thread-safe locking (default: false).
+ * @param p_max_entries The maximum number of allocations allowed (default: DEFAULT_MAX_ALLOCS).
+ */
+
+/**
+ * @brief Destructs the PoolAllocator and releases all resources.
+ */
+
+/**
+ * @brief Virtual method for custom multi-threaded locking implementation.
+ * @note Reimplement this method to provide custom locking behavior.
+ */
+
+/**
+ * @brief Virtual method for custom multi-threaded unlocking implementation.
+ * @note Reimplement this method to provide custom unlocking behavior.
+ */
 #ifndef POOL_ALLOCATOR_H
 #define POOL_ALLOCATOR_H
 

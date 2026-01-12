@@ -1,39 +1,31 @@
-/*************************************************************************/
-/*  method_bind.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file method_bind.h
- * @brief Method binding for reflection and script exposure.
+ * @brief Provides method binding infrastructure for reflective function calls and type casting.
+ * 
+ * This header defines the core mechanisms for binding C++ methods to a variant-based
+ * calling convention, enabling runtime method invocation with type checking and
+ * automatic argument conversion.
+ * 
+ * Key Components:
+ * - MethodFlags: Enumeration of method behavior modifiers (const, virtual, vararg, etc.)
+ * - VariantCaster: Template specializations for converting Variant types to C++ types
+ * - VariantObjectClassChecker: Type checking for object-derived classes
+ * - MethodBind: Abstract base class representing a bindable method
+ * - MethodBindVarArg: Template implementation for variable argument methods
+ * 
+ * Features:
+ * - Type-safe variant casting with template specialization
+ * - Enum type support via VARIANT_ENUM_CAST macro
+ * - Debug metadata generation for argument/return type information
+ * - Pointer-to-call (ptrcall) optimization support
+ * - Default argument handling
+ * - Method metadata (name, flags, argument count)
+ * 
+ * @note Requires preprocessor definitions: DEBUG_ENABLED, PTRCALL_ENABLED
+ * @see method_bind.gen.inc for generated method bind implementations
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef METHOD_BIND_H
 #define METHOD_BIND_H
 

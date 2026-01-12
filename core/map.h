@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  map.h                                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file map.h
- * @brief Template-based ordered map (red-black tree).
+ * @class Map
+ * @brief A template-based Red-Black Tree implementation for key-value pair storage.
+ * 
+ * @tparam K The key type
+ * @tparam V The value type
+ * @tparam C The comparator class for keys (default: Comparator<K>)
+ * @tparam A The allocator class (default: DefaultAllocator)
+ * 
+ * This is a self-balancing binary search tree that maintains O(log n) time complexity
+ * for search, insertion, and deletion operations. The implementation is based on
+ * red-black tree algorithms and maintains both a tree structure and a doubly-linked
+ * list for ordered iteration.
+ * 
+ * @note The implementation maintains element pointers for efficient forward and backward
+ * iteration while preserving tree properties.
+ * 
+ * @see Element for information about key-value pair access
+ * 
+ * Example usage:
+ * @code
+ * Map<String, int> my_map;
+ * my_map.insert("key1", 10);
+ * int value = my_map["key1"];
+ * if (my_map.has("key1")) {
+ *     my_map.erase("key1");
+ * }
+ * @endcode
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef MAP_H
 #define MAP_H
 

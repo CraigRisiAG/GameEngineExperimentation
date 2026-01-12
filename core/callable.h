@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  callable.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file callable.h
- * @brief Type-safe function/method wrapper for callbacks.
+ * @brief Abstraction layer for callable objects and signals
+ * 
+ * This file provides the core infrastructure for handling callable objects,
+ * custom callables, and signals in the game engine. It enables efficient
+ * invocation of methods and custom callable objects, supporting both standard
+ * object-method pairs and customized callable implementations.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class Callable
+ * @brief Abstract representation of objects that can be called
+ * 
+ * Provides a unified interface for invoking methods on objects and custom
+ * callables. Designed to optimize the standard case of object-method pairs
+ * while supporting custom callable implementations. The class maintains a
+ * maximum size of 16 bytes on 64-bit systems for efficiency.
+ * 
+ * @note Supports three states: null, custom, and standard callables
+ */
 
+/**
+ * @struct Callable::CallError
+ * @brief Error information for callable invocations
+ * 
+ * Contains error codes, problematic argument index, and expected values
+ * to provide detailed feedback on failed method calls.
+ */
+
+/**
+ * @class CallableCustom
+ * @brief Base class for custom callable implementations
+ * 
+ * Provides the interface for creating custom callable objects with
+ * reference counting. Derived classes must implement comparison,
+ * hashing, string representation, and invocation logic.
+ * 
+ * @note Thread-safe reference counting via SafeRefCount
+ */
+
+/**
+ * @class Signal
+ * @brief Proxy object for object signal handling
+ * 
+ * Represents a named signal on an object, allocated on-demand by
+ * scripting languages for storage in Variant types. Manages signal
+ * emission, connection, and disconnection of callables.
+ * 
+ * @note Not used directly by the engine; primarily for script binding
+ */
 #ifndef CALLABLE_H
 #define CALLABLE_H
 

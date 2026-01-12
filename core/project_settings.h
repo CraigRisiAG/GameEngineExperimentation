@@ -1,39 +1,85 @@
-/*************************************************************************/
-/*  project_settings.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file project_settings.h
- * @brief Template-based hash set.
+ * @class ProjectSettings
+ * @brief Manages project-wide settings and configuration.
+ * 
+ * ProjectSettings is a singleton class that handles all project configuration,
+ * including built-in settings, custom properties, and feature overrides.
+ * It supports loading/saving settings in both text and binary formats.
+ * 
+ * @details
+ * - Thread-safe operations via _THREAD_SAFE_CLASS_
+ * - Manages property persistence and ordering
+ * - Supports feature overrides and custom property metadata
+ * - Can load resource packs and convert settings between versions
+ * - Provides path localization/globalization functionality
+ * 
+ * @note This is a singleton class. Use get_singleton() to access the instance.
+ * 
+ * @see Object
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct VariantContainer
+ * @brief Internal container for storing variant values with metadata.
+ * 
+ * @member order Priority order for property display
+ * @member persist Whether the property should be saved to disk
+ * @member variant The actual property value
+ * @member initial The initial/default value for comparison
+ * @member hide_from_editor Whether to hide from the editor UI
+ * @member overridden Whether the value has been overridden from default
+ * @member restart_if_changed Whether changing this requires application restart
+ */
 
+/**
+ * @fn void set_setting(const String &p_setting, const Variant &p_value)
+ * @brief Sets a project setting value.
+ * 
+ * @param p_setting The setting key/path
+ * @param p_value The value to set
+ */
+
+/**
+ * @fn Variant get_setting(const String &p_setting) const
+ * @brief Retrieves a project setting value.
+ * 
+ * @param p_setting The setting key/path
+ * @return The setting value, or empty Variant if not found
+ */
+
+/**
+ * @fn bool has_setting(String p_var) const
+ * @brief Checks if a setting exists.
+ * 
+ * @param p_var The setting key/path
+ * @return true if setting exists, false otherwise
+ */
+
+/**
+ * @fn Error setup(const String &p_path, const String &p_main_pack, bool p_upwards = false)
+ * @brief Initializes ProjectSettings with configuration paths.
+ * 
+ * @param p_path The project resource path
+ * @param p_main_pack The main pack file path
+ * @param p_upwards Whether to search upward for settings
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @fn Error save()
+ * @brief Saves all project settings to disk.
+ * 
+ * @return Error code indicating success or failure
+ */
+
+/**
+ * @fn static ProjectSettings *get_singleton()
+ * @brief Gets the singleton instance of ProjectSettings.
+ * 
+ * @return Pointer to the ProjectSettings singleton
+ */
 #ifndef PROJECT_SETTINGS_H
 #define PROJECT_SETTINGS_H
 

@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  core_string_names.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file core_string_names.h
- * @brief Unicode string handling and manipulation.
+ * @class CoreStringNames
+ * @brief Singleton class managing commonly used string names throughout the core engine.
+ * 
+ * CoreStringNames provides centralized access to frequently used string identifiers
+ * as StringName objects, improving performance by avoiding redundant string creation
+ * and comparison operations.
+ * 
+ * @details
+ * This singleton class is instantiated during engine initialization via register_core_types()
+ * and destroyed during shutdown via unregister_core_types(). It caches StringName instances
+ * for common property names, vector/color components, transformation data, and signal/method names.
+ * 
+ * @note
+ * - StringName objects are interned strings with fast comparison semantics
+ * - This class uses a singleton pattern with manual memory management
+ * - Constructor implementation is private; use get_singleton() to access the instance
+ * - The TOOLS_ENABLED preprocessor flag conditionally includes editor-specific string names
+ * 
+ * @see StringName, register_core_types(), unregister_core_types()
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef CORE_STRING_NAMES_H
 #define CORE_STRING_NAMES_H
 

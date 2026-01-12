@@ -1,39 +1,151 @@
-/*************************************************************************/
-/*  error_macros.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file error_macros.cpp
- * @brief Error handling and assertion macros.
+ * @brief Error handling and reporting system implementation.
+ * 
+ * This module provides a centralized error handling mechanism with support for
+ * custom error handlers, logging, and detailed error reporting with file location
+ * and line number information.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Registers a custom error handler to the global error handler list.
+ * 
+ * Adds the provided error handler to the linked list of handlers that will be
+ * invoked when errors are printed. Uses global locking to ensure thread safety.
+ * 
+ * @param p_handler Pointer to the ErrorHandlerList structure to add.
+ * 
+ * @note The handler is added to the front of the list.
+ */
 
+/**
+ * @brief Removes a custom error handler from the global error handler list.
+ * 
+ * Searches for and removes the specified error handler from the linked list.
+ * Uses global locking to ensure thread safety during removal.
+ * 
+ * @param p_handler Pointer to the ErrorHandlerList structure to remove.
+ * 
+ * @note Safely handles removal of any handler in the list, including the head.
+ */
+
+/**
+ * @brief Prints an error message with automatic error type inference.
+ * 
+ * Overloaded version that accepts a C-style error string and delegates to the
+ * full implementation with an empty message parameter.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (C-style string).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Prints an error message from a String object.
+ * 
+ * Overloaded version that accepts a String object for the error description.
+ * Converts to UTF-8 and delegates to the C-string implementation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (String object).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Core error reporting function with full error and message details.
+ * 
+ * Handles error reporting by notifying the OS, logging to the global logger,
+ * and invoking all registered custom error handlers in sequence. Uses global
+ * locking to ensure thread-safe handler invocation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (C-style string).
+ * @param p_message Additional error message (C-style string).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Prints an error with String error and C-string message.
+ * 
+ * Converts String error to UTF-8 and delegates to the core implementation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (String object).
+ * @param p_message Additional error message (C-style string).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Prints an error with C-string error and String message.
+ * 
+ * Converts String message to UTF-8 and delegates to the core implementation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (C-style string).
+ * @param p_message Additional error message (String object).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Prints an error with both String error and String message.
+ * 
+ * Converts both String parameters to UTF-8 and delegates to the core implementation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_error Error description (String object).
+ * @param p_message Additional error message (String object).
+ * @param p_type Type of error (ErrorHandlerType enum).
+ */
+
+/**
+ * @brief Reports an out-of-bounds index error with detailed context.
+ * 
+ * Generates a formatted error message describing an index that exceeded bounds,
+ * and reports it via the standard error reporting mechanism. Optionally marks
+ * the error as fatal.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_index The invalid index value.
+ * @param p_size The valid size/boundary.
+ * @param p_index_str String representation of the index variable name.
+ * @param p_size_str String representation of the size variable name.
+ * @param p_message Additional error context (C-style string).
+ * @param fatal Whether this is a fatal error.
+ */
+
+/**
+ * @brief Reports an out-of-bounds index error with String message.
+ * 
+ * Overloaded version that accepts a String object for the message parameter.
+ * Converts to UTF-8 and delegates to the C-string implementation.
+ * 
+ * @param p_function Name of the function where the error occurred.
+ * @param p_file Path to the source file where the error occurred.
+ * @param p_line Line number where the error occurred.
+ * @param p_index The invalid index value.
+ * @param p_size The valid size/boundary.
+ * @param p_index_str String representation of the index variable name.
+ * @param p_size_str String representation of the size variable name.
+ * @param p_message Additional error context (String object).
+ * @param fatal Whether this is a fatal error.
+ */
 #include "error_macros.h"
 
 #include "core/io/logger.h"

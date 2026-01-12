@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  method_ptrcall.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file method_ptrcall.h
- * @brief Definition of PtrToArg data structure.
+ * @brief Type conversion and pointer argument handling for method calls
+ * 
+ * This header provides template-based conversion utilities for converting between
+ * pointer representations and typed values. It enables seamless type conversion
+ * for pointer-based method invocation, supporting both primitive types and complex
+ * Godot engine types.
+ * 
+ * @details
+ * The file defines three main categories of conversions:
+ * 
+ * 1. **PtrToArg Template Specializations**: Provides convert() and encode() methods
+ *    for converting void pointers to/from specific types. This enables dynamic
+ *    method invocation with type safety.
+ * 
+ * 2. **Macro-Based Specializations**:
+ *    - MAKE_PTRARG: Direct value conversion for simple types
+ *    - MAKE_PTRARGCONV: Conversion between different types (e.g., uint8_t to int64_t)
+ *    - MAKE_PTRARG_BY_REFERENCE: Reference-based conversion for complex types
+ *    - MAKE_VECARG: Vector type conversion with element copying
+ *    - MAKE_VECARR: Vector to Array conversion
+ *    - MAKE_DVECARR: Direct vector to Array conversion
+ *    - MAKE_STRINGCONV_BY_REFERENCE: String-based type conversion
+ * 
+ * 3. **Special Cases**: Custom specializations for Object pointers, ObjectID,
+ *    IP_Address, and Face3 geometry data.
+ * 
+ * @note This is a core utility header for Godot's reflection and dynamic
+ *       dispatch system. Only available when PTRCALL_ENABLED is defined.
+ * 
+ * @see core/variant.h
+ * @see core/object_id.h
+ * @see core/math/transform_2d.h
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef METHOD_PTRCALL_H
 #define METHOD_PTRCALL_H
 

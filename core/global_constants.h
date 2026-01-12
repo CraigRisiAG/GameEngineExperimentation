@@ -1,39 +1,37 @@
-/*************************************************************************/
-/*  global_constants.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file global_constants.h
- * @brief Implementation of GlobalConstants class.
+ * @class GlobalConstants
+ * @brief Provides access to a collection of global constants and their metadata.
+ * 
+ * This class offers a static interface to query global constants, including their
+ * enumeration groups, names, and values. It serves as a central registry for
+ * application-wide constant definitions.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Retrieves the total number of registered global constants.
+ * @return The count of global constants available in the registry.
+ */
 
+/**
+ * @brief Gets the enumeration group name associated with a global constant.
+ * @param p_idx The index of the global constant.
+ * @return A StringName representing the enum group this constant belongs to.
+ */
+
+/**
+ * @brief Retrieves the name of a global constant by its index.
+ * @param p_idx The index of the global constant.
+ * @return A pointer to a C-string containing the constant's name.
+ */
+
+/**
+ * @brief Retrieves the value of a global constant by its index.
+ * @param p_idx The index of the global constant.
+ * @return The integer value of the global constant.
+ */
 #ifndef GLOBAL_CONSTANTS_H
 #define GLOBAL_CONSTANTS_H
 

@@ -1,39 +1,106 @@
-/*************************************************************************/
-/*  packed_data_container.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file packed_data_container.cpp
- * @brief Implementation of packed_data_container functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// \class PackedDataContainer
+/// \brief A container for efficiently storing and accessing packed binary data structures.
+/// 
+/// PackedDataContainer provides a mechanism to pack complex data types (arrays, dictionaries, 
+/// and variant types) into a compact binary format and retrieve them without full deserialization.
+/// It supports hierarchical data structures and uses offset-based access for efficient memory usage.
+///
+/// \note String values are cached during packing to reduce redundant storage.
+/// \note Nested arrays and dictionaries are stored as references (PackedDataContainerRef).
 
+/// \fn Variant PackedDataContainer::getvar(const Variant &p_key, bool *r_valid) const
+/// \brief Retrieves a value from the root container using the specified key.
+/// \param p_key The key to look up (supports numeric indices for arrays or variant keys for dictionaries).
+/// \param r_valid Optional pointer to a boolean that will be set to false if the key is not found.
+/// \return The variant value associated with the key, or an empty Variant if not found.
+
+/// \fn int PackedDataContainer::size() const
+/// \brief Returns the number of elements in the root container.
+/// \return The size of the root array or dictionary, or -1 if the root is neither.
+
+/// \fn Variant PackedDataContainer::_iter_init_ofs(const Array &p_iter, uint32_t p_offset)
+/// \brief Initializes iteration state for a container at the given offset.
+/// \param p_iter Array containing iteration state (should have size 1).
+/// \param p_offset Memory offset of the container to iterate.
+/// \return true if iteration can begin, false if the container is empty.
+
+/// \fn Variant PackedDataContainer::_iter_next_ofs(const Array &p_iter, uint32_t p_offset)
+/// \brief Advances the iteration state to the next element.
+/// \param p_iter Array containing the current iteration position.
+/// \param p_offset Memory offset of the container being iterated.
+/// \return true if there are more elements, false when iteration is complete.
+
+/// \fn Variant PackedDataContainer::_iter_get_ofs(const Variant &p_iter, uint32_t p_offset)
+/// \brief Retrieves the element at the current iteration position.
+/// \param p_iter The current iteration position (integer index).
+/// \param p_offset Memory offset of the container being iterated.
+/// \return The variant value at the current position, or empty Variant if out of bounds.
+
+/// \fn Variant PackedDataContainer::_get_at_ofs(uint32_t p_ofs, const uint8_t *p_buf, bool &err) const
+/// \brief Decodes and retrieves a variant value from the specified buffer offset.
+/// \param p_ofs The offset in the buffer to decode from.
+/// \param p_buf Pointer to the binary data buffer.
+/// \param err Reference to error flag (set to true if decoding fails).
+/// \return The decoded variant, or a reference to nested structures (arrays/dictionaries).
+
+/// \fn uint32_t PackedDataContainer::_type_at_ofs(uint32_t p_ofs) const
+/// \brief Determines the type of data stored at the given offset.
+/// \param p_ofs The offset to check.
+/// \return The type identifier (TYPE_ARRAY, TYPE_DICT, or variant type).
+
+/// \fn int PackedDataContainer::_size(uint32_t p_ofs) const
+/// \brief Returns the element count of an array or dictionary at the specified offset.
+/// \param p_ofs The offset of the container.
+/// \return The number of elements, or -1 if the data is not an array or dictionary.
+
+/// \fn Variant PackedDataContainer::_key_at_ofs(uint32_t p_ofs, const Variant &p_key, bool &err) const
+/// \brief Looks up a value in an array or dictionary at the given offset.
+/// \param p_ofs The offset of the container.
+/// \param p_key The key to search for (index for arrays, variant key for dictionaries).
+/// \param err Reference to error flag (set to true if key not found or lookup fails).
+/// \return The variant value associated with the key.
+
+/// \fn uint32_t PackedDataContainer::_pack(const Variant &p_data, Vector<uint8_t> &tmpdata, Map<String, uint32_t> &string_cache)
+/// \brief Recursively packs a variant into binary format.
+/// \param p_data The variant data to pack.
+/// \param tmpdata Vector to append packed binary data to.
+/// \param string_cache Map for deduplicating string values.
+/// \return The buffer offset where the packed data begins.
+
+/// \fn Error PackedDataContainer::pack(const Variant &p_data)
+/// \brief Packs the given variant data into this container's internal binary format.
+/// \param p_data The variant (typically an array or dictionary) to pack.
+/// \return OK on success.
+
+/// \fn void PackedDataContainer::_set_data(const Vector<uint8_t> &p_data)
+/// \brief Loads binary data from an external source.
+/// \param p_data The pre-packed binary data.
+
+/// \fn Vector<uint8_t> PackedDataContainer::_get_data() const
+/// \brief Exports the internal binary data.
+/// \return A copy of the packed data buffer.
+
+/// \class PackedDataContainerRef
+/// \brief A reference wrapper providing access to a nested array or dictionary within a PackedDataContainer.
+/// 
+/// PackedDataContainerRef allows transparent access to nested structures without requiring
+/// full deserialization of the entire packed data.
+
+/// \fn Variant PackedDataContainerRef::getvar(const Variant &p_key, bool *r_valid) const
+/// \brief Retrieves a value from this reference's container using the specified key.
+/// \param p_key The key to look up.
+/// \param r_valid Optional pointer to a boolean set to false if key is not found.
+/// \return The variant value, or empty Variant if not found.
+
+/// \fn int PackedDataContainerRef::size() const
+/// \brief Returns the number of elements in this container reference.
+/// \return The element count.
+
+/// \fn bool PackedDataContainerRef::_is_dictionary() const
+/// \brief Determines whether this reference points to a dictionary or array.
+/// \return true if the referenced container is a dictionary, false if it's an array.
 #include "packed_data_container.h"
 
 #include "core/core_string_names.h"

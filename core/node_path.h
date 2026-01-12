@@ -1,39 +1,152 @@
-/*************************************************************************/
-/*  node_path.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file node_path.h
- * @brief Implementation of NodePath class.
+ * @class NodePath
+ * @brief Represents a path to a node in a scene tree hierarchy.
+ * 
+ * NodePath is used to reference nodes in the scene tree using a path-like notation.
+ * It can represent both absolute paths (from root) and relative paths, with support
+ * for property access through subpaths.
+ * 
+ * The class uses reference counting for memory management and includes hash caching
+ * for efficient lookups and comparisons.
+ * 
+ * @note NodePath uses copy-on-write semantics through the shared Data structure.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Checks if the path is absolute (starts from root).
+ * @return true if the path is absolute, false if relative.
+ */
 
+/**
+ * @brief Gets the number of node names in the path.
+ * @return The count of node names in the main path.
+ */
+
+/**
+ * @brief Retrieves a node name at the specified index.
+ * @param p_idx The index of the node name to retrieve.
+ * @return The StringName at the given index.
+ */
+
+/**
+ * @brief Gets the number of subpath components (property access).
+ * @return The count of subpath components.
+ */
+
+/**
+ * @brief Retrieves a subpath component at the specified index.
+ * @param p_idx The index of the subpath component to retrieve.
+ * @return The StringName subpath component at the given index.
+ */
+
+/**
+ * @brief Gets all node names in the path.
+ * @return A vector containing all StringName components of the main path.
+ */
+
+/**
+ * @brief Gets all subpath components.
+ * @return A vector containing all StringName subpath components.
+ */
+
+/**
+ * @brief Gets the concatenated representation of all subpaths.
+ * @return A StringName containing the concatenated subpath.
+ */
+
+/**
+ * @brief Computes a relative path from this path to another path.
+ * @param p_np The target NodePath to compute the relative path to.
+ * @return A new NodePath representing the relative path.
+ */
+
+/**
+ * @brief Converts the path to a property path format.
+ * @return A new NodePath formatted as a property path.
+ */
+
+/**
+ * @brief Prepends a period to the path for property access.
+ */
+
+/**
+ * @brief Gets the parent path by removing the last node component.
+ * @return A new NodePath representing the parent node.
+ */
+
+/**
+ * @brief Computes a 32-bit hash value for the path.
+ * @return A uint32_t hash value, cached for efficiency.
+ */
+
+/**
+ * @brief Converts the NodePath to its string representation.
+ * @return A String representation of the path.
+ */
+
+/**
+ * @brief Checks if the path is empty.
+ * @return true if the path contains no components, false otherwise.
+ */
+
+/**
+ * @brief Equality comparison operator.
+ * @param p_path The NodePath to compare with.
+ * @return true if paths are equal, false otherwise.
+ */
+
+/**
+ * @brief Inequality comparison operator.
+ * @param p_path The NodePath to compare with.
+ * @return true if paths are not equal, false otherwise.
+ */
+
+/**
+ * @brief Assignment operator.
+ * @param p_path The NodePath to assign from.
+ */
+
+/**
+ * @brief Simplifies the path in-place by removing unnecessary components.
+ */
+
+/**
+ * @brief Returns a simplified copy of the path.
+ * @return A new NodePath with redundant components removed.
+ */
+
+/**
+ * @brief Constructs a NodePath from a vector of node names.
+ * @param p_path Vector of StringName components forming the path.
+ * @param p_absolute Whether the path is absolute or relative.
+ */
+
+/**
+ * @brief Constructs a NodePath from node names and subpath components.
+ * @param p_path Vector of StringName node components.
+ * @param p_subpath Vector of StringName subpath components.
+ * @param p_absolute Whether the path is absolute or relative.
+ */
+
+/**
+ * @brief Copy constructor.
+ * @param p_path The NodePath to copy from.
+ */
+
+/**
+ * @brief Constructs a NodePath from its string representation.
+ * @param p_path A String containing the path in text format.
+ */
+
+/**
+ * @brief Default constructor. Creates an empty NodePath.
+ */
+
+/**
+ * @brief Destructor. Releases the internal data reference.
+ */
 #ifndef NODE_PATH_H
 #define NODE_PATH_H
 

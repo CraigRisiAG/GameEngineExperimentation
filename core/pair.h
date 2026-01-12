@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  pair.h                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file pair.h
- * @brief Definition of Pair data structure.
+ * @brief A generic pair template container and related utilities.
+ * 
+ * This header defines a simple Pair template struct that holds two values of different types,
+ * along with comparison operators and a sorting functor.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @template F The type of the first element
+ * @template S The type of the second element
+ * @struct Pair
+ * @brief A generic container for storing two values of potentially different types.
+ * 
+ * The Pair struct provides a simple way to group two related values together.
+ * It includes default and parameterized constructors for convenient initialization.
+ */
 
+/**
+ * @template F The type of the first element
+ * @template S The type of the second element
+ * @brief Equality operator for Pair objects.
+ * 
+ * Compares two Pair objects by checking if both their first and second elements are equal.
+ * 
+ * @param pair The first Pair to compare
+ * @param other The second Pair to compare
+ * @return true if both pairs have equal first and second elements, false otherwise
+ */
+
+/**
+ * @template F The type of the first element
+ * @template S The type of the second element
+ * @brief Inequality operator for Pair objects.
+ * 
+ * Compares two Pair objects by checking if either their first or second elements differ.
+ * 
+ * @param pair The first Pair to compare
+ * @param other The second Pair to compare
+ * @return true if either the first or second elements differ, false otherwise
+ */
+
+/**
+ * @template F The type of the first element (must support the < operator)
+ * @template S The type of the second element
+ * @struct PairSort
+ * @brief A comparator functor for sorting Pair objects by their first element.
+ * 
+ * This functor can be used with standard library sorting algorithms to sort
+ * collections of Pair objects in ascending order based on the first element.
+ */
 #ifndef PAIR_H
 #define PAIR_H
 

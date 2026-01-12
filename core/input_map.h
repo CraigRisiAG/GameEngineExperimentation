@@ -1,39 +1,72 @@
-/*************************************************************************/
-/*  input_map.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file input_map.h
- * @brief Template-based ordered map (red-black tree).
+ * @class InputMap
+ * @brief Manages input action mappings and event handling.
+ * 
+ * InputMap is a singleton class that stores and manages input actions and their associated
+ * input events. It provides functionality to create, modify, and query input actions, allowing
+ * the game engine to map physical input events (keyboard, mouse, gamepad) to logical game actions.
+ * 
+ * Each action has a unique name, a deadzone threshold for analog inputs, and a list of input
+ * events that can trigger it. Multiple input events can map to the same action, and actions
+ * can be triggered by any device or specific devices.
+ * 
+ * @note This is a singleton class. Use InputMap::get_singleton() to access the instance.
+ * 
+ * @see InputEvent
+ * @see Object
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct InputMap::Action
+ * @brief Represents a single input action with its configuration.
+ * 
+ * @member int id - The unique identifier for this action.
+ * @member float deadzone - The deadzone threshold for analog inputs (range: 0.0 to 1.0).
+ * @member List<Ref<InputEvent>> inputs - Collection of input events that trigger this action.
+ */
 
+/**
+ * @var InputMap::ALL_DEVICES
+ * @brief Special constant indicating that an action can be triggered by any input device.
+ */
+
+/**
+ * @fn static InputMap* InputMap::get_singleton()
+ * @brief Returns the singleton instance of InputMap.
+ * @return Pointer to the InputMap singleton instance.
+ */
+
+/**
+ * @fn bool InputMap::has_action(const StringName &p_action) const
+ * @brief Checks if an action with the given name exists.
+ * @param p_action The name of the action to check.
+ * @return True if the action exists, false otherwise.
+ */
+
+/**
+ * @fn void InputMap::add_action(const StringName &p_action, float p_deadzone = 0.5)
+ * @brief Creates a new input action.
+ * @param p_action The name of the action to create.
+ * @param p_deadzone The deadzone threshold for analog inputs (default: 0.5).
+ */
+
+/**
+ * @fn void InputMap::action_add_event(const StringName &p_action, const Ref<InputEvent> &p_event)
+ * @brief Adds an input event to an existing action.
+ * @param p_action The name of the action.
+ * @param p_event The input event to add to the action.
+ */
+
+/**
+ * @fn bool InputMap::event_is_action(const Ref<InputEvent> &p_event, const StringName &p_action) const
+ * @brief Determines if an input event triggers a specific action.
+ * @param p_event The input event to check.
+ * @param p_action The name of the action to test against.
+ * @return True if the event triggers the action, false otherwise.
+ */
 #ifndef INPUT_MAP_H
 #define INPUT_MAP_H
 

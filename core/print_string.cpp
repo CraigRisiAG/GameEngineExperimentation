@@ -1,39 +1,57 @@
-/*************************************************************************/
-/*  print_string.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file print_string.cpp
- * @brief Unicode string handling and manipulation.
+ * @brief Print string handler implementation for managing console output and custom print handlers.
+ * 
+ * This module provides functionality for printing strings to the console and distributing
+ * output to registered custom print handlers. It maintains a linked list of handler callbacks
+ * that are invoked whenever print_line() or print_error() is called.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Registers a new print handler to receive output notifications.
+ * @param p_handler Pointer to the PrintHandlerList node to add to the handler chain.
+ * 
+ * Adds the provided handler to the front of the print handler list. The handler will
+ * receive callbacks for both regular prints and error messages. Thread-safe operation
+ * is ensured through global locking.
+ */
 
+/**
+ * @brief Unregisters a print handler from the handler chain.
+ * @param p_handler Pointer to the PrintHandlerList node to remove.
+ * 
+ * Removes the specified handler from the print handler linked list. If the handler
+ * is not found in the list, an error condition is triggered. Thread-safe operation
+ * is ensured through global locking.
+ */
+
+/**
+ * @brief Prints a line of text to the console and all registered handlers.
+ * @param p_string The string to print.
+ * 
+ * Outputs the string to the OS console with a newline, then distributes the message
+ * to all registered print handlers with the error flag set to false. Can be disabled
+ * via the _print_line_enabled flag. Thread-safe operation is ensured through global locking.
+ */
+
+/**
+ * @brief Prints an error message to the console and all registered handlers.
+ * @param p_string The error string to print.
+ * 
+ * Outputs the string to the OS error stream with a newline, then distributes the message
+ * to all registered print handlers with the error flag set to true. Can be disabled
+ * via the _print_error_enabled flag. Thread-safe operation is ensured through global locking.
+ */
+
+/**
+ * @brief Conditionally prints a verbose message if verbose mode is enabled.
+ * @param p_string The message to print verbosely.
+ * 
+ * Checks if the OS is in verbose stdout mode. If enabled, delegates to print_line()
+ * to output the message. Useful for debug or detailed logging information.
+ */
 #include "print_string.h"
 
 #include "core/os/os.h"

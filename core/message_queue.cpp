@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  message_queue.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file message_queue.cpp
- * @brief Implementation of message_queue functionality.
+ * @brief Implementation of the MessageQueue class for deferred method calls and notifications.
+ * 
+ * The MessageQueue provides a thread-safe mechanism to queue and flush deferred operations
+ * on objects, including method calls, property sets, and notifications. Messages are stored
+ * in a pre-allocated buffer and processed in order during flush operations.
+ * 
+ * Features:
+ * - Singleton pattern for global message queue access
+ * - Support for deferred method calls with variable arguments
+ * - Property assignment queueing
+ * - Object notification queueing
+ * - Thread-safe operations with reentrant flush capability
+ * - Memory statistics and debugging information
+ * - Configurable buffer size via project settings
+ * 
+ * Message Types:
+ * - TYPE_CALL: Deferred method invocation with optional error reporting
+ * - TYPE_SET: Deferred property assignment
+ * - TYPE_NOTIFICATION: Object notification dispatch
+ * 
+ * Thread Safety:
+ * Uses _THREAD_SAFE_METHOD_ and _THREAD_SAFE_LOCK_/_THREAD_SAFE_UNLOCK_ macros
+ * to ensure thread-safe buffer access and modification.
+ * 
+ * @note The flush operation is reentrant, allowing queued messages to add new
+ *       messages to the queue during execution.
+ * @note Buffer exhaustion triggers an error and outputs statistics to aid debugging.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "message_queue.h"
 
 #include "core/core_string_names.h"

@@ -1,39 +1,52 @@
-/*************************************************************************/
-/*  func_ref.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file func_ref.h
- * @brief Implementation of FuncRef class.
+ * @class FuncRef
+ * @brief A reference wrapper for calling functions on objects.
+ * 
+ * FuncRef is a Reference-derived class that allows storing a reference to a specific
+ * function on an object and calling it later through the stored reference.
+ * 
+ * @details
+ * This class maintains an ObjectID to track the target object and a StringName
+ * to identify the function to be called. It provides multiple ways to invoke
+ * the stored function with different argument passing mechanisms.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Invokes the referenced function with the provided arguments.
+ * 
+ * @param p_args Array of Variant pointers representing the function arguments.
+ * @param p_argcount The number of arguments in p_args.
+ * @param r_error Output parameter that receives any CallError that occurs during invocation.
+ * @return Variant The return value of the called function.
+ */
 
+/**
+ * @brief Invokes the referenced function with arguments provided as an Array.
+ * 
+ * @param p_args An Array of Variants to pass as function arguments.
+ * @return Variant The return value of the called function.
+ */
+
+/**
+ * @brief Sets the object instance whose function will be called.
+ * 
+ * @param p_obj Pointer to the Object that contains the function to be called.
+ */
+
+/**
+ * @brief Sets the name of the function to be called on the instance.
+ * 
+ * @param p_func The name of the function as a StringName.
+ */
+
+/**
+ * @brief Checks whether this FuncRef refers to a valid, callable function.
+ * 
+ * @return bool True if the referenced object and function are valid; false otherwise.
+ */
 #ifndef FUNC_REF_H
 #define FUNC_REF_H
 

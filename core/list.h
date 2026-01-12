@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  list.h                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file list.h
- * @brief Template-based doubly-linked list.
+ * Generic Templatized Doubly-Linked List Implementation
+ * 
+ * A flexible linked list container that allows efficient insertion, deletion,
+ * and iteration in both directions. Unlike STL implementations, this list
+ * supports erasing elements directly from iterators and allows for custom
+ * memory allocators.
+ * 
+ * @tparam T The type of elements stored in the list
+ * @tparam A The allocator type (defaults to DefaultAllocator)
+ * 
+ * Key Features:
+ * - Bidirectional iteration through Element pointers
+ * - Direct element erasure via Element::erase()
+ * - Push/pop operations at both front and back (O(1))
+ * - Insert operations before/after specific elements (O(1))
+ * - Find operation for value lookup (O(n))
+ * - Custom sorting with in-place and auxiliary buffer variants
+ * - Element swapping and repositioning
+ * - List inversion
+ * - Custom memory allocator support
+ * 
+ * Example usage:
+ * @code
+ * List<int> myList;
+ * List<int>::Element* elem = myList.push_back(42);
+ * elem->erase(); // Direct removal
+ * @endcode
+ * 
+ * Performance:
+ * - Access by index: O(n)
+ * - Push/Pop front/back: O(1)
+ * - Insert/Erase via Element: O(1)
+ * - Find: O(n)
+ * - Sort: O(n log n) with auxiliary buffer, O(n²) in-place
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef LIST_H
 #define LIST_H
 

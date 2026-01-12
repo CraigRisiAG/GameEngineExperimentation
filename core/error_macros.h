@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  error_macros.h                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file error_macros.h
- * @brief Error handling and assertion macros.
+ * @brief Error handling macros and utilities for the game engine.
+ *
+ * This header provides a comprehensive set of macros for error handling, validation, and debugging.
+ * The error handling system works opposite to traditional assertions - errors are non-fatal and
+ * the engine attempts to maintain stability and consistency by returning processable data.
+ *
+ * Error macros support both simple validation (without messages) and detailed error reporting
+ * (with custom messages via _MSG variants). Most macros have versions that either return void
+ * or return a specific value (via _V suffix).
+ *
+ * Key macro families:
+ * - Index bounds checking: ERR_FAIL_INDEX, ERR_FAIL_UNSIGNED_INDEX variants
+ * - Null pointer checks: ERR_FAIL_NULL variants
+ * - Condition validation: ERR_FAIL_COND, ERR_BREAK, ERR_CONTINUE variants
+ * - Generic errors: ERR_FAIL, ERR_FAIL_V variants
+ * - Fatal errors: CRASH_BAD_INDEX, CRASH_COND, CRASH_NOW variants
+ * - Warnings: WARN_PRINT, WARN_DEPRECATED variants
+ *
+ * Error handlers can be registered via add_error_handler() to customize error output behavior.
+ * In debug builds, error messages are preserved via DEBUG_STR(); in release builds they are stripped.
+ *
+ * @note All macros follow a consistent pattern: condition check, optional error printing, and control flow
+ *       modification (return, return value, continue, break, or crash).
+ * @note The 'unlikely()' attribute hints to the compiler that error conditions are rare.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef ERROR_MACROS_H
 #define ERROR_MACROS_H
 

@@ -1,39 +1,44 @@
-/*************************************************************************/
-/*  packed_data_container.h                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file packed_data_container.h
- * @brief Implementation of PackedDataContainer class.
+ * @class PackedDataContainer
+ * @brief A resource class for storing and managing packed binary data in a compressed format.
+ * 
+ * PackedDataContainer provides efficient storage and retrieval of Variant data by packing it into
+ * a binary format. It supports nested data structures including dictionaries and arrays.
+ * 
+ * @details
+ * - Uses internal binary format with type markers (TYPE_DICT, TYPE_ARRAY)
+ * - Implements string caching to reduce redundant data storage
+ * - Supports iteration over packed data structures
+ * - Provides key-based and offset-based access to packed data
+ * 
+ * @see PackedDataContainerRef
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct DictKey
+ * @brief Represents a dictionary key with associated hash for efficient lookup.
+ * 
+ * @member hash - Hash value of the key for quick comparison
+ * @member key - The Variant key itself
+ */
 
+/**
+ * @class PackedDataContainerRef
+ * @brief A reference wrapper for accessing data within a PackedDataContainer.
+ * 
+ * PackedDataContainerRef provides a reference to a specific offset within a PackedDataContainer,
+ * allowing access to nested structures without unpacking the entire container.
+ * 
+ * @details
+ * - Maintains reference to parent PackedDataContainer and offset position
+ * - Supports iteration protocol for dictionaries and arrays
+ * - Provides variant access through key-based indexing
+ * 
+ * @see PackedDataContainer
+ */
 #ifndef PACKED_DATA_CONTAINER_H
 #define PACKED_DATA_CONTAINER_H
 

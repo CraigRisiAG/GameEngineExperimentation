@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  project_settings.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file project_settings.cpp
- * @brief Template-based hash set.
+ * ProjectSettings - Manages engine and project configuration settings.
+ * 
+ * This class handles loading, saving, and managing project settings from configuration files
+ * (project.godot, project.binary, override.cfg). It supports:
+ * - Reading/writing settings in text and binary formats
+ * - Feature-based setting overrides
+ * - Custom property information and hints
+ * - Resource path localization/globalization
+ * - Data pack loading
+ * - Setting ordering and initialization tracking
+ * 
+ * The class uses a singleton pattern to provide global access to project settings throughout
+ * the engine. Settings can be accessed via the get/set methods inherited from the base class.
+ * 
+ * Key features:
+ * - Automatic version conversion for backwards compatibility
+ * - Network-based settings loading support
+ * - Setting restart flags to control engine restart on change
+ * - Custom feature tracking for platform-specific overrides
+ * - Property revert functionality to track initial vs. current values
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "project_settings.h"
 
 #include "core/bind/core_bind.h"

@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  global_constants.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file global_constants.cpp
- * @brief Definition of _GlobalConstant data structure.
+ * @brief Global constants registration and management system
+ * 
+ * This file implements the registration and retrieval of global constants used throughout
+ * the game engine. It provides a centralized mechanism for binding constants related to:
+ * - UI layout (margins, corners, alignment)
+ * - Input handling (keyboard keys, mouse buttons, joystick controls, MIDI messages)
+ * - Error codes
+ * - Property hints and usage flags
+ * - Method flags
+ * - Variant type constants
+ * - Variant operator constants
+ * 
+ * The system supports debug-mode enum name tracking for better introspection and tooling.
+ * Constants are stored in a static vector and can be queried by index for reflection purposes.
+ * 
+ * @struct _GlobalConstant
+ * @brief Internal structure for storing a single global constant entry
+ * @member enum_name The enum family name (debug builds only)
+ * @member name The constant's identifier string
+ * @member value The integer value of the constant
+ * 
+ * @function register_global_constants()
+ * @brief Populates the global constants vector with all engine constants
+ * Called during engine initialization to make constants available to scripts and tools
+ * 
+ * @function unregister_global_constants()
+ * @brief Clears all registered global constants
+ * Called during engine shutdown for cleanup
+ * 
+ * @function GlobalConstants::get_global_constant_count()
+ * @brief Returns the total number of registered global constants
+ * @return int The count of constants in the registry
+ * 
+ * @function GlobalConstants::get_global_constant_enum(int p_idx)
+ * @brief Retrieves the enum family name for a constant at the given index
+ * @param p_idx The constant index
+ * @return StringName The enum name (empty string in release builds)
+ * 
+ * @function GlobalConstants::get_global_constant_name(int p_idx)
+ * @brief Retrieves the name identifier for a constant at the given index
+ * @param p_idx The constant index
+ * @return const char* The constant's name string
+ * 
+ * @function GlobalConstants::get_global_constant_value(int p_idx)
+ * @brief Retrieves the integer value for a constant at the given index
+ * @param p_idx The constant index
+ * @return int The constant's value
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "global_constants.h"
 
 #include "core/object.h"

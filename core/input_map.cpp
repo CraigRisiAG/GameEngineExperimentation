@@ -1,39 +1,75 @@
-/*************************************************************************/
-/*  input_map.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file input_map.cpp
- * @brief Template-based ordered map (red-black tree).
+ * @class InputMap
+ * @brief Manages input actions and their associated input events.
+ * 
+ * InputMap is a singleton that handles the mapping of input events (keyboard, mouse, gamepad)
+ * to named actions. It provides functionality to:
+ * - Create and manage input actions
+ * - Associate input events with actions
+ * - Query whether an input event matches a specific action
+ * - Set deadzone thresholds for analog inputs
+ * - Load input configurations from project settings or defaults
+ * 
+ * @note This is a singleton class. Access via InputMap::get_singleton().
+ * 
+ * @member singleton - Static pointer to the InputMap singleton instance
+ * @member ALL_DEVICES - Constant representing all input devices (-1)
+ * @member input_map - Map storing all registered actions and their associated events
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn void add_action(const StringName &p_action, float p_deadzone)
+ * @brief Adds a new input action to the map.
+ * @param p_action - The name of the action to add
+ * @param p_deadzone - The deadzone threshold for analog inputs (default: 0.5f)
+ * @throws ERR_FAIL_COND_MSG if action already exists
+ */
 
+/**
+ * @fn void erase_action(const StringName &p_action)
+ * @brief Removes an input action from the map.
+ * @param p_action - The name of the action to remove
+ * @throws ERR_FAIL_COND_MSG if action does not exist
+ */
+
+/**
+ * @fn void action_add_event(const StringName &p_action, const Ref<InputEvent> &p_event)
+ * @brief Associates an input event with an action.
+ * @param p_action - The name of the action
+ * @param p_event - The input event to associate
+ * @throws ERR_FAIL_COND_MSG if action doesn't exist or event is null
+ */
+
+/**
+ * @fn void action_erase_event(const StringName &p_action, const Ref<InputEvent> &p_event)
+ * @brief Removes a specific input event from an action.
+ * @param p_action - The name of the action
+ * @param p_event - The input event to remove
+ */
+
+/**
+ * @fn bool event_get_action_status(const Ref<InputEvent> &p_event, const StringName &p_action, bool *p_pressed, float *p_strength)
+ * @brief Checks if an input event matches a specific action and retrieves its status.
+ * @param p_event - The input event to check
+ * @param p_action - The action name to match against
+ * @param p_pressed - Output parameter for pressed state (optional)
+ * @param p_strength - Output parameter for input strength/magnitude (optional)
+ * @return true if the event matches the action, false otherwise
+ */
+
+/**
+ * @fn void load_from_globals()
+ * @brief Loads input actions from project settings.
+ * Clears existing actions and populates the map from ProjectSettings input/ entries.
+ */
+
+/**
+ * @fn void load_default()
+ * @brief Loads default UI input actions.
+ * Sets up standard actions like ui_accept, ui_cancel, ui_left, ui_right, etc.
+ */
 #include "input_map.h"
 
 #include "core/os/keyboard.h"

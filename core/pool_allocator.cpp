@@ -1,39 +1,269 @@
-/*************************************************************************/
-/*  pool_allocator.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file pool_allocator.cpp
- * @brief Implementation of pool_allocator functionality.
+ * @brief Implementation of a pool-based memory allocator with support for allocation, deallocation, and memory compaction.
+ * 
+ * This file provides the implementation of the PoolAllocator class, which manages a fixed-size memory pool
+ * and allocates/deallocates memory in chunks. Key features include:
+ * - Fragmentation management through memory compaction (forward and backward)
+ * - Entry-based tracking of allocated blocks with position, size, and lock status
+ * - Thread-safe operations through mutex locking
+ * - Memory hole detection and reuse
+ * - Resize operations with automatic compaction when necessary
+ * - Lock/unlock mechanism to prevent memory relocation during access
+ * 
+ * @note The allocator maintains an entry array to track allocated blocks and an entry indices array
+ *       to maintain sorted order of entries by position in the pool.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Moves memory in the pool to compact it, eliminating fragmentation.
+ * 
+ * @param m_entry Reference to the entry to move
+ * @param m_to_pos The target position in the pool where the entry should be moved
+ * 
+ * Macro that copies an allocated block to a new position and updates the entry's position field.
+ * Used during memory compaction operations.
+ */
 
+/**
+ * @brief Acquires a lock for thread-safe operations.
+ * 
+ * Currently a no-op placeholder that can be implemented for actual mutex locking
+ * when thread safety is required.
+ */
+
+/**
+ * @brief Releases a lock for thread-safe operations.
+ * 
+ * Currently a no-op placeholder that can be implemented for actual mutex unlocking
+ * when thread safety is required.
+ */
+
+/**
+ * @brief Finds a free entry slot in the entry array.
+ * 
+ * @param p_pos Output parameter that receives the index of the free entry
+ * @return true if a free entry was found, false if the entry array is full
+ * 
+ * Searches for an entry with length 0 (indicating it's free/unused).
+ */
+
+/**
+ * @brief Finds a suitable hole (gap) in the pool to accommodate a new allocation.
+ * 
+ * @param p_pos Output parameter receiving the index where the hole is found
+ * @param p_for_size The size needed to fit in the hole
+ * @return true if a hole was found, false otherwise
+ * 
+ * Scans through allocated entries to find gaps between them, then checks
+ * if remaining space at the pool's end is sufficient. The hole position is
+ * the entry index after which the hole exists.
+ */
+
+/**
+ * @brief Compacts memory forward up to a specified entry index.
+ * 
+ * @param p_up_to The index up to which compaction should occur (default: all entries)
+ * 
+ * Moves allocated blocks forward (toward lower addresses) to eliminate holes,
+ * skipping locked entries. This reduces fragmentation when allocating new memory.
+ */
+
+/**
+ * @brief Compacts memory backward from a specified entry index.
+ * 
+ * @param p_from The starting entry index for backward compaction
+ * 
+ * Moves allocated blocks backward (toward higher addresses) to eliminate holes
+ * after a specified position, skipping locked entries. Used when trying to
+ * resize an allocation by creating space after it.
+ */
+
+/**
+ * @brief Finds the index position of an entry within the entry indices array.
+ * 
+ * @param p_map_pos Output parameter receiving the position in entry_indices
+ * @param p_entry Pointer to the entry to locate
+ * @return true if the entry was found, false otherwise
+ */
+
+/**
+ * @brief Allocates a block of memory from the pool.
+ * 
+ * @param p_size The size in bytes to allocate
+ * @return An ID handle for the allocated block, or POOL_ALLOCATOR_INVALID_ID on failure
+ * 
+ * Attempts to find or create a hole of sufficient size. If necessary, compacts
+ * memory to make room. The returned ID combines an entry index and a check value
+ * for validity verification.
+ */
+
+/**
+ * @brief Retrieves the entry structure associated with an allocation ID.
+ * 
+ * @param p_mem The allocation ID returned by alloc()
+ * @return Pointer to the entry, or NULL if invalid
+ * 
+ * Non-const version. Validates the entry through check bits and length verification.
+ */
+
+/**
+ * @brief Retrieves the entry structure associated with an allocation ID (const).
+ * 
+ * @param p_mem The allocation ID returned by alloc()
+ * @return Pointer to the entry, or NULL if invalid
+ * 
+ * Const version. Validates the entry through check bits and length verification.
+ */
+
+/**
+ * @brief Frees a previously allocated memory block.
+ * 
+ * @param p_mem The allocation ID to free
+ * 
+ * Removes the entry from the sorted entry indices array and updates free memory count.
+ * The operation fails if the entry is locked.
+ */
+
+/**
+ * @brief Gets the allocated size of a memory block.
+ * 
+ * @param p_mem The allocation ID
+ * @return The size in bytes, or 0 if invalid
+ * 
+ * Thread-safe operation that returns the requested allocation size (not aligned).
+ */
+
+/**
+ * @brief Resizes an existing allocation.
+ * 
+ * @param p_mem The allocation ID to resize
+ * @param p_new_size The new size in bytes
+ * @return OK on success, or an error code (ERR_INVALID_PARAMETER, ERR_OUT_OF_MEMORY, etc.)
+ * 
+ * Handles three cases: no change in aligned size, shrinking, and expansion.
+ * Expansion may trigger forward and/or backward compaction to make room.
+ */
+
+/**
+ * @brief Locks a memory allocation to prevent its relocation during compaction.
+ * 
+ * @param p_mem The allocation ID to lock
+ * @return OK on success, or ERR_INVALID_PARAMETER if the ID is invalid
+ * 
+ * Increments a lock counter. The get() method requires lock count > 0.
+ * Only applicable if the allocator was created with needs_locking enabled.
+ */
+
+/**
+ * @brief Checks if a memory allocation is currently locked.
+ * 
+ * @param p_mem The allocation ID to check
+ * @return true if locked, false otherwise
+ * 
+ * Only meaningful if the allocator was created with needs_locking enabled.
+ */
+
+/**
+ * @brief Retrieves a pointer to allocated memory (const version).
+ * 
+ * @param p_mem The allocation ID
+ * @return Pointer to the memory, or NULL on failure
+ * 
+ * If locking is required, the block must be locked before calling this method.
+ * Performs bounds checking and lock validation.
+ */
+
+/**
+ * @brief Retrieves a pointer to allocated memory (non-const version).
+ * 
+ * @param p_mem The allocation ID
+ * @return Pointer to the memory, or NULL on failure
+ * 
+ * If locking is required, the block must be locked before calling this method.
+ * Performs bounds checking and lock validation.
+ */
+
+/**
+ * @brief Unlocks a previously locked memory allocation.
+ * 
+ * @param p_mem The allocation ID to unlock
+ * 
+ * Decrements the lock counter. Has no effect if locking is not enabled.
+ */
+
+/**
+ * @brief Gets the total amount of used memory in the pool.
+ * 
+ * @return Used memory in bytes
+ * 
+ * Calculated as pool_size - free_mem.
+ */
+
+/**
+ * @brief Gets the peak (minimum) amount of free memory recorded.
+ * 
+ * @return Free memory in bytes at peak usage
+ */
+
+/**
+ * @brief Gets the current amount of free memory in the pool.
+ * 
+ * @return Free memory in bytes
+ */
+
+/**
+ * @brief Initializes the pool allocator with given memory and parameters.
+ * 
+ * @param p_mem Pointer to the memory pool
+ * @param p_size Size of the pool in bytes
+ * @param p_max_entries Maximum number of simultaneous allocations
+ * 
+ * Sets up entry array, entry indices array, and initializes tracking variables.
+ */
+
+/**
+ * @brief Constructor that allocates its own pool memory.
+ * 
+ * @param p_size Size of the pool to allocate in bytes
+ * @param p_needs_locking Enable lock/unlock mechanism
+ * @param p_max_entries Maximum number of simultaneous allocations
+ * 
+ * The allocator allocates its own memory via memalloc() and manages it internally.
+ */
+
+/**
+ * @brief Constructor for use with externally-provided memory.
+ * 
+ * @param p_mem Pointer to existing memory pool
+ * @param p_size Size of the provided pool in bytes
+ * @param p_align Alignment requirement in bytes
+ * @param p_needs_locking Enable lock/unlock mechanism
+ * @param p_max_entries Maximum number of simultaneous allocations
+ * 
+ * Adjusts the memory pointer and size if alignment is needed, but does not
+ * allocate new memory. User is responsible for the memory's lifetime.
+ */
+
+/**
+ * @brief Constructor for static allocation with guaranteed alignment.
+ * 
+ * @param p_align Required alignment in bytes (must be >= 1)
+ * @param p_size Size of the pool in bytes
+ * @param p_needs_locking Enable lock/unlock mechanism
+ * @param p_max_entries Maximum number of simultaneous allocations
+ * 
+ * Allocates memory via Memory::alloc_static() with extra space for alignment adjustment.
+ */
+
+/**
+ * @brief Destructor that cleans up allocated resources.
+ * 
+ * Frees the pool memory if it was allocated by the constructor and deletes
+ * the entry array and entry indices array.
+ */
 #include "pool_allocator.h"
 
 #include "core/error_macros.h"

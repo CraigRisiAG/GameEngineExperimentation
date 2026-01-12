@@ -1,39 +1,167 @@
-/*************************************************************************/
-/*  error_list.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file error_list.h
- * @brief Template-based doubly-linked list.
+ * @brief Comprehensive error enumeration for the game engine.
+ * 
+ * Defines a standardized set of error codes used throughout the engine for consistent
+ * error reporting and handling. This generic error list provides a language for returning
+ * detailed error information.
+ * 
+ * @note When checking error results, use `result != OK` or `!result` comparisons.
+ *       Do NOT compare directly against FAILED, as error codes may become more detailed
+ *       in future versions.
+ * 
+ * @enum Error
+ * @brief Standard error codes for the game engine.
+ * 
+ * @var Error::OK
+ * Operation completed successfully. Value: 0.
+ * 
+ * @var Error::FAILED
+ * Generic failure. Use only when a more specific error code is unavailable.
+ * 
+ * @var Error::ERR_UNAVAILABLE
+ * Requested feature is unsupported or unavailable on the current platform/configuration.
+ * 
+ * @var Error::ERR_UNCONFIGURED
+ * Object has not been properly initialized or configured before use.
+ * 
+ * @var Error::ERR_UNAUTHORIZED
+ * User lacks necessary credentials or permissions for the requested operation.
+ * 
+ * @var Error::ERR_PARAMETER_RANGE_ERROR
+ * Supplied parameter is outside acceptable range. Value: 5.
+ * 
+ * @var Error::ERR_OUT_OF_MEMORY
+ * Insufficient memory to complete operation.
+ * 
+ * @var Error::ERR_FILE_NOT_FOUND
+ * Requested file does not exist.
+ * 
+ * @var Error::ERR_FILE_BAD_DRIVE
+ * File operation failed due to invalid or inaccessible drive.
+ * 
+ * @var Error::ERR_FILE_BAD_PATH
+ * Specified file path is invalid or malformed.
+ * 
+ * @var Error::ERR_FILE_NO_PERMISSION
+ * Insufficient permissions to access file. Value: 10.
+ * 
+ * @var Error::ERR_FILE_ALREADY_IN_USE
+ * File is locked or already in use by another process.
+ * 
+ * @var Error::ERR_FILE_CANT_OPEN
+ * Failed to open file.
+ * 
+ * @var Error::ERR_FILE_CANT_WRITE
+ * Failed to write to file.
+ * 
+ * @var Error::ERR_FILE_CANT_READ
+ * Failed to read from file.
+ * 
+ * @var Error::ERR_FILE_UNRECOGNIZED
+ * File format is not recognized. Value: 15.
+ * 
+ * @var Error::ERR_FILE_CORRUPT
+ * File data is corrupted or invalid.
+ * 
+ * @var Error::ERR_FILE_MISSING_DEPENDENCIES
+ * File references missing dependencies.
+ * 
+ * @var Error::ERR_FILE_EOF
+ * Unexpected end-of-file encountered.
+ * 
+ * @var Error::ERR_CANT_OPEN
+ * Cannot open resource, socket, or file.
+ * 
+ * @var Error::ERR_CANT_CREATE
+ * Failed to create resource. Value: 20.
+ * 
+ * @var Error::ERR_QUERY_FAILED
+ * Database or resource query operation failed.
+ * 
+ * @var Error::ERR_ALREADY_IN_USE
+ * Resource is currently in use.
+ * 
+ * @var Error::ERR_LOCKED
+ * Resource is locked and unavailable.
+ * 
+ * @var Error::ERR_TIMEOUT
+ * Operation exceeded maximum allowed time.
+ * 
+ * @var Error::ERR_CANT_CONNECT
+ * Failed to establish connection. Value: 25.
+ * 
+ * @var Error::ERR_CANT_RESOLVE
+ * Failed to resolve network address or resource identifier.
+ * 
+ * @var Error::ERR_CONNECTION_ERROR
+ * Connection failed or was interrupted.
+ * 
+ * @var Error::ERR_CANT_ACQUIRE_RESOURCE
+ * Unable to acquire necessary resource.
+ * 
+ * @var Error::ERR_CANT_FORK
+ * Process fork operation failed.
+ * 
+ * @var Error::ERR_INVALID_DATA
+ * Provided data is invalid or malformed. Value: 30.
+ * 
+ * @var Error::ERR_INVALID_PARAMETER
+ * Supplied parameter is invalid.
+ * 
+ * @var Error::ERR_ALREADY_EXISTS
+ * Item already exists when attempting to add.
+ * 
+ * @var Error::ERR_DOES_NOT_EXIST
+ * Item does not exist when attempting retrieval or deletion.
+ * 
+ * @var Error::ERR_DATABASE_CANT_READ
+ * Database read operation failed.
+ * 
+ * @var Error::ERR_DATABASE_CANT_WRITE
+ * Database write operation failed. Value: 35.
+ * 
+ * @var Error::ERR_COMPILATION_FAILED
+ * Compilation process failed.
+ * 
+ * @var Error::ERR_METHOD_NOT_FOUND
+ * Requested method does not exist.
+ * 
+ * @var Error::ERR_LINK_FAILED
+ * Linking operation failed.
+ * 
+ * @var Error::ERR_SCRIPT_FAILED
+ * Script execution failed.
+ * 
+ * @var Error::ERR_CYCLIC_LINK
+ * Circular dependency detected. Value: 40.
+ * 
+ * @var Error::ERR_INVALID_DECLARATION
+ * Declaration is invalid or malformed.
+ * 
+ * @var Error::ERR_DUPLICATE_SYMBOL
+ * Duplicate symbol definition detected.
+ * 
+ * @var Error::ERR_PARSE_ERROR
+ * Parsing operation failed.
+ * 
+ * @var Error::ERR_BUSY
+ * Resource is busy; operation cannot be performed now.
+ * 
+ * @var Error::ERR_SKIP
+ * Operation should be skipped. Value: 45.
+ * 
+ * @var Error::ERR_HELP
+ * User requested help information.
+ * 
+ * @var Error::ERR_BUG
+ * Critical bug detected - validation check or assertion failed unexpectedly.
+ * 
+ * @var Error::ERR_PRINTER_ON_FIRE
+ * Hardware failure or catastrophic error (parallel port printer malfunction).
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef ERROR_LIST_H
 #define ERROR_LIST_H
 

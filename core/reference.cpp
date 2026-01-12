@@ -1,39 +1,51 @@
-/*************************************************************************/
-/*  reference.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file reference.cpp
- * @brief Reference-counted memory management for resources.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \class Reference
+/// \brief A reference-counted base class for managing object lifecycles automatically.
+///
+/// Reference is a specialized Object subclass that implements automatic memory management
+/// through reference counting. Objects that inherit from Reference are automatically deleted
+/// when their reference count reaches zero.
+///
+/// \method bool init_ref()
+/// Initializes the reference count for this object. Should be called once after creation
+/// to properly set up the reference counting mechanism. Compensates for the initial reference
+/// to ensure correct reference counting behavior.
+/// \return true if initialization was successful, false otherwise.
+///
+/// \method int reference_get_count() const
+/// Returns the current reference count value for this object.
+/// \return The number of active references to this object.
+///
+/// \method bool reference()
+/// Increments the reference count and notifies script instances and language bindings
+/// that a reference has been added. This is called automatically by REF smart pointers.
+/// \return true if the reference operation was successful, false otherwise.
+///
+/// \method bool unreference()
+/// Decrements the reference count and notifies script instances and language bindings
+/// that a reference has been removed. When the count reaches zero, the object is flagged
+/// for deletion.
+/// \return true if the object should be deleted (count reached zero), false otherwise.
+///
+/// \class WeakRef
+/// \brief A weak reference wrapper that holds a non-owning reference to an Object.
+///
+/// WeakRef stores an ObjectID to an object without incrementing its reference count.
+/// The referenced object can be deleted independently, and get_ref() will safely return
+/// a null Variant if the object no longer exists.
+///
+/// \method Variant get_ref() const
+/// Retrieves the referenced object as a Variant, or a null Variant if the object has been deleted.
+/// \return A Variant containing the referenced object, or an empty Variant.
+///
+/// \method void set_obj(Object *p_object)
+/// Sets the weak reference to point to the specified object.
+/// \param p_object The object to weakly reference, or nullptr to clear the reference.
+///
+/// \method void set_ref(const REF &p_ref)
+/// Sets the weak reference from a Reference smart pointer.
+/// \param p_ref A smart pointer to a Reference object.
 #include "reference.h"
 
 #include "core/script_language.h"

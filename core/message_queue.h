@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  message_queue.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file message_queue.h
- * @brief Implementation of MessageQueue class.
+ * @class MessageQueue
+ * @brief Thread-safe message queue for deferred function calls, notifications, and property updates.
+ * 
+ * MessageQueue is a singleton that manages a queue of messages to be processed later.
+ * It supports three types of messages:
+ * - TYPE_CALL: Deferred function calls on objects
+ * - TYPE_NOTIFICATION: Notifications sent to objects
+ * - TYPE_SET: Property value assignments
+ * 
+ * The queue uses a fixed-size buffer to store messages and is thread-safe for multi-threaded environments.
+ * Messages are processed by calling flush(), which executes all pending messages in FIFO order.
+ * 
+ * @note This is a singleton class. Use get_singleton() to access the global instance.
+ * @note The default buffer size is 1024 KB, which can be configured via DEFAULT_QUEUE_SIZE_KB.
+ * 
+ * @see Object
+ * @see Callable
+ * @see Variant
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef MESSAGE_QUEUE_H
 #define MESSAGE_QUEUE_H
 

@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  callable.cpp                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file callable.cpp
- * @brief Type-safe function/method wrapper for callbacks.
+ * @brief Implementation of Callable and Signal classes for handling deferred calls and signal emissions.
+ * 
+ * The Callable class provides a wrapper for callable objects that can reference either:
+ * - An object method (via ObjectID and method name)
+ * - A custom callable implementation (CallableCustom)
+ * 
+ * Key Features:
+ * - Deferred execution via call_deferred()
+ * - Direct execution via call()
+ * - Comparison operators for sorting and equality checking
+ * - Custom callable support with reference counting
+ * - String conversion for debugging
+ * 
+ * The Signal class represents a signal emitted by an object and provides:
+ * - Signal emission with arguments
+ * - Connection management (connect, disconnect, is_connected)
+ * - Connection listing
+ * - Comparison and string representation
+ * 
+ * @note Both classes use ObjectID for object references to avoid dangling pointers.
+ * @note CallableCustom uses reference counting for memory management.
+ * @note Signal connections return Array of Object::Connection structures.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "callable.h"
 #include "core/script_language.h"
 #include "message_queue.h"

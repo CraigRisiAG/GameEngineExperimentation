@@ -1,39 +1,107 @@
-/*************************************************************************/
-/*  cowdata.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file cowdata.h
- * @brief Implementation of CowData class.
+ * @class CowData
+ * @brief Copy-on-Write (CoW) data container template class.
+ * 
+ * A generic copy-on-write container that efficiently manages dynamic arrays
+ * with reference counting. Data is shared between copies until modification
+ * is attempted, at which point a deep copy is performed.
+ * 
+ * @tparam T The data type stored in the container.
+ * 
+ * @note This class uses reference counting and atomic operations for thread-safe
+ *       shared ownership semantics.
+ * 
+ * @details
+ * - Memory layout: [refcount(uint32_t)][size(uint32_t)][data(T[])]
+ * - Supports trivial and non-trivial constructors/destructors
+ * - Automatically handles overflow checks during allocation
+ * - Memory is allocated with proper alignment via Memory::alloc_static()
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Retrieves a mutable pointer to the data array.
+ * 
+ * Triggers copy-on-write if the data is shared with other instances.
+ * 
+ * @return A mutable pointer to the first element, or nullptr if empty.
+ */
 
+/**
+ * @brief Retrieves a const pointer to the data array.
+ * 
+ * @return A const pointer to the first element, or nullptr if empty.
+ */
+
+/**
+ * @brief Returns the current number of elements in the container.
+ * 
+ * @return The size as an integer, or 0 if the container is empty.
+ */
+
+/**
+ * @brief Resizes the container to the specified number of elements.
+ * 
+ * If expanding, new elements are default-constructed. If shrinking,
+ * excess elements are destructed. Triggers copy-on-write if needed.
+ * 
+ * @param p_size The new size. Must be non-negative.
+ * @return OK on success, ERR_INVALID_PARAMETER if p_size < 0,
+ *         ERR_OUT_OF_MEMORY on allocation failure.
+ */
+
+/**
+ * @brief Searches for the first occurrence of a value.
+ * 
+ * @param p_val The value to search for.
+ * @param p_from The starting index for the search (default 0).
+ * @return The index of the first matching element, or -1 if not found.
+ */
+
+/**
+ * @brief Inserts an element at the specified position.
+ * 
+ * Shifts all subsequent elements one position forward.
+ * 
+ * @param p_pos The insertion position (must be <= size()).
+ * @param p_val The value to insert.
+ * @return OK on success, ERR_INVALID_PARAMETER if position is invalid,
+ *         ERR_OUT_OF_MEMORY on allocation failure.
+ */
+
+/**
+ * @brief Removes the element at the specified index.
+ * 
+ * Shifts all subsequent elements one position backward.
+ * 
+ * @param p_index The index of the element to remove (must be < size()).
+ */
+
+/**
+ * @brief Sets the element at the specified index.
+ * 
+ * Triggers copy-on-write if the data is shared.
+ * 
+ * @param p_index The index of the element to set (must be < size()).
+ * @param p_elem The new value.
+ */
+
+/**
+ * @brief Retrieves a mutable reference to the element at the specified index.
+ * 
+ * Triggers copy-on-write if the data is shared.
+ * 
+ * @param p_index The index (must be < size()).
+ * @return A mutable reference to the element.
+ */
+
+/**
+ * @brief Retrieves a const reference to the element at the specified index.
+ * 
+ * @param p_index The index (must be < size()).
+ * @return A const reference to the element.
+ */
 #ifndef COWDATA_H
 #define COWDATA_H
 

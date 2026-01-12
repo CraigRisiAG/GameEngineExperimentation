@@ -1,39 +1,185 @@
-/*************************************************************************/
-/*  node_path.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file node_path.cpp
- * @brief Implementation of node_path functionality.
+ * @class NodePath
+ * @brief Represents a path to a node in a scene tree with support for absolute/relative paths and subpaths.
+ * 
+ * NodePath provides a way to reference nodes in a hierarchical structure using path-like syntax.
+ * Paths can be absolute (starting with '/') or relative, and can include subpaths (properties) 
+ * separated by colons. The class uses reference counting for memory management.
+ * 
+ * Example paths:
+ * - "/root/child/grandchild" (absolute path)
+ * - "sibling/cousin" (relative path)
+ * - "/root/child:property" (path with subpath)
+ * - "../other_node" (relative path with parent reference)
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Updates the cached hash value for this NodePath.
+ * @details Recalculates the hash by combining hashes of all path and subpath components.
+ * Sets hash_cache_valid to true after computation.
+ */
+void _update_hash_cache() const;
 
+/**
+ * @brief Prepends a period (".") to the beginning of the path if not already present.
+ * @details This makes a relative path explicitly relative. Invalidates the hash cache.
+ */
+void prepend_period();
+
+/**
+ * @brief Checks if this NodePath is an absolute path.
+ * @return true if the path is absolute (starts with '/'), false otherwise or if uninitialized.
+ */
+bool is_absolute() const;
+
+/**
+ * @brief Gets the number of components in the main path.
+ * @return Number of path segments (directories/nodes).
+ */
+int get_name_count() const;
+
+/**
+ * @brief Retrieves a specific path component by index.
+ * @param p_idx Index of the path component to retrieve.
+ * @return The StringName at the given index, or empty StringName if invalid.
+ */
+StringName get_name(int p_idx) const;
+
+/**
+ * @brief Gets the number of subpath components (properties).
+ * @return Number of subpath segments.
+ */
+int get_subname_count() const;
+
+/**
+ * @brief Retrieves a specific subpath component by index.
+ * @param p_idx Index of the subpath component to retrieve.
+ * @return The StringName at the given index, or empty StringName if invalid.
+ */
+StringName get_subname(int p_idx) const;
+
+/**
+ * @brief Decrements the reference count and deletes the internal data if count reaches zero.
+ */
+void unref();
+
+/**
+ * @brief Compares two NodePath objects for equality.
+ * @param p_path The NodePath to compare with.
+ * @return true if both paths represent the same path, false otherwise.
+ */
+bool operator==(const NodePath &p_path) const;
+
+/**
+ * @brief Compares two NodePath objects for inequality.
+ * @param p_path The NodePath to compare with.
+ * @return true if paths are different, false if equal.
+ */
+bool operator!=(const NodePath &p_path) const;
+
+/**
+ * @brief Assigns another NodePath to this one with reference counting.
+ * @param p_path The NodePath to assign from.
+ */
+void operator=(const NodePath &p_path);
+
+/**
+ * @brief Converts the NodePath to its string representation.
+ * @return String representation of the path (e.g., "/root/child:property").
+ */
+operator String() const;
+
+/**
+ * @brief Copy constructor.
+ * @param p_path The NodePath to copy.
+ */
+NodePath(const NodePath &p_path);
+
+/**
+ * @brief Gets all path components as a Vector of StringNames.
+ * @return Vector containing all path segments.
+ */
+Vector<StringName> get_names() const;
+
+/**
+ * @brief Gets all subpath components as a Vector of StringNames.
+ * @return Vector containing all subpath segments.
+ */
+Vector<StringName> get_subnames() const;
+
+/**
+ * @brief Gets concatenated subpath as a single StringName with ':' separators.
+ * @return Concatenated subpath string, cached for performance.
+ */
+StringName get_concatenated_subnames() const;
+
+/**
+ * @brief Calculates the relative path from this path to another absolute path.
+ * @param p_np The destination NodePath (must be absolute).
+ * @return A new NodePath representing the relative path from this to p_np.
+ * @note Both paths must be absolute for this to work correctly.
+ */
+NodePath rel_path_to(const NodePath &p_np) const;
+
+/**
+ * @brief Converts this NodePath to a property path format.
+ * @details Moves path components into the subpath with '/' separators.
+ * @return A new NodePath with restructured path/subpath components.
+ */
+NodePath get_as_property_path() const;
+
+/**
+ * @brief Constructor from a vector of StringNames representing the path.
+ * @param p_path Vector of path components.
+ * @param p_absolute Whether the path is absolute.
+ */
+NodePath(const Vector<StringName> &p_path, bool p_absolute);
+
+/**
+ * @brief Constructor from path and subpath vectors.
+ * @param p_path Vector of path components.
+ * @param p_subpath Vector of subpath (property) components.
+ * @param p_absolute Whether the path is absolute.
+ */
+NodePath(const Vector<StringName> &p_path, const Vector<StringName> &p_subpath, bool p_absolute);
+
+/**
+ * @brief Simplifies the path by removing '.' and resolving '..' references.
+ * @details Modifies the path in-place, removing unnecessary components.
+ * Invalidates the hash cache.
+ */
+void simplify();
+
+/**
+ * @brief Returns a simplified copy of this NodePath.
+ * @return A new NodePath with simplified path.
+ */
+NodePath simplified() const;
+
+/**
+ * @brief Constructor from a string representation of a path.
+ * @param p_path String representation (e.g., "/root/child:property:subproperty").
+ * @details Parses the string to extract path, subpath, and absolute/relative nature.
+ */
+NodePath(const String &p_path);
+
+/**
+ * @brief Checks if this NodePath is empty (uninitialized).
+ * @return true if the NodePath contains no data, false otherwise.
+ */
+bool is_empty() const;
+
+/**
+ * @brief Default constructor creating an empty NodePath.
+ */
+NodePath();
+
+/**
+ * @brief Destructor that releases the internal data reference.
+ */
+~NodePath();
 #include "node_path.h"
 
 #include "core/print_string.h"

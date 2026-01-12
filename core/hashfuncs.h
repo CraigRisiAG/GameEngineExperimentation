@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  hashfuncs.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file hashfuncs.h
- * @brief Definition of HashMapHasherDefault data structure.
+ * @brief Hash function utilities for various data types
+ * 
+ * This header provides a collection of hashing functions and helper structures
+ * for computing hash codes of different data types. It includes implementations
+ * of the DJB2 hash algorithm, specialized hash functions for floating-point numbers,
+ * and type conversion utilities.
+ * 
+ * The module also defines default hasher and comparator functors that can be used
+ * with hash map implementations to support hashing of built-in types, strings,
+ * and engine-specific types like ObjectID, StringName, and NodePath.
+ * 
+ * Key Features:
+ * - DJB2 hash function for C strings and buffers
+ * - Specialized hash functions for 64-bit integers and floating-point numbers
+ * - Type-safe hash computation through template utilities
+ * - Default hash map hasher supporting multiple types
+ * - Comparison functor with special NaN handling for floating-point values
+ * 
+ * @note NaN values are normalized to ensure consistent hashing behavior
+ * @note All hash functions are implemented as inline for performance
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef HASHFUNCS_H
 #define HASHFUNCS_H
 
