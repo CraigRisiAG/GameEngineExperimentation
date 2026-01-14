@@ -1,39 +1,42 @@
-/*************************************************************************/
-/*  string_builder.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file string_builder.cpp
- * @brief Unicode string handling and manipulation.
+ * @class StringBuilder
+ * @brief A utility class for efficiently concatenating strings.
+ * 
+ * This class provides methods to append both Godot String objects and C-style
+ * null-terminated strings, then combine them into a single String result.
+ * It tracks the total length and maintains separate lists for each string type
+ * to optimize memory usage and concatenation performance.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Appends a Godot String to the builder.
+ * 
+ * @param p_string The String object to append. If empty, the operation is ignored.
+ * @return A reference to this StringBuilder instance for method chaining.
+ */
+StringBuilder &append(const String &p_string);
 
+/**
+ * @brief Appends a C-style null-terminated string to the builder.
+ * 
+ * @param p_cstring The null-terminated C string to append.
+ * @return A reference to this StringBuilder instance for method chaining.
+ */
+StringBuilder &append(const char *p_cstring);
+
+/**
+ * @brief Constructs and returns the final concatenated string.
+ * 
+ * Combines all appended strings (both Godot Strings and C strings) into a single
+ * String object in the order they were appended. Allocates temporary buffer memory
+ * which is freed after the String is constructed.
+ * 
+ * @return A new String containing all appended content. Returns an empty string if
+ *         no strings have been appended.
+ */
+String as_string() const;
 #include "string_builder.h"
 
 #include <string.h>

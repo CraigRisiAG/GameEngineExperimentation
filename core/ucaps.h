@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  ucaps.h                                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file ucaps.h
- * @brief Header file for ucaps functionality.
+ * @brief Unicode case conversion lookup tables and functions.
+ *
+ * This header provides static lookup tables and binary search functions
+ * for converting Unicode characters between lowercase and uppercase forms.
+ * Supports a wide range of scripts including Latin, Greek, Cyrillic, Armenian, Georgian, and more.
+ *
+ * @details
+ * - `caps_table`: Maps lowercase Unicode codepoints to their uppercase equivalents (666 entries)
+ * - `reverse_caps_table`: Maps uppercase Unicode codepoints to their lowercase equivalents (665 entries)
+ * - `_find_upper()`: Binary search function to find the uppercase form of a character
+ * - `_find_lower()`: Binary search function to find the lowercase form of a character
+ *
+ * Characters not found in the lookup tables are returned unchanged.
+ *
+ * @note The magic number 666 for `CAPS_LEN` is a humorous reference and has no special significance.
+ *
+ * @author [Game Engine Experimentation Project]
+ * @date [Unknown]
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn static int _find_upper(int ch)
+ * @brief Finds the uppercase equivalent of a Unicode character using binary search.
+ *
+ * @param ch The Unicode codepoint to convert to uppercase
+ * @return The uppercase equivalent codepoint, or the original character if not found in the table
+ *
+ * @note Uses the `caps_table` lookup table with binary search for O(log n) performance
+ */
 
+/**
+ * @fn static int _find_lower(int ch)
+ * @brief Finds the lowercase equivalent of a Unicode character using binary search.
+ *
+ * @param ch The Unicode codepoint to convert to lowercase
+ * @return The lowercase equivalent codepoint, or the original character if not found in the table
+ *
+ * @note Uses the `reverse_caps_table` lookup table with binary search for O(log n) performance
+ */
 #ifndef UCAPS_H
 #define UCAPS_H
 

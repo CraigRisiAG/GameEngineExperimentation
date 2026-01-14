@@ -1,39 +1,49 @@
-/*************************************************************************/
-/*  thread_work_pool.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file thread_work_pool.cpp
- * @brief Implementation of thread_work_pool functionality.
+ * @class ThreadWorkPool
+ * @brief A thread pool implementation for distributing work across multiple threads.
+ * 
+ * This class manages a pool of worker threads that can execute tasks concurrently.
+ * It provides initialization, task distribution, and graceful shutdown capabilities.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Static thread function executed by each worker thread.
+ * 
+ * This function runs in a loop, waiting for work to be assigned, executing it,
+ * and signaling completion. The thread exits when the exit flag is set.
+ * 
+ * @param p_thread Pointer to the ThreadData structure containing synchronization
+ *                  primitives and work queue information for the thread.
+ */
 
+/**
+ * @brief Initializes the thread pool with the specified number of threads.
+ * 
+ * Creates and starts the specified number of worker threads. If the thread count
+ * is negative, defaults to the system's processor count.
+ * 
+ * @param p_thread_count The number of threads to create. If negative, uses the
+ *                       system processor count.
+ * 
+ * @note Must not be called if the pool is already initialized.
+ *       Fails with ERR_FAIL_COND if threads are already allocated.
+ */
+
+/**
+ * @brief Shuts down the thread pool and releases all resources.
+ * 
+ * Signals all worker threads to exit, waits for them to complete, and deallocates
+ * all thread resources. Safe to call even if the pool was not initialized.
+ */
+
+/**
+ * @brief Destructor that ensures proper cleanup of the thread pool.
+ * 
+ * Calls finish() to gracefully shut down all threads and release resources.
+ */
 #include "thread_work_pool.h"
 #include "core/os/os.h"
 

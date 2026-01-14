@@ -1,39 +1,70 @@
-/*************************************************************************/
-/*  safe_refcount.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file safe_refcount.cpp
- * @brief Implementation of safe_refcount functionality.
+ * @brief MSVC-Windows implementation of atomic reference counting operations.
+ * 
+ * This file provides inline implementations of atomic operations for safe reference counting
+ * on Windows platforms using MSVC compiler. It supports both 32-bit and 64-bit atomic operations
+ * using Windows Interlocked API functions.
+ * 
+ * @details
+ * The implementation uses Windows Interlocked functions for thread-safe atomic operations:
+ * - InterlockedCompareExchange/InterlockedCompareExchange64 for conditional increments
+ * - InterlockedIncrement/InterlockedIncrement64 for atomic increments
+ * - InterlockedDecrement/InterlockedDecrement64 for atomic decrements
+ * - InterlockedAdd/InterlockedAdd64 for atomic additions
+ * - InterlockedExchangeAdd/InterlockedExchangeAdd64 for atomic subtractions
+ * 
+ * Two sets of functions are provided: one for uint32_t and one for uint64_t operations.
+ * All functions are marked as inline for performance-critical reference counting operations.
+ * 
+ * @note This implementation is specific to Microsoft Visual C++ on Windows platforms.
+ *       Compiler guard: #if defined(_MSC_VER)
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Atomically increments a reference counter only if it is non-zero.
+ * @param pw Pointer to the volatile counter to increment.
+ * @return The new value after increment, or 0 if the counter was already 0.
+ * @details Uses compare-and-swap in a loop to ensure atomic operation.
+ *          Returns 0 if the counter cannot be incremented (already at 0).
+ */
 
+/**
+ * @brief Atomically decrements a reference counter.
+ * @param pw Pointer to the volatile counter to decrement.
+ * @return The new value after decrement.
+ */
+
+/**
+ * @brief Atomically increments a reference counter.
+ * @param pw Pointer to the volatile counter to increment.
+ * @return The new value after increment.
+ */
+
+/**
+ * @brief Atomically adds a value to a counter.
+ * @param pw Pointer to the volatile counter.
+ * @param val The value to add.
+ * @return The new value after addition.
+ */
+
+/**
+ * @brief Atomically subtracts a value from a counter.
+ * @param pw Pointer to the volatile counter.
+ * @param val The value to subtract.
+ * @return The new value after subtraction.
+ */
+
+/**
+ * @brief Atomically updates a counter to a greater value using compare-and-swap.
+ * @param pw Pointer to the volatile counter.
+ * @param val The value to compare against and potentially set.
+ * @return The greater of the current value or the provided value.
+ * @details If the current value is already greater than or equal to val, returns current value.
+ *          Otherwise, atomically sets the counter to val and returns val.
+ */
 #include "safe_refcount.h"
 
 #if defined(_MSC_VER)

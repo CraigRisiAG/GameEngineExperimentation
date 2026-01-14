@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  translation.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file translation.h
- * @brief Implementation of Translation class.
+ * @brief Translation and localization system for multi-language support.
+ * 
+ * This module provides a complete translation infrastructure including:
+ * - Individual Translation resources that store message mappings
+ * - TranslationServer singleton for managing all translations
+ * - Locale management and fallback handling
+ * - Support for tool and documentation translations
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class Translation
+ * @brief Resource class that stores translated strings for a specific locale.
+ * 
+ * Manages a collection of source text to translated text mappings for a single language.
+ * Can be extended for specialized translation implementations.
+ * 
+ * @see Resource
+ */
 
+/**
+ * @class TranslationServer
+ * @brief Singleton server that manages all active translations and locale settings.
+ * 
+ * Provides centralized translation lookup, locale management, and handles fallback
+ * translations when a string is not available in the current locale. Also manages
+ * separate translation sets for tools and documentation.
+ * 
+ * @see Object
+ */
 #ifndef TRANSLATION_H
 #define TRANSLATION_H
 

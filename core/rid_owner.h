@@ -1,39 +1,90 @@
-/*************************************************************************/
-/*  rid_owner.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file rid_owner.h
- * @brief Resource ID handle for server objects.
+ * @brief Resource ID (RID) allocation and ownership management system.
+ * 
+ * This file provides a template-based RID allocation system for managing resources
+ * with unique identifiers. It supports both single-threaded and thread-safe operations.
+ * 
+ * @class RID_AllocBase
+ * @brief Base class for RID allocation providing core ID generation functionality.
+ * 
+ * Provides static methods for generating unique RIDs and converting between RID
+ * objects and their underlying 64-bit ID representation.
+ * 
+ * @var RID_AllocBase::base_id
+ * @brief Global atomic counter for generating unique ID values.
+ * 
+ * @class RID_Alloc
+ * @brief Template-based RID allocator with chunked memory management.
+ * 
+ * @tparam T The type of objects to allocate and manage.
+ * @tparam THREAD_SAFE Boolean flag to enable/disable thread-safe operations using spin locks.
+ * 
+ * Manages object allocation in fixed-size chunks with validation using 32-bit validators
+ * and free-list tracking. The 64-bit RID is composed of a 32-bit validator (upper bits)
+ * and a 32-bit index (lower bits) for efficient lookup and validation.
+ * 
+ * @method make_rid(const T &p_value)
+ * @brief Allocates a new object and returns its associated RID.
+ * @param p_value The value to copy into the allocated object.
+ * @return RID A unique resource identifier for the allocated object.
+ * 
+ * @method getornull(const RID &p_rid)
+ * @brief Retrieves a pointer to the object associated with the given RID.
+ * @param p_rid The resource identifier to look up.
+ * @return T* Pointer to the object if RID is valid, NULL otherwise.
+ * 
+ * @method owns(const RID &p_rid)
+ * @brief Checks if this allocator owns the object referenced by the given RID.
+ * @param p_rid The resource identifier to check.
+ * @return bool True if the RID is valid and owned by this allocator, false otherwise.
+ * 
+ * @method free(const RID &p_rid)
+ * @brief Deallocates the object associated with the given RID.
+ * @param p_rid The resource identifier of the object to free.
+ * 
+ * @method get_rid_count() const
+ * @brief Returns the current number of allocated objects.
+ * @return uint32_t Number of active allocations.
+ * 
+ * @method get_ptr_by_index(uint32_t p_index)
+ * @brief Retrieves a pointer to an allocated object by its allocation index.
+ * @param p_index Zero-based index in the allocation order.
+ * @return T* Pointer to the object at the given index.
+ * 
+ * @method get_rid_by_index(uint32_t p_index)
+ * @brief Retrieves the RID of an allocated object by its allocation index.
+ * @param p_index Zero-based index in the allocation order.
+ * @return RID The resource identifier at the given index.
+ * 
+ * @method get_owned_list(List<RID> *p_owned)
+ * @brief Populates a list with RIDs of all currently allocated objects.
+ * @param p_owned Pointer to list to be populated with owned RIDs.
+ * 
+ * @method set_description(const char *p_descrption)
+ * @brief Sets a description string for debugging and error reporting.
+ * @param p_descrption Description of the allocator's purpose.
+ * 
+ * @class RID_PtrOwner
+ * @brief Specialized RID allocator for managing pointers to objects.
+ * 
+ * @tparam T The type of objects being pointed to.
+ * @tparam THREAD_SAFE Boolean flag for thread-safe operations.
+ * 
+ * Wrapper around RID_Alloc that stores and manages pointers to objects
+ * rather than the objects themselves.
+ * 
+ * @class RID_Owner
+ * @brief Standard RID allocator for managing objects directly.
+ * 
+ * @tparam T The type of objects to allocate and manage.
+ * @tparam THREAD_SAFE Boolean flag for thread-safe operations.
+ * 
+ * Wrapper around RID_Alloc providing a simplified interface for direct
+ * object allocation and management.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RID_OWNER_H
 #define RID_OWNER_H
 

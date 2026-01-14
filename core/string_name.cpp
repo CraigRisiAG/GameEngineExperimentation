@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  string_name.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file string_name.cpp
- * @brief Unicode string handling and manipulation.
+ * @brief Implementation of the StringName class for interned string management.
+ * 
+ * StringName is a system for managing unique string identifiers with reference counting
+ * and hash-table based deduplication. This implementation provides:
+ * 
+ * - Automatic string interning to ensure identical strings share the same memory
+ * - Fast O(1) comparison between StringName instances via pointer comparison
+ * - Reference counting for memory management
+ * - Thread-safe operations via mutex protection
+ * - Support for static C strings, String objects, and character arrays
+ * - Hash table based lookup with collision resolution via linked lists
+ * 
+ * Key Features:
+ * - setup(): Initializes the global string name table
+ * - cleanup(): Deallocates all remaining string names and reports orphans
+ * - StringName constructors: Support creation from various string types
+ * - search(): Lookup existing strings without creating new entries
+ * - operator==() and operator!=(): Comparison operators for various types
+ * - unref(): Reference counting and memory cleanup
+ * 
+ * The class uses a global hash table (_table) indexed by hash value modulo STRING_TABLE_LEN,
+ * with each bucket containing a doubly-linked list of _Data structures for collision handling.
+ * 
+ * Thread Safety: All operations modifying the string table are protected by a global mutex.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "string_name.h"
 
 #include "core/os/os.h"

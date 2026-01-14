@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  script_language.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file script_language.cpp
- * @brief Implementation of script_language functionality.
+ * @brief Implementation of the scripting language system for the game engine.
+ * 
+ * This file contains the core functionality for managing script languages, script instances,
+ * and global script classes within the engine. It provides:
+ * 
+ * - ScriptServer: A singleton that manages multiple scripting languages, handles global script
+ *   class registration and persistence, and controls script execution settings.
+ * 
+ * - Script: Base class for script objects that provides binding methods, property/method/signal
+ *   introspection, and integration with the debugger system.
+ * 
+ * - ScriptInstance: Abstract base class for script instances, providing property state management,
+ *   method calling with variable arguments, and fallback property handling.
+ * 
+ * - PlaceHolderScriptInstance: A concrete implementation used when the actual script language
+ *   is not available. It maintains property values and constants while providing fallback
+ *   property access without actual script execution.
+ * 
+ * - ScriptCodeCompletionCache: Singleton for caching script code completion data.
+ * 
+ * Key Features:
+ * - Support for multiple scripting language backends
+ * - Thread-safe language initialization and cleanup
+ * - Global class management with cyclic inheritance detection
+ * - Script reloading and debugger integration
+ * - Fallback behavior for unloaded scripts via placeholder instances
+ * 
+ * @see script_language.h
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "script_language.h"
 
 #include "core/core_string_names.h"

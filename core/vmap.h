@@ -1,39 +1,155 @@
-/*************************************************************************/
-/*  vmap.h                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file vmap.h
- * @brief Template-based ordered map (red-black tree).
+ * @class VMap
+ * @brief A template-based sorted map container using copy-on-write semantics.
+ *
+ * VMap is a generic key-value map that maintains its elements in sorted order
+ * based on the key type. It uses binary search for efficient lookups and uses
+ * copy-on-write (CowData) for memory efficiency when copying.
+ *
+ * @tparam T The key type. Must support operator< for comparison.
+ * @tparam V The value type associated with each key.
+ *
+ * @note This container maintains sorted order, making it suitable for scenarios
+ *       where elements need to be accessed in order or where range queries are needed.
+ *
+ * @note Uses copy-on-write semantics for efficient copying and assignment operations.
+ *
+ * Example usage:
+ * @code
+ * VMap<String, int> myMap;
+ * myMap.insert("key1", 42);
+ * if (myMap.has("key1")) {
+ *     int value = myMap["key1"];
+ * }
+ * @endcode
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct Pair
+ * @brief A key-value pair structure.
+ *
+ * @member T key The key of the pair.
+ * @member V value The value associated with the key.
+ */
 
+/**
+ * @brief Finds the position of a key or where it should be inserted.
+ *
+ * @param p_val The value to search for.
+ * @param r_exact Output parameter set to true if an exact match was found.
+ * @return The index of the found element or the insertion position.
+ */
+
+/**
+ * @brief Finds the exact position of a key.
+ *
+ * @param p_val The value to search for.
+ * @return The index of the key if found, -1 otherwise.
+ */
+
+/**
+ * @brief Inserts or updates a key-value pair.
+ *
+ * @param p_key The key to insert or update.
+ * @param p_val The value to associate with the key.
+ * @return The index where the pair was inserted or updated.
+ */
+
+/**
+ * @brief Checks if a key exists in the map.
+ *
+ * @param p_val The key to search for.
+ * @return true if the key exists, false otherwise.
+ */
+
+/**
+ * @brief Removes a key-value pair from the map.
+ *
+ * @param p_val The key to remove. Does nothing if the key doesn't exist.
+ */
+
+/**
+ * @brief Finds the index of a key.
+ *
+ * @param p_val The key to search for.
+ * @return The index if found, -1 otherwise.
+ */
+
+/**
+ * @brief Finds the nearest index to a given key.
+ *
+ * @param p_val The key to search for.
+ * @return The index of the key if found, or the index where it would be inserted.
+ */
+
+/**
+ * @brief Returns the number of elements in the map.
+ *
+ * @return The size of the map.
+ */
+
+/**
+ * @brief Checks if the map is empty.
+ *
+ * @return true if the map contains no elements, false otherwise.
+ */
+
+/**
+ * @brief Returns a const pointer to the internal array of pairs.
+ *
+ * @return Const pointer to the pair array.
+ */
+
+/**
+ * @brief Returns a mutable pointer to the internal array of pairs.
+ *
+ * @return Mutable pointer to the pair array.
+ */
+
+/**
+ * @brief Retrieves the value at a given index.
+ *
+ * @param p_index The index of the element.
+ * @return Const reference to the value.
+ */
+
+/**
+ * @brief Retrieves the mutable value at a given index.
+ *
+ * @param p_index The index of the element.
+ * @return Mutable reference to the value.
+ */
+
+/**
+ * @brief Retrieves the key at a given index.
+ *
+ * @param p_index The index of the element.
+ * @return Const reference to the key.
+ */
+
+/**
+ * @brief Retrieves the mutable key at a given index.
+ *
+ * @param p_index The index of the element.
+ * @return Mutable reference to the key.
+ */
+
+/**
+ * @brief Accesses a value by key (const version).
+ *
+ * @param p_key The key to access.
+ * @return Const reference to the value.
+ * @note Will crash if the key does not exist.
+ */
+
+/**
+ * @brief Accesses or creates a value by key.
+ *
+ * @param p_key The key to access.
+ * @return Mutable reference to the value. If the key doesn't exist, it is created with a default value.
+ */
 #ifndef VMAP_H
 #define VMAP_H
 

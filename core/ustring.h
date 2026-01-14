@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  ustring.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file ustring.h
- * @brief Unicode string handling and manipulation.
+ * @brief Unicode string handling classes and utilities for game engine.
+ *
+ * This header provides comprehensive string manipulation functionality including:
+ * - CharProxy: A proxy class for character access with copy-on-write semantics
+ * - CharString: A narrow character string class using copy-on-write data storage
+ * - String: A Unicode (wide character) string class with extensive utility methods
+ *
+ * Features include:
+ * - String searching (find, find_last, rfind, etc.)
+ * - String transformation (to_upper, to_lower, capitalize, etc.)
+ * - String splitting and joining operations
+ * - Path manipulation utilities
+ * - Encoding/decoding (UTF-8, URL, JSON, XML, C-escape, etc.)
+ * - Hashing and cryptographic functions (MD5, SHA1, SHA256)
+ * - Type conversion (to_int, to_float, to_double, etc.)
+ * - Validation methods (is_valid_identifier, is_valid_ip_address, etc.)
+ * - Pattern matching and subsequence detection
+ * - String formatting and padding operations
+ *
+ * The String class uses copy-on-write semantics through CowData<CharType> for
+ * efficient memory management and string copying.
+ *
+ * @see CowData for the underlying copy-on-write data structure
+ * @see CharProxy for character proxy operations
+ * @see CharString for ASCII string handling
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef USTRING_H
 #define USTRING_H
 

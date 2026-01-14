@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  resource.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file resource.h
- * @brief Base class for serializable engine resources.
+ * @brief Core resource management system for the game engine.
+ * 
+ * This header defines the Resource class, which serves as the base class for all
+ * engine resources (textures, scenes, scripts, etc.). It provides functionality for:
+ * - Resource lifecycle management through reference counting
+ * - Resource path and metadata handling
+ * - Owner tracking and change notification
+ * - Local scene resource support
+ * - Resource caching and lookup
+ * 
+ * @details
+ * The Resource class extends Reference to provide automatic memory management.
+ * It maintains a cache of loaded resources and supports editor features like
+ * import tracking and ID management.
+ * 
+ * Key features:
+ * - RES_BASE_EXTENSION macro for registering resource file extensions
+ * - Resource duplication with subresource support
+ * - Local-to-scene resources for scene-specific instances
+ * - Owner registration for change notification tracking
+ * - Thread-safe resource caching via ResourceCache
+ * - Editor-only features controlled by TOOLS_ENABLED
+ * 
+ * @class Resource
+ * @extends Reference
+ * @brief Base class for all engine resources with reference counting and caching.
+ * 
+ * @class ResourceCache
+ * @brief Static cache manager for efficient resource lookup and management.
+ * Provides thread-safe access to cached resources and supports bulk operations
+ * like reloading and dumping resource information.
+ * 
+ * @typedef RES
+ * @brief Convenience typedef for Ref<Resource> smart pointer.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RESOURCE_H
 #define RESOURCE_H
 

@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  type_info.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file type_info.h
- * @brief Definition of EnableIf data structure.
+ * @brief Type information and reflection utilities for the game engine.
+ * 
+ * This header provides compile-time type introspection and metadata management for the engine's
+ * type system. It enables runtime type information (RTTI) capabilities when DEBUG_METHODS_ENABLED
+ * is defined, allowing for type checking, inheritance detection, and variant type conversion.
+ * 
+ * @details
+ * The file includes:
+ * - EnableIf<C, T>: Template metaprogramming utility for conditional type definitions
+ * - TypesAreSame<A, B>: Compile-time type equality checking
+ * - TypeInherits<B, D>: Compile-time inheritance relationship detection
+ * - GetTypeInfo<T>: Primary template for retrieving type metadata and variant information
+ * - Metadata enum: Flags for specifying integer and floating-point type precision
+ * 
+ * Supported types include:
+ * - Primitive types: bool, int8_t, uint8_t, int16_t, uint16_t, int32_t, uint32_t, int64_t, uint64_t, float, double, wchar_t
+ * - Engine types: String, Vector2, Vector3, Transform, Quat, Color, StringName, NodePath, RID, Callable, Signal
+ * - Collection types: Dictionary, Array, PackedByteArray, PackedIntXXArray, PackedFloatXXArray, PackedStringArray, PackedVectorXArray, PackedColorArray
+ * - Special types: Variant, ObjectID, Object pointers
+ * 
+ * Macros:
+ * - MAKE_TYPE_INFO(m_type, m_var_type): Generates GetTypeInfo specialization for a type
+ * - MAKE_TYPE_INFO_WITH_META(m_type, m_var_type, m_metadata): Generates specialization with metadata
+ * - MAKE_TEMPLATE_TYPE_INFO(m_template, m_type, m_var_type): Generates specialization for template types
+ * - MAKE_ENUM_TYPE_INFO(m_enum): Generates specialization for enum types
+ * - CLASS_INFO(m_type): Retrieves class info for a given type
+ * 
+ * @note When compilation fails with instantiation errors for GetTypeInfo<T>, ensure that the
+ * forward declaration of T can see the actual class definition, especially for Object-derived classes.
+ * This typically requires including the full class declaration in the source file where GetTypeInfo<T>
+ * is instantiated.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef TYPE_INFO_H
 #define TYPE_INFO_H
 

@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  vset.h                                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file vset.h
- * @brief Template-based hash set.
+ * @class VSet
+ * @brief A template class that implements a sorted set container using a Vector.
+ * 
+ * VSet maintains a sorted collection of unique elements, allowing efficient
+ * insertion, deletion, and lookup operations using binary search. Duplicate
+ * elements are not allowed and are silently ignored on insertion attempts.
+ * 
+ * @tparam T The type of elements stored in the set. Must support the less-than
+ *           operator (<) for comparison.
+ * 
+ * @details
+ * The class uses an internal Vector to store elements in sorted order. All
+ * operations rely on binary search to maintain O(log n) lookup complexity,
+ * though insertions and deletions are O(n) due to Vector's array-based storage.
+ * 
+ * Example usage:
+ * @code
+ * VSet<int> mySet;
+ * mySet.insert(5);
+ * mySet.insert(3);
+ * mySet.insert(7);
+ * if (mySet.has(3)) {
+ *     mySet.erase(3);
+ * }
+ * @endcode
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef VSET_H
 #define VSET_H
 

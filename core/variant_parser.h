@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  variant_parser.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file variant_parser.h
- * @brief Dynamic typing system supporting multiple data types.
+ * @class VariantParser
+ * @brief Parser for deserializing Variant data from streams.
+ * 
+ * Provides functionality to parse Variant objects from different stream sources
+ * (files and strings) into structured data formats including dictionaries, arrays,
+ * and tagged objects. Supports custom resource parsing through callback functions.
+ * 
+ * @nested Stream
+ * Abstract base class representing a character input stream.
+ * Implementations must define character reading and EOF detection.
+ * 
+ * @nested StreamFile
+ * Stream implementation for reading from file resources.
+ * 
+ * @nested StreamString
+ * Stream implementation for reading from in-memory strings.
+ * 
+ * @nested ResourceParser
+ * Callback structure for handling custom resource deserialization.
+ * @field userdata Opaque pointer passed to parsing functions
+ * @field func Main resource parsing function
+ * @field ext_func External resource parsing function
+ * @field sub_func Sub-resource parsing function
+ * 
+ * @enum TokenType
+ * Enumeration of all recognized token types in the variant format.
+ * 
+ * @enum Expecting
+ * Parser state expectations during object/dictionary parsing.
+ * 
+ * @nested Token
+ * Represents a single parsed token with its type and value.
+ * 
+ * @nested Tag
+ * Represents a named object with associated field data.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @class VariantWriter
+ * @brief Serializer for converting Variant data to string representation.
+ * 
+ * Provides functionality to serialize Variant objects to strings with support
+ * for custom resource encoding through callback functions.
+ * 
+ * @typedef StoreStringFunc
+ * Callback for storing serialized string output.
+ * 
+ * @typedef EncodeResourceFunc
+ * Callback for encoding resource references as strings.
+ */
 #ifndef VARIANT_PARSER_H
 #define VARIANT_PARSER_H
 

@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  string_builder.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file string_builder.h
- * @brief Unicode string handling and manipulation.
+ * @class StringBuilder
+ * @brief A utility class for efficiently concatenating multiple strings.
+ * 
+ * The StringBuilder class provides an efficient way to build strings by appending
+ * multiple String or C-string fragments without creating intermediate copies.
+ * It maintains separate storage for Godot Strings and C-strings, tracking their
+ * total length for optimized final string construction.
+ * 
+ * @note Internally distinguishes between Godot String objects (marked as -1) and
+ *       C strings (marked with their index) for efficient memory management.
+ * 
+ * @example
+ *     StringBuilder sb;
+ *     sb.append("Hello").append(" ").append("World");
+ *     String result = sb.as_string();
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef STRING_BUILDER_H
 #define STRING_BUILDER_H
 

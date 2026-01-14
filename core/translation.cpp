@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  translation.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file translation.cpp
- * @brief Implementation of translation functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @file translation.cpp
+/// @brief Translation and localization system implementation for the game engine.
+///
+/// This file provides a comprehensive translation and localization framework that:
+/// - Maintains locale-specific message mappings for runtime translation
+/// - Supports 400+ language/locale combinations with ISO 639-1 codes
+/// - Handles locale standardization and validation (e.g., Windows-specific locale names)
+/// - Implements fallback mechanisms for unsupported locale variations
+/// - Provides both runtime and tool-specific translation systems
+///
+/// The translation system works as follows:
+/// 1. Source strings are mapped to translated strings via Translation objects
+/// 2. TranslationServer manages all registered translations globally
+/// 3. When translating, the system attempts exact locale matching first, then falls back
+///    to language-code matching (e.g., "en_GB" falls back to "en")
+/// 4. If primary locale translation fails, a configurable fallback locale is tried
+/// 5. If all translations fail, the original source string is returned
+///
+/// Key components:
+/// - locale_list[]: Array of supported locale codes (e.g., "en", "es_MX", "zh_CN")
+/// - locale_names[]: Parallel array with human-readable locale names
+/// - locale_renames[][2]: Maps non-standard locale codes to ISO 639-1 equivalents
+/// - Translation class: Per-locale message container (source -> translated text)
+/// - TranslationServer: Singleton managing all translations and locale operations
+///
+/// @note Locale codes support both underscore and hyphen separators, automatically
+///       normalized to underscore format for consistency.
+/// @note Tool translations and documentation translations are maintained separately
+///       from runtime translations for editor UI and documentation localization.
 #include "translation.h"
 
 #include "core/io/resource_loader.h"

@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  string_name.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file string_name.h
- * @brief Unicode string handling and manipulation.
+ * @class StringName
+ * @brief Optimized string class for fast comparisons using interned strings.
+ *
+ * StringName implements a string interning system where identical strings share the same
+ * internal data pointer. This allows O(1) equality comparisons using pointer comparison
+ * instead of character-by-character comparison.
+ *
+ * The class uses a hash table with 2^12 (4096) buckets to store unique strings. Each
+ * string is stored as a _Data structure containing:
+ * - Reference counting for automatic memory management
+ * - C-string pointer for constant strings
+ * - String object for dynamic strings
+ * - Hash value for quick lookups
+ * - Doubly-linked list pointers for collision handling
+ *
+ * @note All StringName instances are thread-safe through mutex protection during
+ * construction and destruction. The comparison operators are lock-free O(1) operations.
+ *
+ * @example
+ * StringName name1("MyString");
+ * StringName name2("MyString");
+ * if (name1 == name2) { }  // O(1) pointer comparison, very fast
+ *
+ * @see String - For mutable string operations
+ * @see StaticCString - For compile-time constant string optimization
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef STRING_NAME_H
 #define STRING_NAME_H
 

@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  ustring.cpp                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file ustring.cpp
- * @brief Unicode string handling and manipulation.
+ * @brief Unicode string implementation and manipulation functions.
+ * 
+ * This file contains comprehensive string handling functionality including:
+ * - Basic string operations (copy, concatenation, comparison)
+ * - Case conversion (uppercase, lowercase)
+ * - String searching and pattern matching (find, findn, rfind, rfindn, match, matchn)
+ * - String splitting and joining (split, rsplit, split_floats, split_ints, join)
+ * - String trimming and stripping (strip_edges, lstrip, rstrip, dedent)
+ * - Substring operations (substr, left, right, insert, erase)
+ * - Number conversion (to_int, to_double, to_float, hex_to_int, bin_to_int)
+ * - String formatting (format, sprintf, pad_decimals, pad_zeros)
+ * - Path manipulation (simplify_path, get_base_dir, get_file, plus_file, path_to)
+ * - Encoding/decoding (utf8, c_escape, c_unescape, json_escape, xml_escape, xml_unescape, http_escape, http_unescape)
+ * - Validation (is_numeric, is_valid_integer, is_valid_float, is_valid_identifier, is_valid_ip_address, is_valid_html_color, is_valid_filename)
+ * - Hashing and cryptography (hash, hash64, md5_text, sha1_text, sha256_text, md5_buffer, sha1_buffer, sha256_buffer)
+ * - String analysis (similarity, bigrams, word_wrap)
+ * - Text transformation (camelcase_to_underscore, capitalize, humanize_size)
+ * 
+ * Supports both CharString (8-bit) and String (wide character) variants.
+ * Includes UTF-8 parsing and generation with proper encoding validation.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS // to disable build-time warning which suggested to use strcpy_s instead strcpy
 #endif

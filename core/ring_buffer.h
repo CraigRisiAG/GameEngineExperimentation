@@ -1,39 +1,108 @@
-/*************************************************************************/
-/*  ring_buffer.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file ring_buffer.h
- * @brief Implementation of RingBuffer class.
+ * @class RingBuffer
+ * @brief A templated circular/ring buffer data structure for efficient sequential data storage and retrieval.
+ * 
+ * RingBuffer provides a fixed-size circular buffer implementation that maintains separate read and write
+ * positions. It efficiently handles wrapping around the buffer boundaries using bitwise operations.
+ * 
+ * @tparam T The type of elements stored in the ring buffer.
+ * 
+ * @note The buffer size must be a power of 2 to support efficient modulo operations via bitmasks.
+ * 
+ * @warning The buffer is full when (write_pos - read_pos) == size - 1. It is never completely full
+ * to distinguish between empty and full states.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Reads a single element from the buffer and advances the read position.
+ * @return A copy of the element at the read position, or a default-constructed T() if the buffer is empty.
+ */
 
+/**
+ * @brief Reads multiple elements from the buffer into a provided buffer.
+ * @param p_buf Pointer to the destination buffer where data will be copied.
+ * @param p_size The number of elements to read.
+ * @param p_advance If true, advances the read position; if false, leaves it unchanged. Default is true.
+ * @return The actual number of elements read (limited by available data).
+ */
+
+/**
+ * @brief Copies data from the buffer without advancing the read position.
+ * @param p_buf Pointer to the destination buffer.
+ * @param p_offset The offset from the current read position to start copying.
+ * @param p_size The number of elements to copy.
+ * @return The actual number of elements copied.
+ */
+
+/**
+ * @brief Searches for an element within the buffer starting at a given offset.
+ * @param t The element to search for.
+ * @param p_offset The offset from the current read position to start searching.
+ * @param p_max_size The maximum number of elements to search through.
+ * @return The offset where the element was found, or -1 if not found.
+ */
+
+/**
+ * @brief Advances the read position by the specified amount.
+ * @param p_n The number of positions to advance.
+ * @return The actual number of positions advanced (clamped by available data).
+ */
+
+/**
+ * @brief Decreases the write position by the specified amount.
+ * @param p_n The number of positions to move backward.
+ * @return The actual number of positions decreased (clamped by available data).
+ */
+
+/**
+ * @brief Writes a single element to the buffer at the write position.
+ * @param p_v The element to write.
+ * @return OK if successful, FAILED if there is insufficient space.
+ */
+
+/**
+ * @brief Writes multiple elements from a source buffer into the ring buffer.
+ * @param p_buf Pointer to the source buffer.
+ * @param p_size The number of elements to write.
+ * @return The actual number of elements written (limited by available space).
+ */
+
+/**
+ * @brief Returns the number of free/unoccupied spaces in the buffer.
+ * @return The number of elements that can be written before the buffer is full.
+ */
+
+/**
+ * @brief Returns the number of occupied/readable elements in the buffer.
+ * @return The number of elements currently available to read.
+ */
+
+/**
+ * @brief Returns the current capacity of the ring buffer.
+ * @return The total size of the underlying data storage.
+ */
+
+/**
+ * @brief Clears the ring buffer by resetting read and write positions to zero.
+ * @note This does not deallocate memory, only resets the positions.
+ */
+
+/**
+ * @brief Resizes the ring buffer to a new size specified as a power of 2.
+ * @param p_power The exponent: new size will be 2^p_power.
+ * @note If the buffer is resized and contains wrapped data, the data is reorganized to be contiguous.
+ */
+
+/**
+ * @brief Constructs a RingBuffer with an optional initial capacity.
+ * @param p_power The exponent for initial size (2^p_power). Default is 0 (size 1).
+ */
+
+/**
+ * @brief Destructs the RingBuffer.
+ */
 #ifndef RING_BUFFER_H
 #define RING_BUFFER_H
 

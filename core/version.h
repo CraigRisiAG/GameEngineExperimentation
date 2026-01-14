@@ -1,39 +1,25 @@
-/*************************************************************************/
-/*  version.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file version.h
- * @brief Header file for version functionality.
+ * @brief Version information and macros for the Godot game engine.
+ * 
+ * This header file defines a comprehensive set of macros for managing and formatting
+ * version information throughout the engine. Version numbers follow the semantic versioning
+ * pattern of <major>.<minor> for initial releases and <major>.<minor>.<patch> for
+ * subsequent bugfix releases where patch != 0.
+ * 
+ * @note Requires version_generated.gen.h to define VERSION_MAJOR, VERSION_MINOR,
+ *       VERSION_PATCH, VERSION_STATUS, VERSION_MODULE_CONFIG, VERSION_BUILD, and VERSION_NAME.
+ * 
+ * Macro Definitions:
+ * - VERSION_BRANCH: Main branch version string (e.g., "3.1")
+ * - VERSION_NUMBER: Complete version string excluding patch if zero (e.g., "3.1" or "3.1.4")
+ * - VERSION_HEX: Hexadecimal encoded version for easy compile-time comparison
+ * - VERSION_FULL_CONFIG: Complete version with status and module-specific features
+ * - VERSION_FULL_BUILD: Extended version including build description
+ * - VERSION_FULL_NAME: Human-readable version string with engine name and "v" prefix
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef VERSION_H
 #define VERSION_H
 

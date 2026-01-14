@@ -1,39 +1,73 @@
-/*************************************************************************/
-/*  string_buffer.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file string_buffer.h
- * @brief Unicode string handling and manipulation.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class StringBuffer
+/// @brief A flexible string buffer with small string optimization (SSO).
+///
+/// StringBuffer provides an efficient way to build strings by combining small string
+/// optimization with dynamic allocation. Strings up to SHORT_BUFFER_SIZE characters
+/// are stored in a stack-allocated buffer, while larger strings are dynamically allocated.
+///
+/// @tparam SHORT_BUFFER_SIZE The size of the inline buffer (default: 64 characters).
+///
+/// @details
+/// The class manages two storage locations:
+/// - short_buffer: Stack-allocated buffer for strings smaller than SHORT_BUFFER_SIZE
+/// - buffer: Dynamically allocated String for larger content
+///
+/// This approach minimizes heap allocations for typical small strings while maintaining
+/// scalability for larger content.
+///
+/// @example
+/// StringBuffer<> sb;
+/// sb.append("Hello").append(" ").append("World");
+/// String result = sb.as_string();
 
+/// @fn StringBuffer& StringBuffer::append(CharType p_char)
+/// @brief Appends a single character to the buffer.
+/// @param p_char The character to append.
+/// @return Reference to this StringBuffer for method chaining.
+
+/// @fn StringBuffer& StringBuffer::append(const String& p_string)
+/// @brief Appends a String object to the buffer.
+/// @param p_string The String to append.
+/// @return Reference to this StringBuffer for method chaining.
+
+/// @fn StringBuffer& StringBuffer::append(const char* p_str)
+/// @brief Appends a C-style null-terminated string to the buffer.
+/// @param p_str Pointer to the null-terminated string to append.
+/// @return Reference to this StringBuffer for method chaining.
+
+/// @fn StringBuffer& StringBuffer::append(const CharType* p_str, int p_clip_to_len)
+/// @brief Appends a CharType string with optional length limit.
+/// @param p_str Pointer to the string to append.
+/// @param p_clip_to_len Maximum characters to append (-1 for unlimited).
+/// @return Reference to this StringBuffer for method chaining.
+
+/// @fn StringBuffer& StringBuffer::reserve(int p_size)
+/// @brief Reserves capacity for at least p_size characters.
+/// @param p_size The desired minimum capacity.
+/// @return Reference to this StringBuffer for method chaining.
+/// @details Promotes to dynamic allocation if needed, copying existing content.
+
+/// @fn int StringBuffer::length() const
+/// @brief Returns the current number of characters in the buffer.
+/// @return The length of the accumulated string.
+
+/// @fn String StringBuffer::as_string()
+/// @brief Converts the buffer contents to a String object.
+/// @return A String containing the accumulated data.
+
+/// @fn double StringBuffer::as_double()
+/// @brief Converts the buffer contents to a double value.
+/// @return The buffer content parsed as a double.
+
+/// @fn int64_t StringBuffer::as_int()
+/// @brief Converts the buffer contents to a 64-bit integer.
+/// @return The buffer content parsed as an int64_t.
+
+/// @fn operator String()
+/// @brief Implicit conversion operator to String.
+/// @return A String containing the buffer contents.
 #ifndef STRING_BUFFER_H
 #define STRING_BUFFER_H
 

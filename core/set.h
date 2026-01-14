@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  set.h                                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file set.h
- * @brief Template-based hash set.
+ * @class Set
+ * @brief A self-balancing Red-Black Tree implementation providing sorted set operations.
+ * 
+ * A template-based set container that maintains elements in sorted order using a Red-Black Tree
+ * data structure. This implementation is based on the MIT Red-Black Tree reference implementation.
+ * 
+ * @tparam T The type of elements stored in the set
+ * @tparam C The comparator class used for ordering elements (default: Comparator<T>)
+ * @tparam A The allocator class used for memory management (default: DefaultAllocator)
+ * 
+ * @details
+ * The Set class provides:
+ * - O(log n) insertion, deletion, and lookup operations
+ * - Forward and backward iteration through elements
+ * - Automatic balancing to maintain tree properties
+ * - Support for finding elements and lower bound queries
+ * - Memory-efficient node-based storage with linked list pointers for iteration
+ * 
+ * @note Elements are stored in a Red-Black Tree structure with additional bidirectional
+ *       linked list pointers (_next, _prev) to enable efficient sequential iteration.
+ * 
+ * @see Element The node type used in the tree
+ * 
+ * @example
+ * Set<int> mySet;
+ * mySet.insert(5);
+ * mySet.insert(3);
+ * mySet.insert(7);
+ * bool found = mySet.has(5);  // true
+ * for (auto* elem = mySet.front(); elem; elem = elem->next()) {
+ *     int value = elem->get();
+ * }
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SET_H
 #define SET_H
 

@@ -1,39 +1,49 @@
-/*************************************************************************/
-/*  undo_redo.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file undo_redo.h
- * @brief Implementation of UndoRedo class.
+ * @class UndoRedo
+ * @brief Manages undo/redo functionality for objects and resources.
+ * 
+ * The UndoRedo class provides a complete undo/redo system that tracks operations
+ * performed on objects and allows them to be reversed or reapplied. It supports
+ * method calls, property changes, and resource references.
+ * 
+ * @section Usage
+ * Create an action with create_action(), add operations (methods, properties, references),
+ * then commit_action() to finalize. Use undo() and redo() to navigate history.
+ * 
+ * @section MergeMode
+ * - MERGE_DISABLE: No merging of consecutive actions
+ * - MERGE_ENDS: Merge actions with same name at history ends
+ * - MERGE_ALL: Merge all actions with same name
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum MergeMode
+ * @brief Determines how consecutive undo/redo actions are merged.
+ * @var MERGE_DISABLE Do not merge actions
+ * @var MERGE_ENDS Merge consecutive actions with identical names
+ * @var MERGE_ALL Merge all actions sharing the same name
+ */
 
+/**
+ * @struct Operation
+ * @brief Represents a single operation within an action (method, property, or reference).
+ * @var type The type of operation (method call, property change, or resource reference)
+ * @var resref Reference to a resource if applicable
+ * @var object Object ID that the operation targets
+ * @var name Name of the method or property
+ * @var args Arguments for the operation
+ */
+
+/**
+ * @struct Action
+ * @brief Represents a complete action containing do and undo operations.
+ * @var name Human-readable name of the action
+ * @var do_ops List of operations to perform (redo)
+ * @var undo_ops List of operations to undo
+ * @var last_tick Timestamp of the action for merge mode operations
+ */
 #ifndef UNDO_REDO_H
 #define UNDO_REDO_H
 

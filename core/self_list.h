@@ -1,39 +1,57 @@
-/*************************************************************************/
-/*  self_list.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file self_list.h
- * @brief Template-based doubly-linked list.
+ * @class SelfList
+ * @brief A self-referencing doubly-linked list node that manages its own membership in a list.
+ * 
+ * @tparam T The type of data stored in the list node.
+ * 
+ * SelfList is a template class that implements an intrusive doubly-linked list where each node
+ * maintains pointers to the next and previous elements, as well as a reference to its parent List.
+ * This design allows elements to be part of a list without requiring external node wrappers.
+ * 
+ * @nested class List
+ * @brief Manages a doubly-linked list of SelfList nodes.
+ * 
+ * The List class serves as the container that holds the first and last pointers of the linked list.
+ * It provides methods to add, remove, and access elements.
+ * 
+ * @method void add(SelfList<T> *p_elem)
+ * @brief Adds an element to the front of the list.
+ * @param p_elem Pointer to the SelfList element to add. Must not already be in a list.
+ * 
+ * @method void add_last(SelfList<T> *p_elem)
+ * @brief Adds an element to the end of the list.
+ * @param p_elem Pointer to the SelfList element to add. Must not already be in a list.
+ * 
+ * @method void remove(SelfList<T> *p_elem)
+ * @brief Removes an element from the list.
+ * @param p_elem Pointer to the SelfList element to remove. Must be in this list.
+ * 
+ * @method SelfList<T> *first()
+ * @brief Returns a pointer to the first element in the list.
+ * @return Pointer to the first SelfList node, or NULL if list is empty.
+ * 
+ * @brief SelfList(T *p_self)
+ * @brief Constructs a new SelfList node.
+ * @param p_self Pointer to the data object this node represents.
+ * 
+ * @method bool in_list() const
+ * @brief Checks if this element is currently in a list.
+ * @return True if the element is in a list, false otherwise.
+ * 
+ * @method SelfList<T> *next()
+ * @brief Returns a pointer to the next element.
+ * 
+ * @method SelfList<T> *prev()
+ * @brief Returns a pointer to the previous element.
+ * 
+ * @method T *self() const
+ * @brief Returns a pointer to the data object this node represents.
+ * 
+ * @destructor ~SelfList()
+ * @brief Destroys the node and automatically removes it from its list if present.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SELF_LIST_H
 #define SELF_LIST_H
 

@@ -1,39 +1,25 @@
-/*************************************************************************/
-/*  undo_redo.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file undo_redo.cpp
- * @brief Implementation of undo_redo functionality.
+ * @class UndoRedo
+ * @brief Manages undo/redo operations for objects in the engine.
+ * 
+ * This class implements a command pattern-based undo/redo system that tracks
+ * operations performed on objects and allows them to be undone and redone.
+ * 
+ * Operations are grouped into actions, which can contain multiple do/undo operations.
+ * The system supports method calls, property changes, and object references.
+ * 
+ * Actions can be merged based on their names and timing using different merge modes:
+ * - MERGE_DISABLE: No merging (default)
+ * - MERGE_ENDS: Merges with previous action and clears its do operations
+ * - MERGE_ALL: Merges with previous action keeping all operations
+ * 
+ * @note The system uses a stack-based approach where operations are applied immediately
+ * when committed, with undo operations stored for reversal.
+ * 
+ * @see create_action, commit_action, undo, redo
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "undo_redo.h"
 
 #include "core/os/os.h"

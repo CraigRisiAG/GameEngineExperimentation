@@ -1,39 +1,37 @@
-/*************************************************************************/
-/*  sort_array.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file sort_array.h
- * @brief Variant-based dynamic array container.
+ * @brief Introspective sorting algorithm implementation with heap sort fallback.
+ * 
+ * This header provides a template-based sorting class that implements the Introsort algorithm,
+ * which combines quicksort, heapsort, and insertion sort for optimal performance across
+ * different input distributions. It also includes support for nth element selection.
+ * 
+ * @details
+ * The SortArray class provides:
+ * - Customizable comparison function via template parameter
+ * - Optional validation in DEBUG mode to detect bad comparators
+ * - Multiple sorting strategies:
+ *   * Introsort: Main sorting algorithm that adapts based on recursion depth
+ *   * Heapsort: Fallback when recursion depth exceeds O(log n)
+ *   * Insertion sort: Optimal for small arrays (threshold: 16 elements)
+ * - Nth element selection using introselect algorithm
+ * - Partial sorting capabilities
+ * 
+ * @tparam T The data type of elements to sort
+ * @tparam Comparator Comparison function object (default: _DefaultComparator<T>)
+ * @tparam Validate Enable validation checks in DEBUG mode (default: true in DEBUG, false otherwise)
+ * 
+ * Time Complexity:
+ * - sort(): O(n log n) average, O(n log n) worst case
+ * - nth_element(): O(n) average, O(n log n) worst case
+ * 
+ * Space Complexity: O(log n) due to recursion
+ * 
+ * @note The comparator must define operator()(const T &a, const T &b) returning true if a < b
+ * @warning Bad comparison functions may result in incorrect sorting; enable SORT_ARRAY_VALIDATE_ENABLED in DEBUG builds
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SORT_ARRAY_H
 #define SORT_ARRAY_H
 

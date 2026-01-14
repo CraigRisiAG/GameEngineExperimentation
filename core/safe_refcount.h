@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  safe_refcount.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file safe_refcount.h
- * @brief Definition of SafeRefCount data structure.
+ * @brief Thread-safe atomic reference counting utilities
+ * 
+ * This header provides platform-specific implementations of atomic operations
+ * for safe reference counting in multithreaded environments. It abstracts away
+ * platform differences by providing consistent atomic primitives.
+ * 
+ * @details
+ * The implementation varies based on the compilation environment:
+ * - NO_THREADS: Simple non-atomic operations for single-threaded builds
+ * - __GNUC__: GCC/Clang atomic builtins (__sync_* intrinsics)
+ * - _MSC_VER: MSVC implementations (declared as external functions)
+ * 
+ * Supported atomic operations:
+ * - atomic_conditional_increment(): Atomically increment if non-zero
+ * - atomic_increment(): Atomically increment and return new value
+ * - atomic_decrement(): Atomically decrement and return new value
+ * - atomic_add(): Atomically add a value and return result
+ * - atomic_sub(): Atomically subtract a value and return result
+ * - atomic_exchange_if_greater(): Atomically swap if new value is greater
+ * 
+ * The SafeRefCount struct provides a convenient reference counting interface
+ * with atomic operations for managing object lifetimes in multithreaded code.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SAFE_REFCOUNT_H
 #define SAFE_REFCOUNT_H
 

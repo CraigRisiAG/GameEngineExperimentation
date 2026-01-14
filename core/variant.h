@@ -1,39 +1,35 @@
-/*************************************************************************/
-/*  variant.h                                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file variant.h
- * @brief Dynamic typing system supporting multiple data types.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @file variant.h
+/// @brief Variant type system for dynamic typing and type conversion.
+///
+/// The Variant class is a container that can hold values of any supported type,
+/// including primitive types (bool, int, float, string), math types (Vector2, Vector3, Transform, etc.),
+/// and complex types (Dictionary, Array, Object references).
+///
+/// @details
+/// - Variant uses a union-based storage mechanism to minimize memory overhead (20 bytes for float, 36 for double)
+/// - Supports 40+ different types with automatic type conversion where applicable
+/// - Provides operator overloading for common mathematical and logical operations
+/// - Implements reference counting for complex types (arrays, dictionaries, objects)
+/// - Type information is stored as an enum, with corresponding value in a union member
+///
+/// @note
+/// - The Type enum must be kept in sync with variant_op operation tables
+/// - The Operator enum defines all supported operations on variants
+/// - Complex types (Transform2D, AABB, Basis, Transform) are heap-allocated for memory efficiency
+/// - Packed arrays use reference counting to optimize copying performance
+///
+/// @see Callable, Dictionary, Array, PropertyInfo, MethodInfo
 
+/// @class Variant
+/// @brief A dynamic type container supporting 40+ different data types.
+///
+/// @details Variant is the core of the dynamic typing system. It can store any supported
+/// type and provides methods for type checking, conversion, method invocation, and
+/// property access. It implements copy-on-write semantics for complex types.
+///
+/// @note Memory layout is optimized to fit in a cache line (GCC_ALIGNED_8).
 #ifndef VARIANT_H
 #define VARIANT_H
 

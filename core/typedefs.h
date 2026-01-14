@@ -1,39 +1,24 @@
-/*************************************************************************/
-/*  typedefs.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file typedefs.h
- * @brief Definition of Comparator data structure.
+ * @brief Core type definitions, macros, and utility functions for the game engine.
+ *
+ * This header provides fundamental definitions used throughout the engine, including:
+ * - String conversion macros (_STR, _MKSTR)
+ * - Inline function modifiers (_ALWAYS_INLINE_, _FORCE_INLINE_)
+ * - Platform-specific Windows macro undefines to prevent naming conflicts
+ * - Math utility macros (ABS, SGN, MIN, MAX, CLAMP, SWAP)
+ * - Power-of-2 manipulation functions (next_power_of_2, previous_power_of_2, etc.)
+ * - Byte-order swapping macros (BSWAP16, BSWAP32, BSWAP64)
+ * - Generic comparator template for containers
+ * - Global lock utilities for thread synchronization
+ * - Compiler-specific attributes (likely/unlikely, printf format attributes)
+ * - Utility templates for metaprogramming (IndexSequence, BuildIndexSequence)
+ *
+ * @note Must be included early in compilation order after platform_config.h
+ * @note Relies on error_list.h and int_types.h being available
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef TYPEDEFS_H
 #define TYPEDEFS_H
 
