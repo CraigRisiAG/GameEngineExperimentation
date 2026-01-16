@@ -1,39 +1,60 @@
-/*************************************************************************/
-/*  midi_driver_coremidi.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file midi_driver_coremidi.cpp
- * @brief Implementation of midi_driver_coremidi functionality.
+ * @brief CoreMIDI driver implementation for MIDI input handling on macOS.
+ * 
+ * This file implements a MIDI driver using Apple's CoreMIDI framework to handle
+ * MIDI input from connected sources. It manages the creation, connection, and
+ * cleanup of MIDI ports and endpoints.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Callback function for reading MIDI packets from input sources.
+ * 
+ * This static callback is invoked by the CoreMIDI framework when MIDI data
+ * is received from a connected source. It processes each packet in the packet
+ * list and forwards the MIDI data to the input handler.
+ * 
+ * @param packet_list Pointer to the MIDIPacketList containing received packets.
+ * @param read_proc_ref_con User-defined reference data (unused).
+ * @param src_conn_ref_con Pointer to the MIDIDriverCoreMidi instance (this).
+ */
 
+/**
+ * @brief Initializes and opens the CoreMIDI driver.
+ * 
+ * Creates a MIDI client, establishes an input port, and automatically connects
+ * to all available MIDI sources. Must be called before any MIDI input can be
+ * received.
+ * 
+ * @return Error code: OK on success, ERR_CANT_OPEN if client or port creation fails.
+ */
+
+/**
+ * @brief Closes and cleans up the CoreMIDI driver.
+ * 
+ * Disconnects from all MIDI sources, disposes of the input port and MIDI client.
+ * Should be called when the driver is no longer needed. Safe to call multiple times.
+ */
+
+/**
+ * @brief Retrieves the display names of all connected MIDI input sources.
+ * 
+ * @return PackedStringArray containing the names of connected MIDI input devices.
+ */
+
+/**
+ * @brief Constructs a new MIDIDriverCoreMidi instance.
+ * 
+ * Initializes the MIDI client handle to null.
+ */
+
+/**
+ * @brief Destructs the MIDIDriverCoreMidi instance.
+ * 
+ * Ensures proper cleanup by calling close() if it hasn't been called explicitly.
+ */
 #ifdef COREMIDI_ENABLED
 
 #include "midi_driver_coremidi.h"

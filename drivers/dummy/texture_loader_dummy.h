@@ -1,39 +1,47 @@
-/*************************************************************************/
-/*  texture_loader_dummy.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file texture_loader_dummy.h
- * @brief Implementation of ResourceFormatDummyTexture class.
+ * @class ResourceFormatDummyTexture
+ * @brief A dummy texture loader resource format handler for testing and development purposes.
+ * 
+ * This class extends ResourceFormatLoader and provides the necessary interface
+ * to load dummy texture resources. It handles recognition of texture file extensions,
+ * type validation, and resource instantiation.
+ * 
+ * @note This is a dummy implementation intended for experimentation and testing.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Loads a texture resource from the specified file path.
+ * 
+ * @param p_path The file path of the texture to load.
+ * @param p_original_path The original resource path (optional).
+ * @param r_error Pointer to store error status if loading fails (optional).
+ * @param p_use_sub_threads Whether to use sub-threads for loading (default: false).
+ * @param r_progress Pointer to store loading progress (optional).
+ * 
+ * @return RES The loaded texture resource, or null on failure.
+ */
 
+/**
+ * @brief Retrieves the list of file extensions recognized by this loader.
+ * 
+ * @param p_extensions Pointer to a list where recognized extensions will be stored.
+ */
+
+/**
+ * @brief Checks if this loader handles the specified resource type.
+ * 
+ * @param p_type The resource type to check.
+ * @return bool True if this loader handles the specified type, false otherwise.
+ */
+
+/**
+ * @brief Determines the resource type based on the file path.
+ * 
+ * @param p_path The file path to analyze.
+ * @return String The resource type corresponding to the file.
+ */
 #ifndef TEXTURE_LOADER_DUMMY_H
 #define TEXTURE_LOADER_DUMMY_H
 

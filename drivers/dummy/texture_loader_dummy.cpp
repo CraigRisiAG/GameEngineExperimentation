@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  texture_loader_dummy.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file texture_loader_dummy.cpp
- * @brief Implementation of texture_loader_dummy functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class ResourceFormatDummyTexture
+/// @brief A dummy texture loader resource format handler for testing purposes.
+///
+/// This class implements a texture loader that creates a simple 8x8 black dummy texture
+/// regardless of the input file path. It's designed for testing and development scenarios
+/// where actual texture loading is not required.
+///
+/// @method RES load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress)
+/// @brief Loads a texture resource and returns a dummy 8x8 black ImageTexture.
+/// @param p_path The path to the texture file to load.
+/// @param p_original_path The original path before any remapping.
+/// @param r_error Pointer to store any error codes that occur during loading.
+/// @param p_use_sub_threads Whether to use sub-threads for loading (unused in dummy implementation).
+/// @param r_progress Pointer to store loading progress (unused in dummy implementation).
+/// @return A Ref<ImageTexture> containing the dummy 8x8 black texture, or null on failure.
+///
+/// @method void get_recognized_extensions(List<String> *p_extensions) const
+/// @brief Registers the file extensions that this loader can handle.
+/// @param p_extensions Pointer to the list where recognized extensions are added (png, hdr, jpg, tga).
+///
+/// @method bool handles_type(const String &p_type) const
+/// @brief Checks if this loader can handle the specified resource type.
+/// @param p_type The resource type to check.
+/// @return True if the type is Texture2D or a derived class, false otherwise.
+///
+/// @method String get_resource_type(const String &p_path) const
+/// @brief Determines the resource type based on file extension.
+/// @param p_path The file path to analyze.
+/// @return "ImageTexture" if the extension matches supported formats, empty string otherwise.
 #include "texture_loader_dummy.h"
 
 #include "core/os/file_access.h"

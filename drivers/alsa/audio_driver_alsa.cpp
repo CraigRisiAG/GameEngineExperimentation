@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  audio_driver_alsa.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file audio_driver_alsa.cpp
- * @brief Implementation of audio_driver_alsa functionality.
+ * AudioDriverALSA - ALSA audio driver implementation for Linux systems
+ * 
+ * This driver provides audio output functionality using the Advanced Linux Sound Architecture (ALSA).
+ * It manages PCM device initialization, audio buffer management, and threaded audio processing.
+ * 
+ * Key Features:
+ * - Supports stereo audio output with S16_LE format
+ * - Configurable sample rate and output latency
+ * - Multi-device support with hot-swapping capability
+ * - Non-blocking PCM operations with thread-based audio loop
+ * - Automatic error recovery for underrun conditions
+ * 
+ * Thread Safety:
+ * - Uses mutex locking for device switching and state management
+ * - Audio processing occurs in a dedicated thread
+ * - Thread-safe device enumeration and device switching
+ * 
+ * Error Handling:
+ * - Validates device availability before initialization
+ * - Recovers from ALSA underrun/overrun conditions
+ * - Falls back to "Default" device on initialization failure
+ * 
+ * Audio Processing:
+ * - Configurable buffer size based on project latency settings
+ * - Period-based audio output with automatic buffer management
+ * - Audio server integration for mixing and processing
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "audio_driver_alsa.h"
 
 #ifdef ALSA_ENABLED

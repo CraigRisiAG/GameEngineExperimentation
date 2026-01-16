@@ -1,39 +1,24 @@
-/*************************************************************************/
-/*  audio_driver_alsa.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file audio_driver_alsa.h
- * @brief Implementation of AudioDriverALSA class.
+ * @class AudioDriverALSA
+ * @brief ALSA audio driver implementation for audio playback on Linux systems.
+ * 
+ * Provides audio output functionality using the Advanced Linux Sound Architecture (ALSA).
+ * Manages audio thread, device configuration, sample buffering, and PCM stream handling.
+ * 
+ * @details
+ * This driver handles:
+ * - PCM device initialization and management
+ * - Multi-threaded audio processing with mutex synchronization
+ * - Audio sample format conversion (int32 to int16)
+ * - Device selection and switching
+ * - Speaker mode and mix rate configuration
+ * 
+ * @note Requires ALSA_ENABLED preprocessor definition to be compiled.
+ * 
+ * @see AudioDriver
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifdef ALSA_ENABLED
 
 #ifndef AUDIO_DRIVER_ALSA_H

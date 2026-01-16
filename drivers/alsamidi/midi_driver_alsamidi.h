@@ -1,39 +1,20 @@
-/*************************************************************************/
-/*  midi_driver_alsamidi.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file midi_driver_alsamidi.h
- * @brief Implementation of MIDIDriverALSAMidi class.
+ * @class MIDIDriverALSAMidi
+ * @brief ALSA MIDI driver implementation for Linux systems.
+ * 
+ * This class provides MIDI input functionality using the Advanced Linux Sound Architecture (ALSA).
+ * It manages raw MIDI input connections and processes incoming MIDI events in a separate thread.
+ * 
+ * @details
+ * The driver maintains a list of connected MIDI input devices and uses a dedicated thread
+ * to handle incoming MIDI messages. Thread-safe operations are ensured through mutex locking.
+ * 
+ * @note This class is only compiled when ALSAMIDI_ENABLED is defined.
+ * 
+ * @see MIDIDriver
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifdef ALSAMIDI_ENABLED
 
 #ifndef MIDI_DRIVER_ALSAMIDI_H

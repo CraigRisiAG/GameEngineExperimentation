@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  audio_driver_coreaudio.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file audio_driver_coreaudio.cpp
- * @brief Implementation of audio_driver_coreaudio functionality.
+ * @brief CoreAudio driver implementation for audio input/output on macOS and iOS.
+ * 
+ * This file implements the AudioDriverCoreAudio class, which provides audio playback
+ * and capture functionality using Apple's CoreAudio framework. It handles audio unit
+ * initialization, buffer management, device selection, and audio callbacks for both
+ * output and input streams.
+ * 
+ * Key features:
+ * - Audio output with configurable channels (stereo, surround 3.1, 5.1, 7.1)
+ * - Audio input/capture with mono and stereo support
+ * - Dynamic device selection and enumeration (macOS only)
+ * - Device change detection via property listeners (macOS only)
+ * - Configurable mix rate and output latency
+ * - Thread-safe audio processing with mutex locking
+ * 
+ * Platform support:
+ * - OSX: HAL output with full device enumeration support
+ * - iOS: Remote I/O with limited device management
+ * 
+ * @note Audio callbacks run on a real-time thread and should minimize processing time.
+ * @note Device enumeration and change notifications are only available on macOS.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifdef COREAUDIO_ENABLED
 
 #include "audio_driver_coreaudio.h"

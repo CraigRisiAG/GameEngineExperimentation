@@ -1,39 +1,100 @@
-/*************************************************************************/
-/*  midi_driver_alsamidi.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file midi_driver_alsamidi.cpp
- * @brief Implementation of midi_driver_alsamidi functionality.
+ * @brief ALSA MIDI driver implementation for Linux systems.
+ * 
+ * This module provides MIDI input support using the Advanced Linux Sound Architecture (ALSA).
+ * It manages multiple MIDI input devices and processes incoming MIDI messages in a dedicated thread.
+ * 
+ * @details
+ * The driver:
+ * - Enumerates and opens all available ALSA raw MIDI input devices
+ * - Reads MIDI data from devices in a non-blocking threaded loop
+ * - Parses variable-length MIDI messages based on status byte
+ * - Handles both channel messages (2-3 bytes) and system messages (1-3 bytes)
+ * - Supports SysEx messages (variable length, 0xF0-0xF7)
+ * - Thread-safe access to connected input devices via mutex locking
+ * 
+ * @note Requires ALSA library (libasound) and ALSAMIDI_ENABLED preprocessor flag.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Determines the expected byte count for a MIDI message.
+ * 
+ * @param message The MIDI status byte (upper nibble indicates message type).
+ * @return Expected message length in bytes (1, 2, 3, or 256 for variable-length SysEx).
+ * 
+ * @details
+ * MIDI message sizes:
+ * - 3 bytes: Note Off/On, Aftertouch, CC, Pitch Bend, Song Position Pointer
+ * - 2 bytes: Patch Change, Channel Pressure, Time Code, Song Select
+ * - 1 byte: System Real-Time, Tune Request, SysEx Start/End
+ * - 256: SysEx (variable length, buffered until SysEx end marker)
+ */
 
+/**
+ * @brief Thread function for reading and processing MIDI input data.
+ * 
+ * @param p_udata Pointer to MIDIDriverALSAMidi instance (cast from void*).
+ * 
+ * @details
+ * This function runs in a separate thread and continuously:
+ * - Reads one byte at a time from each connected MIDI input device
+ * - Detects status bytes (0x80+) to identify message boundaries
+ * - Buffers message bytes and forwards complete messages to the input handler
+ * - Handles non-blocking read errors gracefully (ignores EAGAIN)
+ * - Flushes incomplete packets when new status bytes arrive
+ * - Uses mutex protection to prevent race conditions
+ */
+
+/**
+ * @brief Opens and initializes all available ALSA MIDI input devices.
+ * 
+ * @return OK on success, ERR_CANT_OPEN if device enumeration fails.
+ * 
+ * @details
+ * - Enumerates all system ALSA raw MIDI devices
+ * - Opens each device in non-blocking mode
+ * - Stores valid device handles for polling
+ * - Creates and starts the input processing thread
+ */
+
+/**
+ * @brief Closes all MIDI devices and terminates the input thread.
+ * 
+ * @details
+ * - Signals the input thread to exit
+ * - Waits for thread completion
+ * - Closes all open MIDI device handles
+ * - Clears the connected devices list
+ */
+
+/**
+ * @brief Thread-safe mutex lock wrapper.
+ */
+
+/**
+ * @brief Thread-safe mutex unlock wrapper.
+ */
+
+/**
+ * @brief Retrieves names of all connected MIDI input devices.
+ * 
+ * @return PackedStringArray containing human-readable device names.
+ * 
+ * @note Thread-safe; acquires lock during device enumeration.
+ */
+
+/**
+ * @brief Constructs the ALSA MIDI driver instance.
+ * 
+ * @details Initializes thread pointer and exit flag.
+ */
+
+/**
+ * @brief Destructs the ALSA MIDI driver and closes all resources.
+ */
 #ifdef ALSAMIDI_ENABLED
 
 #include "midi_driver_alsamidi.h"
