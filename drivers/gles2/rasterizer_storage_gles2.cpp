@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  rasterizer_storage_gles2.cpp                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file rasterizer_storage_gles2.cpp
- * @brief Implementation of rasterizer_storage_gles2 functionality.
+ * @brief OpenGL ES 2.0 Rasterizer Storage Implementation
+ * 
+ * This file implements the RasterizerStorageGLES2 class, which manages rendering resources
+ * for OpenGL ES 2.0 graphics contexts. It handles creation, allocation, and management of
+ * various GPU resources including:
+ * 
+ * - Textures (2D, Cubemaps, Arrays, 3D) with support for various compression formats
+ *   (S3TC/DXT, RGTC, BPTC, PVRTC, ETC)
+ * - Materials and Shaders with custom code compilation
+ * - Meshes with vertex/index buffers and blend shapes
+ * - MultiMeshes for instanced rendering
+ * - Skeletons with bone transformation data
+ * - Immediate geometry rendering
+ * - Lights (directional, spot, omni) with shadow support
+ * - Reflection Probes and Lightmap Captures
+ * - Render Targets with MSAA support
+ * - Canvas Light Shadows and Occluders
+ * 
+ * The implementation manages OpenGL state and provides abstraction over platform-specific
+ * extensions for Android, iOS, and UWP platforms. It also handles half-float vertex
+ * decompression and various texture format conversions.
+ * 
+ * @note This is an ES 2.0 implementation with fallback support for GLES_OVER_GL (desktop GL)
+ * @note Particle systems and GI Probes are not supported in ES 2.0
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "rasterizer_storage_gles2.h"
 
 #include "core/math/transform.h"

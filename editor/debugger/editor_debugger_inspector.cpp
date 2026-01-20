@@ -1,39 +1,100 @@
-/*************************************************************************/
-/*  editor_debugger_inspector.cpp                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_debugger_inspector.cpp
- * @brief Implementation of editor_debugger_inspector functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class EditorDebuggerRemoteObject
+/// @brief Represents a remote object being inspected in the debugger.
+/// 
+/// This class provides a wrapper around remote objects that are being debugged,
+/// allowing property inspection and editing. It maintains a list of properties
+/// and their current values synchronized with the remote debugger state.
+/// 
+/// @signal value_edited(int object_id, StringName property, Variant value)
+///         Emitted when a property value is edited on this remote object.
 
+/// @fn bool EditorDebuggerRemoteObject::_set(const StringName &p_name, const Variant &p_value)
+/// @brief Sets a property value on the remote object.
+/// @param p_name The name of the property to set.
+/// @param p_value The new value for the property.
+/// @return true if the property was successfully set, false otherwise.
+/// @note Properties starting with "Constants/" cannot be edited.
+
+/// @fn bool EditorDebuggerRemoteObject::_get(const StringName &p_name, Variant &r_ret) const
+/// @brief Retrieves a property value from the remote object.
+/// @param p_name The name of the property to retrieve.
+/// @param r_ret Output parameter containing the property value.
+/// @return true if the property exists and was retrieved, false otherwise.
+
+/// @fn void EditorDebuggerRemoteObject::_get_property_list(List<PropertyInfo> *p_list) const
+/// @brief Populates the property list for this remote object.
+/// @param p_list Output list to be populated with PropertyInfo structures.
+
+/// @fn String EditorDebuggerRemoteObject::get_title()
+/// @brief Returns a human-readable title for this remote object.
+/// @return A string containing the remote object's type name and ID, or "<null>" if invalid.
+
+/// @fn Variant EditorDebuggerRemoteObject::get_variant(const StringName &p_name)
+/// @brief Convenience method to get a property variant.
+/// @param p_name The property name to retrieve.
+/// @return The variant value of the property.
+
+/// @class EditorDebuggerInspector
+/// @brief Inspector panel for debugging remote objects in the editor.
+/// 
+/// Manages the inspection and editing of remote objects during debugging sessions.
+/// Tracks multiple remote objects, handles property updates, and manages stack variables.
+/// 
+/// @signal object_selected(int id)
+///         Emitted when a remote object is selected for inspection.
+/// @signal object_edited(int id, StringName property, Variant value)
+///         Emitted when a property of a remote object is edited.
+/// @signal object_property_updated(int id, StringName property)
+///         Emitted when a property of a remote object is updated by the debugger.
+
+/// @fn EditorDebuggerInspector::EditorDebuggerInspector()
+/// @brief Constructs the debugger inspector and initializes the variables object.
+
+/// @fn EditorDebuggerInspector::~EditorDebuggerInspector()
+/// @brief Destructs the debugger inspector and cleans up all cached remote objects.
+
+/// @fn void EditorDebuggerInspector::_notification(int p_what)
+/// @brief Handles editor notifications for initialization and tree entry.
+/// @param p_what The notification type.
+
+/// @fn void EditorDebuggerInspector::_object_edited(ObjectID p_id, const String &p_prop, const Variant &p_value)
+/// @brief Internal handler for object property edits. Forwards to signal.
+/// @param p_id The ID of the edited object.
+/// @param p_prop The property name that was edited.
+/// @param p_value The new value of the property.
+
+/// @fn void EditorDebuggerInspector::_object_selected(ObjectID p_object)
+/// @brief Internal handler for object selection. Forwards to signal.
+/// @param p_object The ID of the selected object.
+
+/// @fn ObjectID EditorDebuggerInspector::add_object(const Array &p_arr)
+/// @brief Adds or updates a remote object in the inspector.
+/// @param p_arr A serialized array containing the object's data from the debugger.
+/// @return The ObjectID of the added/updated remote object.
+/// @details Handles resource loading for object properties and script attachment.
+
+/// @fn void EditorDebuggerInspector::clear_cache()
+/// @brief Clears all cached remote objects and removes any current selection.
+
+/// @fn Object *EditorDebuggerInspector::get_object(ObjectID p_id)
+/// @brief Retrieves a cached remote object by ID.
+/// @param p_id The ObjectID to look up.
+/// @return Pointer to the remote object, or NULL if not found.
+
+/// @fn void EditorDebuggerInspector::add_stack_variable(const Array &p_array)
+/// @brief Adds a stack variable to the variables inspector panel.
+/// @param p_array A serialized array containing the variable data.
+/// @details Variables are categorized as Locals, Members, or Globals.
+
+/// @fn void EditorDebuggerInspector::clear_stack_variables()
+/// @brief Clears all stack variables from the variables inspector panel.
+
+/// @fn String EditorDebuggerInspector::get_stack_variable(const String &p_var)
+/// @brief Retrieves the value of a stack variable by name.
+/// @param p_var The full name of the variable (including category prefix).
+/// @return The string representation of the variable's value.
 #include "editor_debugger_inspector.h"
 
 #include "core/debugger/debugger_marshalls.h"

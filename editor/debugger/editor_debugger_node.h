@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  editor_debugger_node.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file editor_debugger_node.h
- * @brief Implementation of EditorDebuggerNode class.
+ * @class EditorDebuggerNode
+ * @brief Main debugger interface node for the editor.
+ * 
+ * EditorDebuggerNode manages the debugging functionality in the editor, including:
+ * - Multiple debugger instances via tabs
+ * - Breakpoint management
+ * - Remote scene tree inspection
+ * - Live debugging and editing
+ * - Camera override control for different viewports
+ * - Script execution tracking and stack navigation
+ * 
+ * This class acts as a central hub for debugging operations, coordinating between
+ * the debugger server, script editor, and remote game instances.
+ * 
+ * @note This is a singleton class accessed via get_singleton().
+ * @inherits MarginContainer
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum CameraOverride
+ * @brief Specifies which viewport/camera to override during debugging.
+ * @var OVERRIDE_NONE No camera override
+ * @var OVERRIDE_2D Override 2D viewport camera
+ * @var OVERRIDE_3D_1 Override 3D Viewport 1 camera
+ * @var OVERRIDE_3D_2 Override 3D Viewport 2 camera
+ * @var OVERRIDE_3D_3 Override 3D Viewport 3 camera
+ * @var OVERRIDE_3D_4 Override 3D Viewport 4 camera
+ */
 
+/**
+ * @class EditorDebuggerNode::Breakpoint
+ * @brief Represents a code breakpoint with source file and line number.
+ * 
+ * @var source The source file path where the breakpoint is set
+ * @var line The line number of the breakpoint
+ */
 #ifndef EDITOR_DEBUGGER_NODE_H
 #define EDITOR_DEBUGGER_NODE_H
 

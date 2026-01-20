@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  shader_gles2.h                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file shader_gles2.h
- * @brief Implementation of ShaderGLES2 class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \class ShaderGLES2
+/// \brief OpenGL ES 2.0 shader management and compilation system.
+///
+/// ShaderGLES2 provides a comprehensive system for managing GLES2 shader programs,
+/// including compilation, caching, versioning, and custom shader support. It handles
+/// shader variants based on conditional compilation, uniform management, and texture
+/// unit binding.
+///
+/// \section Features
+/// - **Shader Compilation**: Compiles and links vertex and fragment shaders
+/// - **Version Caching**: Caches compiled shader versions to avoid recompilation
+/// - **Conditional Compilation**: Supports conditional defines for shader variants
+/// - **Custom Shaders**: Allows runtime custom shader code injection
+/// - **Uniform Management**: Manages shader uniforms and their locations
+/// - **Texture Unit Binding**: Handles texture unit pair management
+///
+/// \section Nested Structures
+/// - \c Enum: Defines bit mask and shift information for conditional defines
+/// - \c EnumValue: Mask values for setting/clearing conditional bits
+/// - \c AttributePair: Maps attribute names to GL attribute indices
+/// - \c UniformPair: Maps uniform names to their type hints
+/// - \c TexUnitPair: Maps texture uniform names to texture unit indices
+/// - \c CustomCode: Stores custom shader code with versioning information
+/// - \c Version: Represents a compiled shader program variant with uniform locations
+/// - \c VersionKey: Unique key combining version and code_version for caching
+///
+/// \section Usage
+/// Subclasses must implement get_shader_name() and init() methods, then call setup()
+/// to configure the shader with conditional defines, uniforms, attributes, and code.
+/// Use bind() to activate the shader, _set_conditional() to change variants, and
+/// create_custom_shader() for runtime shader customization.
+///
+/// \note This is an abstract base class; concrete implementations provide specific shader definitions.
 #ifndef SHADER_GLES2_H
 #define SHADER_GLES2_H
 

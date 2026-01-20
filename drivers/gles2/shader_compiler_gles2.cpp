@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  shader_compiler_gles2.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file shader_compiler_gles2.cpp
- * @brief Implementation of shader_compiler_gles2 functionality.
+ * @brief GLES2 Shader Compiler Implementation
+ * 
+ * This file implements the shader compilation pipeline for OpenGL ES 2.0 (GLES2).
+ * It converts abstract shader nodes into GLSL ES 2.0 compatible code.
+ * 
+ * Key Features:
+ * - Converts shader AST (Abstract Syntax Tree) nodes to GLSL ES 2.0 code
+ * - Handles multiple shader types: Canvas Item, Spatial
+ * - Manages uniforms, varyings, structs, and functions
+ * - Applies render mode definitions and precision qualifiers
+ * - Generates vertex, fragment, and light shader code
+ * - Handles special texture sampling functions (texture2D, textureCube, etc.)
+ * - Supports math operations with GLES2 compatibility adjustments
+ * 
+ * Main Classes:
+ * - ShaderCompilerGLES2: Main compiler class that orchestrates the compilation process
+ * 
+ * Helper Functions:
+ * - _mktab(): Generates indentation tabs for formatted output
+ * - _typestr(): Converts data types to GLSL type strings
+ * - _prestr(): Converts precision qualifiers to GLSL strings
+ * - _qualstr(): Converts argument qualifiers (in/out/inout) to GLSL strings
+ * - _opstr(): Converts operators to GLSL operator strings
+ * - _mkid(): Mangles identifiers to avoid GLSL reserved double underscore
+ * - f2sp0(): Converts floats to GLSL-compatible string representation
+ * - get_constant_text(): Generates GLSL code for constant values
+ * 
+ * Main Methods:
+ * - compile(): Entry point for shader compilation
+ * - _dump_node_code(): Recursively converts AST nodes to GLSL code
+ * - _dump_function_deps(): Handles function dependency resolution and generation
+ * 
+ * @note GLES2 has limited capabilities compared to modern OpenGL:
+ *       - No support for unsigned integers (uses signed instead)
+ *       - Limited built-in functions
+ *       - Precision qualifiers required
+ *       - Different texture sampling syntax
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "shader_compiler_gles2.h"
 
 #include "core/os/os.h"

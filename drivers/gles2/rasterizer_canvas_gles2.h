@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  rasterizer_canvas_gles2.h                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file rasterizer_canvas_gles2.h
- * @brief Implementation of RasterizerCanvasGLES2 class.
+ * @class RasterizerCanvasGLES2
+ * @brief OpenGL ES 2.0 implementation of the canvas rasterizer.
+ * 
+ * This class handles 2D rendering operations for canvas items using OpenGL ES 2.0.
+ * It manages shader states, transformations, lighting, and drawing of various canvas primitives.
+ * 
+ * @details
+ * The rasterizer manages:
+ * - Canvas item rendering with support for textures, normals, and skeletal animation
+ * - Light and shadow rendering for 2D scenes
+ * - Multiple shader types (canvas, shadow, lens distortion)
+ * - Vertex and index buffer management for polygons and nine-patch rendering
+ * - Screen-space effects and coordinate transformations
+ * 
+ * Key responsibilities:
+ * - Maintain and update uniform data for shaders
+ * - Render canvas items in depth-sorted order with modulation and lighting
+ * - Handle light shadow buffer updates and viewport shadow debugging
+ * - Provide texture binding and buffer management utilities
+ * - Support post-processing effects like lens distortion
+ * 
+ * @note This is an internal rendering component specific to GLES2 graphics backend.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RASTERIZERCANVASGLES2_H
 #define RASTERIZERCANVASGLES2_H
 

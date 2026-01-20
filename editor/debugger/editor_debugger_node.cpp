@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  editor_debugger_node.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file editor_debugger_node.cpp
- * @brief Implementation of editor_debugger_node functionality.
+ * @brief Implementation of the EditorDebuggerNode class for managing debug sessions in the Godot editor.
+ * 
+ * This file provides the core functionality for the debugger interface, including:
+ * - Management of multiple debugging sessions through a TabContainer
+ * - Connection handling between the editor and remote debugged processes
+ * - Remote scene tree inspection and live editing capabilities
+ * - Breakpoint management and synchronization across debuggers
+ * - Stack frame navigation and script line highlighting
+ * - Live debug operations (node creation, deletion, reparenting, etc.)
+ * - Debug control commands (step, continue, break)
+ * - Error and warning tracking with UI updates
+ * - Remote object inspection and property updates
+ * 
+ * The EditorDebuggerNode acts as a singleton hub that coordinates multiple ScriptEditorDebugger
+ * instances, each representing an active debugging session with a remote process. It handles
+ * the lifecycle of debugging sessions, manages UI state, and provides the interface between
+ * the editor and debugged game instances.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_debugger_node.h"
 
 #include "editor/debugger/editor_debugger_tree.h"

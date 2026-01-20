@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  rasterizer_storage_gles2.h                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file rasterizer_storage_gles2.h
- * @brief Implementation of RasterizerStorageGLES2 class.
+ * @class RasterizerStorageGLES2
+ * @brief GLES2 implementation of the RasterizerStorage interface.
+ * 
+ * Manages GPU resources for the GLES2 rendering backend, including:
+ * - Textures (2D, 3D, cubemaps, arrays)
+ * - Shaders and materials
+ * - Meshes and surfaces
+ * - Skeletons and blend shapes
+ * - Lights and reflection probes
+ * - Render targets and framebuffer objects
+ * - Particles and immediate geometry
+ * - Lightmap captures and GI probes
+ * 
+ * This class serves as the central storage and management system for all GPU resources
+ * used during rendering operations. It maintains resource ownership through RID (Resource ID)
+ * handles and provides methods to create, modify, and retrieve GPU resource data.
+ * 
+ * The class is organized into several subsystems:
+ * - Config: Graphics capability detection and configuration
+ * - Resources: Global GPU resources (white/black textures, buffers, etc.)
+ * - Shaders: Shader compilation and management
+ * - Info: Rendering statistics and memory tracking
+ * - API sections: Public methods for each resource type (Texture, Shader, Material, Mesh, etc.)
+ * 
+ * Resource lifecycle is managed through dirty lists that track modifications and update
+ * GPU memory accordingly during render passes.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RASTERIZERSTORAGEGLES2_H
 #define RASTERIZERSTORAGEGLES2_H
 

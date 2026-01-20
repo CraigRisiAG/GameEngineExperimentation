@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  rasterizer_scene_gles2.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file rasterizer_scene_gles2.h
- * @brief Implementation of RasterizerSceneGLES2 class.
+ * @brief GLES2 implementation of the rasterizer scene renderer.
+ *
+ * RasterizerSceneGLES2 is responsible for rendering 3D scenes using OpenGL ES 2.0.
+ * It manages scene rendering, shadows, reflections, lighting, and environmental effects.
+ *
+ * @class RasterizerSceneGLES2
+ * @extends RasterizerScene
+ *
+ * @section Features
+ * - Shadow atlas management with configurable filtering modes (NEAREST, PCF5, PCF13)
+ * - Directional and omnidirectional shadow rendering
+ * - Reflection probe instances and cubemap management
+ * - Environmental settings (background, fog, glow, depth of field, tone mapping)
+ * - Light instance management with support for directional, omni, and spot lights
+ * - Material and shader system with skeletal animation support
+ * - Post-processing effects (blur, tone mapping)
+ * - Depth of field, screen space ambient occlusion, and screen space reflections
+ *
+ * @section Shadow System
+ * Utilizes ShadowAtlas for efficient shadow map allocation across four quadrants.
+ * Supports both cubemap shadows for point lights and directional shadow mapping.
+ *
+ * @section Reflection System
+ * Manages reflection probe instances with cubemap rendering and atlas-based storage.
+ * Supports real-time reflection updates and specular contributions.
+ *
+ * @section Rendering Pipeline
+ * 1. Scene culling and geometry collection into RenderList
+ * 2. Material and light setup for each render element
+ * 3. Geometry rendering with appropriate shader selection
+ * 4. Post-processing application (bloom, DOF, tone mapping)
+ * 5. Final composite to screen or framebuffer
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef RASTERIZERSCENEGLES2_H
 #define RASTERIZERSCENEGLES2_H
 

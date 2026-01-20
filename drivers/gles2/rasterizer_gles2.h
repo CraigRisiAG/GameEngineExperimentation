@@ -1,39 +1,124 @@
-/*************************************************************************/
-/*  rasterizer_gles2.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file rasterizer_gles2.h
- * @brief Implementation of RasterizerGLES2 class.
+ * @class RasterizerGLES2
+ * @brief OpenGL ES 2.0 implementation of the Rasterizer interface.
+ * 
+ * This class provides rendering capabilities using OpenGL ES 2.0 as the graphics backend.
+ * It manages three main rendering subsystems: storage, canvas, and scene rendering.
+ * 
+ * @details
+ * The RasterizerGLES2 class is responsible for:
+ * - Managing the rendering pipeline for OpenGL ES 2.0 graphics
+ * - Coordinating storage operations for graphics resources
+ * - Handling canvas and scene rendering operations
+ * - Managing render targets and frame rendering
+ * - Processing boot images and lens distortion effects
+ * 
+ * @note This is a low-end renderer implementation as indicated by is_low_end() returning true.
+ * 
+ * @see RasterizerStorage, RasterizerCanvas, RasterizerScene
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Gets the storage subsystem for graphics resource management.
+ * @return Pointer to RasterizerStorage implementation
+ */
 
+/**
+ * @brief Gets the canvas rendering subsystem.
+ * @return Pointer to RasterizerCanvas implementation
+ */
+
+/**
+ * @brief Gets the scene rendering subsystem.
+ * @return Pointer to RasterizerScene implementation
+ */
+
+/**
+ * @brief Sets the boot image displayed during engine initialization.
+ * @param p_image The image to display
+ * @param p_color Background color
+ * @param p_scale Whether to scale the image to fit the screen
+ * @param p_use_filter Whether to apply filtering to the image (default: true)
+ */
+
+/**
+ * @brief Initializes the rasterizer and graphics subsystems.
+ */
+
+/**
+ * @brief Begins a new frame with the specified time step.
+ * @param frame_step The time elapsed since the last frame in seconds
+ */
+
+/**
+ * @brief Sets the current render target for subsequent drawing operations.
+ * @param p_render_target RID of the render target
+ */
+
+/**
+ * @brief Restores the previous render target after 3D rendering.
+ * @param p_3d_was_drawn Whether 3D content was drawn to the render target
+ */
+
+/**
+ * @brief Clears the current render target with the specified color.
+ * @param p_color The color to clear with
+ */
+
+/**
+ * @brief Blits a render target to the screen.
+ * @param p_render_target RID of the source render target
+ * @param p_screen_rect Rectangle defining the destination on screen
+ * @param p_screen Screen index (default: 0)
+ */
+
+/**
+ * @brief Outputs a render target to screen with lens distortion applied.
+ * @param p_render_target RID of the source render target
+ * @param p_screen_rect Rectangle defining the destination on screen
+ * @param p_k1 First distortion coefficient
+ * @param p_k2 Second distortion coefficient
+ * @param p_eye_center Center point of the eye for distortion calculation
+ * @param p_oversample Oversampling factor for quality
+ */
+
+/**
+ * @brief Ends the current frame and optionally swaps buffers.
+ * @param p_swap_buffers Whether to swap front and back buffers
+ */
+
+/**
+ * @brief Finalizes and cleans up the rasterizer resources.
+ */
+
+/**
+ * @brief Checks if the OpenGL ES 2.0 driver is viable on this system.
+ * @return Error code indicating viability status
+ */
+
+/**
+ * @brief Sets this rasterizer as the current rendering backend.
+ */
+
+/**
+ * @brief Registers configuration options for the rasterizer.
+ */
+
+/**
+ * @brief Determines if this is a low-end renderer.
+ * @return true, as GLES2 is optimized for low-end devices
+ */
+
+/**
+ * @brief Constructs a new RasterizerGLES2 instance.
+ */
+
+/**
+ * @brief Destructs the RasterizerGLES2 instance and releases resources.
+ */
 #ifndef RASTERIZERGLES2_H
 #define RASTERIZERGLES2_H
 

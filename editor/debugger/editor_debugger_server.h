@@ -1,39 +1,58 @@
-/*************************************************************************/
-/*  editor_debugger_server.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file editor_debugger_server.h
- * @brief Implementation of EditorDebuggerServer class.
+ * @class EditorDebuggerServer
+ * @brief Abstract base class for managing editor debugger server connections.
+ * 
+ * EditorDebuggerServer provides an interface for creating and managing connections
+ * to remote debuggers. Implementations of this class handle the server-side logic
+ * for accepting and processing debugger connections.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn static EditorDebuggerServer *create_default()
+ * @brief Factory method to create a default debugger server implementation.
+ * @return A pointer to the created EditorDebuggerServer instance.
+ */
 
+/**
+ * @fn virtual void poll()
+ * @brief Process pending debugger server operations.
+ * 
+ * Should be called regularly to check for new connections and process
+ * any pending communication from connected debuggers.
+ */
+
+/**
+ * @fn virtual Error start()
+ * @brief Start the debugger server.
+ * @return Error code indicating success or failure of the operation.
+ */
+
+/**
+ * @fn virtual void stop()
+ * @brief Stop the debugger server and close any active connections.
+ */
+
+/**
+ * @fn virtual bool is_active() const
+ * @brief Check if the debugger server is currently running.
+ * @return true if the server is active, false otherwise.
+ */
+
+/**
+ * @fn virtual bool is_connection_available() const
+ * @brief Check if a new debugger connection is available.
+ * @return true if a connection is waiting to be accepted, false otherwise.
+ */
+
+/**
+ * @fn virtual Ref<RemoteDebuggerPeer> take_connection()
+ * @brief Accept and retrieve the next available debugger connection.
+ * @return A reference to the RemoteDebuggerPeer representing the connection,
+ *         or null if no connection is available.
+ */
 #ifndef EDITOR_DEBUGGER_CONNECTION_H
 #define EDITOR_DEBUGGER_CONNECTION_H
 

@@ -1,90 +1,61 @@
-/*************************************************************************/
-/*  editor_debugger_inspector.h                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_debugger_inspector.h
- * @brief Implementation of EditorDebuggerRemoteObject class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
-#ifndef EDITOR_DEBUGGER_INSPECTOR_H
-#define EDITOR_DEBUGGER_INSPECTOR_H
-#include "editor/editor_inspector.h"
-
+/// @class EditorDebuggerRemoteObject
+/// @brief Represents a remote object from a debugger session.
+/// 
+/// This class wraps remote objects that are inspected during debugging,
+/// providing property access and synchronization with the remote debugger.
+/// It stores property metadata and values for display in the inspector.
 class EditorDebuggerRemoteObject : public Object {
 
-	GDCLASS(EditorDebuggerRemoteObject, Object);
-
-protected:
-	bool _set(const StringName &p_name, const Variant &p_value);
-	bool _get(const StringName &p_name, Variant &r_ret) const;
-	void _get_property_list(List<PropertyInfo> *p_list) const;
-	static void _bind_methods();
-
-public:
-	bool editable = false;
-	ObjectID remote_object_id;
-	String type_name;
-	List<PropertyInfo> prop_list;
-	Map<StringName, Variant> prop_values;
-
-	ObjectID get_remote_object_id() { return remote_object_id; };
-	String get_title();
-
-	Variant get_variant(const StringName &p_name);
-
-	void clear() {
-		prop_list.clear();
-		prop_values.clear();
-	}
-
-	void update() { _change_notify(); }
-
-	EditorDebuggerRemoteObject(){};
-};
-
+/// @class EditorDebuggerInspector
+/// @brief Inspector panel for examining remote objects during debugging.
+/// 
+/// This class extends EditorInspector to provide debugging capabilities,
+/// managing remote object inspection and stack variable display.
+/// It maintains a cache of remote objects and handles variable updates
+/// from the debugger backend.
+/// 
+/// @see EditorInspector
+/// @see EditorDebuggerRemoteObject
 class EditorDebuggerInspector : public EditorInspector {
-
-	GDCLASS(EditorDebuggerInspector, EditorInspector);
-
-private:
-	ObjectID inspected_object_id;
-	Map<ObjectID, EditorDebuggerRemoteObject *> remote_objects;
-	EditorDebuggerRemoteObject *variables;
-
+	
+	/// @brief Handles selection of a remote object for inspection.
+	/// @param p_object The ObjectID of the selected remote object.
 	void _object_selected(ObjectID p_object);
+	
+	/// @brief Called when a property of an inspected object is edited.
+	/// @param p_id The ObjectID of the edited object.
+	/// @param p_prop The property name that was edited.
+	/// @param p_value The new property value.
 	void _object_edited(ObjectID p_id, const String &p_prop, const Variant &p_value);
-
-protected:
-	void _notification(int p_what);
-	static void _bind_methods();
+	
+	/// @brief Adds a remote object to the cache.
+	/// @param p_arr Array containing remote object data.
+	/// @return The ObjectID of the added remote object.
+	ObjectID add_object(const Array &p_arr);
+	
+	/// @brief Retrieves a cached remote object.
+	/// @param p_id The ObjectID of the object to retrieve.
+	/// @return Pointer to the remote object, or nullptr if not found.
+	Object *get_object(ObjectID p_id);
+	
+	/// @brief Clears the remote object cache.
+	void clear_cache();
+	
+	/// @brief Retrieves a variable from the current stack frame.
+	/// @param p_var The variable name.
+	/// @return The variable value as a string.
+	String get_stack_variable(const String &p_var);
+	
+	/// @brief Adds a variable to the stack variable list.
+	/// @param p_arr Array containing stack variable data.
+	void add_stack_variable(const Array &p_arr);
+	
+	/// @brief Clears all stack variables.
+	void clear_stack_variables();
+};
 
 public:
 	EditorDebuggerInspector();

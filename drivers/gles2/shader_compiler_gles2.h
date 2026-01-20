@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  shader_compiler_gles2.h                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file shader_compiler_gles2.h
- * @brief Implementation of ShaderCompilerGLES2 class.
+ * @class ShaderCompilerGLES2
+ * @brief Compiler for GLES2 shaders that converts shader code into platform-specific generated code.
+ * 
+ * This class handles the compilation of shader language code into GLES2-compatible vertex, fragment,
+ * and light shader code. It manages identifier actions, render modes, uniforms, and shader-specific
+ * time and usage tracking.
+ * 
+ * @struct IdentifierActions
+ * @brief Container for shader identifier configuration and tracking data.
+ * @details Holds mappings for render modes, usage flags, write flags, and uniform definitions
+ *          that are applied during shader compilation.
+ * 
+ * @struct GeneratedCode
+ * @brief Output structure containing the compiled shader code and metadata.
+ * @details Contains the compiled vertex, fragment, and light shader code along with custom defines,
+ *          uniforms, texture information, and time usage flags.
+ * 
+ * @struct DefaultIdentifierActions
+ * @brief Internal structure mapping identifier strings to their GLSL replacements and defines.
+ * @details Provides rename mappings, render mode defines, and usage defines for shader compilation.
+ * 
+ * @method Error compile(VS::ShaderMode p_mode, const String &p_code, IdentifierActions *p_actions, const String &p_path, GeneratedCode &r_gen_code)
+ * @brief Compiles shader code for the specified shader mode.
+ * @param p_mode The shader mode (vertex, fragment, etc.)
+ * @param p_code The source shader code to compile
+ * @param p_actions Pointer to identifier actions configuration
+ * @param p_path The file path of the shader (for debugging)
+ * @param r_gen_code Output structure containing the generated shader code
+ * @return Error code indicating success or failure of compilation
+ * 
+ * @constructor ShaderCompilerGLES2()
+ * @brief Initializes a new shader compiler instance.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SHADERCOMPILERGLES2_H
 #define SHADERCOMPILERGLES2_H
 

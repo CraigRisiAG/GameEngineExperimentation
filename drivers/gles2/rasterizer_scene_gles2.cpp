@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  rasterizer_scene_gles2.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file rasterizer_scene_gles2.cpp
- * @brief Implementation of rasterizer_scene_gles2 functionality.
+ * @brief GLES2 scene rendering implementation for the Godot game engine.
+ * 
+ * This file implements the RasterizerSceneGLES2 class, which handles scene rendering,
+ * shadow mapping, reflection probes, and post-processing effects for OpenGL ES 2.0.
+ * 
+ * Key Features:
+ * - Shadow atlas management for dynamic shadow casting
+ * - Directional, omnidirectional, and spot light rendering
+ * - Reflection probe instance creation and management
+ * - Environment settings (background, fog, glow, DOF blur, adjustments)
+ * - Depth of field (DOF) blur with near and far blur support
+ * - Glow/bloom effects with gaussian blur
+ * - Tone mapping and color correction
+ * - Skeleton-based mesh deformation (software and hardware paths)
+ * - Multi-instance rendering support
+ * - Render list management with alpha blending
+ * - Dual paraboloid and cubemap shadow rendering
+ * 
+ * Main Classes and Structures:
+ * - RasterizerSceneGLES2: Main renderer class
+ * - ShadowAtlas: Manages shadow map atlasing for multiple lights
+ * - LightInstance: Light instance data with shadow information
+ * - ReflectionProbeInstance: Reflection probe rendering data
+ * - Environment: Scene environment settings (lighting, effects, background)
+ * - RenderList: Sorted list of renderable elements
+ * 
+ * The renderer processes scenes by:
+ * 1. Culling visible instances
+ * 2. Building render lists with proper material and light assignments
+ * 3. Rendering shadow maps for all light sources
+ * 4. Rendering opaque geometry with lighting
+ * 5. Rendering sky/background
+ * 6. Rendering transparent geometry with alpha blending
+ * 7. Applying post-processing effects (DOF, glow, tone mapping)
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "rasterizer_scene_gles2.h"
 
 #include "core/math/math_funcs.h"

@@ -1,39 +1,62 @@
-/*************************************************************************/
-/*  editor_debugger_server.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file editor_debugger_server.cpp
- * @brief Implementation of EditorDebuggerServerTCP class.
+ * @class EditorDebuggerServerTCP
+ * @brief TCP-based implementation of the editor debugger server.
+ * 
+ * Manages TCP server connections for the editor debugger, handling incoming
+ * debug connections from remote debugger peers. Inherits from EditorDebuggerServer
+ * and provides TCP-specific server functionality.
+ * 
+ * @details
+ * - Listens for incoming TCP connections on a configurable remote port
+ * - Validates port availability and logs connection errors
+ * - Manages connection lifecycle (start, stop, poll)
+ * - Creates RemoteDebuggerPeerTCP instances for accepted connections
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn EditorDebuggerServerTCP::EditorDebuggerServerTCP()
+ * @brief Constructs the TCP debugger server and initializes the internal TCP_Server instance.
+ */
 
+/**
+ * @fn Error EditorDebuggerServerTCP::start()
+ * @brief Starts listening for incoming debugger connections on the configured remote port.
+ * @return OK on successful start, error code if port binding fails.
+ * @details If the server fails to listen, an error message is logged to the editor log.
+ */
+
+/**
+ * @fn void EditorDebuggerServerTCP::stop()
+ * @brief Stops the TCP server from listening for new connections.
+ */
+
+/**
+ * @fn bool EditorDebuggerServerTCP::is_active() const
+ * @brief Checks if the server is currently active and listening.
+ * @return true if the server is listening, false otherwise.
+ */
+
+/**
+ * @fn bool EditorDebuggerServerTCP::is_connection_available() const
+ * @brief Checks if the server is listening and has an available incoming connection.
+ * @return true if a connection is available, false otherwise.
+ */
+
+/**
+ * @fn Ref<RemoteDebuggerPeer> EditorDebuggerServerTCP::take_connection()
+ * @brief Accepts and wraps the next available connection in a RemoteDebuggerPeerTCP.
+ * @return A reference to the new RemoteDebuggerPeerTCP, or null if no connection is available.
+ * @details Asserts that a connection is available before attempting to take it.
+ */
+
+/**
+ * @fn EditorDebuggerServer* EditorDebuggerServer::create_default()
+ * @brief Factory method that creates the default TCP-based debugger server implementation.
+ * @return A new instance of EditorDebuggerServerTCP.
+ */
 #include "editor_debugger_server.h"
 
 #include "core/io/marshalls.h"

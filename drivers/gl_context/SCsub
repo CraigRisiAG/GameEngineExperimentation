@@ -1,4 +1,27 @@
+
+
 #!/usr/bin/env python
+"""
+SCons build script for configuring and compiling OpenGL context drivers.
+This script conditionally includes GLAD (GL/GLES loader generator) library
+for supported platforms and adds OpenGL context driver source files to the
+build environment.
+The script:
+- Checks if the target platform supports OpenGL (haiku, osx, windows, x11)
+- Configures GLAD as a third-party dependency with appropriate compiler flags
+- Enables GLAD and sets up GLES-over-GL rendering mode
+- Compiles third-party GLAD sources with warnings disabled
+- Adds all C++ driver source files to the build
+Platforms supported:
+    - haiku: BeOS-like operating system
+    - osx: macOS
+    - windows: Windows operating systems
+    - x11: Linux and Unix-like systems with X11 display server
+Environment variables modified:
+    - CPPPATH: Adds third-party include directories
+    - CPPDEFINES: Adds preprocessor definitions for GLAD and GLES
+    - drivers_sources: Accumulates source files for the drivers module
+"""
 
 Import('env')
 

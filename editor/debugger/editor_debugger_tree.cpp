@@ -1,39 +1,62 @@
-/*************************************************************************/
-/*  editor_debugger_tree.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_debugger_tree.cpp
- * @brief Implementation of editor_debugger_tree functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class EditorDebuggerTree
+/// @brief A tree view for displaying and interacting with remote scene nodes during debugging.
+///
+/// EditorDebuggerTree extends TreeView to provide a hierarchical visualization of nodes
+/// from a remote debugged scene. It allows inspecting node properties, saving branches as scenes,
+/// and copying node paths. The tree maintains state across updates including node selection,
+/// expansion/collapse state, and filtering.
+///
+/// @signals
+/// - object_selected(int object_id, int debugger): Emitted when a tree item is selected.
+///   Parameters: object_id - the ObjectID of the selected node, debugger - the debugger instance ID.
+/// - save_node(int object_id, String filename, int debugger): Emitted when user saves a node branch.
+///   Parameters: object_id - the ObjectID of the node to save, filename - target file path, debugger - debugger instance ID.
+///
+/// @see SceneDebuggerTree, EditorFileDialog, PopupMenu
+
+/// @fn EditorDebuggerTree::EditorDebuggerTree()
+/// @brief Constructs the debugger tree and initializes popup menu and file dialog child nodes.
+
+/// @fn void EditorDebuggerTree::_notification(int p_what)
+/// @brief Handles initialization notifications to connect tree selection signals.
+
+/// @fn void EditorDebuggerTree::_bind_methods()
+/// @brief Binds object_selected and save_node signals to the scripting system.
+
+/// @fn void EditorDebuggerTree::_scene_tree_selected()
+/// @brief Callback when a tree item is selected; emits object_selected signal with the node's ID.
+
+/// @fn void EditorDebuggerTree::_scene_tree_folded(Object *p_obj)
+/// @brief Callback when a tree item is collapsed/expanded; updates the unfold cache.
+
+/// @fn void EditorDebuggerTree::_scene_tree_rmb_selected(const Vector2 &p_position)
+/// @brief Callback for right-click on tree item; displays context menu with save and copy options.
+
+/// @fn void EditorDebuggerTree::update_scene_tree(const SceneDebuggerTree *p_tree, int p_debugger)
+/// @brief Populates the tree from a flattened depth-first list of remote nodes.
+/// @param p_tree The scene debugger tree data containing flattened node list.
+/// @param p_debugger The debugger instance identifier.
+/// @details Reconstructs the hierarchy from flat node array, applies filters, maintains selection and expansion state.
+
+/// @fn String EditorDebuggerTree::get_selected_path()
+/// @brief Returns the node path of the currently selected tree item.
+/// @return Node path as a string, or empty string if no item is selected.
+
+/// @fn String EditorDebuggerTree::_get_path(TreeItem *p_item)
+/// @brief Constructs the full node path from a tree item by traversing parent nodes.
+/// @param p_item The tree item to get the path for.
+/// @return The constructed path from root to item.
+
+/// @fn void EditorDebuggerTree::_item_menu_id_pressed(int p_option)
+/// @brief Handles context menu selections: save node as scene or copy node path to clipboard.
+/// @param p_option The selected menu option ID.
+
+/// @fn void EditorDebuggerTree::_file_selected(const String &p_file)
+/// @brief Callback when user confirms file selection in save dialog; emits save_node signal.
+/// @param p_file The selected file path for saving the node.
 #include "editor_debugger_tree.h"
 
 #include "editor/editor_node.h"
