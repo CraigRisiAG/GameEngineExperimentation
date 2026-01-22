@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  editor_atlas_packer.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file editor_atlas_packer.cpp
- * @brief Implementation of editor_atlas_packer functionality.
+ * @brief Plots a filled triangle onto a bitmap.
+ * 
+ * Uses a scanline algorithm to rasterize a triangle defined by three vertices
+ * onto the provided bitmap. The triangle is filled by iterating through each
+ * horizontal scanline and setting all pixels between the left and right edges.
+ * 
+ * @param p_bitmap The target bitmap to plot the triangle onto
+ * @param vertices Array of three Vector2i points defining the triangle vertices
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @brief Packs multiple texture atlas charts into an optimized rectangular atlas.
+ * 
+ * Takes a collection of 2D charts (typically UV islands from 3D meshes) and
+ * arranges them efficiently in a rectangular atlas texture using a tetris-like
+ * bin packing algorithm. Each chart is first rasterized to a bitmap with
+ * height information, then placed at the position that minimizes wasted space.
+ * 
+ * @param charts Vector of Chart objects to pack. On return, each chart's
+ *               final_offset and transposed properties are set
+ * @param r_width Output parameter: width of the resulting atlas in pixels
+ * @param r_height Output parameter: height of the resulting atlas in pixels
+ * @param p_atlas_max_size Maximum allowed size of the atlas in pixels
+ * @param p_cell_resolution Resolution of the cells used for calculations.
+ *                         Determines the granularity of the packing algorithm
+ */
 #include "editor_atlas_packer.h"
 
 void EditorAtlasPacker::_plot_triangle(Ref<BitMap> p_bitmap, Vector2i *vertices) {

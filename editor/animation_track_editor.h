@@ -1,4 +1,39 @@
 
+
+
+/// @file animation_track_editor.h
+/// @brief Animation track editor interface for the game engine.
+///
+/// This header file contains the class definitions for the animation track editor system.
+/// It provides a comprehensive UI for editing animation tracks, keyframes, and related properties.
+///
+/// @class AnimationTimelineEdit
+/// @brief Timeline display and interaction control for animations.
+/// Inherits from Range to handle zoom and scroll functionality.
+/// Manages animation length, playback position, track addition, and looping.
+///
+/// @class AnimationTrackEdit
+/// @brief Base class for individual animation track editing UI elements.
+/// Inherits from Control to provide GUI rendering and input handling.
+/// Handles track-specific operations like key manipulation, path editing, and interpolation modes.
+/// Supports drag-and-drop functionality for key movement and selection.
+///
+/// @class AnimationTrackEditPlugin
+/// @brief Plugin interface for creating custom track edit controls.
+/// Allows for extensible creation of specialized track editors for different animation types
+/// (value tracks, audio tracks, animation tracks).
+///
+/// @class AnimationTrackEditGroup
+/// @brief Visual grouping container for related animation tracks.
+/// Inherits from Control to display a track group with an icon and node name.
+/// Manages timeline reference and root node for grouped tracks.
+///
+/// @class AnimationTrackEditor
+/// @brief Main animation track editor interface.
+/// Inherits from VBoxContainer to layout the complete editor UI.
+/// Provides track management, keyframe editing, selection, movement, optimization,
+/// and clipboard operations for animation editing workflows.
+/// Supports bezier curve editing, snap-to-grid, and FPS-based timing.
 #ifndef ANIMATION_TRACK_EDITOR_H
 #define ANIMATION_TRACK_EDITOR_H
 

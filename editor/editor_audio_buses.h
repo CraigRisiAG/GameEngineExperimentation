@@ -1,39 +1,51 @@
-/*************************************************************************/
-/*  editor_audio_buses.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_audio_buses.h
- * @brief Implementation of EditorAudioBus class.
+ * @brief Audio bus editor interface for managing audio output channels and effects.
+ * 
+ * This file contains the editor UI components for managing audio buses in the game engine.
+ * It provides a visual interface for configuring audio buses, applying effects, controlling
+ * volume levels, and managing audio routing through sends.
+ * 
+ * @class EditorAudioBus
+ * @brief Visual representation of a single audio bus with controls for volume, effects, and routing.
+ * 
+ * Provides a panel-based UI element that displays:
+ * - Audio bus name and identification
+ * - Volume slider with VU meters for left and right channels
+ * - Solo, mute, and bypass toggle buttons
+ * - Audio effect management and configuration
+ * - Send routing to other buses
+ * - Drag-and-drop support for reordering effects
+ * 
+ * @class EditorAudioBusDrop
+ * @brief Drop target control for reordering audio buses.
+ * 
+ * A specialized control that handles drag-and-drop operations for repositioning
+ * audio buses within the bus hierarchy.
+ * 
+ * @class EditorAudioBuses
+ * @brief Main container for managing multiple audio buses.
+ * 
+ * Manages the collection of audio buses and provides:
+ * - Add/remove bus functionality
+ * - Bus layout saving and loading
+ * - Default layout management
+ * - Automatic saving of changes to the audio bus configuration
+ * 
+ * @class EditorAudioMeterNotches
+ * @brief Renders dB value notches for audio level meters.
+ * 
+ * Provides visual reference marks on VU meters showing decibel level indicators
+ * and their corresponding text labels.
+ * 
+ * @class AudioBusesEditorPlugin
+ * @brief Editor plugin integration for the audio bus editor.
+ * 
+ * Integrates the audio bus editor as an EditorPlugin, enabling access through
+ * the editor's plugin system.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITORAUDIOBUSES_H
 #define EDITORAUDIOBUSES_H
 

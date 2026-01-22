@@ -1,39 +1,44 @@
-/*************************************************************************/
-/*  audio_stream_preview.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file audio_stream_preview.cpp
- * @brief Implementation of audio_stream_preview functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/// @brief Retrieves the length of the audio stream in seconds.
+/// @return The duration of the audio stream.
+
+/// @brief Gets the maximum amplitude value within a time range.
+/// @param p_time The start time in seconds.
+/// @param p_time_next The end time in seconds.
+/// @return The normalized maximum amplitude in the range [-1.0, 1.0].
+
+/// @brief Gets the minimum amplitude value within a time range.
+/// @param p_time The start time in seconds.
+/// @param p_time_next The end time in seconds.
+/// @return The normalized minimum amplitude in the range [-1.0, 1.0].
+
+/// @brief Default constructor for AudioStreamPreview.
+/// Initializes the preview with zero length.
+
+/// @brief Emits the preview_updated signal for a given object.
+/// @param p_id The ObjectID of the audio stream that was updated.
+
+/// @brief Threading function that generates the audio preview data.
+/// Reads audio frames in chunks, calculates min/max amplitudes, and stores them as 8-bit values.
+/// @param p_preview Pointer to the Preview structure containing stream and playback data.
+
+/// @brief Generates or retrieves a preview for the given audio stream.
+/// Creates a preview by reading the audio stream and computing min/max amplitude samples.
+/// @param p_stream The audio stream to preview.
+/// @return A reference to the AudioStreamPreview, or null if the stream is invalid.
+
+/// @brief Binds methods to the Godot scripting interface.
+/// Exposes preview generation and update signals to GDScript.
+
+/// @brief Handles notifications for the preview generator.
+/// Cleans up finished preview threads and removes unused preview data.
+/// @param p_what The notification type.
+
+/// @brief Constructor for AudioStreamPreviewGenerator.
+/// Initializes the singleton and enables processing.
 #include "audio_stream_preview.h"
 
 /////////////////////

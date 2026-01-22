@@ -1,39 +1,55 @@
-/*************************************************************************/
-/*  array_property_edit.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file array_property_edit.cpp
- * @brief Implementation of array_property_edit functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @file array_property_edit.cpp
+/// @brief Implementation of ArrayPropertyEdit class for editing array properties in the editor
+/// 
+/// This file provides functionality to edit array properties through the Godot editor interface.
+/// It handles:
+/// - Getting and setting array values with undo/redo support
+/// - Managing array resizing with value preservation
+/// - Supporting typed and untyped arrays
+/// - Paginating large arrays for performance (100 items per page)
+/// - Type conversion for array elements
+/// - Property hint parsing for subtypes and constraints
+///
+/// @class ArrayPropertyEdit
+/// @brief Enables editing of array properties in the editor with full undo/redo support
+///
+/// @method Variant get_array() const
+/// @brief Retrieves the array property from the target object
+/// @return The array variant, or an empty array if object/property not found
+///
+/// @method void _set_size(int p_size)
+/// @brief Updates the array size with undo/redo support
+/// @param p_size The new size of the array
+///
+/// @method void _set_value(int p_idx, const Variant &p_value)
+/// @brief Sets a value at the specified array index with undo/redo support
+/// @param p_idx The array index to modify
+/// @param p_value The new value to set
+///
+/// @method bool _set(const StringName &p_name, const Variant &p_value)
+/// @brief Virtual property setter for editor property binding
+/// @param p_name The property name (array/size, array/page, or indices/*)
+/// @param p_value The value to set
+/// @return True if property was handled
+///
+/// @method bool _get(const StringName &p_name, Variant &r_ret) const
+/// @brief Virtual property getter for editor property binding
+/// @param p_name The property name to retrieve
+/// @param r_ret Output parameter for the retrieved value
+/// @return True if property was found
+///
+/// @method void _get_property_list(List<PropertyInfo> *p_list) const
+/// @brief Generates the list of editable properties for the array
+/// @param p_list Output list of PropertyInfo objects
+///
+/// @method void edit(Object *p_obj, const StringName &p_prop, const String &p_hint_string, Variant::Type p_deftype)
+/// @brief Initializes the editor for a specific array property
+/// @param p_obj Target object containing the array property
+/// @param p_prop Property name of the array
+/// @param p_hint_string Hint string with subtype information (format: "type/hint:hint_string")
+/// @param p_deftype Default variant type for empty arrays
 #include "array_property_edit.h"
 
 #include "core/io/marshalls.h"

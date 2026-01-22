@@ -1,39 +1,65 @@
-/*************************************************************************/
-/*  editor_audio_buses.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_audio_buses.cpp
- * @brief Implementation of editor_audio_buses functionality.
+ * @class EditorAudioBus
+ * @brief A UI component for editing individual audio bus properties in the Godot editor.
+ * 
+ * EditorAudioBus provides a visual interface for controlling audio bus parameters including:
+ * - Volume level with normalized to dB conversion
+ * - Solo, mute, and bypass effects toggles
+ * - VU meters for left and right audio channels
+ * - Audio effects management with drag-and-drop reordering
+ * - Bus send routing configuration
+ * - Name editing with duplicate name prevention
+ * 
+ * The component integrates with Godot's UndoRedo system to support undo/redo operations
+ * for all parameter changes. It handles real-time audio peak level visualization and
+ * provides a tooltip preview for volume changes.
+ * 
+ * @note The master bus (index 0) has restricted functionality - it cannot be deleted
+ *       or renamed, and does not support send routing.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorAudioBusDrop
+ * @brief A drop target zone for rearranging audio buses via drag-and-drop.
+ * 
+ * EditorAudioBusDrop represents the drop zone at the end of the audio bus list,
+ * allowing users to drag buses to the end of the list. It provides visual feedback
+ * when hovering over the drop zone.
+ */
 
+/**
+ * @class EditorAudioBuses
+ * @brief Main editor panel for managing all audio buses and their layouts.
+ * 
+ * EditorAudioBuses provides a comprehensive interface for:
+ * - Creating and managing multiple audio buses
+ * - Saving and loading bus layout configurations
+ * - Coordinating bus reordering via drag-and-drop
+ * - Auto-saving bus configurations at regular intervals
+ * - Displaying the active bus layout file path
+ * 
+ * The panel integrates with the Godot editor's bottom panel system and
+ * provides both UI controls and file management for audio bus layouts.
+ */
+
+/**
+ * @class AudioBusesEditorPlugin
+ * @brief Plugin adapter that integrates the audio buses editor into Godot's editor interface.
+ * 
+ * AudioBusesEditorPlugin bridges the audio bus editor with Godot's main editor,
+ * allowing AudioBusLayout resources to be edited through the dedicated audio buses panel.
+ */
+
+/**
+ * @class EditorAudioMeterNotches
+ * @brief A visual component displaying dB scale notches for audio level meters.
+ * 
+ * EditorAudioMeterNotches renders a calibrated scale with customizable notch marks
+ * and dB value labels, typically displayed alongside VU meters for audio visualization.
+ * Notches can be configured to display or hide their dB values independently.
+ */
 #include "editor_audio_buses.h"
 
 #include "core/io/resource_saver.h"

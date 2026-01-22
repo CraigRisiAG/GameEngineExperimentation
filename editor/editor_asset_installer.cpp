@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  editor_asset_installer.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_asset_installer.cpp
- * @brief Implementation of editor_asset_installer functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \class EditorAssetInstaller
+/// \brief Handles the installation of asset packages in ZIP format into the editor.
+///
+/// This class provides functionality to open, preview, and install asset packages
+/// that are distributed as ZIP files. Users can selectively choose which files
+/// and directories to install through a tree view interface.
+///
+/// Key Features:
+/// - Opens and validates ZIP package files
+/// - Displays package contents in a hierarchical tree structure
+/// - Allows users to selectively choose files/directories to install
+/// - Automatically detects and marks files that already exist
+/// - Extracts selected files to the resource filesystem
+/// - Provides progress feedback during extraction
+/// - Displays file type icons based on extension
+///
+/// \method void open(const String &p_path, int p_depth)
+/// Opens a package file and populates the tree view with its contents.
+/// \param p_path Path to the ZIP package file
+/// \param p_depth Directory depth to skip (useful for nested package structures)
+///
+/// \method void ok_pressed()
+/// Extracts and installs all checked files from the package.
+/// Creates directories and writes files to the resource filesystem.
+/// Handles extraction errors and displays result notifications.
+///
+/// \method void _item_edited()
+/// Callback when a tree item's check state is changed by the user.
+/// Automatically checks/unchecks child items and parent items as needed.
+///
+/// \method void _update_subitems(TreeItem *p_item, bool p_check, bool p_first)
+/// Recursively updates the check state of tree items and their siblings.
+/// \param p_item The tree item to update
+/// \param p_check The check state to apply
+/// \param p_first True if this is the first call (to control recursion)
 #include "editor_asset_installer.h"
 
 #include "core/io/zip_io.h"

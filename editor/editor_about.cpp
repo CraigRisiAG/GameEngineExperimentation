@@ -1,39 +1,48 @@
-/*************************************************************************/
-/*  editor_about.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_about.cpp
- * @brief Implementation of editor_about functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \class EditorAbout
+/// \brief Dialog window displaying information about the Godot Engine editor.
+///
+/// This class manages the "About" dialog that shows credits, donations, licenses,
+/// and third-party component information. It organizes content into multiple tabs:
+/// - Authors: Project founders, lead developers, project managers, and contributors
+/// - Donors: Platinum, gold, silver, and bronze sponsors/donors
+/// - License: Main Godot Engine MIT license
+/// - Third-party Licenses: Copyright and license information for all third-party libraries
+///
+/// The dialog dynamically populates lists from generated source files (authors.gen.h,
+/// donors.gen.h, license.gen.h) and displays third-party component information
+/// in a tree structure with associated metadata.
+///
+/// \note Responds to theme changes to update fonts and icons from the editor theme.
+///
+/// \method void _notification(int p_what)
+/// Handles notifications for tree entry and theme changes, updating UI elements accordingly.
+///
+/// \method void _license_tree_selected()
+/// Callback invoked when a third-party component or license is selected in the tree,
+/// displaying its metadata in the text label.
+///
+/// \method void _bind_methods()
+/// Binds methods for GDScript exposure (currently empty).
+///
+/// \method TextureRect* get_logo() const
+/// Returns the logo texture rect element.
+///
+/// \method ScrollContainer* _populate_list(const String& p_name, const List<String>& p_sections,
+///                                         const char* const* const p_src[], int p_flag_single_column)
+/// Creates a scrollable container with organized lists of names grouped by sections.
+/// \param p_name Name of the scroll container
+/// \param p_sections Section titles for grouping
+/// \param p_src Array of string pointers for each section
+/// \param p_flag_single_column Bitmask determining single-column layout per section
+/// \return Populated ScrollContainer widget
+///
+/// \method EditorAbout()
+/// Constructs the About dialog, initializing all UI elements and populating tabs.
+///
+/// \method ~EditorAbout()
+/// Destructor.
 #include "editor_about.h"
 #include "editor_node.h"
 

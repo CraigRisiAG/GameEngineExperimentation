@@ -1,39 +1,97 @@
-/*************************************************************************/
-/*  doc_data.h                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file doc_data.h
- * @brief Implementation of DocData class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class DocData
+/// @brief Manages and stores documentation data for classes, methods, properties, and constants.
+///
+/// DocData is responsible for loading, merging, and saving documentation information for engine classes.
+/// It provides structures to represent class documentation including methods, properties, constants, and signals.
+///
+/// @struct ArgumentDoc
+/// @brief Represents documentation for a method or function argument.
+/// @member name - The name of the argument
+/// @member type - The data type of the argument
+/// @member enumeration - The enumeration type if applicable
+/// @member default_value - The default value of the argument if any
+///
+/// @struct MethodDoc
+/// @brief Represents documentation for a class method or function.
+/// @member name - The name of the method
+/// @member return_type - The return type of the method
+/// @member return_enum - The enumeration type of the return value if applicable
+/// @member qualifiers - Method qualifiers (e.g., const, static)
+/// @member description - Detailed description of the method
+/// @member arguments - Vector of arguments the method accepts
+///
+/// @struct ConstantDoc
+/// @brief Represents documentation for a class constant.
+/// @member name - The name of the constant
+/// @member value - The constant's value
+/// @member enumeration - The enumeration group it belongs to
+/// @member description - Description of the constant's purpose
+///
+/// @struct PropertyDoc
+/// @brief Represents documentation for a class property.
+/// @member name - The property name
+/// @member type - The property's data type
+/// @member enumeration - Enumeration type if applicable
+/// @member description - Description of the property
+/// @member setter - Name of the setter method
+/// @member getter - Name of the getter method
+/// @member default_value - The default value of the property
+/// @member overridden - Whether the property is overridden in a subclass
+///
+/// @struct ClassDoc
+/// @brief Represents complete documentation for a class.
+/// @member name - The class name
+/// @member inherits - The parent class name
+/// @member category - Documentation category
+/// @member brief_description - Short description of the class
+/// @member description - Detailed description of the class
+/// @member tutorials - Vector of related tutorial references
+/// @member methods - Vector of method documentation
+/// @member signals - Vector of signal documentation
+/// @member constants - Vector of constant documentation
+/// @member properties - Vector of property documentation
+/// @member theme_properties - Vector of theme property documentation
+///
+/// @member version - Documentation format version
+/// @member class_list - Map storing ClassDoc entries indexed by class name
+///
+/// @fn Error load_classes(const String &p_dir)
+/// @brief Loads documentation from XML files in the specified directory.
+/// @param p_dir Directory path containing documentation files
+/// @return Error code indicating success or failure
+///
+/// @fn Error save_classes(const String &p_default_path, const Map<String, String> &p_class_path)
+/// @brief Saves documentation to XML files.
+/// @param p_default_path Default output directory path
+/// @param p_class_path Map of class names to custom output paths
+/// @return Error code indicating success or failure
+///
+/// @fn void merge_from(const DocData &p_data)
+/// @brief Merges documentation from another DocData instance into this one.
+/// @param p_data The DocData to merge from
+///
+/// @fn void remove_from(const DocData &p_data)
+/// @brief Removes documentation entries that exist in the provided DocData.
+/// @param p_data The DocData containing entries to remove
+///
+/// @fn void generate(bool p_basic_types)
+/// @brief Generates documentation for built-in types and classes.
+/// @param p_basic_types If true, generates documentation for basic types
+///
+/// @fn Error load_compressed(const uint8_t *p_data, int p_compressed_size, int p_uncompressed_size)
+/// @brief Loads documentation from compressed data.
+/// @param p_data Pointer to compressed documentation data
+/// @param p_compressed_size Size of the compressed data
+/// @param p_uncompressed_size Expected size after decompression
+/// @return Error code indicating success or failure
+///
+/// @fn static Error erase_classes(const String &p_dir)
+/// @brief Erases documentation files from the specified directory.
+/// @param p_dir Directory path containing documentation files to erase
+/// @return Error code indicating success or failure
 #ifndef DOC_DATA_H
 #define DOC_DATA_H
 

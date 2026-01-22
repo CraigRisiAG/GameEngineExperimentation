@@ -1,39 +1,56 @@
-/*************************************************************************/
-/*  code_editor.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file code_editor.cpp
- * @brief Implementation of code_editor functionality.
+ * @brief Implementation of code editor components including GotoLineDialog, FindReplaceBar, and CodeTextEditor.
+ * 
+ * This file provides the core functionality for a text-based code editor with the following features:
+ * - Go to line dialog for quick navigation
+ * - Find and replace functionality with regex support
+ * - Code completion and syntax highlighting
+ * - Line manipulation (move, duplicate, delete)
+ * - Bookmark management
+ * - Line and column tracking
+ * - Editor settings management
+ * 
+ * @class GotoLineDialog
+ * @brief Dialog for navigating to a specific line in the text editor.
+ * @method popup_find_line() - Shows the dialog with current cursor line
+ * @method get_line() - Returns the line number entered by user
+ * @method ok_pressed() - Handles confirmation and navigation
+ * 
+ * @class FindReplaceBar
+ * @brief Search and replace bar for text editors with advanced options.
+ * @method _search() - Core search functionality with flags
+ * @method _replace() - Replaces current search match
+ * @method _replace_all() - Replaces all matches in document or selection
+ * @method search_prev() - Finds previous occurrence
+ * @method search_next() - Finds next occurrence
+ * @method popup_search() - Shows search UI
+ * @method popup_replace() - Shows search and replace UI
+ * 
+ * @class CodeTextEditor
+ * @brief Main code editor component with syntax highlighting, completion, and utilities.
+ * @method _input() - Handles keyboard shortcuts
+ * @method _zoom_in() - Increases font size
+ * @method _zoom_out() - Decreases font size
+ * @method move_lines_up() - Moves selected lines up
+ * @method move_lines_down() - Moves selected lines down
+ * @method delete_lines() - Deletes current or selected lines
+ * @method clone_lines_down() - Duplicates lines below
+ * @method convert_indent_to_spaces() - Converts tabs to spaces
+ * @method convert_indent_to_tabs() - Converts spaces to tabs
+ * @method convert_case() - Converts selected text case (UPPER/lower/Capitalize)
+ * @method toggle_inline_comment() - Toggles comment on lines
+ * @method goto_line() - Navigates to specific line
+ * @method set_error() - Displays error message
+ * @method toggle_bookmark() - Toggles bookmark on current line
+ * @method goto_next_bookmark() - Navigates to next bookmark
+ * @method goto_prev_bookmark() - Navigates to previous bookmark
+ * @method set_code_complete_func() - Sets custom code completion callback
+ * @method validate_script() - Validates script content
+ * @method update_editor_settings() - Applies editor configuration
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "code_editor.h"
 
 #include "core/os/input.h"

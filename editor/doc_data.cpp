@@ -1,39 +1,115 @@
-/*************************************************************************/
-/*  doc_data.cpp                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file doc_data.cpp
- * @brief Implementation of doc_data functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// \brief Merges documentation from another DocData instance into this one.
+/// 
+/// This function iterates through all classes in the current DocData and merges
+/// matching documentation from the provided DocData instance. For methods, it performs
+/// detailed argument type matching to handle polymorphic functions correctly.
+/// 
+/// \param p_data The source DocData to merge from
+void DocData::merge_from(const DocData &p_data);
+
+/// \brief Removes classes from this DocData that exist in another DocData instance.
+/// 
+/// \param p_data The DocData containing class names to remove
+void DocData::remove_from(const DocData &p_data);
+
+/// \brief Extracts return type information from a PropertyInfo and populates the MethodDoc.
+/// 
+/// Handles various type scenarios including enums, class names, resource types, and variants.
+/// 
+/// \param p_method The MethodDoc to populate with return type information
+/// \param p_retinfo The PropertyInfo containing return type metadata
+static void return_doc_from_retinfo(DocData::MethodDoc &p_method, const PropertyInfo &p_retinfo);
+
+/// \brief Extracts argument information from a PropertyInfo and populates the ArgumentDoc.
+/// 
+/// Converts PropertyInfo metadata into argument documentation including type, enumeration,
+/// and handling special cases like enums and resource types.
+/// 
+/// \param p_argument The ArgumentDoc to populate
+/// \param p_arginfo The PropertyInfo containing argument metadata
+static void argument_doc_from_arginfo(DocData::ArgumentDoc &p_argument, const PropertyInfo &p_arginfo);
+
+/// \brief Retrieves the default value for a class property for documentation purposes.
+/// 
+/// For classes that can be instantiated, directly retrieves the default value.
+/// For abstract classes, searches inheriting classes to find a default value.
+/// 
+/// \param p_class_name The class name
+/// \param p_property_name The property name
+/// \param r_default_value_valid Output flag indicating if a valid default was found
+/// \return The default value variant, or empty variant if not found
+static Variant get_documentation_default_value(const StringName &p_class_name, const StringName &p_property_name, bool &r_default_value_valid);
+
+/// \brief Generates complete documentation for engine classes and built-in types.
+/// 
+/// Introspects the ClassDB to extract methods, properties, signals, constants, and theme items.
+/// Optionally generates documentation for Variant types and global constants.
+/// 
+/// \param p_basic_types If true, also generates documentation for Variant types and global scope
+void DocData::generate(bool p_basic_types);
+
+/// \brief Parses method/signal XML documentation into a MethodDoc vector.
+/// 
+/// Reads XML elements for methods/signals including return types, arguments, and descriptions.
+/// 
+/// \param parser The XMLParser positioned at a methods or signals section
+/// \param methods Output vector to populate with parsed method documentation
+/// \return OK on success, ERR_FILE_CORRUPT on invalid XML format
+static Error _parse_methods(Ref<XMLParser> &parser, Vector<DocData::MethodDoc> &methods);
+
+/// \brief Loads documentation XML files from a directory.
+/// 
+/// Recursively loads all XML documentation files from the specified directory
+/// and merges them into the class_list.
+/// 
+/// \param p_dir Path to directory containing XML documentation files
+/// \return OK on success, error code otherwise
+Error DocData::load_classes(const String &p_dir);
+
+/// \brief Erases all documentation XML files from a directory.
+/// 
+/// Deletes all XML files from the specified directory.
+/// 
+/// \param p_dir Path to directory containing XML files to erase
+/// \return OK on success, error code otherwise
+Error DocData::erase_classes(const String &p_dir);
+
+/// \brief Loads documentation from an XMLParser instance.
+/// 
+/// Parses XML documentation format and populates the class_list with ClassDoc entries.
+/// 
+/// \param parser The XMLParser to read from
+/// \return OK on success, ERR_FILE_CORRUPT on invalid format
+Error DocData::_load(Ref<XMLParser> parser);
+
+/// \brief Helper function to write indented XML strings to a file.
+/// 
+/// \param f The FileAccess object for writing
+/// \param p_tablevel Number of tab indentations
+/// \param p_string The string content to write
+static void _write_string(FileAccess *f, int p_tablevel, const String &p_string);
+
+/// \brief Saves all documentation to XML files.
+/// 
+/// Exports each ClassDoc to an individual XML file with proper formatting and escaping.
+/// 
+/// \param p_default_path Default directory path for saving documentation files
+/// \param p_class_path Map of class names to custom save paths
+/// \return OK on success, error code otherwise
+Error DocData::save_classes(const String &p_default_path, const Map<String, String> &p_class_path);
+
+/// \brief Loads compressed documentation data from a buffer.
+/// 
+/// Decompresses DEFLATE-compressed documentation data and parses it as XML.
+/// 
+/// \param p_data Compressed data buffer
+/// \param p_compressed_size Size of compressed data
+/// \param p_uncompressed_size Expected size after decompression
+/// \return OK on success, error code otherwise
+Error DocData::load_compressed(const uint8_t *p_data, int p_compressed_size, int p_uncompressed_size);
 #include "doc_data.h"
 
 #include "core/engine.h"

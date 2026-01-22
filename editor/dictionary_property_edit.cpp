@@ -1,39 +1,76 @@
-/*************************************************************************/
-/*  dictionary_property_edit.cpp                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file dictionary_property_edit.cpp
- * @brief Implementation of dictionary_property_edit functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @file dictionary_property_edit.cpp
+/// @brief Implementation of DictionaryPropertyEdit class for editing dictionary properties in the editor.
+///
+/// This file provides functionality to edit dictionary properties in the Godot engine editor.
+/// It allows users to view, modify, and manage key-value pairs within a dictionary property
+/// of an object through the property inspector interface.
+///
+/// @class DictionaryPropertyEdit
+/// @brief Handles editing of dictionary properties in the editor UI.
+///
+/// Provides methods to get, set, and notify changes to dictionary entries.
+/// Supports undo/redo functionality for dictionary modifications.
+
+/// @brief Notifies of a change without parameters.
+/// Triggers the change notification system.
+void DictionaryPropertyEdit::_notif_change();
+
+/// @brief Notifies of a change with a string parameter.
+/// @param p_v The string value associated with the change notification.
+void DictionaryPropertyEdit::_notif_changev(const String &p_v);
+
+/// @brief Attempts to change a dictionary key.
+/// @param p_old_key The current key to be changed.
+/// @param p_new_key The new key value.
+/// @note Currently not implemented; dictionary key modification is not supported.
+void DictionaryPropertyEdit::_set_key(const Variant &p_old_key, const Variant &p_new_key);
+
+/// @brief Sets a value in the dictionary for the given key.
+/// @param p_key The dictionary key.
+/// @param p_value The new value to set.
+void DictionaryPropertyEdit::_set_value(const Variant &p_key, const Variant &p_value);
+
+/// @brief Retrieves the dictionary from the associated object.
+/// @return The dictionary variant, or an empty dictionary if retrieval fails.
+Variant DictionaryPropertyEdit::get_dictionary() const;
+
+/// @brief Populates the property list with dictionary keys and values.
+/// @param p_list Pointer to the property list to be filled.
+void DictionaryPropertyEdit::_get_property_list(List<PropertyInfo> *p_list) const;
+
+/// @brief Initializes the editor for a specific object property.
+/// @param p_obj The object containing the dictionary property.
+/// @param p_prop The name of the property to edit.
+void DictionaryPropertyEdit::edit(Object *p_obj, const StringName &p_prop);
+
+/// @brief Retrieves the node associated with the edited object.
+/// @return Pointer to the node, or NULL if conversion fails.
+Node *DictionaryPropertyEdit::get_node();
+
+/// @brief Determines if undo/redo operations should be disabled.
+/// @return Always returns true; undo/redo is disabled for this editor.
+bool DictionaryPropertyEdit::_dont_undo_redo();
+
+/// @brief Binds methods to the class for script exposure.
+void DictionaryPropertyEdit::_bind_methods();
+
+/// @brief Sets a property value on the dictionary.
+/// @param p_name The property name (format: "index: key" or "index: value").
+/// @param p_value The value to set.
+/// @return True if the property was successfully set, false otherwise.
+bool DictionaryPropertyEdit::_set(const StringName &p_name, const Variant &p_value);
+
+/// @brief Gets a property value from the dictionary.
+/// @param p_name The property name (format: "index: key" or "index: value").
+/// @param r_ret Output parameter containing the retrieved value.
+/// @return True if the property was successfully retrieved, false otherwise.
+bool DictionaryPropertyEdit::_get(const StringName &p_name, Variant &r_ret) const;
+
+/// @brief Default constructor.
+DictionaryPropertyEdit::DictionaryPropertyEdit();
 #include "dictionary_property_edit.h"
 #include "editor_node.h"
 
