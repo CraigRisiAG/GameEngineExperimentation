@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  editor_autoload_settings.cpp                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_autoload_settings.cpp
- * @brief Implementation of editor_autoload_settings functionality.
+ * @class EditorAutoloadSettings
+ * @brief Manages autoload settings in the Godot editor.
+ * 
+ * This class handles the UI and logic for managing autoloaded nodes and scripts in a Godot project.
+ * It provides functionality to add, remove, rename, and reorder autoloads, as well as toggle their
+ * singleton status. Autoloads can be either PackedScenes or Scripts that inherit from Node.
+ * 
+ * Features:
+ * - Add/remove autoloads with validation
+ * - Rename autoloads with collision detection
+ * - Toggle autoload singleton status (adds/removes global constants)
+ * - Reorder autoloads via drag-and-drop
+ * - Open autoload resources in the editor
+ * - Persistent undo/redo support for all operations
+ * - Supports both editor-only (tool) scripts and runtime autoloads
+ * 
+ * @note Singleton autoloads are represented with a leading "*" in their path in ProjectSettings.
+ * @note Tool scripts (in_editor=true) are added to the scene tree for editor access.
+ * @note Non-singleton, non-editor autoloads are not retained after initialization.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_autoload_settings.h"
 
 #include "core/global_constants.h"
