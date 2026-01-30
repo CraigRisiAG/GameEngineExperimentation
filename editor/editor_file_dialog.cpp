@@ -1,39 +1,50 @@
-/*************************************************************************/
-/*  editor_file_dialog.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_file_dialog.cpp
- * @brief File selection dialog for editor operations.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class EditorFileDialog
+/// @brief File dialog editor widget for browsing and selecting files/directories.
+/// 
+/// EditorFileDialog is a specialized file browser dialog for the Godot editor that allows
+/// users to open, save, or select files and directories. It supports multiple display modes
+/// (thumbnails and list), filtering by file type, favorites management, and recent directories.
+/// 
+/// Features:
+/// - Multiple access modes: filesystem, resources, and user data
+/// - Display modes: thumbnails and list views
+/// - File filtering by extension
+/// - Favorites and recent directories management
+/// - Preview thumbnails for selected files
+/// - Keyboard shortcuts for common operations
+/// - Context menu for file operations (copy, delete, reveal in explorer)
+/// - Support for single or multiple file selection
+/// 
+/// Signals:
+/// - file_selected(path: String) - Emitted when a single file is selected
+/// - files_selected(paths: PackedStringArray) - Emitted when multiple files are selected
+/// - dir_selected(dir: String) - Emitted when a directory is selected
+/// 
+/// @example
+/// ```gdscript
+/// var dialog = EditorFileDialog.new()
+/// dialog.set_mode(EditorFileDialog.MODE_OPEN_FILE)
+/// dialog.set_access(EditorFileDialog.ACCESS_FILESYSTEM)
+/// dialog.add_filter("*.txt ; Text Files")
+/// dialog.connect("file_selected", self, "_on_file_selected")
+/// dialog.popup_centered_ratio(0.7)
+/// ```
 
+/// @class EditorLineEditFileChooser
+/// @brief A convenience widget combining a LineEdit with an EditorFileDialog.
+/// 
+/// EditorLineEditFileChooser provides an easy way to add a file selection UI to editors.
+/// It consists of a text input field and a browse button that opens a file dialog.
+/// The selected file path is automatically populated in the text field.
+/// 
+/// @example
+/// ```gdscript
+/// var chooser = EditorLineEditFileChooser.new()
+/// chooser.get_file_dialog().add_filter("*.res ; Resource Files")
+/// add_child(chooser)
+/// ```
 #include "editor_file_dialog.h"
 
 #include "core/os/file_access.h"

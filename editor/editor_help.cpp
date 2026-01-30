@@ -1,39 +1,53 @@
-/*************************************************************************/
-/*  editor_help.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_help.cpp
- * @brief Implementation of editor_help functionality.
+ * @class EditorHelp
+ * @brief Displays formatted documentation for Godot classes, methods, properties, and other class members.
+ * 
+ * EditorHelp is responsible for rendering interactive documentation within the Godot editor.
+ * It parses class documentation data and displays it in a rich text format with syntax highlighting,
+ * cross-references, and navigation capabilities.
+ * 
+ * Key Features:
+ * - Displays class hierarchy (inheritance and derived classes)
+ * - Shows class descriptions, methods, properties, signals, constants, and enums
+ * - Supports syntax highlighting for code elements
+ * - Provides clickable links for cross-referencing between documentation
+ * - Includes search functionality via FindBar
+ * - Responsive layout that adjusts margins based on window width
+ * - Theme-aware color scheme
+ * 
+ * @note Uses static DocData pointer to access shared documentation database
+ * @see DocData for documentation data structures
+ * @see FindBar for search functionality
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorHelpBit
+ * @brief A lightweight helper widget that displays formatted help text in a RichTextLabel.
+ * 
+ * EditorHelpBit is a simplified version of EditorHelp, designed for displaying small snippets
+ * of formatted documentation text. It supports BBCode markup and can emit navigation signals
+ * when documentation links are clicked.
+ * 
+ * @note Set minimum height of 70 EDSCALE units
+ */
 
+/**
+ * @class FindBar
+ * @brief A search bar widget for finding text within RichTextLabel documentation.
+ * 
+ * FindBar provides text search functionality with navigation between matches.
+ * It displays match count and integrates with RichTextLabel's built-in search capabilities.
+ * 
+ * Features:
+ * - Text input field for search queries
+ * - Previous/Next navigation buttons
+ * - Match counter display
+ * - Close button to hide the search bar
+ * - Keyboard shortcuts (ESC to close)
+ * - Case-sensitive search support
+ */
 #include "editor_help.h"
 
 #include "core/os/input.h"

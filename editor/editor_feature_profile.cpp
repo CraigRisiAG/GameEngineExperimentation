@@ -1,39 +1,30 @@
-/*************************************************************************/
-/*  editor_feature_profile.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_feature_profile.cpp
- * @brief Implementation of editor_feature_profile functionality.
+ * @brief Manages editor feature profiles for customizing which features and classes are available in the editor.
+ *
+ * This module provides functionality to create, load, save, and manage editor feature profiles.
+ * Feature profiles allow users to disable specific editor features (3D editor, script editor, asset library, etc.),
+ * disable specific classes, disable class editors, and disable individual class properties.
+ *
+ * The EditorFeatureProfile class represents a single profile configuration with methods to:
+ * - Enable/disable features by type (3D, scripting, asset library, etc.)
+ * - Enable/disable entire class hierarchies
+ * - Enable/disable specific class editors
+ * - Enable/disable individual class properties
+ * - Serialize/deserialize profiles to/from JSON files
+ *
+ * The EditorFeatureProfileManager class provides a UI for managing multiple profiles:
+ * - Create new profiles
+ * - Import/export profiles
+ * - Set the active profile
+ * - Edit profile settings through a tree-based class and property interface
+ * - View and modify which features, classes, and properties are enabled in each profile
+ *
+ * @see EditorFeatureProfile
+ * @see EditorFeatureProfileManager
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_feature_profile.h"
 #include "core/io/json.h"
 #include "core/os/dir_access.h"

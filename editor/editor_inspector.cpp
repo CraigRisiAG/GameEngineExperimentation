@@ -1,39 +1,85 @@
-/*************************************************************************/
-/*  editor_inspector.cpp                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_inspector.cpp
- * @brief Implementation of editor_inspector functionality.
+ * @brief Implementation of the editor inspector system for Godot Engine.
+ *
+ * This file contains the implementation of several key classes for the editor's property inspector:
+ *
+ * @class EditorProperty
+ * Represents a single property editor in the inspector. Handles rendering, user interaction,
+ * and property value changes. Supports features like checkable properties, keying for animation,
+ * revert functionality, and drag-and-drop support. Manages focus through focusable child controls.
+ *
+ * Key methods:
+ * - get_minimum_size(): Returns the minimum required size for the property display
+ * - emit_changed(): Emits property_changed signal with property data
+ * - _notification(): Handles sort children and draw notifications
+ * - _gui_input(): Processes mouse and keyboard input for interactive elements
+ * - set_checkable/is_checkable(): Manages checkbox state
+ * - set_keying/is_keying(): Manages animation keyframe support
+ * - add_focusable(): Registers child controls for focus management
+ * - select/deselect(): Manages property selection state
+ *
+ * @class EditorPropertyRevert
+ * Static utility class for handling property revert functionality. Manages reverting properties
+ * to their original values in instantiated scenes or to class defaults.
+ *
+ * Key methods:
+ * - may_node_be_in_instance(): Checks if a node is part of an instantiated scene
+ * - get_instanced_node_original_property(): Retrieves original property values from scene state
+ * - is_node_property_different(): Compares current and original property values
+ * - can_property_revert(): Determines if a property can be reverted
+ *
+ * @class EditorInspectorPlugin
+ * Base class for custom inspector plugins. Allows extending the inspector to handle custom
+ * property editing for specific object types. Plugins are called in reverse order of addition,
+ * allowing later plugins to override earlier ones.
+ *
+ * Key methods:
+ * - can_handle(): Determines if this plugin handles a given object
+ * - parse_begin/parse_end(): Called at start and end of property parsing
+ * - parse_category(): Called when a property category is encountered
+ * - parse_property(): Called for each property to customize its editor
+ * - add_custom_control/add_property_editor(): Adds custom UI elements
+ *
+ * @class EditorInspectorCategory
+ * Represents a category header in the inspector displaying the class name with icon.
+ * Provides tooltips for class documentation.
+ *
+ * @class EditorInspectorSection
+ * Collapsible section container for grouped properties. Supports folding/unfolding
+ * with persistence of fold state. Supports nested sections with alpha blending.
+ *
+ * Key methods:
+ * - setup(): Initializes the section with label, object reference, and styling
+ * - unfold/fold(): Expands or collapses the section
+ * - get_vbox(): Returns the container for section contents
+ *
+ * @class EditorInspector
+ * Main inspector widget that displays and manages all properties of an edited object.
+ * Coordinates between property editors and the undo/redo system. Supports filtering,
+ * search, categories, and custom property editors through plugins.
+ *
+ * Key methods:
+ * - edit(): Sets the object to be inspected
+ * - update_tree(): Rebuilds the entire property tree
+ * - update_property(): Updates a single property display
+ * - set_keying/set_read_only: Controls inspector modes
+ * - set_use_doc_hints/set_show_categories: Display options
+ * - collapse_all_folding/expand_all_folding: Fold state control
+ * - Static plugin management: add_inspector_plugin, remove_inspector_plugin, cleanup_plugins
+ *
+ * Features:
+ * - Dynamic property editor instantiation through registered plugins
+ * - Full undo/redo integration for property changes
+ * - Property filtering and search functionality
+ * - Feature profile support for hiding properties
+ * - Multi-property editing for bulk changes
+ * - Property revert functionality
+ * - Scroll position caching per edited object
+ * - Nested inspector support (sub_inspector mode)
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_inspector.h"
 
 #include "array_property_edit.h"

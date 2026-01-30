@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  editor_data.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_data.h
- * @brief Implementation of EditorHistory class.
+ * @class EditorHistory
+ * @brief Manages the navigation history of selected objects and properties in the editor.
+ * 
+ * EditorHistory maintains a stack-based history of editor selections, allowing users to navigate
+ * through previously viewed objects and their properties. It supports up to 64 history entries.
+ * 
+ * @see EditorData
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorData
+ * @brief Central data management system for the editor, handling plugins, scenes, and custom types.
+ * 
+ * EditorData serves as the primary data hub for the editor infrastructure. It manages:
+ * - Editor plugins and their lifecycle
+ * - Multiple edited scenes and scene switching
+ * - Undo/redo operations
+ * - Custom type registration and instantiation
+ * - Script class metadata and icon paths
+ * - Clipboard operations
+ * - Editor state persistence
+ * 
+ * @note This class coordinates between EditorSelection, EditorHistory, and various EditorPlugins.
+ * @see EditorSelection, EditorHistory, EditorPlugin
+ */
 
+/**
+ * @class EditorSelection
+ * @brief Manages the current selection state of nodes and objects in the editor.
+ * 
+ * EditorSelection maintains a collection of selected nodes and their associated editor-specific data.
+ * It provides:
+ * - Selection tracking and updates
+ * - Per-node editor data storage
+ * - Notification system for selection changes
+ * - Transformation data for selected nodes
+ * 
+ * @note Inherits from Object and implements signals for selection change notifications.
+ * @see EditorData
+ */
 #ifndef EDITOR_DATA_H
 #define EDITOR_DATA_H
 

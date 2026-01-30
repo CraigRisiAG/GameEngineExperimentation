@@ -1,39 +1,79 @@
-/*************************************************************************/
-/*  editor_folding.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_folding.cpp
- * @brief Implementation of editor_folding functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// \class EditorFolding
+/// \brief Manages the folding state of editor sections for scenes and resources.
+///
+/// EditorFolding handles saving and loading of folded/unfolded states for nodes and resources
+/// in the editor. It persists folding information to configuration files and restores them
+/// when scenes or resources are reopened.
+///
+/// Key responsibilities:
+/// - Save and load folding states for scene nodes and their properties
+/// - Save and load folding states for resources referenced by nodes
+/// - Track which nodes are displayed as folded
+/// - Automatically unfold sections with revertible properties
+///
+/// Folding data is stored in separate .cfg files named with the pattern:
+/// "{filename}-folding-{md5_hash}.cfg" in the project settings directory.
 
+/// \fn Vector<String> EditorFolding::_get_unfolds(const Object *p_object)
+/// \brief Retrieves the set of unfolded sections for an object.
+/// \param p_object The object to query for section folding state
+/// \return A vector of section names that are unfolded
+
+/// \fn void EditorFolding::save_resource_folding(const RES &p_resource, const String &p_path)
+/// \brief Saves the folding state of a resource to disk.
+/// \param p_resource The resource whose folding state to save
+/// \param p_path The path of the resource file
+
+/// \fn void EditorFolding::_set_unfolds(Object *p_object, const Vector<String> &p_unfolds)
+/// \brief Applies a set of unfolded sections to an object.
+/// \param p_object The object to modify
+/// \param p_unfolds Vector of section names to unfold
+
+/// \fn void EditorFolding::load_resource_folding(RES p_resource, const String &p_path)
+/// \brief Loads the previously saved folding state for a resource.
+/// \param p_resource The resource to restore folding state for
+/// \param p_path The path of the resource file
+
+/// \fn void EditorFolding::_fill_folds(const Node *p_root, const Node *p_node, Array &p_folds, Array &resource_folds, Array &nodes_folded, Set<RES> &resources)
+/// \brief Recursively collects folding information for a node and its children.
+/// \param p_root The root node of the scene
+/// \param p_node The current node being processed
+/// \param p_folds Output array for node folding states
+/// \param resource_folds Output array for resource folding states
+/// \param nodes_folded Output array for folded node paths
+/// \param resources Set to track processed resources and avoid duplicates
+
+/// \fn void EditorFolding::save_scene_folding(const Node *p_scene, const String &p_path)
+/// \brief Saves the complete folding state of a scene and its resources.
+/// \param p_scene The root node of the scene
+/// \param p_path The path of the scene file
+
+/// \fn void EditorFolding::load_scene_folding(Node *p_scene, const String &p_path)
+/// \brief Restores the previously saved folding state for a scene.
+/// \param p_scene The root node of the scene to restore
+/// \param p_path The path of the scene file
+
+/// \fn bool EditorFolding::has_folding_data(const String &p_path)
+/// \brief Checks if folding data exists for a given file.
+/// \param p_path The file path to check
+/// \return True if a folding configuration file exists
+
+/// \fn void EditorFolding::_do_object_unfolds(Object *p_object, Set<RES> &resources)
+/// \brief Automatically unfolds sections with revertible properties.
+/// \param p_object The object to process
+/// \param resources Set to track and recursively process referenced resources
+
+/// \fn void EditorFolding::_do_node_unfolds(Node *p_root, Node *p_node, Set<RES> &resources)
+/// \brief Recursively unfolds node sections that have revertible properties.
+/// \param p_root The root node of the scene
+/// \param p_node The current node being processed
+/// \param resources Set to track processed resources
+
+/// \fn void EditorFolding::unfold_scene(Node *p_scene)
+/// \brief Automatically unfolds all sections with revertible properties in a scene.
+/// \param p_scene The root node of the scene
 #include "editor_folding.h"
 
 #include "core/os/file_access.h"

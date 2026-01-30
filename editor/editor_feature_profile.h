@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  editor_feature_profile.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_feature_profile.h
- * @brief Implementation of EditorFeatureProfile class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// \class EditorFeatureProfile
+/// \brief Manages editor feature profiles for controlling which features and properties are available.
+///
+/// EditorFeatureProfile provides functionality to selectively disable editor features, class editors,
+/// and class properties. Profiles can be saved to and loaded from files, allowing for custom editor
+/// configurations tailored to different use cases or user skill levels.
+///
+/// Features that can be disabled include 3D viewport, scripting, asset library, scene tree, import dock,
+/// node dock, and filesystem dock.
+///
+/// \see EditorFeatureProfileManager
 
+/// \class EditorFeatureProfileManager
+/// \brief UI manager for creating, editing, and applying editor feature profiles.
+///
+/// EditorFeatureProfileManager provides a dialog interface for managing editor feature profiles.
+/// It allows users to create new profiles, import/export existing profiles, and edit which classes
+/// and properties are disabled. The manager maintains the current active profile and notifies the editor
+/// when profile changes occur.
+///
+/// \see EditorFeatureProfile
 #ifndef EDITOR_FEATURE_PROFILE_H
 #define EDITOR_FEATURE_PROFILE_H
 

@@ -1,39 +1,68 @@
-/*************************************************************************/
-/*  editor_file_system.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_file_system.h
- * @brief Implementation of EditorFileSystemDirectory class.
+ * @brief File system management for the editor with directory and file tracking.
+ * 
+ * This header defines classes for managing and monitoring the editor's file system,
+ * including caching, import validation, and change detection.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorFileSystemDirectory
+ * @brief Represents a directory node in the editor's file system tree.
+ * 
+ * Maintains hierarchical directory structure with file information, modification times,
+ * and import status. Provides access to subdirectories and files within the directory.
+ */
 
+/**
+ * @struct FileInfo
+ * @brief Metadata about a file in the file system.
+ * 
+ * Stores file path, type, modification times, import validity, dependencies, and
+ * script class information.
+ */
+
+/**
+ * @class EditorFileSystem
+ * @brief Singleton manager for the editor's file system scanning and caching.
+ * 
+ * Handles asynchronous file system scanning, import management, change detection,
+ * file caching, script class collection, and file group handling. Maintains a cached
+ * representation of the project's file system structure.
+ * 
+ * @details
+ * - Performs threaded file system scans to avoid UI blocking
+ * - Caches file metadata including modification times and import status
+ * - Detects and processes file system changes
+ * - Manages file reimport operations and group file dependencies
+ * - Tracks script class definitions and their metadata
+ * - Supports FAT32/exFAT file system workarounds
+ */
+
+/**
+ * @struct ItemAction
+ * @brief Represents a file system action to be processed.
+ * 
+ * Encapsulates directory and file add/remove operations, file reloads, and
+ * reimport tests with associated directory and file information.
+ */
+
+/**
+ * @struct FileCache
+ * @brief Persisted file metadata for caching file system state.
+ * 
+ * Stores file type, modification times, import status, dependencies, and
+ * script class information for quick file system reconstruction.
+ */
+
+/**
+ * @struct ScanProgress
+ * @brief Tracks progress of file system scanning operations.
+ * 
+ * Maintains progress range and UI progress indicator for long-running scans.
+ */
 #ifndef EDITOR_FILE_SYSTEM_H
 #define EDITOR_FILE_SYSTEM_H
 

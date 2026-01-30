@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  editor_dir_dialog.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_dir_dialog.cpp
- * @brief Implementation of editor_dir_dialog functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class EditorDirDialog
+/// @brief A dialog for selecting and managing directories in the editor.
+///
+/// EditorDirDialog provides a tree-based interface for browsing and selecting directories
+/// within the editor's file system. It supports directory creation and tracks which paths
+/// are expanded/collapsed.
+///
+/// @details
+/// The dialog displays the resource filesystem hierarchy in a Tree widget and allows users to:
+/// - Navigate and select directories
+/// - Create new folders within selected directories
+/// - Persist the expanded/collapsed state of directory nodes
+///
+/// The dialog automatically reloads when the editor's filesystem changes and handles
+/// visibility state changes to defer updates when the dialog is hidden.
+///
+/// @signals
+/// - dir_selected(String dir): Emitted when a directory is selected and confirmed.
+///
+/// @private
+/// - updating: Flag to prevent recursive updates during tree operations
+/// - must_reload: Flag indicating a reload is pending when the dialog becomes visible
+/// - opened_paths: Set tracking which directory paths are currently expanded in the tree
+/// - tree: Tree widget displaying the directory hierarchy
+/// - makedir: Button for creating new directories
+/// - makedialog: Confirmation dialog for new folder creation
+/// - makedirname: Line edit for entering the new folder name
+/// - mkdirerr: Error dialog for directory creation failures
+///
+/// @methods
+/// - _update_dir(): Recursively updates tree items for a directory and its subdirectories
+/// - reload(): Clears and rebuilds the entire directory tree
+/// - _notification(): Handles tree enter/exit and visibility change notifications
+/// - _item_collapsed(): Tracks which directories are expanded or collapsed by the user
+/// - _item_activated(): Handles double-click selection of a directory
+/// - ok_pressed(): Emits the dir_selected signal with the selected directory path
+/// - _make_dir(): Opens the folder creation dialog
+/// - _make_dir_confirm(): Creates a new directory and triggers a filesystem rescan
 #include "editor_dir_dialog.h"
 
 #include "core/os/keyboard.h"

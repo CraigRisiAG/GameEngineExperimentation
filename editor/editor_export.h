@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  editor_export.h                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_export.h
- * @brief Implementation of EditorExportPreset class.
+ * @brief Editor export system for managing platform-specific project exports
+ * 
+ * This header defines the core classes for the editor's export pipeline:
+ * - EditorExportPreset: Stores export configuration and settings for a specific preset
+ * - EditorExportPlatform: Base class for platform-specific export implementations
+ * - EditorExportPlugin: Hook system for plugins to customize export behavior
+ * - EditorExport: Main manager coordinating all export platforms, presets, and plugins
+ * - EditorExportPlatformPC: PC-specific export implementation
+ * - EditorExportTextSceneToBinaryPlugin: Plugin for converting text scenes to binary format
+ * 
+ * The export system supports:
+ * - Multiple export presets with customizable filters and patches
+ * - Platform-specific features and capabilities detection
+ * - Script export modes (text, compiled, encrypted)
+ * - Shared object and resource handling
+ * - iOS-specific framework and linker configuration
+ * - Plugin-based extensibility for custom export logic
+ * - Debug flag configuration for exported builds
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITOR_EXPORT_H
 #define EDITOR_EXPORT_H
 

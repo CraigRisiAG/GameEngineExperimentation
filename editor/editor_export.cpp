@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  editor_export.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_export.cpp
- * @brief Implementation of editor_export functionality.
+ * @brief Editor export functionality for packaging and exporting game projects
+ * 
+ * This file contains the implementation of the editor export system, including:
+ * - EditorExportPreset: Manages export configuration presets with platform-specific settings
+ * - EditorExportPlatform: Base class for platform-specific export implementations
+ * - EditorExportPlugin: Plugin system for extending export functionality
+ * - EditorExport: Main singleton managing export platforms, presets, and plugins
+ * - EditorExportPlatformPC: PC platform-specific export implementation
+ * - EditorExportTextSceneToBinaryPlugin: Plugin for converting text-based scenes/resources to binary format
+ * 
+ * Key features:
+ * - Support for multiple export platforms (Windows, macOS, Linux, etc.)
+ * - Export filtering by resources, scenes, or all resources
+ * - Pack file (.pck) and ZIP export formats
+ * - Custom features and script encryption support
+ * - Platform-specific texture format selection (S3TC, ETC, ETC2, BPTC)
+ * - Plugin system for custom export processing
+ * - Debug flag configuration (remote debugging, file server, collision/navigation visualization)
+ * - Template-based executable export with embedded or separate PCK files
+ * - MD5 checksum generation for exported files
+ * - Preset persistence via configuration file
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_export.h"
 
 #include "core/crypto/crypto_core.h"

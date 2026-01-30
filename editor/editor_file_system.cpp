@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  editor_file_system.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_file_system.cpp
- * @brief Implementation of editor_file_system functionality.
+ * @brief Editor file system implementation for managing project resources and assets.
+ * 
+ * This file implements the EditorFileSystem class, which provides a comprehensive
+ * file system management layer for the editor. It handles:
+ * 
+ * - Scanning and tracking project resources
+ * - Caching file metadata (type, dependencies, modification times)
+ * - Importing and re-importing resources with configurable importers
+ * - Detecting file changes and triggering appropriate updates
+ * - Managing script classes and global class metadata
+ * - Supporting both single-threaded and multi-threaded scanning operations
+ * 
+ * Key Features:
+ * - Recursive directory scanning with progress tracking
+ * - File modification time tracking to detect changes
+ * - Import validation and cache management
+ * - Support for group file imports (multiple files imported together)
+ * - Script class metadata extraction and management
+ * - Resource dependency tracking
+ * - FAT32/exFAT filesystem special handling
+ * 
+ * The system maintains:
+ * - A filesystem tree (EditorFileSystemDirectory) representing the project structure
+ * - A file cache to minimize redundant processing
+ * - Import metadata for each resource file
+ * - Global script class registry
+ * 
+ * Threading Model:
+ * - Can operate in single-threaded or multi-threaded mode
+ * - Uses background threads for filesystem scanning to avoid UI blocking
+ * - Provides progress tracking and cancellation support
+ * 
+ * @see EditorFileSystemDirectory
+ * @see ResourceFormatImporter
+ * @see ResourceLoader
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_file_system.h"
 
 #include "core/io/resource_importer.h"

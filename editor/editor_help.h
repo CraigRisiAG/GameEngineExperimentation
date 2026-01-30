@@ -1,39 +1,43 @@
-/*************************************************************************/
-/*  editor_help.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_help.h
- * @brief Implementation of FindBar class.
+ * @class FindBar
+ * @brief A search bar widget for finding text within a RichTextLabel.
+ * 
+ * Provides a horizontal box container with search functionality including:
+ * - Text input field for search queries
+ * - Previous/next navigation buttons
+ * - Match counter display
+ * - Hide button to collapse the search bar
+ * 
+ * Handles search state tracking, result counting, and keyboard input events.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorHelp
+ * @brief Main documentation viewer for the editor.
+ * 
+ * A comprehensive help system that displays class documentation with:
+ * - Class descriptions and inheritance hierarchy
+ * - Methods, signals, properties, and constants
+ * - Theme properties and enumerations
+ * - Search functionality via FindBar
+ * - Navigation between related classes
+ * - Color-coded syntax highlighting for documentation
+ * 
+ * Manages documentation generation, section navigation, and scroll position.
+ */
 
+/**
+ * @class EditorHelpBit
+ * @brief A compact help display panel for quick documentation reference.
+ * 
+ * A lightweight panel container that displays:
+ * - Rich text formatted documentation snippets
+ * - Clickable help navigation links
+ * 
+ * Used for inline help tooltips and quick reference in editor UI elements.
+ */
 #ifndef EDITOR_HELP_H
 #define EDITOR_HELP_H
 

@@ -1,39 +1,36 @@
-/*************************************************************************/
-/*  editor_help_search.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_help_search.cpp
- * @brief Implementation of editor_help_search functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \brief Searches the editor help documentation for classes and members matching a given term.
+///
+/// EditorHelpSearch provides a dialog interface for searching through the engine's built-in
+/// documentation. It allows filtering by member type (methods, signals, constants, properties, theme items)
+/// and supports case-sensitive search and hierarchy display options.
+///
+/// The search is performed asynchronously in phases to avoid blocking the UI:
+/// - Phase 1: Match class names against the search term
+/// - Phase 2: Create class hierarchy items in the results tree
+/// - Phase 3: Match and create member items (methods, signals, constants, properties, theme items)
+/// - Phase 4: Select the best matching result
+///
+/// \class EditorHelpSearch
+/// \ingroup editor
+///
+/// \details
+/// Features:
+/// - Real-time search as the user types in the search box
+/// - Filter by member type using dropdown combo box
+/// - Toggle case sensitivity with dedicated button
+/// - Toggle hierarchy view with dedicated button
+/// - Keyboard navigation (arrow keys) within results
+/// - Feature profile support (hides disabled classes)
+/// - Persistent window size and position
+///
+/// Signals:
+/// - go_to_help(String): Emitted when user selects a result; parameter is the documentation link
+///
+/// \nested EditorHelpSearch::Runner
+/// Background worker class that performs the multi-phase search asynchronously.
+/// Prevents UI freezing by limiting work to a specified time slot per frame.
 #include "editor_help_search.h"
 
 #include "core/os/keyboard.h"

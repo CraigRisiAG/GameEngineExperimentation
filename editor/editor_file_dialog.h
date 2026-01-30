@@ -1,39 +1,45 @@
-/*************************************************************************/
-/*  editor_file_dialog.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_file_dialog.h
- * @brief File selection dialog for editor operations.
+ * @class EditorFileDialog
+ * @brief A file dialog GUI component for selecting files and directories in the editor.
+ * 
+ * EditorFileDialog extends ConfirmationDialog to provide a comprehensive file browser interface
+ * with support for multiple display modes, access levels, and file operations.
+ * 
+ * @details
+ * Features include:
+ * - Multiple display modes (thumbnails, list view)
+ * - Access control (resources, user data, filesystem)
+ * - File/directory selection modes (open single/multiple files, open directory, save file)
+ * - File filtering capabilities
+ * - Directory navigation (history, favorites, recent files)
+ * - Preview functionality for selected items
+ * - Context menu operations (copy path, delete, create folder, etc.)
+ * - Hidden file visibility toggle
+ * 
+ * @enum DisplayMode
+ * - DISPLAY_THUMBNAILS: Show files as thumbnail previews
+ * - DISPLAY_LIST: Show files in a list view
+ * 
+ * @enum Access
+ * - ACCESS_RESOURCES: Browse project resources
+ * - ACCESS_USERDATA: Browse user data directory
+ * - ACCESS_FILESYSTEM: Browse entire filesystem
+ * 
+ * @enum Mode
+ * - MODE_OPEN_FILE: Select a single file for opening
+ * - MODE_OPEN_FILES: Select multiple files for opening
+ * - MODE_OPEN_DIR: Select a directory
+ * - MODE_OPEN_ANY: Select either file or directory
+ * - MODE_SAVE_FILE: Select file path for saving
+ * 
+ * @typedef GetIconFunc Function pointer for retrieving file icons
+ * @typedef RegisterFunc Function pointer for registration callbacks
+ * 
+ * @see EditorLineEditFileChooser
+ * @see ConfirmationDialog
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITORFILEDIALOG_H
 #define EDITORFILEDIALOG_H
 

@@ -1,39 +1,67 @@
-/*************************************************************************/
-/*  editor_help_search.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_help_search.h
- * @brief Implementation of EditorHelpSearch class.
+ * @class EditorHelpSearch
+ * @brief A dialog for searching through editor help documentation.
+ * 
+ * Provides a UI for searching classes, methods, signals, constants, properties, and theme items
+ * in the help system. Supports case-sensitive search and hierarchical view options.
+ * 
+ * @note This class extends ConfirmationDialog and manages search functionality through an
+ *       asynchronous Runner task to avoid blocking the editor.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum SearchFlags
+ * @brief Flags for controlling what types of items to search for.
+ * 
+ * @var SEARCH_CLASSES       Search in class names
+ * @var SEARCH_METHODS       Search in method names
+ * @var SEARCH_SIGNALS       Search in signal names
+ * @var SEARCH_CONSTANTS     Search in constant names
+ * @var SEARCH_PROPERTIES    Search in property names
+ * @var SEARCH_THEME_ITEMS   Search in theme item names
+ * @var SEARCH_ALL           Search in all types
+ * @var SEARCH_CASE_SENSITIVE Enable case-sensitive search
+ * @var SEARCH_SHOW_HIERARCHY Show class hierarchy in results
+ */
 
+/**
+ * @class EditorHelpSearch::Runner
+ * @brief Asynchronous worker for processing help search queries.
+ * 
+ * Processes searches in phases to maintain responsiveness. Matches search terms against
+ * documentation and builds a hierarchical tree of results.
+ * 
+ * @note Implemented as a Reference to allow incremental processing via work() calls.
+ */
+
+/**
+ * @enum Phase
+ * @brief Execution phases for the search runner.
+ * 
+ * @var PHASE_MATCH_CLASSES_INIT    Initialize class matching
+ * @var PHASE_MATCH_CLASSES         Match search term against classes
+ * @var PHASE_CLASS_ITEMS_INIT      Initialize class item creation
+ * @var PHASE_CLASS_ITEMS           Create tree items for matched classes
+ * @var PHASE_MEMBER_ITEMS_INIT     Initialize member item creation
+ * @var PHASE_MEMBER_ITEMS          Create tree items for class members
+ * @var PHASE_SELECT_MATCH          Select and highlight the matched item
+ * @var PHASE_MAX                   Total number of phases
+ */
+
+/**
+ * @struct ClassMatch
+ * @brief Stores matched results for a documentation class.
+ * 
+ * @var doc                  Pointer to the class documentation
+ * @var name                 Whether the class name matched the search term
+ * @var methods              Matched methods from the class
+ * @var signals              Matched signals from the class
+ * @var constants            Matched constants from the class
+ * @var properties           Matched properties from the class
+ * @var theme_properties     Matched theme properties from the class
+ */
 #ifndef EDITOR_HELP_SEARCH_H
 #define EDITOR_HELP_SEARCH_H
 
