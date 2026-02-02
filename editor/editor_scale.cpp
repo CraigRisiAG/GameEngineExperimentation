@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  editor_scale.cpp                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_scale.cpp
- * @brief Implementation of editor_scale functionality.
+ * @brief Manages the editor UI scaling factor.
+ * 
+ * This module provides functionality to set and retrieve the global editor scale,
+ * which is used to adjust the UI size for different display resolutions and user preferences.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Sets the editor scale factor.
+ * 
+ * Updates the global editor scale value used for UI rendering and layout calculations.
+ * 
+ * @param p_scale The scale factor to apply. Typically a value >= 1.0 for upscaling.
+ */
 
+/**
+ * @brief Retrieves the current editor scale factor.
+ * 
+ * Returns the global editor scale value that is applied to UI elements.
+ * 
+ * @return float The current editor scale factor.
+ */
 #include "editor_scale.h"
 
 #include "core/os/os.h"

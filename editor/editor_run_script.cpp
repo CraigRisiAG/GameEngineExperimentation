@@ -1,39 +1,41 @@
-/*************************************************************************/
-/*  editor_run_script.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_run_script.cpp
- * @brief Implementation of editor_run_script functionality.
+ * @class EditorScript
+ * @brief A script class that provides editor-level functionality and access to the editor interface.
+ * 
+ * EditorScript allows users to write scripts that can interact with the Godot editor,
+ * including accessing and manipulating the currently edited scene. Scripts using this class
+ * must include the 'tool' keyword and implement the _run() method.
+ * 
+ * @method void add_root_node(Node *p_node)
+ * @brief Adds a root node to the editor as the edited scene.
+ * @param p_node The node to set as the root of the edited scene.
+ * @note Fails if editor is not initialized or if a scene is already being edited.
+ * 
+ * @method EditorInterface* get_editor_interface()
+ * @brief Returns the singleton EditorInterface instance for accessing editor functionality.
+ * @return Pointer to the EditorInterface singleton.
+ * 
+ * @method Node* get_scene()
+ * @brief Retrieves the currently edited scene in the editor.
+ * @return Pointer to the root node of the edited scene, or NULL if no scene is open.
+ * @note Returns NULL and logs an error if editor is not initialized.
+ * 
+ * @method void _run()
+ * @brief Virtual method that executes the editor script logic.
+ * @note Must be implemented in derived script classes. Called automatically by the editor.
+ * 
+ * @method void set_editor(EditorNode *p_editor)
+ * @brief Sets the editor instance for this script to operate on.
+ * @param p_editor Pointer to the EditorNode instance.
+ * 
+ * @method void _bind_methods()
+ * @brief Binds methods to the scripting system for reflection and remote call support.
+ * 
+ * @constructor EditorScript()
+ * @brief Initializes a new EditorScript instance with no editor reference.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_run_script.h"
 
 #include "editor_node.h"

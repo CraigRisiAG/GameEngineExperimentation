@@ -1,39 +1,40 @@
-/*************************************************************************/
-/*  editor_spin_slider.cpp                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_spin_slider.cpp
- * @brief Implementation of editor_spin_slider functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \file editor_spin_slider.cpp
+/// \brief Implementation of EditorSpinSlider widget for numerical input with slider support.
+///
+/// Provides a custom spin slider control for the Godot editor that combines:
+/// - A text label for identification
+/// - A numerical input field with expression evaluation
+/// - An up/down button for step-based adjustments
+/// - A horizontal slider for continuous value adjustment
+/// - Mouse wheel support over the grabber
+/// - Keyboard navigation and focus handling
+///
+/// Key Features:
+/// - Supports both discrete (step=1) and continuous value adjustment
+/// - Expression parsing for mathematical input evaluation
+/// - Modifier key support (Shift for fine control, Ctrl for rounding)
+/// - Customizable styling (flat/normal, custom label colors)
+/// - Read-only mode support
+/// - Integrated value input modal for direct text entry
+///
+/// Input Handling:
+/// - Left mouse click on up/down buttons: increment/decrement by step
+/// - Left mouse drag: continuous value adjustment with visual feedback
+/// - Mouse wheel: step increment/decrement when over grabber
+/// - Keyboard (ui_accept action): open value input modal
+/// - Text editing: supports mathematical expressions
+///
+/// Visual Elements:
+/// - Label: identifies the control purpose
+/// - Number display: shows current value with appropriate decimal places
+/// - Up/Down buttons: visible when step equals 1
+/// - Slider grabber: visible on hover when step > 1
+/// - Slider track: background for continuous value selection
+///
+/// \note Inherits from Range control to provide value management
+/// \note Uses EDSCALE for DPI-aware scaling of UI elements
 #include "editor_spin_slider.h"
 #include "core/math/expression.h"
 #include "core/os/input.h"

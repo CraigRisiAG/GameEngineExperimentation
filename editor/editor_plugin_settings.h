@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  editor_plugin_settings.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_plugin_settings.h
- * @brief Implementation of EditorPluginSettings class.
+ * @class EditorPluginSettings
+ * @brief Manages the UI and settings for editor plugins.
+ * 
+ * EditorPluginSettings is a VBoxContainer-based class that provides a user interface
+ * for viewing, creating, and configuring editor plugins. It maintains a list of plugins
+ * and handles user interactions such as creating new plugins and editing existing ones.
+ * 
+ * @details
+ * The class manages:
+ * - A tree view displaying available plugins
+ * - Buttons for creating and updating the plugin list
+ * - A plugin configuration dialog for editing plugin settings
+ * - Plugin activity state tracking
+ * 
+ * @note This class integrates with the undo/redo system for reversible operations.
+ * 
+ * @see PluginConfigDialog
+ * @see EditorData
+ * @see PropertyEditor
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITORPLUGINSETTINGS_H
 #define EDITORPLUGINSETTINGS_H
 

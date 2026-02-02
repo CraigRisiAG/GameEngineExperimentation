@@ -1,39 +1,25 @@
-/*************************************************************************/
-/*  editor_path.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_path.h
- * @brief Implementation of EditorPath class.
+ * @class EditorPath
+ * @brief A menu button that displays and navigates through the editor's object history path.
+ * 
+ * EditorPath extends MenuButton to provide a visual representation of the current selection
+ * hierarchy in the editor. It maintains a history of objects and allows navigation through
+ * previously selected items.
+ * 
+ * @member history Pointer to EditorHistory that tracks object selection history.
+ * @member objects Vector of ObjectIDs representing the current path hierarchy.
+ * 
+ * @method EditorPath() Default constructor (private).
+ * @method EditorPath(EditorHistory *p_history) Constructor that initializes with a history reference.
+ * @method void update_path() Updates the displayed path based on current selection.
+ * @method void _id_pressed(int p_idx) Internal callback when a path item is selected.
+ * @method void _about_to_show() Internal callback triggered before the popup menu is displayed.
+ * @method void _add_children_to_popup(Object *p_obj, int p_depth) Recursively adds child objects to the popup menu.
+ * @method void _notification(int p_what) Handles engine notifications.
+ * @method void _bind_methods() Binds methods to the Godot scripting API.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITOR_PATH_H
 #define EDITOR_PATH_H
 

@@ -1,39 +1,54 @@
-/*************************************************************************/
-/*  editor_settings.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_settings.h
- * @brief Implementation of EditorSettings class.
+ * @class EditorSettings
+ * @brief Manages editor configuration, settings, and shortcuts.
+ * 
+ * EditorSettings is a singleton resource that handles all editor-wide settings including:
+ * - User preferences and configuration
+ * - Editor plugin management
+ * - Keyboard shortcuts
+ * - Text editor themes
+ * - Project metadata
+ * - Favorite files and recent directories
+ * - Resource clipboard management
+ * 
+ * Settings are stored with metadata such as order, initial values, and whether they trigger
+ * restart notifications. The class supports hierarchical property access and serialization
+ * to configuration files.
+ * 
+ * @note This class is thread-safe through the _THREAD_SAFE_CLASS_ macro.
+ * 
+ * @see EditorPlugin, ConfigFile, ShortCut
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct Plugin
+ * @brief Represents an editor plugin with its metadata and installation information.
+ * 
+ * @member instance Pointer to the instantiated EditorPlugin object
+ * @member path File system path to the plugin
+ * @member name Display name of the plugin
+ * @member author Creator of the plugin
+ * @member version Plugin version string
+ * @member description Human-readable description of the plugin's functionality
+ * @member installs Whether the plugin has installation files
+ * @member script Script file path for the plugin
+ * @member install_files List of files to be installed with the plugin
+ */
 
+/**
+ * @struct VariantContainer
+ * @brief Internal container for storing a setting value with its metadata.
+ * 
+ * @member order Display order priority for the setting
+ * @member variant Current value of the setting
+ * @member initial Initial/default value of the setting
+ * @member has_default_value Whether a default value has been set
+ * @member hide_from_editor Whether to exclude from UI editors
+ * @member save Whether to persist this setting to disk
+ * @member restart_if_changed Whether changing this setting requires application restart
+ */
 #ifndef EDITOR_SETTINGS_H
 #define EDITOR_SETTINGS_H
 

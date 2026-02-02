@@ -1,39 +1,19 @@
-/*************************************************************************/
-/*  editor_inspector.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_inspector.h
- * @brief Implementation of EditorPropertyRevert class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \file editor_inspector.h
+/// \brief Inspector UI system for editing object properties in the editor.
+///
+/// This file contains the core classes for the editor's property inspector:
+/// - EditorPropertyRevert: Handles reverting properties to their original values
+/// - EditorProperty: Base class for individual property editors
+/// - EditorInspectorPlugin: Plugin system for extending inspector functionality
+/// - EditorInspectorCategory: Visual category separator in the inspector
+/// - EditorInspectorSection: Collapsible section for grouped properties
+/// - EditorInspector: Main inspector container that manages all property editing
+///
+/// The inspector uses a plugin system to support custom property editors for
+/// different object types and property kinds. It tracks undo/redo operations,
+/// manages property selection and focus, and provides filtering and search capabilities.
 #ifndef EDITOR_INSPECTOR_H
 #define EDITOR_INSPECTOR_H
 

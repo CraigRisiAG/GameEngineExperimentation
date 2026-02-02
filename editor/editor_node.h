@@ -1,39 +1,49 @@
-/*************************************************************************/
-/*  editor_node.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_node.h
- * @brief Main editor window and project management.
+ * @brief Main editor node class for the Godot game engine editor.
+ *
+ * EditorNode is the core class that manages the editor interface, including the scene tree,
+ * inspector, file system dock, and all editor plugins. It handles scene management, resource
+ * editing, project settings, export functionality, and the overall editor workflow.
+ *
+ * @class EditorNode
+ * @extends Node
+ *
+ * The EditorNode class is responsible for:
+ * - Managing the editor's main user interface layout with split containers
+ * - Handling scene creation, loading, saving, and management
+ * - Coordinating editor plugins and extensions
+ * - Managing the undo/redo system
+ * - Handling project export and build processes
+ * - Managing editor settings, layouts, and preferences
+ * - Processing user input and menu actions
+ * - Managing resource preview generation
+ * - Coordinating between various editor docks (scene tree, inspector, file system, import)
+ * - Managing the play/stop functionality and scene running
+ *
+ * @enum DockSlot
+ * Defines the possible positions for docking editor panels (left upper/lower, right upper/lower).
+ *
+ * @enum MenuOptions
+ * Enumerates all menu options available in the editor's menus (File, Edit, Tools, Run, Settings, Help).
+ *
+ * @enum EditorTable
+ * Identifies the main editor screens (2D, 3D, Script, Asset Library).
+ *
+ * @struct ExecuteThreadArgs
+ * Contains arguments for executing external processes with output capture.
+ *
+ * @struct BottomPanelItem
+ * Represents a panel item that can be added to the editor's bottom panel.
+ *
+ * @struct ExportDefer
+ * Deferred export configuration structure.
+ *
+ * @note EditorNode is a singleton accessible via get_singleton().
+ * @note This class requires manual construction and initialization through editor startup.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITOR_NODE_H
 #define EDITOR_NODE_H
 

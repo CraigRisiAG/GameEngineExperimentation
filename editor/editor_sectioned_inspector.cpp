@@ -1,39 +1,40 @@
-/*************************************************************************/
-/*  editor_sectioned_inspector.cpp                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_sectioned_inspector.cpp
- * @brief Implementation of SectionedInspectorFilter class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class SectionedInspectorFilter
+/// @brief Internal filter class that wraps an edited object and provides property access scoped to a specific section.
+/// 
+/// This class intercepts property get/set operations and automatically prepends a section prefix to property names.
+/// It allows the inspector to display only properties belonging to a particular category/section of an object.
+/// 
+/// @class SectionedInspector
+/// @brief A specialized inspector UI that displays object properties organized by categories in a hierarchical tree view.
+/// 
+/// Provides a split-panel interface with a category tree on the left and a property inspector on the right.
+/// Supports searching/filtering categories and dynamically updates the property list based on the selected section.
+/// Properties are automatically organized into a "global" section if they don't belong to a specific category.
+/// 
+/// @method void edit(Object *p_object)
+/// @brief Sets the object to inspect and initializes the category list and inspector.
+/// 
+/// @method void update_category_list()
+/// @brief Rebuilds the category tree from the edited object's property list.
+/// Filters categories based on search box input if provided.
+/// 
+/// @method void set_current_section(const String &p_section)
+/// @brief Selects and displays properties for the specified section.
+/// 
+/// @method String get_current_section() const
+/// @brief Returns the currently selected category/section name.
+/// 
+/// @method String get_full_item_path(const String &p_item)
+/// @brief Returns the full property path by prepending the current section to the item name.
+/// 
+/// @method void register_search_box(LineEdit *p_box)
+/// @brief Connects a search box to filter the category list in real-time.
+/// 
+/// @method EditorInspector* get_inspector()
+/// @brief Returns a pointer to the internal property inspector widget.
 #include "editor_sectioned_inspector.h"
 #include "editor_scale.h"
 class SectionedInspectorFilter : public Object {

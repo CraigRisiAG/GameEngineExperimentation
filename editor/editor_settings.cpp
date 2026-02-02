@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  editor_settings.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_settings.cpp
- * @brief Definition of _EVCSort data structure.
+ * @brief Implementation of EditorSettings class for managing editor configuration
+ * 
+ * EditorSettings is a singleton class responsible for managing all editor preferences,
+ * shortcuts, and configuration settings. It handles:
+ * - Property storage and retrieval with change notification
+ * - Shortcut key bindings management
+ * - Theme and text editor settings
+ * - Project-specific metadata and favorites
+ * - File system configuration paths
+ * - Language and network settings
+ * - Script templates management
+ * 
+ * The class persists settings to disk and loads them on startup, supporting both
+ * default values and user customizations. It emits signals when settings are changed
+ * to notify dependent systems.
+ * 
+ * Key features:
+ * - Thread-safe property access with _THREAD_SAFE_METHOD_ guards
+ * - Support for property hints and restart-if-changed flags
+ * - Text editor theme import/export functionality
+ * - Project-specific configuration directory management
+ * - Favorites and recent directories tracking
+ * - Editor shortcut customization with platform-specific handling
+ * - Multiple directory support (data, config, cache) with fallbacks
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_settings.h"
 
 #include "core/io/certs_compressed.gen.h"

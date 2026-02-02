@@ -1,39 +1,21 @@
-/*************************************************************************/
-/*  editor_run_native.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_run_native.h
- * @brief Implementation of EditorRunNative class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class EditorRunNative
+/// @brief Manages native platform execution and deployment from the editor.
+///
+/// EditorRunNative is a horizontal box container that provides UI controls for running
+/// and debugging games on native platforms. It maintains platform-specific menu buttons
+/// and tracks the state of resumed runs for seamless re-execution.
+///
+/// @member menus Map of platform identifiers to their corresponding menu buttons.
+/// @member first Flag indicating if this is the first initialization.
+/// @member resume_idx Index of the last resumed run session.
+/// @member resume_platform Platform identifier for the resumed run.
+///
+/// @method _run_native(int p_idx, int p_platform) Executes the game on the specified platform.
+/// @method is_deploy_debug_remote_enabled() const Checks if remote debug deployment is enabled.
+/// @method resume_run_native() Resumes the last native run session.
+/// @method EditorRunNative() Constructs a new EditorRunNative instance.
 #ifndef EDITOR_RUN_NATIVE_H
 #define EDITOR_RUN_NATIVE_H
 

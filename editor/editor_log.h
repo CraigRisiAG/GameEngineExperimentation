@@ -1,39 +1,61 @@
-/*************************************************************************/
-/*  editor_log.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_log.h
- * @brief Implementation of EditorLog class.
+ * @class EditorLog
+ * @brief A UI panel for displaying and managing editor log messages.
+ * 
+ * EditorLog is a VBoxContainer-based widget that displays log messages from the editor,
+ * including standard output, errors, warnings, and editor-specific messages. It provides
+ * functionality to clear and copy log contents, and integrates with the error handling
+ * and undo/redo systems.
+ * 
+ * @details
+ * The log display is managed through a RichTextLabel for formatted text output. The UI
+ * includes a title bar with control buttons and a tool button for additional functionality.
+ * The class handles error callbacks and undo/redo notifications through static callback methods.
+ * 
+ * Thread-safe message handling is supported through thread ID tracking.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum MessageType
+ * @brief Enumeration of message types that can be logged.
+ * 
+ * @value MSG_TYPE_STD Standard output message
+ * @value MSG_TYPE_ERROR Error message
+ * @value MSG_TYPE_WARNING Warning message
+ * @value MSG_TYPE_EDITOR Editor-specific message
+ */
 
+/**
+ * @fn void add_message(const String &p_msg, MessageType p_type)
+ * @brief Adds a message to the log with the specified type.
+ * 
+ * @param p_msg The message text to add
+ * @param p_type The type of message (default: MSG_TYPE_STD)
+ */
+
+/**
+ * @fn void set_tool_button(ToolButton *p_tool_button)
+ * @brief Sets the tool button for the log panel.
+ * 
+ * @param p_tool_button Pointer to the ToolButton to set
+ */
+
+/**
+ * @fn void deinit()
+ * @brief Deinitializes the editor log and cleans up resources.
+ */
+
+/**
+ * @fn void clear()
+ * @brief Clears all messages from the log.
+ */
+
+/**
+ * @fn void copy()
+ * @brief Copies the current log contents to clipboard.
+ */
 #ifndef EDITOR_LOG_H
 #define EDITOR_LOG_H
 

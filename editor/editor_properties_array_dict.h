@@ -1,39 +1,59 @@
-/*************************************************************************/
-/*  editor_properties_array_dict.h                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_properties_array_dict.h
- * @brief Implementation of EditorPropertyArrayObject class.
+ * @brief Editor property classes for managing array and dictionary types in the inspector.
+ * 
+ * This header defines editor property classes that provide UI components for editing
+ * array and dictionary variant types in the Godot editor inspector panel.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorPropertyArrayObject
+ * @brief Reference object wrapper for array variant data.
+ * 
+ * Provides property access to array elements through the _set and _get methods,
+ * allowing individual array elements to be edited as properties in the inspector.
+ */
 
+/**
+ * @class EditorPropertyDictionaryObject
+ * @brief Reference object wrapper for dictionary variant data.
+ * 
+ * Wraps dictionary data and manages new key-value pair state. Provides property
+ * access to dictionary entries and supports adding new items to the dictionary.
+ */
+
+/**
+ * @class EditorPropertyArray
+ * @brief Editor property widget for editing array variants.
+ * 
+ * Extends EditorProperty to provide a complete UI for editing arrays, including:
+ * - Array element type management and conversion
+ * - Pagination for large arrays
+ * - Dynamic array length adjustment
+ * - Type change functionality with popup menu
+ * 
+ * @property array_type The base type of the array elements
+ * @property subtype Optional sub-type for array elements
+ * @property page_len Number of elements shown per page
+ * @property page_idx Current page index
+ */
+
+/**
+ * @class EditorPropertyDictionary
+ * @brief Editor property widget for editing dictionary variants.
+ * 
+ * Extends EditorProperty to provide a UI for editing dictionaries, including:
+ * - Key-value pair management
+ * - Type conversion for keys and values
+ * - Pagination for large dictionaries
+ * - Dynamic dictionary size adjustment
+ * - Addition and removal of key-value pairs
+ * 
+ * @property page_len Number of entries shown per page
+ * @property page_idx Current page index
+ */
 #ifndef EDITOR_PROPERTIES_ARRAY_DICT_H
 #define EDITOR_PROPERTIES_ARRAY_DICT_H
 

@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  editor_properties.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_properties.h
- * @brief Implementation of EditorPropertyNil class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// \file editor_properties.h
+/// \brief Defines various editor property classes for inspecting and editing different data types.
+///
+/// This header file contains a collection of EditorProperty-derived classes that provide UI controls
+/// for editing different property types in the editor inspector. Each class handles a specific data type
+/// or property category, including:
+/// - Text properties (nil, text, multiline text, text enums)
+/// - Path and resource properties (path, class name, object ID, resource)
+/// - Numeric properties (integer, float, easing)
+/// - Vector and transformation properties (Vector2, Vector3, Rect2, Plane, Quat, AABB, Transform2D, Basis, Transform)
+/// - UI properties (checkbox, enum, flags, layers)
+/// - Member selection properties (methods, properties of variant/base/instance/script types)
+/// - Color properties
+/// - Node path properties
+/// - RID properties
+///
+/// The EditorInspectorDefaultPlugin class serves as a factory that determines which property editor
+/// to instantiate based on the property type and hint information.
+///
+/// \see EditorProperty
+/// \see EditorInspector
+/// \see EditorInspectorPlugin
 #ifndef EDITOR_PROPERTIES_H
 #define EDITOR_PROPERTIES_H
 

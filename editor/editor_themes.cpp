@@ -1,39 +1,40 @@
-/*************************************************************************/
-/*  editor_themes.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_themes.cpp
- * @brief Implementation of editor_themes functionality.
+ * @brief Editor theme generation and customization system
+ *
+ * This file contains the implementation for creating and managing the editor's visual theme,
+ * including color schemes, styleboxes, fonts, and icons. It supports multiple built-in
+ * theme presets (Default, Alien, Arc, Godot 2, Grey, Light, Solarized Dark/Light) and
+ * allows for custom theme loading.
+ *
+ * Key Features:
+ * - Dynamic theme creation based on user-selected preset or custom theme
+ * - Color conversion system for icon adaptation between dark and light themes
+ * - SVG icon generation with automatic scaling and filtering
+ * - Comprehensive stylebox and UI element styling
+ * - Syntax highlighting color configuration for text editors
+ * - Support for theme customization through EditorSettings
+ *
+ * Main Functions:
+ * - make_stylebox(): Creates styled boxes with texture and margins
+ * - make_empty_stylebox(): Creates empty styled boxes with custom margins
+ * - make_flat_stylebox(): Creates flat-colored styled boxes
+ * - make_line_stylebox(): Creates line-based styled boxes
+ * - editor_generate_icon(): Generates individual icons from SVG sources
+ * - editor_register_and_generate_icons(): Generates and registers all editor icons
+ * - create_editor_theme(): Main function to create the editor theme with all styling
+ * - create_custom_theme(): Loads custom theme or falls back to editor theme
+ *
+ * Theme Customization Points:
+ * - Base colors (accent, base, contrast levels)
+ * - Dark/Light theme variants
+ * - Border sizes and spacing
+ * - Tab highlighting
+ * - Icon color conversion
+ * - Text editor syntax highlighting
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_themes.h"
 
 #include "core/io/resource_loader.h"

@@ -1,39 +1,42 @@
-/*************************************************************************/
-/*  editor_layouts_dialog.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_layouts_dialog.cpp
- * @brief Implementation of editor_layouts_dialog functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class EditorLayoutsDialog
+/// @brief A dialog for managing editor layouts with selection and creation options.
+///
+/// This dialog allows users to select existing layouts from a list or create new ones
+/// by entering a name. It supports multi-selection of layouts and handles keyboard input
+/// for confirmation and cancellation.
+///
+/// @signal name_confirmed(String name) - Emitted when a layout name is confirmed,
+///         either from selection or text input.
 
+/// @brief Handles keyboard input in the name line edit field.
+/// @param p_event The input event to process.
+/// @details Processes Enter/Return keys to confirm selection and Escape to cancel.
+void EditorLayoutsDialog::_line_gui_input(const Ref<InputEvent> &p_event);
+
+/// @brief Binds signals for the dialog.
+/// @details Registers the "name_confirmed" signal with a String parameter.
+void EditorLayoutsDialog::_bind_methods();
+
+/// @brief Handles the OK button press or Enter key confirmation.
+/// @details Emits the "name_confirmed" signal with either the selected layout names
+///          or the text entered in the name field.
+void EditorLayoutsDialog::ok_pressed();
+
+/// @brief Populates the dialog after it becomes visible.
+/// @details Loads available layouts from the editor configuration file and populates
+///          the layout_names ItemList.
+void EditorLayoutsDialog::_post_popup();
+
+/// @brief Constructs the EditorLayoutsDialog and initializes its UI components.
+/// @details Sets up the VBoxContainer, ItemList for layout selection, and LineEdit for
+///          custom layout names. Connects input signals for interaction handling.
+EditorLayoutsDialog::EditorLayoutsDialog();
+
+/// @brief Toggles the visibility of the name input line.
+/// @param p_enabled Whether to show (true) or hide (false) the name line edit.
+void EditorLayoutsDialog::set_name_line_enabled(bool p_enabled);
 #include "editor_layouts_dialog.h"
 
 #include "core/class_db.h"

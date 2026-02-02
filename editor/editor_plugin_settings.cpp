@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  editor_plugin_settings.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_plugin_settings.cpp
- * @brief Implementation of editor_plugin_settings functionality.
+ * EditorPluginSettings
+ * 
+ * Manages the display and configuration of editor plugins in the plugin settings panel.
+ * Handles plugin discovery, loading, enabling/disabling, and editing of plugin configurations.
+ * 
+ * Features:
+ * - Automatically discovers plugins from the "res://addons" directory
+ * - Validates plugin.cfg files for required metadata (name, author, version, description, script)
+ * - Displays plugins in a tree view with sortable columns (Name, Version, Author, Status, Edit)
+ * - Allows enabling/disabling plugins via checkbox
+ * - Provides interface to create new plugins or edit existing plugin configurations
+ * - Updates plugin list when the window regains focus
+ * 
+ * Signals:
+ * - Connects to EditorNode for plugin enable/disable state management
+ * - Connects to PluginConfigDialog for plugin creation and editing workflows
+ * 
+ * Notifications:
+ * - NOTIFICATION_WM_FOCUS_IN: Refreshes plugin list when window gains focus
+ * - NOTIFICATION_READY: Initializes signal connections
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_plugin_settings.h"
 
 #include "core/io/config_file.h"

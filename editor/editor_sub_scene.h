@@ -1,39 +1,23 @@
-/*************************************************************************/
-/*  editor_sub_scene.h                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_sub_scene.h
- * @brief Implementation of EditorSubScene class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class EditorSubScene
+/// @brief A dialog for managing sub-scene selection and reparenting in the editor.
+/// 
+/// EditorSubScene provides a confirmation dialog interface that allows users to:
+/// - Browse and select nodes from a scene hierarchy tree
+/// - Choose a destination parent node for moving selected nodes
+/// - Handle multi-selection of nodes
+/// - Manage node ownership reassignment
+/// 
+/// The dialog displays a file browser for selecting the sub-scene path and a tree
+/// view for selecting target nodes within the scene.
+/// 
+/// @member selection List of currently selected nodes
+/// @member path LineEdit widget for displaying/entering the sub-scene file path
+/// @member tree Tree widget displaying the scene hierarchy
+/// @member scene The root node of the scene being edited
+/// @member is_root Flag indicating if the current selection is at the scene root
+/// @member file_dialog File dialog for browsing sub-scene files
 #ifndef EDITOR_SUB_SCENE_H
 #define EDITOR_SUB_SCENE_H
 

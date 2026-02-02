@@ -1,39 +1,40 @@
-/*************************************************************************/
-/*  editor_properties_array_dict.cpp                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_properties_array_dict.cpp
- * @brief Implementation of editor_properties_array_dict functionality.
+ * @brief Editor property implementations for array and dictionary types in the Godot engine editor.
+ *
+ * This file contains the implementation of editor property classes that allow users to inspect
+ * and modify array and dictionary properties in the editor inspector panel.
+ *
+ * Classes:
+ * - EditorPropertyArrayObject: Wrapper object for arrays that enables property editing through
+ *   the inspector. Provides _set and _get methods to handle array element access via property names.
+ *
+ * - EditorPropertyDictionaryObject: Wrapper object for dictionaries that enables property editing.
+ *   Handles dictionary key-value pairs and provides support for adding new items.
+ *
+ * - EditorPropertyArray: Editor widget for displaying and editing array properties. Supports:
+ *   - Multiple array types (Array, PackedByteArray, PackedInt32Array, etc.)
+ *   - Dynamic resizing via size slider
+ *   - Pagination for large arrays
+ *   - Type changing for untyped arrays
+ *   - Element removal
+ *
+ * - EditorPropertyDictionary: Editor widget for displaying and editing dictionary properties.
+ *   Supports:
+ *   - Dynamic key-value pair addition and removal
+ *   - Type changing for values
+ *   - Pagination for large dictionaries
+ *   - Support for all Variant types as values
+ *
+ * Key Features:
+ * - Automatic duplication of arrays/dictionaries for proper undo/redo support
+ * - Handling of EncodedObjectAsID for object references
+ * - Pagination support for improved performance with large collections
+ * - Dynamic property editor instantiation based on value types
+ * - Visual separation of new item controls in dictionary editor
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_properties_array_dict.h"
 
 #include "core/io/marshalls.h"

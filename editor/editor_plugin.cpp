@@ -1,39 +1,439 @@
-/*************************************************************************/
-/*  editor_plugin.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_plugin.cpp
- * @brief Implementation of editor_plugin functionality.
+ * @class EditorInterface
+ * @brief Provides a high-level interface for editor plugins to interact with the Godot editor.
+ * 
+ * EditorInterface is a singleton that exposes core editor functionality to plugins, including:
+ * - Scene and resource management (opening, editing, saving scenes)
+ * - Viewport and viewport control access
+ * - File system and resource preview access
+ * - Inspector and editor settings access
+ * - Plugin state management
+ * - Mesh preview generation
+ * 
+ * @method Array _make_mesh_previews(const Array &p_meshes, int p_preview_size)
+ * @brief Wrapper method that converts Array input to Vector<Ref<Mesh>> for mesh preview generation.
+ * @param p_meshes Array of Mesh resources to generate previews for
+ * @param p_preview_size Size of the generated preview textures in pixels
+ * @return Array of Texture2D objects representing the mesh previews
+ * 
+ * @method Vector<Ref<Texture2D>> make_mesh_previews(const Vector<Ref<Mesh>> &p_meshes, Vector<Transform> *p_transforms, int p_preview_size)
+ * @brief Generates preview textures for mesh resources using the visual server.
+ * @details Creates a temporary viewport with camera and lighting setup to render mesh previews.
+ * Supports optional per-mesh transforms for custom positioning.
+ * @param p_meshes Vector of Mesh resources to preview
+ * @param p_transforms Optional custom transforms for each mesh
+ * @param p_preview_size Desired preview texture size
+ * @return Vector of generated Texture2D preview images
+ * 
+ * @method void set_main_screen_editor(const String &p_name)
+ * @brief Switches the active editor screen by name.
+ * @param p_name Name of the editor screen to activate
+ * 
+ * @method Control *get_editor_viewport()
+ * @brief Returns the main editor viewport control.
+ * @return Pointer to the viewport Control
+ * 
+ * @method void edit_resource(const Ref<Resource> &p_resource)
+ * @brief Opens a resource in the appropriate editor.
+ * @param p_resource Resource to edit
+ * 
+ * @method void open_scene_from_path(const String &scene_path)
+ * @brief Opens a scene file from the given path.
+ * @param scene_path Path to the scene file
+ * 
+ * @method void reload_scene_from_path(const String &scene_path)
+ * @brief Reloads a scene from disk.
+ * @param scene_path Path to the scene file
+ * 
+ * @method Node *get_edited_scene_root()
+ * @brief Returns the root node of the currently edited scene.
+ * @return Root Node pointer or NULL if no scene is open
+ * 
+ * @method Array get_open_scenes() const
+ * @brief Returns an array of file paths for all open scenes.
+ * @return Array of String scene file paths
+ * 
+ * @method ScriptEditor *get_script_editor()
+ * @brief Returns the singleton instance of the script editor.
+ * @return Pointer to ScriptEditor
+ * 
+ * @method void select_file(const String &p_file)
+ * @brief Selects a file in the file system dock.
+ * @param p_file File path to select
+ * 
+ * @method String get_selected_path() const
+ * @brief Returns the currently selected path in the file system dock.
+ * @return Selected file or folder path
+ * 
+ * @method String get_current_path() const
+ * @brief Returns the current browsing path in the file system dock.
+ * @return Current directory path
+ * 
+ * @method void inspect_object(Object *p_obj, const String &p_for_property)
+ * @brief Displays an object in the editor inspector.
+ * @param p_obj Object to inspect
+ * @param p_for_property Optional specific property to focus on
+ * 
+ * @method EditorFileSystem *get_resource_file_system()
+ * @brief Returns the singleton EditorFileSystem instance.
+ * @return Pointer to EditorFileSystem
+ * 
+ * @method FileSystemDock *get_file_system_dock()
+ * @brief Returns the file system dock panel.
+ * @return Pointer to FileSystemDock
+ * 
+ * @method EditorSelection *get_selection()
+ * @brief Returns the editor's selection manager.
+ * @return Pointer to EditorSelection
+ * 
+ * @method Ref<EditorSettings> get_editor_settings()
+ * @brief Returns the editor settings resource.
+ * @return Reference to EditorSettings
+ * 
+ * @method EditorResourcePreview *get_resource_previewer()
+ * @brief Returns the resource preview generator.
+ * @return Pointer to EditorResourcePreview
+ * 
+ * @method Control *get_base_control()
+ * @brief Returns the main GUI control of the editor.
+ * @return Pointer to the base GUI Control
+ * 
+ * @method void set_plugin_enabled(const String &p_plugin, bool p_enabled)
+ * @brief Enables or disables an addon plugin.
+ * @param p_plugin Plugin name
+ * @param p_enabled True to enable, false to disable
+ * 
+ * @method bool is_plugin_enabled(const String &p_plugin) const
+ * @brief Checks if an addon plugin is currently enabled.
+ * @param p_plugin Plugin name
+ * @return True if enabled, false otherwise
+ * 
+ * @method EditorInspector *get_inspector() const
+ * @brief Returns the editor's object inspector.
+ * @return Pointer to EditorInspector
+ * 
+ * @method Error save_scene()
+ * @brief Saves the currently edited scene to its file path.
+ * @return OK on success, ERR_CANT_CREATE if no scene is open or has no path
+ * 
+ * @method void save_scene_as(const String &p_scene, bool p_with_preview)
+ * @brief Saves the current scene to a specified path.
+ * @param p_scene Destination file path
+ * @param p_with_preview If true, generates a scene preview thumbnail
+ * 
+ * @method void set_distraction_free_mode(bool p_enter)
+ * @brief Toggles distraction-free editing mode.
+ * @param p_enter True to enter, false to exit
+ * 
+ * @class EditorPlugin
+ * @brief Base class for creating editor plugins that extend the Godot editor.
+ * 
+ * EditorPlugin provides hooks for customizing the editor interface through:
+ * - Custom types and autoload singletons
+ * - UI controls added to various editor panels
+ * - Scene and resource editing callbacks
+ * - Input event handling for 2D and 3D viewports
+ * - Import/export and gizmo plugin support
+ * 
+ * @method void add_custom_type(const String &p_type, const String &p_base, const Ref<Script> &p_script, const Ref<Texture2D> &p_icon)
+ * @brief Registers a custom resource type in the editor.
+ * @param p_type Custom type name
+ * @param p_base Base resource class name
+ * @param p_script Script defining the custom type behavior
+ * @param p_icon Icon to display in the editor
+ * 
+ * @method void remove_custom_type(const String &p_type)
+ * @brief Unregisters a previously registered custom type.
+ * @param p_type Custom type name to remove
+ * 
+ * @method void add_autoload_singleton(const String &p_name, const String &p_path)
+ * @brief Registers an autoload singleton accessible in all scenes.
+ * @param p_name Autoload identifier name
+ * @param p_path Path to the autoload script or scene
+ * 
+ * @method void remove_autoload_singleton(const String &p_name)
+ * @brief Removes a registered autoload singleton.
+ * @param p_name Autoload identifier name to remove
+ * 
+ * @method ToolButton *add_control_to_bottom_panel(Control *p_control, const String &p_title)
+ * @brief Adds a control to the bottom editor panel with a toggle button.
+ * @param p_control Control widget to add
+ * @param p_title Title displayed on the toggle button
+ * @return ToolButton for toggling panel visibility
+ * 
+ * @method void add_control_to_dock(DockSlot p_slot, Control *p_control)
+ * @brief Adds a control to a dockable panel location.
+ * @param p_slot Dock slot location (top-left, bottom-right, etc.)
+ * @param p_control Control to dock
+ * 
+ * @method void remove_control_from_docks(Control *p_control)
+ * @brief Removes a docked control from the editor.
+ * @param p_control Control to remove
+ * 
+ * @method void remove_control_from_bottom_panel(Control *p_control)
+ * @brief Removes a control from the bottom panel.
+ * @param p_control Control to remove
+ * 
+ * @method void add_control_to_container(CustomControlContainer p_location, Control *p_control)
+ * @brief Adds a control to a specific editor container location.
+ * @param p_location Container location (toolbar, viewport menu, property editor, etc.)
+ * @param p_control Control to add
+ * 
+ * @method void remove_control_from_container(CustomControlContainer p_location, Control *p_control)
+ * @brief Removes a control from a specific container location.
+ * @param p_location Container location identifier
+ * @param p_control Control to remove
+ * 
+ * @method void add_tool_menu_item(const String &p_name, Object *p_handler, const String &p_callback, const Variant &p_ud)
+ * @brief Adds a menu item to the Tools menu.
+ * @param p_name Menu item label
+ * @param p_handler Object containing the callback method
+ * @param p_callback Method name to call when activated
+ * @param p_ud Optional user data passed to callback
+ * 
+ * @method void add_tool_submenu_item(const String &p_name, Object *p_submenu)
+ * @brief Adds a submenu to the Tools menu.
+ * @param p_name Submenu label
+ * @param p_submenu PopupMenu object containing submenu items
+ * 
+ * @method void remove_tool_menu_item(const String &p_name)
+ * @brief Removes a Tools menu item.
+ * @param p_name Menu item label to remove
+ * 
+ * @method void set_input_event_forwarding_always_enabled()
+ * @brief Enables continuous input event forwarding to this plugin.
+ * 
+ * @method void set_force_draw_over_forwarding_enabled()
+ * @brief Enables continuous draw-over viewport updates for this plugin.
+ * 
+ * @method void notify_scene_changed(const Node *scn_root)
+ * @brief Emits signal when the scene has changed.
+ * @param scn_root Root node of the changed scene
+ * 
+ * @method void notify_main_screen_changed(const String &screen_name)
+ * @brief Emits signal when the main editor screen changes.
+ * @param screen_name Name of the new screen
+ * 
+ * @method void notify_scene_closed(const String &scene_filepath)
+ * @brief Emits signal when a scene is closed.
+ * @param scene_filepath Path to the closed scene
+ * 
+ * @method void notify_resource_saved(const Ref<Resource> &p_resource)
+ * @brief Emits signal when a resource is saved.
+ * @param p_resource The saved resource
+ * 
+ * @method bool forward_canvas_gui_input(const Ref<InputEvent> &p_event)
+ * @brief Allows plugin to handle 2D canvas input events.
+ * @param p_event Input event to handle
+ * @return True if event was consumed by plugin, false otherwise
+ * 
+ * @method void forward_canvas_draw_over_viewport(Control *p_overlay)
+ * @brief Allows plugin to draw overlay graphics on 2D viewport.
+ * @param p_overlay Control to draw on
+ * 
+ * @method void forward_canvas_force_draw_over_viewport(Control *p_overlay)
+ * @brief Forces continuous drawing of overlay on 2D viewport.
+ * @param p_overlay Control to draw on
+ * 
+ * @method int update_overlays() const
+ * @brief Updates all viewport overlays.
+ * @return Number of updated viewports
+ * 
+ * @method bool forward_spatial_gui_input(Camera *p_camera, const Ref<InputEvent> &p_event)
+ * @brief Allows plugin to handle 3D viewport input events.
+ * @param p_camera Active camera in 3D viewport
+ * @param p_event Input event to handle
+ * @return True if event was consumed, false otherwise
+ * 
+ * @method void forward_spatial_draw_over_viewport(Control *p_overlay)
+ * @brief Allows plugin to draw overlay graphics on 3D viewports.
+ * @param p_overlay Control to draw on
+ * 
+ * @method void forward_spatial_force_draw_over_viewport(Control *p_overlay)
+ * @brief Forces continuous drawing of overlay on 3D viewports.
+ * @param p_overlay Control to draw on
+ * 
+ * @method String get_name() const
+ * @brief Returns the display name of this plugin.
+ * @return Plugin name string
+ * 
+ * @method const Ref<Texture2D> get_icon() const
+ * @brief Returns the icon for this plugin.
+ * @return Texture2D reference for plugin icon
+ * 
+ * @method bool has_main_screen() const
+ * @brief Indicates whether plugin provides a main editor screen.
+ * @return True if plugin has main screen, false otherwise
+ * 
+ * @method void make_visible(bool p_visible)
+ * @brief Shows or hides the plugin's main screen.
+ * @param p_visible True to show, false to hide
+ * 
+ * @method void edit(Object *p_object)
+ * @brief Called when the plugin should edit a specific object.
+ * @param p_object Object to edit
+ * 
+ * @method bool handles(Object *p_object) const
+ * @brief Indicates whether plugin can handle editing a specific object.
+ * @param p_object Object to check
+ * @return True if plugin can handle, false otherwise
+ * 
+ * @method Dictionary get_state() const
+ * @brief Returns the plugin's current editor state for serialization.
+ * @return Dictionary containing state data
+ * 
+ * @method void set_state(const Dictionary &p_state)
+ * @brief Restores plugin state from a dictionary.
+ * @param p_state State dictionary to restore
+ * 
+ * @method void clear()
+ * @brief Called to clear the plugin's content and reset state.
+ * 
+ * @method void save_external_data()
+ * @brief Called to save any external resources managed by the plugin.
+ * 
+ * @method void apply_changes()
+ * @brief Called to apply pending changes in the plugin editor.
+ * 
+ * @method void get_breakpoints(List<String> *p_breakpoints)
+ * @brief Returns list of script breakpoint locations managed by plugin.
+ * @param p_breakpoints List to populate with breakpoint paths
+ * 
+ * @method bool get_remove_list(List<Node *> *p_list)
+ * @brief Retrieves list of nodes to be removed. Override to prevent deletion.
+ * @param p_list List to populate
+ * @return False to allow removal, true to prevent
+ * 
+ * @method void restore_global_state()
+ * @brief Called to restore plugin's global editor state.
+ * 
+ * @method void save_global_state()
+ * @brief Called to save plugin's global editor state.
+ * 
+ * @method void add_import_plugin(const Ref<EditorImportPlugin> &p_importer)
+ * @brief Registers a custom resource importer plugin.
+ * @param p_importer EditorImportPlugin to register
+ * 
+ * @method void remove_import_plugin(const Ref<EditorImportPlugin> &p_importer)
+ * @brief Unregisters a resource importer plugin.
+ * @param p_importer EditorImportPlugin to remove
+ * 
+ * @method void add_export_plugin(const Ref<EditorExportPlugin> &p_exporter)
+ * @brief Registers a custom project exporter plugin.
+ * @param p_exporter EditorExportPlugin to register
+ * 
+ * @method void remove_export_plugin(const Ref<EditorExportPlugin> &p_exporter)
+ * @brief Unregisters an export plugin.
+ * @param p_exporter EditorExportPlugin to remove
+ * 
+ * @method void add_spatial_gizmo_plugin(const Ref<EditorSpatialGizmoPlugin> &p_gizmo_plugin)
+ * @brief Registers a 3D viewport gizmo plugin.
+ * @param p_gizmo_plugin EditorSpatialGizmoPlugin to register
+ * 
+ * @method void remove_spatial_gizmo_plugin(const Ref<EditorSpatialGizmoPlugin> &p_gizmo_plugin)
+ * @brief Unregisters a gizmo plugin.
+ * @param p_gizmo_plugin EditorSpatialGizmoPlugin to remove
+ * 
+ * @method void add_inspector_plugin(const Ref<EditorInspectorPlugin> &p_plugin)
+ * @brief Registers a custom property inspector plugin.
+ * @param p_plugin EditorInspectorPlugin to register
+ * 
+ * @method void remove_inspector_plugin(const Ref<EditorInspectorPlugin> &p_plugin)
+ * @brief Unregisters an inspector plugin.
+ * @param p_plugin EditorInspectorPlugin to remove
+ * 
+ * @method void add_scene_import_plugin(const Ref<EditorSceneImporter> &p_importer)
+ * @brief Registers a custom scene importer plugin.
+ * @param p_importer EditorSceneImporter to register
+ * 
+ * @method void remove_scene_import_plugin(const Ref<EditorSceneImporter> &p_importer)
+ * @brief Unregisters a scene importer plugin.
+ * @param p_importer EditorSceneImporter to remove
+ * 
+ * @method void enable_plugin()
+ * @brief Called when plugin is enabled in project settings.
+ * @details Override to initialize plugin resources and register autoloads.
+ * 
+ * @method void disable_plugin()
+ * @brief Called when plugin is disabled in project settings.
+ * @details Override to cleanup plugin resources and unregister autoloads.
+ * 
+ * @method void set_window_layout(Ref<ConfigFile> p_layout)
+ * @brief Called to restore editor window layout configuration.
+ * @param p_layout ConfigFile with layout data
+ * 
+ * @method void get_window_layout(Ref<ConfigFile> p_layout)
+ * @brief Called to save editor window layout configuration.
+ * @param p_layout ConfigFile to populate with layout data
+ * 
+ * @method bool build()
+ * @brief Called during project build process. Override to add custom build steps.
+ * @return True to continue build, false to cancel
+ * 
+ * @method void queue_save_layout() const
+ * @brief Requests that the editor save its current layout configuration.
+ * 
+ * @method void make_bottom_panel_item_visible(Control *p_item)
+ * @brief Shows a bottom panel item and switches focus to it.
+ * @param p_item Bottom panel Control to show
+ * 
+ * @method void hide_bottom_panel()
+ * @brief Hides the bottom editor panel.
+ * 
+ * @method EditorInterface *get_editor_interface()
+ * @brief Returns the editor interface singleton.
+ * @return Pointer to EditorInterface
+ * 
+ * @method ScriptCreateDialog *get_script_create_dialog()
+ * @brief Returns the script creation dialog.
+ * @return Pointer to ScriptCreateDialog
+ * 
+ * @signal scene_changed(Node *scene_root)
+ * @brief Emitted when the edited scene changes.
+ * 
+ * @signal scene_closed(String filepath)
+ * @brief Emitted when a scene is closed.
+ * 
+ * @signal main_screen_changed(String screen_name)
+ * @brief Emitted when the main editor screen changes.
+ * 
+ * @signal resource_saved(Resource resource)
+ * @brief Emitted when a resource is saved.
+ * 
+ * @enum CustomControlContainer
+ * @brief Locations where controls can be added to the editor UI.
+ * @value CONTAINER_TOOLBAR Main editor toolbar
+ * @value CONTAINER_SPATIAL_EDITOR_MENU 3D editor menu panel
+ * @value CONTAINER_SPATIAL_EDITOR_SIDE_LEFT 3D editor left sidebar
+ * @value CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT 3D editor right sidebar
+ * @value CONTAINER_SPATIAL_EDITOR_BOTTOM 3D editor bottom panel
+ * @value CONTAINER_CANVAS_EDITOR_MENU 2D editor menu panel
+ * @value CONTAINER_CANVAS_EDITOR_SIDE_LEFT 2D editor left sidebar
+ * @value CONTAINER_CANVAS_EDITOR_SIDE_RIGHT 2D editor right sidebar
+ * @value CONTAINER_CANVAS_EDITOR_BOTTOM 2D editor bottom panel
+ * @value CONTAINER_PROPERTY_EDITOR_BOTTOM Inspector addon area
+ * @value CONTAINER_PROJECT_SETTING_TAB_LEFT Project settings left tabs
+ * @value CONTAINER_PROJECT_SETTING_TAB_RIGHT Project settings right tabs
+ * 
+ * @enum DockSlot
+ * @brief Dockable panel slot positions in the editor.
+ * @value DOCK_SLOT_LEFT_UL Left panel upper position
+ * @value DOCK_SLOT_LEFT_BL Left panel lower position
+ * @value DOCK_SLOT_LEFT_UR Left panel upper-right position
+ * @value DOCK_SLOT_LEFT_BR Left panel bottom-right position
+ * @value DOCK_SLOT_RIGHT_UL Right panel upper position
+ * @value DOCK_SLOT_RIGHT_BL Right panel lower position
+ * @value DOCK_SLOT_RIGHT_UR Right panel upper-right position
+ * @value DOCK_SLOT_RIGHT_BR Right panel bottom-right position
+ * @value DOCK_SLOT_MAX Maximum dock slot value
+ * 
+ * @class EditorPlugins
+ * @brief Manager for plugin creation functions.
+ * @details Maintains registry of editor plugin creation callbacks used by the editor
+ * to instantiate available plugins.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "editor_plugin.h"
 
 #include "editor/editor_export.h"

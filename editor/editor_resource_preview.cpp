@@ -1,39 +1,46 @@
-/*************************************************************************/
-/*  editor_resource_preview.cpp                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_resource_preview.cpp
- * @brief Implementation of editor_resource_preview functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class EditorResourcePreviewGenerator
+/// @brief Base class for generating preview thumbnails for different resource types.
+/// 
+/// This class provides a virtual interface for creating preview textures for various
+/// resource types in the editor. Subclasses should override the virtual methods to
+/// handle specific resource types and generate appropriate preview images.
+/// 
+/// Virtual Methods (to be overridden):
+/// - handles(String type): Returns true if this generator can handle the given resource type
+/// - generate(Resource from, Vector2 size): Generates a preview texture from a resource
+/// - generate_from_path(String path, Vector2 size): Generates a preview texture from a file path
+/// - generate_small_preview_automatically(): Returns true to auto-generate small preview from large preview
+/// - can_generate_small_preview(): Returns true if this generator can create small preview thumbnails
 
+/// @class EditorResourcePreview
+/// @brief Manager for asynchronously generating and caching resource preview thumbnails.
+/// 
+/// This singleton class handles queuing, generating, and caching preview textures for
+/// resources both from disk and memory. It uses a background thread to generate previews
+/// asynchronously to avoid blocking the editor UI. Previews are cached both in memory
+/// and on disk to improve performance on subsequent requests.
+/// 
+/// Features:
+/// - Asynchronous preview generation via background thread
+/// - Dual-level caching (memory and disk)
+/// - Support for both resource objects and file paths
+/// - Cache invalidation based on file modification time
+/// - Customizable preview generators for different resource types
+/// - Small and large thumbnail generation
+/// 
+/// Public Methods:
+/// - queue_resource_preview(String path, Object receiver, StringName func, Variant userdata)
+/// - queue_edited_resource_preview(Ref<Resource> resource, Object receiver, StringName func, Variant userdata)
+/// - add_preview_generator(Ref<EditorResourcePreviewGenerator> generator)
+/// - remove_preview_generator(Ref<EditorResourcePreviewGenerator> generator)
+/// - check_for_invalidation(String path)
+/// - start(): Begin the background preview generation thread
+/// - stop(): Shutdown the background thread and wait for completion
+/// 
+/// Signals:
+/// - preview_invalidated(String path): Emitted when a cached preview becomes invalid
 #include "editor_resource_preview.h"
 
 #include "core/method_bind_ext.gen.inc"

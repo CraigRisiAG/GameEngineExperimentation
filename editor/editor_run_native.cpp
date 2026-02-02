@@ -1,39 +1,63 @@
-/*************************************************************************/
-/*  editor_run_native.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_run_native.cpp
- * @brief Implementation of editor_run_native functionality.
+ * @class EditorRunNative
+ * @brief Manages native platform export and run functionality for the editor.
+ *
+ * Handles the creation and management of menu buttons for running exported projects
+ * on various native platforms. Provides UI elements for selecting export presets and
+ * run options, and coordinates the execution of native builds with debug settings.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Processes notifications for tree entry and frame updates.
+ * @param p_what The notification type to process.
+ *
+ * On NOTIFICATION_ENTER_TREE: Initializes menu buttons for each available export platform.
+ * Creates small icon buttons for each platform and connects signal handlers.
+ *
+ * On NOTIFICATION_PROCESS: Polls export platforms for changes and updates menu visibility
+ * and options based on available export presets.
+ */
+void EditorRunNative::_notification(int p_what)
 
+/**
+ * @brief Executes the native run process for a selected platform and option.
+ * @param p_idx The option index within the platform's options (-1 for menu button press).
+ * @param p_platform The index of the export platform to run on.
+ *
+ * Validates the main scene exists, retrieves the appropriate export preset, and initiates
+ * the native execution with configured debug flags (remote debugging, collisions, navigation, etc.).
+ * Stores resume information if the main scene is not available.
+ */
+void EditorRunNative::_run_native(int p_idx, int p_platform)
+
+/**
+ * @brief Resumes a previously interrupted native run operation.
+ *
+ * Re-executes _run_native with the stored resume index and platform from the last call.
+ */
+void EditorRunNative::resume_run_native()
+
+/**
+ * @brief Binds native methods and signals to the scripting system.
+ *
+ * Exposes the "native_run" signal for use in GDScript and other bound languages.
+ */
+void EditorRunNative::_bind_methods()
+
+/**
+ * @brief Checks if remote debug deployment is enabled in project settings.
+ * @return True if remote debug deployment is enabled, false otherwise.
+ */
+bool EditorRunNative::is_deploy_debug_remote_enabled() const
+
+/**
+ * @brief Initializes the EditorRunNative instance.
+ *
+ * Sets up frame processing, initializes first-run flag, and clears resume state.
+ */
+EditorRunNative::EditorRunNative()
 #include "editor_run_native.h"
 
 #include "editor_export.h"

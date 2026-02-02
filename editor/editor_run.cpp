@@ -1,39 +1,55 @@
-/*************************************************************************/
-/*  editor_run.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file editor_run.cpp
- * @brief Implementation of editor_run functionality.
+ * @brief Editor runtime execution manager for the game engine editor.
+ * 
+ * This module handles launching and managing game instances from the editor,
+ * including process spawning, debugging configuration, and window placement settings.
+ * It supports multiple simultaneous instances, remote debugging, breakpoints,
+ * and various window placement options.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Gets the current execution status of the editor run session.
+ * @return EditorRun::Status The current status (PLAY or STOP).
+ */
 
+/**
+ * @brief Runs a game scene with specified configuration and debugging options.
+ * 
+ * Launches one or more instances of the game executable with arguments configured from
+ * editor settings, including remote debugging, breakpoints, window placement, and custom arguments.
+ * 
+ * @param p_scene The scene file path to run. If empty, runs the default scene.
+ * @param p_custom_args Additional command-line arguments to pass to the game executable.
+ * @param p_breakpoints List of breakpoint locations for the debugger.
+ * @param p_skip_breakpoints If true, skip all breakpoints during execution.
+ * @return Error OK if successful, otherwise an error code.
+ */
+
+/**
+ * @brief Checks if a given process ID belongs to a child process managed by this EditorRun instance.
+ * 
+ * @param p_pid The process ID to check.
+ * @return bool True if the process is managed by this EditorRun instance, false otherwise.
+ */
+
+/**
+ * @brief Terminates a specific child process and removes it from the managed list.
+ * 
+ * @param p_pid The process ID of the child process to terminate.
+ */
+
+/**
+ * @brief Stops all running child processes and sets status to STOP.
+ * 
+ * Terminates all managed game instances and updates the run session status.
+ */
+
+/**
+ * @brief Constructs an EditorRun instance with initial STOP status.
+ */
 #include "editor_run.h"
 
 #include "core/project_settings.h"

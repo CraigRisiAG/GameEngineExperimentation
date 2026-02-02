@@ -1,39 +1,45 @@
-/*************************************************************************/
-/*  editor_path.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_path.cpp
- * @brief Implementation of editor_path functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class EditorPath
+/// @brief Manages a visual navigation path for editor objects and sub-resources.
+///
+/// EditorPath provides a dropdown menu interface to navigate through object hierarchies
+/// in the editor. It displays the current object and allows users to browse and select
+/// sub-resources recursively.
+///
+/// @method _add_children_to_popup(Object *p_obj, int p_depth)
+/// @brief Recursively populates the dropdown menu with child objects.
+/// @param p_obj The parent object to extract properties from.
+/// @param p_depth The current recursion depth (limited to 8 levels).
+/// @details Iterates through editor properties, filters for resource types, and adds
+///          valid objects to the popup menu with appropriate indentation based on depth.
+///
+/// @method _about_to_show()
+/// @brief Prepares the popup menu before display.
+/// @details Clears previous entries, retrieves the current history object, and populates
+///          the menu with available sub-resources. Displays a message if no sub-resources exist.
+///
+/// @method update_path()
+/// @brief Updates the display with the current object's icon and name.
+/// @details Traverses the history path, sets the appropriate icon from the current object,
+///          and displays formatted text with the object's name or class identifier.
+///
+/// @method _id_pressed(int p_idx)
+/// @brief Handles popup menu item selection.
+/// @param p_idx The index of the selected menu item.
+/// @details Retrieves the corresponding object and pushes it to the editor for inspection.
+///
+/// @method _notification(int p_what)
+/// @brief Responds to editor notifications.
+/// @param p_what The notification type identifier.
+///
+/// @method _bind_methods()
+/// @brief Binds methods to the scripting interface (empty implementation).
+///
+/// @constructor EditorPath(EditorHistory *p_history)
+/// @brief Initializes the EditorPath with a reference to editor history.
+/// @param p_history Pointer to the editor history manager for path tracking.
+/// @details Sets up signals for popup events and configures text display properties.
 #include "editor_path.h"
 
 #include "editor_node.h"

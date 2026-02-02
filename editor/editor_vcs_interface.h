@@ -1,39 +1,78 @@
-/*************************************************************************/
-/*  editor_vcs_interface.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file editor_vcs_interface.h
- * @brief Implementation of EditorVCSInterface class.
+ * @class EditorVCSInterface
+ * @brief Interface for Version Control System integration in the Godot editor.
+ * 
+ * EditorVCSInterface provides a proxy pattern for communicating with VCS addons.
+ * It acts as a singleton that manages initialization, file staging, committing,
+ * and other VCS operations through virtual methods implemented by addon plugins.
+ * 
+ * The class maintains two sets of methods:
+ * - Protected virtual methods (prefixed with '_') implemented by addons
+ * - Public proxy methods that call the corresponding addon implementations
+ * 
+ * This design allows the editor to interact with VCS systems without direct
+ * dependency on specific implementation details.
+ * 
+ * @note This is a singleton class. Use get_singleton() to access the instance.
+ * 
+ * @see set_singleton()
+ * @see get_singleton()
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Initializes the VCS addon with the project root path.
+ * @param p_project_root_path The root directory path of the project.
+ * @return true if initialization was successful, false otherwise.
+ */
 
+/**
+ * @brief Checks if a VCS has been initialized.
+ * @return true if VCS is initialized, false otherwise.
+ */
+
+/**
+ * @brief Retrieves data about all modified files in the project.
+ * @return Dictionary containing modified files and their metadata.
+ */
+
+/**
+ * @brief Stages a file for commit.
+ * @param p_file_path Path to the file to stage.
+ */
+
+/**
+ * @brief Unstages a file from the commit staging area.
+ * @param p_file_path Path to the file to unstage.
+ */
+
+/**
+ * @brief Commits staged changes with a message.
+ * @param p_msg The commit message.
+ */
+
+/**
+ * @brief Retrieves the diff for a specific file.
+ * @param p_file_path Path to the file.
+ * @return Array containing diff information.
+ */
+
+/**
+ * @brief Shuts down the VCS addon.
+ * @return true if shutdown was successful, false otherwise.
+ */
+
+/**
+ * @brief Gets the name of the current project.
+ * @return String containing the project name.
+ */
+
+/**
+ * @brief Gets the name of the VCS system in use.
+ * @return String containing the VCS name (e.g., "Git").
+ */
 #ifndef EDITOR_VCS_INTERFACE_H
 #define EDITOR_VCS_INTERFACE_H
 

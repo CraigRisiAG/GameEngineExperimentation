@@ -1,39 +1,110 @@
-/*************************************************************************/
-/*  editor_resource_preview.h                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_resource_preview.h
- * @brief Implementation of EditorResourcePreviewGenerator class.
+ * @class EditorResourcePreviewGenerator
+ * @brief Base class for generating preview thumbnails of editor resources.
+ * 
+ * EditorResourcePreviewGenerator is an abstract base class that defines the interface
+ * for creating preview textures of various resource types. Subclasses should override
+ * the virtual methods to handle specific resource types and generate appropriate previews.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @fn virtual bool EditorResourcePreviewGenerator::handles(const String &p_type) const
+ * @brief Checks if this generator can handle the specified resource type.
+ * @param p_type The resource type string to check.
+ * @return true if this generator can handle the resource type, false otherwise.
+ */
 
+/**
+ * @fn virtual Ref<Texture2D> EditorResourcePreviewGenerator::generate(const RES &p_from, const Size2 &p_size) const
+ * @brief Generates a preview texture from a resource object.
+ * @param p_from The resource to generate a preview for.
+ * @param p_size The desired size of the preview texture.
+ * @return A Texture2D reference containing the generated preview, or null if generation failed.
+ */
+
+/**
+ * @fn virtual Ref<Texture2D> EditorResourcePreviewGenerator::generate_from_path(const String &p_path, const Size2 &p_size) const
+ * @brief Generates a preview texture from a file path.
+ * @param p_path The file path of the resource to preview.
+ * @param p_size The desired size of the preview texture.
+ * @return A Texture2D reference containing the generated preview, or null if generation failed.
+ */
+
+/**
+ * @fn virtual bool EditorResourcePreviewGenerator::generate_small_preview_automatically() const
+ * @brief Determines if small previews should be automatically generated for this resource type.
+ * @return true if small previews should be auto-generated, false otherwise.
+ */
+
+/**
+ * @fn virtual bool EditorResourcePreviewGenerator::can_generate_small_preview() const
+ * @brief Checks if this generator is capable of generating small preview thumbnails.
+ * @return true if small preview generation is supported, false otherwise.
+ */
+
+/**
+ * @class EditorResourcePreview
+ * @brief Manages the generation and caching of resource preview thumbnails.
+ * 
+ * EditorResourcePreview is a singleton node that handles the queuing, generation, and
+ * caching of preview thumbnails for editor resources. It uses a background thread to
+ * asynchronously generate previews and notifies interested objects via callback functions
+ * when previews are ready.
+ */
+
+/**
+ * @fn static EditorResourcePreview* EditorResourcePreview::get_singleton()
+ * @brief Retrieves the singleton instance of EditorResourcePreview.
+ * @return Pointer to the EditorResourcePreview singleton.
+ */
+
+/**
+ * @fn void EditorResourcePreview::queue_resource_preview(const String &p_path, Object *p_receiver, const StringName &p_receiver_func, const Variant &p_userdata)
+ * @brief Queues a resource file for preview generation.
+ * @param p_path The file path of the resource to preview.
+ * @param p_receiver The object that will receive the preview callback.
+ * @param p_receiver_func The callback function name to invoke with the generated preview.
+ * @param p_userdata Custom user data to pass to the callback function.
+ */
+
+/**
+ * @fn void EditorResourcePreview::queue_edited_resource_preview(const Ref<Resource> &p_res, Object *p_receiver, const StringName &p_receiver_func, const Variant &p_userdata)
+ * @brief Queues an in-memory resource for preview generation.
+ * @param p_res The resource object to generate a preview for.
+ * @param p_receiver The object that will receive the preview callback.
+ * @param p_receiver_func The callback function name to invoke with the generated preview.
+ * @param p_userdata Custom user data to pass to the callback function.
+ */
+
+/**
+ * @fn void EditorResourcePreview::add_preview_generator(const Ref<EditorResourcePreviewGenerator> &p_generator)
+ * @brief Registers a preview generator for handling specific resource types.
+ * @param p_generator The preview generator to add.
+ */
+
+/**
+ * @fn void EditorResourcePreview::remove_preview_generator(const Ref<EditorResourcePreviewGenerator> &p_generator)
+ * @brief Unregisters a preview generator.
+ * @param p_generator The preview generator to remove.
+ */
+
+/**
+ * @fn void EditorResourcePreview::check_for_invalidation(const String &p_path)
+ * @brief Checks if cached previews for a resource are still valid and invalidates them if necessary.
+ * @param p_path The file path of the resource to check.
+ */
+
+/**
+ * @fn void EditorResourcePreview::start()
+ * @brief Starts the background preview generation thread.
+ */
+
+/**
+ * @fn void EditorResourcePreview::stop()
+ * @brief Stops the background preview generation thread.
+ */
 #ifndef EDITORRESOURCEPREVIEW_H
 #define EDITORRESOURCEPREVIEW_H
 

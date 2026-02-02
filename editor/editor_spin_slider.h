@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  editor_spin_slider.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file editor_spin_slider.h
- * @brief Implementation of EditorSpinSlider class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class EditorSpinSlider
+/// @brief A custom GUI control combining a slider and spin box for numeric input in the editor.
+/// 
+/// EditorSpinSlider extends the Range class to provide an integrated widget for editing
+/// numeric values. It features both a draggable slider/grabber and a text input field,
+/// allowing users to modify values through direct manipulation or text entry.
+/// 
+/// @features
+/// - Dual input methods: slider grabbing and text input
+/// - Customizable label with optional custom coloring
+/// - Mouse wheel support over the grabber
+/// - Hide/show slider capability
+/// - Read-only mode
+/// - Flat visual style option
+/// - Focus management and input validation
+/// 
+/// @note This class is part of the Godot Engine editor GUI framework.
 #ifndef EDITOR_SPIN_SLIDER_H
 #define EDITOR_SPIN_SLIDER_H
 

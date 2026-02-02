@@ -1,39 +1,63 @@
-/*************************************************************************/
-/*  editor_run.h                                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file editor_run.h
- * @brief Implementation of EditorRun class.
+ * @class EditorRun
+ * @brief Manages the execution and lifecycle of editor play sessions.
+ * 
+ * This class handles running scenes in the editor, managing their execution state,
+ * and controlling child processes associated with play sessions.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @enum Status
+ * @brief Represents the current execution state of the editor.
+ * @var STATUS_PLAY - Scene is currently running
+ * @var STATUS_PAUSED - Scene execution is paused
+ * @var STATUS_STOP - Scene is stopped
+ */
 
+/**
+ * @brief Gets the current execution status.
+ * @return Status The current status of the editor run session
+ */
+
+/**
+ * @brief Runs a scene with optional custom arguments and breakpoints.
+ * @param p_scene The path to the scene file to run
+ * @param p_custom_args Custom command-line arguments to pass to the scene
+ * @param p_breakpoints List of breakpoints to set before execution
+ * @param p_skip_breakpoints If true, skip all breakpoints during execution (default: false)
+ * @return Error Error code indicating success or failure of the run operation
+ */
+
+/**
+ * @brief Notifies that native execution has started.
+ * Sets the status to STATUS_PLAY.
+ */
+
+/**
+ * @brief Stops the current scene execution and all child processes.
+ */
+
+/**
+ * @brief Stops a specific child process by its ID.
+ * @param p_pid The process ID to terminate
+ */
+
+/**
+ * @brief Checks if a child process with the given ID exists.
+ * @param p_pid The process ID to check
+ * @return bool True if the process exists, false otherwise
+ */
+
+/**
+ * @brief Gets the total number of active child processes.
+ * @return int The count of child processes
+ */
+
+/**
+ * @brief Constructs an EditorRun instance and initializes it to stopped state.
+ */
 #ifndef EDITOR_RUN_H
 #define EDITOR_RUN_H
 
