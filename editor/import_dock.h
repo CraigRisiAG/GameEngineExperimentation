@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  import_dock.h                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file import_dock.h
- * @brief Implementation of ImportDock class.
+ * @class ImportDock
+ * @brief A docking panel for managing resource import settings and options.
+ * 
+ * The ImportDock provides a user interface for importing resources with customizable
+ * importer selection, preset management, and property configuration. It allows users
+ * to select import presets, configure import options, and trigger re-import operations.
+ * 
+ * @details
+ * This class manages:
+ * - Resource importer selection via dropdown
+ * - Import preset management and selection
+ * - Import property configuration through an EditorInspector
+ * - Re-import confirmation and execution for single or multiple paths
+ * - Import warning/status display
+ * 
+ * Signals and Notifications:
+ * - Responds to importer selection changes
+ * - Handles preset selection and default preset management
+ * - Provides re-import confirmation workflow
+ * - Updates property options based on selected importer and preset
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef IMPORTDOCK_H
 #define IMPORTDOCK_H
 

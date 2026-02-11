@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  inspector_dock.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file inspector_dock.h
- * @brief Implementation of InspectorDock class.
+ * @class InspectorDock
+ * @brief Main dock panel for inspecting and editing object properties in the editor.
+ * 
+ * InspectorDock provides a comprehensive interface for viewing and modifying properties
+ * of selected objects in the scene. It includes resource management, history navigation,
+ * property searching, and object method invocation capabilities.
+ * 
+ * Features:
+ * - Property inspection and editing via EditorInspector
+ * - Resource creation, loading, and saving
+ * - Edit history with forward/backward navigation
+ * - Property search functionality
+ * - Object context menu with helper methods
+ * - Animation keyframing support
+ * - Resource and parameter copying/pasting
+ * - Warning/notification system
+ * 
+ * @note Inherits from VBoxContainer to organize sub-components vertically.
+ * @see EditorInspector, EditorNode, EditorData
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef INSPECTOR_DOCK_H
 #define INSPECTOR_DOCK_H
 

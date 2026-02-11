@@ -1,39 +1,169 @@
-/*************************************************************************/
-/*  groups_editor.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file groups_editor.cpp
- * @brief Definition of _GroupInfoComparator data structure.
+ * @class GroupDialog
+ * @brief Dialog for managing node groups in the scene editor.
+ * 
+ * Provides a UI for viewing and editing which nodes belong to specific groups.
+ * Allows users to add/remove nodes from groups, create/rename/delete groups,
+ * and filter nodes by name. Supports undo/redo operations.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Refreshes the node lists when a group is selected.
+ * Clears and rebuilds both add and remove node trees based on the selected group.
+ */
+void _group_selected();
 
+/**
+ * @brief Recursively loads nodes from the scene tree.
+ * @param p_current The current node being processed.
+ * 
+ * Recursively traverses the scene tree starting from p_current and populates
+ * the node lists based on group membership and filter criteria.
+ */
+void _load_nodes(Node *p_current);
+
+/**
+ * @brief Checks if a node's group membership can be edited.
+ * @param p_node The node to check.
+ * @param p_group The group name to check.
+ * @return True if the node's group membership can be edited, false otherwise.
+ * 
+ * Returns false if the node is part of an inherited scene instance.
+ */
+bool _can_edit(Node *p_node, String p_group);
+
+/**
+ * @brief Adds selected nodes to the current group.
+ * Creates an undo/redo action to add all selected nodes in the "to add" tree
+ * to the currently selected group.
+ */
+void _add_pressed();
+
+/**
+ * @brief Removes selected nodes from the current group.
+ * Creates an undo/redo action to remove all selected nodes from the currently
+ * selected group.
+ */
+void _removed_pressed();
+
+/**
+ * @brief Callback for when the remove filter text changes.
+ * @param p_filter The new filter text.
+ */
+void _remove_filter_changed(const String &p_filter);
+
+/**
+ * @brief Callback for when the add filter text changes.
+ * @param p_filter The new filter text.
+ */
+void _add_filter_changed(const String &p_filter);
+
+/**
+ * @brief Handles the add group button press event.
+ * @param p_name The name entered in the add group text field.
+ */
+void _add_group_pressed(const String &p_name);
+
+/**
+ * @brief Creates a new group with the specified name.
+ * @param p_name The name of the group to create.
+ */
+void _add_group(String p_name);
+
+/**
+ * @brief Handles group rename operations via undo/redo.
+ * Updates all nodes in the renamed group and creates appropriate undo/redo actions.
+ */
+void _group_renamed();
+
+/**
+ * @brief Renames a group in the group tree.
+ * @param p_old_name The previous group name.
+ * @param p_new_name The new group name.
+ */
+void _rename_group_item(const String &p_old_name, const String &p_new_name);
+
+/**
+ * @brief Recursively loads all persistent groups from the scene tree.
+ * @param p_current The current node being processed.
+ */
+void _load_groups(Node *p_current);
+
+/**
+ * @brief Handles group deletion with undo/redo support.
+ * @param p_item The tree item representing the group.
+ * @param p_column The column index (unused).
+ * @param p_id The button id (unused).
+ */
+void _delete_group_pressed(Object *p_item, int p_column, int p_id);
+
+/**
+ * @brief Removes a group from the group tree.
+ * @param p_name The name of the group to delete.
+ */
+void _delete_group_item(const String &p_name);
+
+/**
+ * @brief Handles notifications (e.g., entering scene tree).
+ * @param p_what The notification type.
+ */
+void _notification(int p_what);
+
+/**
+ * @brief Opens the group editor dialog and initializes the UI.
+ */
+void edit();
+
+/**
+ * @brief Binds methods for use with the undo/redo system.
+ */
+void _bind_methods();
+
+/**
+ * @class GroupsEditor
+ * @brief Editor panel for managing groups of a specific node.
+ * 
+ * Displays and allows editing of groups that a selected node belongs to.
+ * Provides quick add/remove group functionality and access to the full group dialog.
+ */
+
+/**
+ * @brief Adds a new group to the current node.
+ * @param p_group The group name (unused, reads from group_name field).
+ */
+void _add_group(const String &p_group);
+
+/**
+ * @brief Removes a node from a group via tree button press.
+ * @param p_item The tree item representing the group.
+ * @param p_column The column index (unused).
+ * @param p_id The button id (unused).
+ */
+void _remove_group(Object *p_item, int p_column, int p_id);
+
+/**
+ * @brief Refreshes the group tree display.
+ * Rebuilds the tree showing all persistent groups the current node belongs to.
+ */
+void update_tree();
+
+/**
+ * @brief Sets the node to display/edit groups for.
+ * @param p_node The node whose groups should be displayed.
+ */
+void set_current(Node *p_node);
+
+/**
+ * @brief Opens the full group management dialog.
+ */
+void _show_group_dialog();
+
+/**
+ * @brief Binds methods for use with the undo/redo system.
+ */
+void _bind_methods();
 #include "groups_editor.h"
 
 #include "editor/scene_tree_editor.h"

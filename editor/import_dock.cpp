@@ -1,39 +1,57 @@
-/*************************************************************************/
-/*  import_dock.cpp                                                      */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file import_dock.cpp
- * @brief Implementation of ImportDockParameters class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class ImportDock
+/// @brief Manages the import settings and re-import operations for resource files in the editor.
+/// 
+/// Provides a dock interface for viewing and modifying import parameters for selected resources.
+/// Supports single and multiple file imports with preset management and configuration persistence.
+/// Handles importer selection, parameter validation, and file system updates.
 
+/// @fn void ImportDock::set_edit_path(const String &p_path)
+/// @brief Sets up the dock to edit import settings for a single resource file.
+/// @param p_path The filesystem path to the resource file to import.
+
+/// @fn void ImportDock::set_edit_multiple_paths(const Vector<String> &p_paths)
+/// @brief Configures the dock to edit import settings for multiple resource files.
+/// @param p_paths Vector of filesystem paths to the resource files.
+/// @details Analyzes value frequency across files to determine common settings.
+
+/// @fn void ImportDock::_update_options(const Ref<ConfigFile> &p_config)
+/// @brief Refreshes the list of available import options and their current values.
+/// @param p_config The import configuration file, may be null for default values.
+
+/// @fn void ImportDock::_update_preset_menu()
+/// @brief Rebuilds the preset dropdown menu with available importer presets.
+
+/// @fn void ImportDock::_importer_selected(int i_idx)
+/// @brief Callback for when the user selects a different importer.
+/// @param i_idx The index of the selected importer in the dropdown.
+
+/// @fn void ImportDock::_preset_selected(int p_idx)
+/// @brief Callback for preset selection, handles preset application or management.
+/// @param p_idx The index of the selected preset item.
+
+/// @fn void ImportDock::_reimport_attempt()
+/// @brief Initiates the reimport process with validation checks.
+/// Displays confirmation dialog if importer type change or resource dependencies detected.
+
+/// @fn void ImportDock::_reimport()
+/// @brief Performs the actual reimport operation, updating configuration files.
+
+/// @fn void ImportDock::_reimport_and_restart()
+/// @brief Reimports files and restarts the editor if importer type changes.
+
+/// @fn void ImportDock::clear()
+/// @brief Clears all import settings and resets the dock to empty state.
+
+/// @fn void ImportDock::initialize_import_options() const
+/// @brief Initializes the inspector with current import parameters.
+
+/// @class ImportDockParameters
+/// @brief Internal data structure storing import configuration and metadata.
+/// 
+/// Manages import option values, property information, and tracks which parameters
+/// have been modified during multi-file editing.
 #include "import_dock.h"
 #include "editor_node.h"
 #include "editor_resource_preview.h"

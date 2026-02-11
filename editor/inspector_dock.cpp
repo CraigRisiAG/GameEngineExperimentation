@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  inspector_dock.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file inspector_dock.cpp
- * @brief Implementation of inspector_dock functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class InspectorDock
+/// @brief Manages the inspector dock interface for editing object properties and resources.
+///
+/// InspectorDock provides a user interface for inspecting and modifying object properties,
+/// managing resources, and navigating through editing history. It includes features for:
+/// - Creating, loading, and saving resources
+/// - Viewing and editing object properties through an inspector panel
+/// - Managing edit history with back/forward navigation
+/// - Performing batch operations on resources (copy, paste, make unique, etc.)
+/// - Handling animation keyframe insertion for spatial transforms and properties
+///
+/// The dock organizes its UI into several sections:
+/// - Resource management buttons (New, Load, Save)
+/// - Navigation controls (History, Back, Forward)
+/// - Object information and menu options
+/// - Property search/filter interface
+/// - Main inspector panel for property editing
+///
+/// @param p_editor Pointer to the EditorNode instance managing the editor
+/// @param p_editor_data Reference to EditorData containing editor state and undo/redo history
 #include "inspector_dock.h"
 
 #include "editor/editor_node.h"
