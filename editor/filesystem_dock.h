@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  filesystem_dock.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file filesystem_dock.h
- * @brief Implementation of FileSystemDock class.
+ * @class FileSystemDock
+ * @brief A dockable file system browser for the editor.
+ * 
+ * FileSystemDock provides a hierarchical view of the project's file system with support for
+ * multiple display modes (tree-only or split view) and file list display options (thumbnails or list).
+ * It handles file operations such as moving, renaming, duplicating, and deletion, along with
+ * dependency tracking and resource management.
+ * 
+ * The dock maintains a history of navigated paths and provides search functionality across
+ * both the folder tree and file list. It integrates with the editor's file system monitoring
+ * to update in real-time when files or folders are modified externally.
+ * 
+ * Features:
+ * - Dual display modes: tree-only or split (tree + file list)
+ * - File list display modes: thumbnails or list view
+ * - Navigation history with forward/backward buttons
+ * - Search functionality for files and folders
+ * - Drag-and-drop support for file operations
+ * - Context menus for file and folder operations
+ * - Favorite folders management
+ * - Dependency tracking and updating
+ * - Import dock integration
+ * - Preview thumbnail generation
+ * 
+ * @note The dock automatically synchronizes with the project's file system and tracks
+ *       all file and folder changes to maintain consistency with the actual file system state.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef FILESYSTEM_DOCK_H
 #define FILESYSTEM_DOCK_H
 
