@@ -1,39 +1,32 @@
-/*************************************************************************/
-/*  property_editor.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file property_editor.cpp
- * @brief Implementation of property_editor functionality.
+ * @class CustomPropertyEditor
+ * @brief A custom property editor dialog for editing various Variant types in the editor.
+ * 
+ * This class provides an interactive UI for editing different property types including:
+ * - Primitive types (BOOL, INT, FLOAT, STRING)
+ * - Math types (VECTOR2, VECTOR3, RECT2, PLANE, QUAT, AABB, TRANSFORM2D, BASIS, TRANSFORM)
+ * - Resource types (OBJECT, COLOR, NODE_PATH)
+ * 
+ * It supports various property hints such as:
+ * - PROPERTY_HINT_RANGE for numeric ranges with optional sliders
+ * - PROPERTY_HINT_ENUM for enumerated values
+ * - PROPERTY_HINT_FILE/DIR for file/directory selection
+ * - PROPERTY_HINT_MULTILINE_TEXT for text editing
+ * - PROPERTY_HINT_LAYERS_* for layer/flag selection
+ * - PROPERTY_HINT_EXP_EASING for easing curve editing
+ * - PROPERTY_HINT_RESOURCE_TYPE for resource instantiation and conversion
+ * 
+ * The editor emits signals when values are modified:
+ * - variant_changed: When the entire value is changed
+ * - variant_field_changed: When a specific field of a composite type is changed (with Shift)
+ * - resource_edit_request: When requesting to edit a resource
+ * 
+ * @signal variant_changed() - Emitted when the variant value changes
+ * @signal variant_field_changed(field: String) - Emitted when a specific field changes
+ * @signal resource_edit_request() - Emitted when requesting resource editing
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "property_editor.h"
 
 #include "core/class_db.h"

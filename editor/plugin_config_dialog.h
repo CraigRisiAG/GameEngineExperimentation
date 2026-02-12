@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  plugin_config_dialog.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file plugin_config_dialog.h
- * @brief Implementation of PluginConfigDialog class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class PluginConfigDialog
+/// @brief A dialog for configuring plugin settings and metadata.
+/// 
+/// PluginConfigDialog extends ConfirmationDialog to provide a user interface
+/// for creating and editing plugin configurations. It manages various plugin
+/// properties including name, subfolder, description, author, version, script
+/// selection, and activation status.
+/// 
+/// The dialog supports two modes: creation mode (adding new plugins) and edit
+/// mode (modifying existing plugins). It validates required fields and notifies
+/// the application of configuration changes through confirmation events.
+/// 
+/// @member name_edit LineEdit for the plugin name
+/// @member subfolder_edit LineEdit for the plugin subfolder path
+/// @member desc_edit TextEdit for the plugin description
+/// @member author_edit LineEdit for the plugin author name
+/// @member version_edit LineEdit for the plugin version
+/// @member script_option_edit OptionButton for selecting script language/type
+/// @member script_edit LineEdit for the script file path
+/// @member active_edit CheckBox for enabling/disabling the plugin
+/// @member _edit_mode Boolean flag indicating if the dialog is in edit mode
+/// 
+/// @method config(const String &p_config_path) Initializes the dialog with
+///         plugin configuration data from the specified path
+/// @method _clear_fields() Resets all input fields to default values
+/// @method _on_confirmed() Handles confirmation action and saves configuration
+/// @method _on_cancelled() Handles cancellation action
+/// @method _on_required_text_changed(const String &p_text) Validates required
+///         text fields and updates UI state accordingly
 #ifndef PLUGIN_CONFIG_DIALOG_H
 #define PLUGIN_CONFIG_DIALOG_H
 

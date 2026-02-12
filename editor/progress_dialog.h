@@ -1,39 +1,104 @@
-/*************************************************************************/
-/*  progress_dialog.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file progress_dialog.h
- * @brief Implementation of BackgroundProgress class.
+ * @class BackgroundProgress
+ * @brief A background progress tracking UI component that extends HBoxContainer.
+ * 
+ * Manages multiple concurrent background tasks with visual progress indicators.
+ * Thread-safe implementation for handling progress updates from background threads.
+ * 
+ * @note This class is thread-safe and can be updated from multiple threads.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct BackgroundProgress::Task
+ * @brief Internal structure to represent a single background task.
+ * 
+ * @member hb The horizontal box container holding the task UI elements.
+ * @member progress The progress bar widget displaying task completion.
+ */
 
+/**
+ * @fn void BackgroundProgress::add_task(const String &p_task, const String &p_label, int p_steps)
+ * @brief Adds a new background task with a label and expected number of steps.
+ * 
+ * @param p_task Unique identifier for the task.
+ * @param p_label Display label for the task.
+ * @param p_steps Expected number of steps to completion.
+ */
+
+/**
+ * @fn void BackgroundProgress::task_step(const String &p_task, int p_step = -1)
+ * @brief Updates the progress of an existing task.
+ * 
+ * @param p_task Identifier of the task to update.
+ * @param p_step Current step number. If -1, increments automatically.
+ */
+
+/**
+ * @fn void BackgroundProgress::end_task(const String &p_task)
+ * @brief Completes and removes a background task from tracking.
+ * 
+ * @param p_task Identifier of the task to end.
+ */
+
+/**
+ * @class ProgressDialog
+ * @brief A modal dialog for displaying and managing progress of foreground tasks.
+ * 
+ * Provides a popup window that displays progress bars for multiple tasks with
+ * optional cancellation capability. Implements singleton pattern for global access.
+ */
+
+/**
+ * @struct ProgressDialog::Task
+ * @brief Internal structure representing a single progress dialog task.
+ * 
+ * @member task Unique task identifier.
+ * @member vb Vertical box container for task UI elements.
+ * @member progress Progress bar widget.
+ * @member state Label displaying current task state/status.
+ */
+
+/**
+ * @fn static ProgressDialog* ProgressDialog::get_singleton()
+ * @brief Returns the global singleton instance of the progress dialog.
+ * 
+ * @return Pointer to the singleton ProgressDialog instance.
+ */
+
+/**
+ * @fn void ProgressDialog::add_task(const String &p_task, const String &p_label, int p_steps, bool p_can_cancel = false)
+ * @brief Adds a new task to the progress dialog.
+ * 
+ * @param p_task Unique identifier for the task.
+ * @param p_label Display label for the task.
+ * @param p_steps Expected number of steps to completion.
+ * @param p_can_cancel Whether the user can cancel this task.
+ */
+
+/**
+ * @fn bool ProgressDialog::task_step(const String &p_task, const String &p_state, int p_step = -1, bool p_force_redraw = true)
+ * @brief Updates the progress and state of an existing task.
+ * 
+ * @param p_task Identifier of the task to update.
+ * @param p_state Current state description to display.
+ * @param p_step Current step number. If -1, increments automatically.
+ * @param p_force_redraw Forces immediate UI redraw if true.
+ * @return True if the task is still running, false if cancelled.
+ */
+
+/**
+ * @fn void ProgressDialog::end_task(const String &p_task)
+ * @brief Completes and removes a task from the progress dialog.
+ * 
+ * @param p_task Identifier of the task to end.
+ */
+
+/**
+ * @fn ProgressDialog::ProgressDialog()
+ * @brief Constructs a new ProgressDialog instance and initializes the singleton.
+ */
 #ifndef PROGRESS_DIALOG_H
 #define PROGRESS_DIALOG_H
 

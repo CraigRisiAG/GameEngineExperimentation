@@ -1,39 +1,39 @@
-/*************************************************************************/
-/*  project_manager.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file project_manager.h
- * @brief Implementation of ProjectManager class.
+ * @class ProjectManager
+ * @brief Manages game engine projects including creation, opening, running, and deletion.
+ * 
+ * ProjectManager is the main UI controller for project operations in the editor.
+ * It handles project lifecycle management, filtering, and interaction with various dialogs.
+ * 
+ * @details
+ * - Manages multiple projects stored in a list with filtering and sorting capabilities
+ * - Provides UI controls for common project operations (open, run, delete, rename)
+ * - Integrates with the asset library and project creation dialogs
+ * - Handles language selection and engine settings updates
+ * - Supports drag-and-drop for project installation
+ * - Maintains recent projects and scroll position state
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @class ProjectListFilter
+ * @brief Provides filtering and search functionality for project listings.
+ * 
+ * ProjectListFilter manages a search interface with filter options for sorting projects.
+ * It combines a search box with an option selector to filter projects by various criteria.
+ * 
+ * @details
+ * - Supports filtering by project name, file path, or edit date
+ * - Provides a search box for text-based project lookup
+ * - Allows dynamic configuration of filter options and search functionality
+ * - Emits signals when filter or search parameters change
+ * 
+ * @enum FilterOption
+ *   - FILTER_NAME: Filter projects by name
+ *   - FILTER_PATH: Filter projects by file path
+ *   - FILTER_EDIT_DATE: Filter projects by last edit date
+ */
 #ifndef PROJECT_MANAGER_H
 #define PROJECT_MANAGER_H
 

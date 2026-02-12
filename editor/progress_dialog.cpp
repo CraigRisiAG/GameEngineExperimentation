@@ -1,39 +1,61 @@
-/*************************************************************************/
-/*  progress_dialog.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file progress_dialog.cpp
- * @brief Implementation of progress_dialog functionality.
+ * @class BackgroundProgress
+ * @brief Manages background task progress tracking with thread-safe operations.
+ * 
+ * Provides functionality to add, update, and remove background tasks with visual progress indicators.
+ * Uses a message queue to safely handle task state changes from multiple threads.
+ * 
+ * @method _add_task(const String &p_task, const String &p_label, int p_steps)
+ *         Internal method to create a new background task with a progress bar.
+ * 
+ * @method _update()
+ *         Processes pending task updates from the updates map.
+ * 
+ * @method _task_step(const String &p_task, int p_step)
+ *         Internal method to update task progress. Negative step values increment by 1.
+ * 
+ * @method _end_task(const String &p_task)
+ *         Internal method to remove a completed task and cleanup its UI elements.
+ * 
+ * @method add_task(const String &p_task, const String &p_label, int p_steps)
+ *         Public method to queue a new background task for creation.
+ * 
+ * @method task_step(const String &p_task, int p_step)
+ *         Public method to update task progress, queuing updates to prevent deadlock.
+ * 
+ * @method end_task(const String &p_task)
+ *         Public method to queue task completion and removal.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/**
+ * @class ProgressDialog
+ * @brief Modal dialog for displaying foreground task progress with cancellation support.
+ * 
+ * Displays progress bars for long-running editor operations with optional cancel button.
+ * Manages task lifecycle and redraws at throttled intervals (200ms) for performance.
+ * Singleton pattern implementation for centralized access.
+ * 
+ * @method add_task(const String &p_task, const String &p_label, int p_steps, bool p_can_cancel)
+ *         Creates and displays a new progress task in the dialog.
+ * 
+ * @method task_step(const String &p_task, const String &p_state, int p_step, bool p_force_redraw)
+ *         Updates task progress and state label. Returns cancellation status.
+ * 
+ * @method end_task(const String &p_task)
+ *         Removes task and hides dialog if no tasks remain.
+ * 
+ * @method _cancel_pressed()
+ *         Internal callback when cancel button is pressed.
+ * 
+ * @method _popup()
+ *         Positions and displays the dialog centered on screen.
+ * 
+ * @method _notification(int p_what)
+ *         Handles redraw notifications to apply panel styling.
+ */
 #include "progress_dialog.h"
 
 #include "core/message_queue.h"

@@ -1,39 +1,22 @@
-/*************************************************************************/
-/*  pane_drag.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file pane_drag.cpp
- * @brief Implementation of pane_drag functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class PaneDrag
+/// @brief A custom UI control for dragging panes with visual feedback.
+///
+/// PaneDrag is an editor UI component that allows users to drag panes by clicking and dragging.
+/// It provides visual feedback by displaying different icons based on mouse hover state.
+///
+/// @signal dragged(Vector2 amount) - Emitted when the pane is being dragged, with the relative
+///                                    mouse movement as the amount parameter.
+///
+/// @details
+/// The control responds to mouse input and emits a "dragged" signal with the relative movement
+/// when the left mouse button is held down. It displays an icon that changes appearance when
+/// the mouse hovers over it, providing visual feedback to the user.
+///
+/// @see _gui_input() - Handles mouse motion input events
+/// @see _notification() - Handles drawing and mouse enter/exit events
+/// @see get_minimum_size() - Returns the size of the pane drag icon
 #include "pane_drag.h"
 
 void PaneDrag::_gui_input(const Ref<InputEvent> &p_input) {

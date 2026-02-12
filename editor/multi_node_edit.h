@@ -1,39 +1,69 @@
-/*************************************************************************/
-/*  multi_node_edit.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file multi_node_edit.h
- * @brief Implementation of MultiNodeEdit class.
+ * @class MultiNodeEdit
+ * @brief A reference-counted class for editing properties across multiple selected nodes.
+ * 
+ * This class allows simultaneous modification of properties on multiple nodes.
+ * It maintains a list of node paths and provides methods to manage them and set
+ * properties that apply to all selected nodes.
+ * 
+ * @note Inherits from Reference, so instances are automatically freed when no longer referenced.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @struct PLData
+ * @brief Property list data structure for tracking property information.
+ * 
+ * @member uses - Number of nodes that use this property
+ * @member info - PropertyInfo containing metadata about the property
+ */
 
+/**
+ * @fn bool _set_impl(const StringName &p_name, const Variant &p_value, const String &p_field)
+ * @brief Internal implementation for setting property values.
+ * 
+ * @param p_name - The name of the property to set
+ * @param p_value - The value to set
+ * @param p_field - Optional field specifier for nested properties
+ * @return bool - True if property was successfully set
+ */
+
+/**
+ * @fn void clear_nodes()
+ * @brief Removes all nodes from the edit list.
+ */
+
+/**
+ * @fn void add_node(const NodePath &p_node)
+ * @brief Adds a node to the multi-edit list.
+ * 
+ * @param p_node - The path to the node to add
+ */
+
+/**
+ * @fn int get_node_count() const
+ * @brief Returns the number of nodes in the edit list.
+ * 
+ * @return int - Count of managed nodes
+ */
+
+/**
+ * @fn NodePath get_node(int p_index) const
+ * @brief Retrieves a node path by index.
+ * 
+ * @param p_index - The index of the node to retrieve
+ * @return NodePath - The path to the requested node
+ */
+
+/**
+ * @fn void set_property_field(const StringName &p_property, const Variant &p_value, const String &p_field)
+ * @brief Sets a property field on all managed nodes.
+ * 
+ * @param p_property - The property name to modify
+ * @param p_value - The value to set
+ * @param p_field - The specific field within the property
+ */
 #ifndef MULTI_NODE_EDIT_H
 #define MULTI_NODE_EDIT_H
 

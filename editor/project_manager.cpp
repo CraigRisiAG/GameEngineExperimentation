@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  project_manager.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file project_manager.cpp
- * @brief Implementation of ProjectDialog class.
+ * @brief Project manager implementation for Godot Editor.
+ * 
+ * This file contains the main project management functionality for the Godot Editor,
+ * including project creation, importing, renaming, and deletion. It manages the UI
+ * for displaying and interacting with projects, as well as handling project scanning
+ * and asset library integration.
+ * 
+ * Key classes:
+ * - ProjectDialog: Dialog for creating new projects, importing existing ones, or renaming projects.
+ * - ProjectListItemControl: UI control for displaying individual project items in the list.
+ * - ProjectList: Scrollable container displaying all available projects with sorting and filtering.
+ * - ProjectListFilter: Filter interface for searching and sorting projects.
+ * - ProjectManager: Main manager class for the project manager UI and functionality.
+ * 
+ * Features:
+ * - Create new Godot projects with configurable renderer settings (Vulkan/OpenGL ES 2.0)
+ * - Import existing projects from directories or ZIP files
+ * - Rename projects and manage project metadata
+ * - Scan directories for existing projects
+ * - Sort and filter projects by name, path, or last edited date
+ * - Manage favorite projects
+ * - Run projects directly from the manager
+ * - Handle missing or corrupted projects
+ * - Multi-language support
+ * - Integration with asset library for downloading templates
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "project_manager.h"
 
 #include "core/io/config_file.h"

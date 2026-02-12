@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  node_dock.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file node_dock.cpp
- * @brief Implementation of node_dock functionality.
+ * @brief Dock panel for editing a selected node's Signals and Groups in the editor.
+ *
+ * The NodeDock manages two sub-editors:
+ * - ConnectionsDock (shown as "Signals")
+ * - GroupsEditor (shown as "Groups")
+ *
+ * It provides a toggle UI to switch between these views, updates button icons on
+ * theme/tree notifications, and synchronizes visibility based on whether a valid
+ * node is currently selected.
+ *
+ * Behavior summary:
+ * - show_connections(): Activates the Signals tab and hides Groups.
+ * - show_groups(): Activates the Groups tab and hides Signals.
+ * - set_node(Node *): Assigns the current node to child editors and shows either
+ *   the active tab or a placeholder message when no node is selected.
+ * - update_lists(): Refreshes the connections tree content.
+ *
+ * Notes:
+ * - Maintains a singleton instance via NodeDock::singleton.
+ * - Uses editor undo/redo from EditorNode for child editor operations.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "node_dock.h"
 
 #include "editor_node.h"

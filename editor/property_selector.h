@@ -1,39 +1,31 @@
-/*************************************************************************/
-/*  property_selector.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file property_selector.h
- * @brief Implementation of PropertySelector class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class PropertySelector
+/// @brief A dialog for selecting properties or methods from various sources.
+///
+/// PropertySelector is a ConfirmationDialog that provides a searchable interface
+/// for selecting properties or methods. It supports selection from base types,
+/// scripts, basic types, and object instances. The dialog includes a search box
+/// with real-time filtering and help information for selected items.
+///
+/// @details
+/// The selector can operate in two modes: property selection or method selection.
+/// It filters options based on user input in the search box and displays results
+/// in a tree view. A help panel provides additional information about selected items.
+///
+/// Supported selection sources:
+/// - Base types (by class name)
+/// - Script objects
+/// - Basic Variant types
+/// - Object instances
+///
+/// Type filtering can be applied to restrict results to specific Variant types.
+///
+/// @signals
+/// - property_selected(String) - Emitted when a property is selected
+/// - method_selected(String) - Emitted when a method is selected
+///
+/// @see PropertyEditor, EditorHelpBit
 #ifndef PROPERTYSELECTOR_H
 #define PROPERTYSELECTOR_H
 

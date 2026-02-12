@@ -1,39 +1,26 @@
-/*************************************************************************/
-/*  node_dock.h                                                          */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file node_dock.h
- * @brief Implementation of NodeDock class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class NodeDock
+/// @brief A docking panel for managing and editing node properties, connections, and groups.
+///
+/// NodeDock provides a tabbed interface for inspecting and modifying various aspects of a selected node.
+/// It displays two main editors: ConnectionsDock for viewing/editing node connections and GroupsEditor
+/// for managing node group membership. The dock automatically updates when the selected node changes.
+///
+/// @members
+/// - connections_button: Button to switch to connections view
+/// - groups_button: Button to switch to groups view
+/// - connections: The connections editor dock
+/// - groups: The groups editor panel
+/// - mode_hb: Container for the mode selection buttons
+/// - select_a_node: Label displayed when no node is selected
+/// - singleton: Static instance of the NodeDock
+///
+/// @methods
+/// - set_node(Node*): Sets the current node to inspect and display
+/// - show_groups(): Switches the view to the groups editor
+/// - show_connections(): Switches the view to the connections editor
+/// - update_lists(): Refreshes the displayed information for the current node
 #ifndef NODE_DOCK_H
 #define NODE_DOCK_H
 

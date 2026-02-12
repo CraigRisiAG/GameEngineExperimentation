@@ -1,39 +1,34 @@
-/*************************************************************************/
-/*  property_selector.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file property_selector.cpp
- * @brief Implementation of property_selector functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
+/// @class PropertySelector
+/// @brief A dialog for selecting properties or methods from classes, scripts, or instances.
+///
+/// PropertySelector provides an interactive UI for users to search and select properties or methods
+/// from various sources including base types, scripts, and object instances. It displays results
+/// in a categorized tree view with filtering capabilities and documentation support.
+///
+/// @details
+/// The selector can operate in two main modes:
+/// - Property selection mode: browse and filter object properties
+/// - Method selection mode: browse and filter methods (with optional virtual-only filtering)
+///
+/// Features:
+/// - Real-time search filtering as user types
+/// - Keyboard navigation support (arrow keys, page up/down)
+/// - Type filtering for properties
+/// - Automatic documentation lookup for selected items
+/// - Color-coded icons based on property/method types
+/// - Hierarchical organization by class/category
+///
+/// @signal selected(String name) - Emitted when a property or method is selected
+///
+/// @see select_property_from_base_type
+/// @see select_property_from_script
+/// @see select_property_from_instance
+/// @see select_method_from_base_type
+/// @see select_method_from_script
+/// @see select_method_from_instance
+/// @see set_type_filter
 #include "property_selector.h"
 
 #include "core/os/keyboard.h"

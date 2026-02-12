@@ -1,39 +1,101 @@
-/*************************************************************************/
-/*  multi_node_edit.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file multi_node_edit.cpp
- * @brief Implementation of multi_node_edit functionality.
+ * @class MultiNodeEdit
+ * @brief Handles simultaneous editing of properties across multiple selected nodes.
+ * 
+ * This class provides a unified interface for getting, setting, and querying properties
+ * of multiple nodes at once. It manages undo/redo operations and ensures property changes
+ * are applied consistently across all selected nodes.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Sets a property value on all managed nodes.
+ * 
+ * @param p_name The property name to set
+ * @param p_value The value to assign to the property
+ * @return true if the property was successfully set, false otherwise
+ */
+bool MultiNodeEdit::_set(const StringName &p_name, const Variant &p_value);
 
+/**
+ * @brief Internal implementation for setting properties with optional field-wise assignment.
+ * 
+ * Handles property assignment for multiple nodes with support for:
+ * - Whole value replacement
+ * - Field-wise property updates (e.g., updating only one component of a Vector3)
+ * - NodePath reference resolution relative to each node
+ * - Undo/redo action creation and commit
+ * 
+ * @param p_name The property name to set
+ * @param p_value The value to assign
+ * @param p_field The specific field to update (empty string for whole value)
+ * @return true if the operation succeeded, false if no edited scene exists
+ */
+bool MultiNodeEdit::_set_impl(const StringName &p_name, const Variant &p_value, const String &p_field);
+
+/**
+ * @brief Retrieves a property value from the first matching node.
+ * 
+ * @param p_name The property name to retrieve
+ * @param r_ret Output parameter containing the retrieved property value
+ * @return true if the property was found and retrieved, false otherwise
+ */
+bool MultiNodeEdit::_get(const StringName &p_name, Variant &r_ret) const;
+
+/**
+ * @brief Collects and filters properties common to all managed nodes.
+ * 
+ * Only includes properties that exist with identical PropertyInfo on all nodes.
+ * Automatically adds a "scripts" property for batch script assignment.
+ * 
+ * @param p_list Output list of properties available for multi-node editing
+ */
+void MultiNodeEdit::_get_property_list(List<PropertyInfo> *p_list) const;
+
+/**
+ * @brief Clears all managed nodes from the editor.
+ */
+void MultiNodeEdit::clear_nodes();
+
+/**
+ * @brief Adds a node to the list of nodes being edited.
+ * 
+ * @param p_node The NodePath of the node to add
+ */
+void MultiNodeEdit::add_node(const NodePath &p_node);
+
+/**
+ * @brief Returns the number of nodes currently being edited.
+ * 
+ * @return The count of managed nodes
+ */
+int MultiNodeEdit::get_node_count() const;
+
+/**
+ * @brief Retrieves the NodePath of a managed node by index.
+ * 
+ * @param p_index The index of the node to retrieve
+ * @return The NodePath at the given index, or empty NodePath if index is invalid
+ */
+NodePath MultiNodeEdit::get_node(int p_index) const;
+
+/**
+ * @brief Sets a specific field of a property on all managed nodes.
+ * 
+ * Used for updating individual components of complex properties without
+ * affecting other fields of the same property.
+ * 
+ * @param p_property The property name containing the field
+ * @param p_value The value to assign to the field
+ * @param p_field The specific field name within the property
+ */
+void MultiNodeEdit::set_property_field(const StringName &p_property, const Variant &p_value, const String &p_field);
+
+/**
+ * @brief Constructs a new MultiNodeEdit instance.
+ */
+MultiNodeEdit::MultiNodeEdit();
 #include "multi_node_edit.h"
 
 #include "core/math/math_fieldwise.h"

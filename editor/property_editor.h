@@ -1,39 +1,44 @@
-/*************************************************************************/
-/*  property_editor.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file property_editor.h
- * @brief Implementation of EditorResourceConversionPlugin class.
+ * @brief Editor property editing and conversion system
+ * 
+ * Provides classes for editing object properties in the editor, including:
+ * - Resource conversion plugin interface for custom resource conversions
+ * - Custom property editor popup with support for various data types
+ * - Property editing UI with multiple editor types (text, color, easing, etc.)
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class EditorResourceConversionPlugin
+ * @brief Base plugin class for custom resource conversion in the editor
+ * 
+ * Allows defining custom conversion rules for resources. Plugins can specify
+ * which resource types they handle and provide conversion functionality.
+ * 
+ * @note Inherit from this class and override virtual methods to implement
+ *       custom resource converters.
+ */
 
+/**
+ * @class CustomPropertyEditor
+ * @brief Popup editor for creating and modifying object properties
+ * 
+ * Provides a comprehensive property editing interface supporting multiple value types
+ * including primitives, ranges, colors, easing curves, node paths, and objects.
+ * Features include value validation, custom action buttons, and real-time preview.
+ * 
+ * @details
+ * - Supports up to 12 simultaneous value editors and 5 action buttons
+ * - Handles easing curve editing with 6 predefined easing types
+ * - Integrates with dialog systems for file selection and type creation
+ * - Evaluates mathematical expressions in numeric fields
+ * - Provides object property and type selection via dedicated dialogs
+ * 
+ * @note The editor can be configured for read-only mode to prevent modifications
+ * @see PropertyValueEvaluator, CreateDialog, PropertySelector
+ */
 #ifndef PROPERTY_EDITOR_H
 #define PROPERTY_EDITOR_H
 

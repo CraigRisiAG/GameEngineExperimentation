@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  project_export.h                                                     */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file project_export.h
- * @brief Implementation of ProjectExportDialog class.
+ * @class ProjectExportDialog
+ * @brief Dialog for managing and configuring project export presets and settings.
+ * 
+ * This dialog allows users to create, edit, and manage export presets for different
+ * platforms. It provides functionality to configure export parameters, specify resource
+ * filters, manage patches, set script encryption options, and export projects in various
+ * formats (PCK, ZIP, or full project export).
+ * 
+ * @details
+ * The dialog is organized into sections using a TabContainer and supports:
+ * - Multiple export presets with platform-specific settings
+ * - Resource filtering and file inclusion/exclusion rules
+ * - Patch management for incremental exports
+ * - Custom feature definitions and display
+ * - Script encryption with key validation
+ * - Export debugging options
+ * - Batch export functionality with progress tracking
+ * 
+ * @note This class inherits from ConfirmationDialog and uses various editor UI components
+ * like EditorInspector, EditorFileDialog, and Tree for its interface.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef PROJECT_EXPORT_SETTINGS_H
 #define PROJECT_EXPORT_SETTINGS_H
 
