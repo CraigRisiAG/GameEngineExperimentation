@@ -1,39 +1,29 @@
-/*************************************************************************/
-/*  settings_config_dialog.cpp                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file settings_config_dialog.cpp
- * @brief Implementation of settings_config_dialog functionality.
+ * @brief Implementation of the EditorSettingsDialog class for managing editor settings and keyboard shortcuts.
+ *
+ * This file contains the implementation of the EditorSettingsDialog which provides a user interface
+ * for configuring editor settings, customizing keyboard shortcuts, and managing editor preferences.
+ * The dialog includes:
+ * - General settings tab with searchable property inspector
+ * - Shortcuts tab for viewing and customizing keyboard shortcuts
+ * - Undo/redo functionality for settings changes
+ * - Auto-save timer for settings modifications
+ * - Editor restart notification when settings require restart
+ *
+ * Key Features:
+ * - Real-time settings editing with automatic saving
+ * - Custom theme and color configuration detection
+ * - Keyboard shortcut remapping with conflict detection
+ * - Search/filter functionality for both settings and shortcuts
+ * - Visual feedback for modified shortcuts
+ * - Restore default shortcuts capability
+ *
+ * @class EditorSettingsDialog
+ * @inherits AcceptDialog
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "settings_config_dialog.h"
 
 #include "core/os/keyboard.h"

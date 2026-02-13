@@ -1,39 +1,51 @@
-/*************************************************************************/
-/*  quick_open.cpp                                                       */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file quick_open.cpp
- * @brief Implementation of quick_open functionality.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/// @class EditorQuickOpen
+/// @brief A dialog for quickly opening files and directories in the editor.
+/// 
+/// This class provides a dialog interface that allows users to search and select files
+/// or directories from the project's file system. It features:
+/// - Real-time search filtering with similarity-based ranking
+/// - Support for single or multi-selection modes
+/// - Directory and file filtering based on class type
+/// - Keyboard navigation through search results
+/// - Icon display for files and folders
+///
+/// The dialog emits a "quick_open" signal when a selection is confirmed.
 
+/// @fn void popup_dialog(const StringName &p_base, bool p_enable_multi, bool p_add_dirs, bool p_dontclear)
+/// @brief Opens the quick open dialog with specified configuration.
+/// @param p_base The base class type to filter files by
+/// @param p_enable_multi Whether to allow selecting multiple items
+/// @param p_add_dirs Whether to include directories in the results
+/// @param p_dontclear Whether to preserve the previous search text
+
+/// @fn String get_selected() const
+/// @brief Retrieves the path of the currently selected item.
+/// @return The full resource path (res://) of the selected item, or empty string if nothing is selected
+
+/// @fn Vector<String> get_selected_files() const
+/// @brief Retrieves all selected file paths in multi-selection mode.
+/// @return A vector of resource paths for all selected items
+
+/// @fn StringName get_base_type() const
+/// @brief Gets the base class type filter for this dialog.
+/// @return The base class type used for filtering files
+
+/// @fn void _update_search()
+/// @brief Updates the search results based on current search text.
+/// Rescans the file system and repopulates the results tree with sorted matches.
+
+/// @fn Vector<Pair<String, Ref<Texture2D>>> _sort_fs(Vector<Pair<String, Ref<Texture2D>>> &list)
+/// @brief Sorts search results by relevance using similarity scoring.
+/// @param list The list of files to sort
+/// @return The sorted list ranked by match quality
+
+/// @fn float _path_cmp(String search, String path) const
+/// @brief Compares search text against a path for relevance scoring.
+/// @param search The search query text
+/// @param path The file path to match against
+/// @return A score value where higher indicates better match
 #include "quick_open.h"
 
 #include "core/os/keyboard.h"

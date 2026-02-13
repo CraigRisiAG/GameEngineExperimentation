@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  scene_tree_editor.cpp                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file scene_tree_editor.cpp
- * @brief Implementation of scene_tree_editor functionality.
+ * @brief Handles button press events on tree items in the scene tree editor.
+ * 
+ * This method processes various button interactions within the scene tree, including:
+ * - BUTTON_SUBSCENE: Opens inherited scenes or instanced scene files in the editor
+ * - BUTTON_SCRIPT: Opens the script attached to a node
+ * - BUTTON_VISIBILITY: Toggles visibility for CanvasItem/Spatial nodes (can apply to multiple selected nodes)
+ * - BUTTON_LOCK: Unlocks locked nodes (CanvasItem/Spatial)
+ * - BUTTON_PIN: Unpins pinned AnimationPlayer editors
+ * - BUTTON_GROUP: Removes group metadata from nodes to make children selectable
+ * - BUTTON_WARNING: Displays configuration warnings in a popup dialog
+ * - BUTTON_SIGNALS: Shows the signals dock for the node
+ * - BUTTON_GROUPS: Shows the groups dock for the node
+ * 
+ * @param p_item The TreeItem object that was clicked
+ * @param p_column The column index where the button was pressed
+ * @param p_id The button ID identifying which button was pressed
+ * 
+ * Most operations that modify node state are wrapped in undo/redo actions for proper
+ * editor history management. The method also handles selection and updates the tree
+ * view accordingly.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "scene_tree_editor.h"
 
 #include "core/message_queue.h"

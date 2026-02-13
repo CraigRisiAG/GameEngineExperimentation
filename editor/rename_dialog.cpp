@@ -1,39 +1,28 @@
-/*************************************************************************/
-/*  rename_dialog.cpp                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
- * @file rename_dialog.cpp
- * @brief Implementation of rename_dialog functionality.
+ * @class RenameDialog
+ * @brief A dialog window for batch renaming nodes in the scene tree.
+ *
+ * This dialog provides an interface for performing complex rename operations on multiple
+ * selected nodes. It supports search and replace, prefix/suffix addition, regular expressions,
+ * text substitution with node properties, and post-processing options like case conversion
+ * and naming convention conversion.
+ *
+ * Features:
+ * - Search and replace with optional regex support
+ * - Prefix and suffix addition
+ * - Text substitution with placeholders: ${NAME}, ${PARENT}, ${TYPE}, ${SCENE}, ${ROOT}, ${COUNTER}
+ * - Sequential counter with configurable start value, step, and padding
+ * - Per-level counter option for hierarchical renaming
+ * - Post-processing: PascalCase ↔ snake_case conversion, case conversion
+ * - Live preview of rename results
+ * - Undo/redo support through UndoRedo
+ *
+ * @param p_scene_tree_editor Pointer to the SceneTreeEditor for emitting rename signals
+ * @param p_undo_redo Pointer to the UndoRedo system for recording rename actions
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "rename_dialog.h"
 
 #include "core/print_string.h"

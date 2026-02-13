@@ -1,39 +1,66 @@
-/*************************************************************************/
-/*  reparent_dialog.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file reparent_dialog.cpp
- * @brief Implementation of reparent_dialog functionality.
+ * @brief Implementation of the ReparentDialog class for reparenting nodes in the scene tree.
+ *
+ * This file contains the implementation of a dialog window that allows users to select
+ * a new parent node for one or more selected nodes in the scene hierarchy. It provides
+ * a tree view for navigation and an option to preserve global transforms during reparenting.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Handles notification events for the ReparentDialog.
+ * @param p_what The notification type to handle.
+ *
+ * Responds to NOTIFICATION_ENTER_TREE by connecting the confirmed signal,
+ * NOTIFICATION_EXIT_TREE by disconnecting it, and NOTIFICATION_DRAW for
+ * custom drawing operations (currently commented out).
+ */
 
+/**
+ * @brief Cancels the reparent operation and closes the dialog.
+ *
+ * Called when the user cancels the operation. Simply hides the dialog
+ * without performing any reparenting.
+ */
+
+/**
+ * @brief Performs the reparent operation with the selected parent node.
+ *
+ * Emits the "reparent" signal with the selected node's path and the
+ * keep_transform setting if a valid node is selected in the tree.
+ * Hides the dialog after emitting the signal.
+ */
+
+/**
+ * @brief Sets the current selection to be marked in the tree view.
+ * @param p_selection A set of Node pointers representing the current selection.
+ *
+ * Marks the provided nodes in the scene tree editor to indicate which
+ * nodes are being reparented.
+ */
+
+/**
+ * @brief Binds methods and signals for the ReparentDialog class.
+ *
+ * Registers the "_cancel" method and defines the "reparent" signal with
+ * parameters for the target node path and keep global transform flag.
+ */
+
+/**
+ * @brief Constructs a new ReparentDialog.
+ *
+ * Initializes the dialog with a scene tree editor for selecting the new parent,
+ * a checkbox for preserving global transforms, and connects necessary signals.
+ * Sets up the UI layout using VBoxContainer.
+ */
+
+/**
+ * @brief Destructor for ReparentDialog.
+ *
+ * Cleans up resources used by the ReparentDialog instance.
+ */
 #include "reparent_dialog.h"
 
 #include "core/print_string.h"

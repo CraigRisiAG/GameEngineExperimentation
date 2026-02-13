@@ -1,39 +1,230 @@
-/*************************************************************************/
-/*  script_create_dialog.cpp                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file script_create_dialog.cpp
- * @brief Implementation of script_create_dialog functionality.
+ * @brief Implementation of the ScriptCreateDialog class for creating and configuring new scripts in the editor.
+ *
+ * This dialog provides a comprehensive interface for script creation with the following features:
+ * - Language selection (GDScript, C#, etc.)
+ * - Parent class/inheritance configuration
+ * - Class naming for languages that support it
+ * - Script template selection
+ * - Built-in script support (embedded in scene files)
+ * - File path validation and browsing
+ * - Real-time validation feedback for all inputs
+ *
+ * The dialog handles both creation of new scripts and loading of existing ones,
+ * with appropriate UI state changes based on the creation mode.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Handles notification events for the dialog.
+ * @param p_what The notification type identifier.
+ *
+ * Processes NOTIFICATION_THEME_CHANGED and NOTIFICATION_ENTER_TREE events to:
+ * - Update language menu icons from EditorIcons
+ * - Restore last selected language from project metadata
+ * - Apply appropriate theme styles to UI elements
+ */
 
+/**
+ * @brief Called when the path HBox container finishes sorting its children.
+ *
+ * Automatically selects the filename portion of the path when the dialog becomes visible,
+ * positioning the cursor for easy editing while keeping the path visible.
+ */
+
+/**
+ * @brief Checks if a built-in script can be created.
+ * @return true if both built-in support and built-in mode are enabled, false otherwise.
+ */
+
+/**
+ * @brief Configures the dialog with initial values.
+ * @param p_base_name The base class name to inherit from.
+ * @param p_base_path The initial file path for the script.
+ * @param p_built_in_enabled Whether built-in script option should be available.
+ * @param p_load_enabled Whether loading existing scripts is allowed.
+ *
+ * Resets all fields and initializes the dialog state based on provided parameters.
+ */
+
+/**
+ * @brief Sets the base type for inheritance filtering.
+ * @param p_base The base type name to restrict inheritance options.
+ */
+
+/**
+ * @brief Validates a parent class name or file path.
+ * @param p_string The parent name/path to validate.
+ * @return true if the parent is valid (exists in ClassDB, is a global class, or is a valid quoted file path).
+ */
+
+/**
+ * @brief Validates a class name according to naming rules.
+ * @param p_string The class name to validate.
+ * @return true if the name is valid (alphanumeric + underscore + dot, not starting with digit).
+ */
+
+/**
+ * @brief Validates a script file path.
+ * @param p_path The file path to validate.
+ * @param p_file_must_exist Whether the file must already exist.
+ * @return Empty string if valid, otherwise an error message describing the issue.
+ *
+ * Checks for:
+ * - Non-empty path and filename
+ * - Local path (starts with "res://")
+ * - Valid base directory
+ * - No conflicting directory names
+ * - Correct file extension for selected language
+ * - Language-specific validation rules
+ */
+
+/**
+ * @brief Called when the class name changes.
+ * @param p_name The new class name.
+ *
+ * Validates the class name and updates the dialog state.
+ */
+
+/**
+ * @brief Called when the parent name changes.
+ * @param p_parent The new parent name.
+ *
+ * Validates the parent name and updates the dialog state.
+ */
+
+/**
+ * @brief Called when a script template is selected.
+ * @param p_template The template menu index.
+ *
+ * Updates the script_template path and stores the selection in project metadata.
+ */
+
+/**
+ * @brief Handles the OK button press.
+ *
+ * Creates a new script or loads an existing one based on current dialog state.
+ */
+
+/**
+ * @brief Creates a new script file.
+ *
+ * Generates the script from template or language defaults, sets the class name if applicable,
+ * saves to disk (if not built-in), and emits the "script_created" signal.
+ */
+
+/**
+ * @brief Loads an existing script file.
+ *
+ * Loads the script from the specified path and emits the "script_created" signal.
+ */
+
+/**
+ * @brief Called when the selected language changes.
+ * @param l The language index.
+ *
+ * Updates dialog state based on language capabilities:
+ * - Named classes support
+ * - File inheritance support
+ * - Built-in mode support
+ * - File extension
+ * - Available templates
+ */
+
+/**
+ * @brief Updates the list of available script templates for a language.
+ * @param p_extension The file extension to filter templates.
+ *
+ * Scans project and editor template directories, building a list with override tracking.
+ */
+
+/**
+ * @brief Called when the built-in checkbox state changes.
+ *
+ * Toggles between built-in and file-based script modes.
+ */
+
+/**
+ * @brief Opens a file browser dialog.
+ * @param browse_parent If true, browsing for parent script; if false, browsing for script path.
+ * @param p_save If true, opens in save mode; if false, opens in open mode.
+ */
+
+/**
+ * @brief Called when a file is selected in the browser.
+ * @param p_file The selected file path.
+ *
+ * Updates either parent_name or file_path based on browse mode.
+ */
+
+/**
+ * @brief Called when a class is created/selected in the class tree.
+ *
+ * Updates the parent name with the selected class.
+ */
+
+/**
+ * @brief Opens the class selection tree dialog.
+ */
+
+/**
+ * @brief Called when the script path changes.
+ * @param p_path The new path.
+ *
+ * Validates the path and updates dialog state accordingly.
+ */
+
+/**
+ * @brief Called when Enter is pressed in the path field.
+ * @param p_path The entered path.
+ *
+ * Triggers OK button action.
+ */
+
+/**
+ * @brief Displays a script validation message.
+ * @param valid Whether the validation passed.
+ * @param p_msg The message to display.
+ *
+ * Colors the message green for success, red for errors.
+ */
+
+/**
+ * @brief Displays a path validation message.
+ * @param valid Whether the validation passed.
+ * @param p_msg The message to display.
+ *
+ * Colors the message green for success, red for errors.
+ */
+
+/**
+ * @brief Updates the entire dialog state.
+ *
+ * Performs comprehensive validation and updates all UI elements:
+ * - Validation messages
+ * - Field editability
+ * - Button states
+ * - OK button availability
+ */
+
+/**
+ * @brief Binds methods for scripting exposure.
+ */
+
+/**
+ * @brief Constructor that initializes all UI elements and default values.
+ *
+ * Creates the complete dialog layout including:
+ * - Language selection
+ * - Parent class configuration
+ * - Class name input
+ * - Template selection
+ * - Built-in script toggle
+ * - Path configuration
+ * - Status panels and error labels
+ */
 #include "script_create_dialog.h"
 
 #include "core/io/resource_saver.h"

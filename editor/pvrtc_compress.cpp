@@ -1,39 +1,35 @@
-/*************************************************************************/
-/*  pvrtc_compress.cpp                                                   */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file pvrtc_compress.cpp
- * @brief Implementation of pvrtc_compress functionality.
+ * @brief PVRTC image compression module for the game engine.
+ * 
+ * This module provides functionality to compress images using PVRTC (PowerVR Texture Compression)
+ * formats. It supports both software-based compression and external tool-based compression.
+ * 
+ * @details
+ * The module handles two compression formats:
+ * - PVRTC2: 2-bit per pixel compression
+ * - PVRTC4: 4-bit per pixel compression
+ * 
+ * It also supports ETC compression format when using an external compression tool.
+ * 
+ * The compression process can work in two modes:
+ * 1. Using built-in fallback functions if no external tool is configured
+ * 2. Using an external PVRTC texture tool if configured in EditorSettings
+ * 
+ * When using an external tool, the module:
+ * - Saves the source image as PNG to a temporary location
+ * - Executes the external compression tool
+ * - Loads the compressed result back
+ * - Cleans up temporary files
+ * 
+ * @note Requires EditorSettings configuration for external tool path:
+ *       "filesystem/import/pvrtc_texture_tool"
+ * 
+ * @note Optional settings:
+ *       - "filesystem/import/pvrtc_fast_conversion": enables fast conversion mode
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "pvrtc_compress.h"
 
 #include "core/io/resource_loader.h"

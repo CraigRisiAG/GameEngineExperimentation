@@ -1,39 +1,27 @@
-/*************************************************************************/
-/*  scene_tree_dock.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
 
-/**
- * @file scene_tree_dock.h
- * @brief Implementation of SceneTreeDock class.
- */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+/// @class SceneTreeDock
+/// @brief Main editor dock for managing the scene tree hierarchy.
+/// 
+/// SceneTreeDock provides a user interface for viewing and manipulating the node hierarchy
+/// of a game scene. It handles operations such as creating, renaming, reparenting, deleting,
+/// and scripting nodes within the scene tree.
+/// 
+/// The dock integrates with various dialogs for advanced operations including:
+/// - Node creation and instantiation
+/// - Script creation and attachment
+/// - Node renaming and batch operations
+/// - Scene merging and inheritance management
+/// - Group and connection management
+/// 
+/// It supports both local scene editing and remote scene inspection, with drag-and-drop
+/// functionality for nodes and files. The class maintains editor state and coordinates
+/// with EditorData and EditorSelection for maintaining consistency across the editor.
+/// 
+/// @note This class extends VBoxContainer and is typically instantiated by EditorNode.
+///
+/// @see SceneTreeEditor, EditorData, EditorSelection, EditorNode
 #ifndef SCENE_TREE_DOCK_H
 #define SCENE_TREE_DOCK_H
 

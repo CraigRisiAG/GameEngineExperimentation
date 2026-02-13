@@ -1,39 +1,78 @@
-/*************************************************************************/
-/*  script_create_dialog.h                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file script_create_dialog.h
- * @brief Implementation of ScriptCreateDialog class.
+ * @brief Dialog for creating new script files in the editor.
+ *
+ * ScriptCreateDialog provides a user interface for creating new script files with various options
+ * including class name, parent class, language selection, template selection, and file path configuration.
+ * It supports both file-based and built-in scripts, with validation for class names, parent classes, and file paths.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class ScriptCreateDialog
+ * @brief A dialog window for creating and configuring new script files.
+ *
+ * This class extends ConfirmationDialog to provide a comprehensive interface for script creation.
+ * It manages various aspects of script generation including:
+ * - Class name and parent class specification
+ * - Programming language selection
+ * - Template selection and management
+ * - File path configuration (both external and built-in)
+ * - Input validation for names and paths
+ * - Integration with the editor's file system and class browser
+ *
+ * The dialog validates user input in real-time and provides feedback through error labels
+ * and status panels to ensure valid script configurations before creation.
+ */
 
+/**
+ * @enum ScriptOrigin
+ * @brief Defines the origin location of script templates.
+ */
+
+/**
+ * @var ScriptOrigin::SCRIPT_ORIGIN_PROJECT
+ * @brief Template originates from the current project.
+ */
+
+/**
+ * @var ScriptOrigin::SCRIPT_ORIGIN_EDITOR
+ * @brief Template originates from the editor installation.
+ */
+
+/**
+ * @struct ScriptTemplateInfo
+ * @brief Contains metadata about a script template.
+ *
+ * @var ScriptTemplateInfo::id
+ * Template identifier.
+ *
+ * @var ScriptTemplateInfo::origin
+ * Origin of the template (project or editor).
+ *
+ * @var ScriptTemplateInfo::dir
+ * Directory path where the template is located.
+ *
+ * @var ScriptTemplateInfo::name
+ * Display name of the template.
+ *
+ * @var ScriptTemplateInfo::extension
+ * File extension associated with the template.
+ */
+
+/**
+ * @brief Configures the dialog with base parameters for script creation.
+ * @param p_base_name The base class name to inherit from.
+ * @param p_base_path The default path where the script should be created.
+ * @param p_built_in_enabled Whether built-in script option is available.
+ * @param p_load_enabled Whether loading existing scripts is enabled.
+ */
+
+/**
+ * @brief Sets the base type from which the new script can inherit.
+ * @param p_base The base class type name.
+ */
 #ifndef SCRIPT_CREATE_DIALOG_H
 #define SCRIPT_CREATE_DIALOG_H
 

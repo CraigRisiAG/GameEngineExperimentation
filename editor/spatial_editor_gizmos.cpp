@@ -1,39 +1,33 @@
-/*************************************************************************/
-/*  spatial_editor_gizmos.cpp                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file spatial_editor_gizmos.cpp
- * @brief Implementation of spatial_editor_gizmos functionality.
+ * @brief Implementation of 3D editor gizmos for various spatial nodes in the Godot Engine editor.
+ *
+ * This file contains the implementation of visual gizmos that appear in the 3D editor viewport
+ * for various types of spatial nodes. Gizmos provide visual feedback and interactive handles
+ * for manipulating node properties directly in the viewport.
+ *
+ * The file includes gizmo implementations for:
+ * - Lights (Directional, Omni, Spot)
+ * - Audio nodes (AudioStreamPlayer3D)
+ * - Camera nodes
+ * - Mesh and sprite nodes
+ * - Position markers
+ * - Skeletons and physical bones
+ * - Ray casts and spring arms
+ * - Vehicle wheels
+ * - Soft bodies
+ * - Visibility notifiers
+ * - Particle systems (CPU and GPU)
+ * - Reflection and GI probes
+ * - Collision shapes and polygons
+ * - Navigation meshes
+ * - Physics joints (Pin, Hinge, Slider, Cone Twist, Generic 6DOF)
+ *
+ * Each gizmo plugin manages the visual representation, handle interaction, and property
+ * modification for its corresponding node type in the 3D editor viewport.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "spatial_editor_gizmos.h"
 
 #include "core/math/geometry.h"

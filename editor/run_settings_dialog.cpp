@@ -1,39 +1,70 @@
-/*************************************************************************/
-/*  run_settings_dialog.cpp                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file run_settings_dialog.cpp
- * @brief Implementation of run_settings_dialog functionality.
+ * @brief Implementation of the RunSettingsDialog class for configuring scene run settings.
+ *
+ * This dialog provides UI controls for selecting the run mode (Current Scene or Main Scene)
+ * and specifying command-line arguments for the main scene execution.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @brief Displays the run settings dialog as a centered popup.
+ *
+ * Opens the dialog with a fixed size of 300x150 pixels, centered on the screen.
+ */
 
+/**
+ * @brief Sets custom command-line arguments for scene execution.
+ *
+ * @param p_arguments The argument string to be set in the arguments text field.
+ */
+
+/**
+ * @brief Gets the current custom command-line arguments.
+ *
+ * @return String The current arguments text from the arguments field.
+ */
+
+/**
+ * @brief Binds class methods to the Godot class database.
+ *
+ * Used for exposing methods to the Godot scripting system. Currently empty
+ * with one method commented out.
+ */
+
+/**
+ * @brief Callback for when the run mode selection changes.
+ *
+ * Enables or disables the arguments text field based on the selected mode.
+ * When "Current Scene" (index 0) is selected, arguments are disabled.
+ * When "Main Scene" (index 1) is selected, arguments are enabled.
+ *
+ * @param idx The index of the newly selected run mode.
+ */
+
+/**
+ * @brief Gets the currently selected run mode.
+ *
+ * @return int The index of the selected run mode (0 = Current Scene, 1 = Main Scene).
+ */
+
+/**
+ * @brief Sets the run mode programmatically.
+ *
+ * @param p_run_mode The run mode index to select (0 = Current Scene, 1 = Main Scene).
+ *                   Also sets the editability of the arguments field accordingly.
+ */
+
+/**
+ * @brief Constructor for RunSettingsDialog.
+ *
+ * Initializes the dialog with:
+ * - A vertical box container layout
+ * - An option button for selecting run mode (Current Scene or Main Scene)
+ * - A line edit field for entering main scene arguments (initially disabled)
+ * - Sets the dialog title and OK button text
+ */
 #include "run_settings_dialog.h"
 
 void RunSettingsDialog::popup_run_settings() {

@@ -1,39 +1,23 @@
-/*************************************************************************/
-/*  settings_config_dialog.h                                             */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
- * @file settings_config_dialog.h
- * @brief Implementation of EditorSettingsDialog class.
+ * @class EditorSettingsDialog
+ * @brief A dialog window for managing editor settings and keyboard shortcuts.
+ *
+ * This class provides a tabbed interface for configuring editor settings and customizing
+ * keyboard shortcuts. It features a sectioned inspector for general settings and a tree
+ * view for managing shortcuts with search and filtering capabilities.
+ *
+ * The dialog supports:
+ * - General settings configuration through a sectioned inspector
+ * - Keyboard shortcut customization with visual feedback
+ * - Search and filter functionality for both settings and shortcuts
+ * - Undo/redo support for setting changes
+ * - Editor restart notification when settings require it
+ * - Real-time input capture for key binding
+ *
+ * @inherits AcceptDialog
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef SETTINGS_CONFIG_DIALOG_H
 #define SETTINGS_CONFIG_DIALOG_H
 

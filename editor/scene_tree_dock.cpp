@@ -1,39 +1,31 @@
-/*************************************************************************/
-/*  scene_tree_dock.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
 
 /**
  * @file scene_tree_dock.cpp
- * @brief Implementation of scene_tree_dock functionality.
+ * @brief Implementation of the Scene Tree Dock for the Godot Editor.
+ *
+ * This file contains the implementation of the SceneTreeDock class, which provides
+ * the main interface for managing the scene tree in the Godot Editor. It handles
+ * node creation, deletion, reparenting, script attachment, and various other
+ * scene tree operations.
+ *
+ * Key functionalities include:
+ * - Node creation and instantiation from scenes
+ * - Node duplication, deletion, and reparenting
+ * - Script attachment and management
+ * - Scene tree navigation and filtering
+ * - Undo/redo operations for scene modifications
+ * - Drag and drop support for nodes and resources
+ * - Context menu operations (right-click menu)
+ * - Handling of editable children and placeholder instances
+ * - Integration with the editor's selection system
+ * - Remote tree editing support
+ * - Keyboard shortcut handling
+ * - Scene structure validation (e.g., cyclical dependency checks)
+ *
+ * The class works closely with EditorNode, EditorSelection, and SceneTreeEditor
+ * to provide a comprehensive scene editing experience.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #include "scene_tree_dock.h"
 
 #include "core/io/resource_saver.h"

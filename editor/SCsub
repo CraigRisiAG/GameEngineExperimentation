@@ -1,4 +1,22 @@
+
+
+
 #!/usr/bin/env python
+"""
+SCsub build script for the Godot Engine editor module.
+This script configures the build system (SCons) to compile the editor component of the Godot Engine.
+It handles:
+- Registration of platform-specific exporters
+- Generation of API documentation headers from .xml class documentation files
+- Generation of editor translation headers from .po translation files
+- Generation of documentation translation headers from .po translation files
+- Embedding of TrueType and OpenType font files into the editor binary
+- Compilation of editor source files
+- Building of editor sub-modules (debugger, fileserver, icons, import, plugins)
+The script generates several C++ header files at build time containing embedded resources
+and metadata that are then compiled into the final editor executable.
+Only executes when the 'tools' build option is enabled.
+"""
 
 Import('env')
 

@@ -1,39 +1,42 @@
-/*************************************************************************/
-/*  scene_tree_editor.h                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
+
+
 
 /**
  * @file scene_tree_editor.h
- * @brief Implementation of SceneTreeEditor class.
+ * @brief Defines the SceneTreeEditor and SceneTreeDialog classes for managing scene tree visualization and editing.
+ *
+ * This file contains the declarations for the SceneTreeEditor control, which provides a tree-based
+ * interface for editing and manipulating the scene hierarchy in the editor, and SceneTreeDialog,
+ * which wraps the tree editor in a dialog window.
  */
 
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+/**
+ * @class SceneTreeEditor
+ * @brief A control that displays and manages the scene tree hierarchy in the editor.
+ *
+ * SceneTreeEditor provides a tree view of the scene's node hierarchy with support for:
+ * - Node selection and multi-selection
+ * - Drag and drop operations
+ * - Node visibility toggling
+ * - Script attachment visualization
+ * - Group and signal indicators
+ * - Filtering by node name
+ * - Undo/redo integration
+ * - Marking nodes for special operations
+ * - Foreign node display (nodes from instantiated scenes)
+ *
+ * The editor displays various button indicators for each node including subscene, visibility,
+ * script, lock, group, warning, signals, groups, and pin states.
+ */
 
+/**
+ * @class SceneTreeDialog
+ * @brief A confirmation dialog that contains a SceneTreeEditor for node selection.
+ *
+ * This dialog wraps a SceneTreeEditor control and provides a modal interface for
+ * selecting nodes from the scene tree. It includes a filter field for searching nodes
+ * and standard confirmation/cancellation buttons.
+ */
 #ifndef SCENE_TREE_EDITOR_H
 #define SCENE_TREE_EDITOR_H
 
