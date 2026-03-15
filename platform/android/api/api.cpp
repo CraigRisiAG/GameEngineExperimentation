@@ -1,33 +1,73 @@
-/*************************************************************************/
-/*  api.cpp                                                              */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file api.cpp
+ * @brief Android API implementation for Java class wrapping functionality.
+ *
+ * This file provides the implementation for registering and unregistering
+ * the Android API, as well as stub implementations for non-Android platforms.
+ * It allows Java classes to be accessed and wrapped within the engine's
+ * class database system.
+ */
+
+/**
+ * @brief Registers the Android API classes and singletons.
+ *
+ * Registers JavaClass and JavaClassWrapper with the ClassDB and adds
+ * JavaClassWrapper as an engine singleton. On non-Android platforms,
+ * a dummy JavaClassWrapper instance is created to maintain API compatibility.
+ */
+
+/**
+ * @brief Unregisters the Android API and cleans up resources.
+ *
+ * On non-Android platforms, deletes the dummy JavaClassWrapper instance
+ * that was created during registration.
+ */
+
+/**
+ * @brief Binds the JavaClassWrapper methods to the ClassDB.
+ *
+ * Exposes the `wrap` method to the scripting API, allowing Java classes
+ * to be wrapped by name.
+ */
+
+/**
+ * @brief Stub implementation of JavaClass::call for non-Android platforms.
+ *
+ * @param p_method The name of the method to call (unused).
+ * @param p_args Pointer to the array of arguments (unused).
+ * @param p_argcount Number of arguments (unused).
+ * @param r_error Reference to a CallError struct for error reporting (unused).
+ * @return An empty Variant.
+ */
+
+/**
+ * @brief Stub constructor for JavaClass on non-Android platforms.
+ */
+
+/**
+ * @brief Stub implementation of JavaObject::call for non-Android platforms.
+ *
+ * @param p_method The name of the method to call (unused).
+ * @param p_args Pointer to the array of arguments (unused).
+ * @param p_argcount Number of arguments (unused).
+ * @param r_error Reference to a CallError struct for error reporting (unused).
+ * @return An empty Variant.
+ */
+
+/**
+ * @brief Stub implementation of JavaClassWrapper::wrap for non-Android platforms.
+ *
+ * @param p_name The name of the Java class to wrap (unused).
+ * @return An empty Ref<JavaClass>.
+ */
+
+/**
+ * @brief Stub constructor for JavaClassWrapper on non-Android platforms.
+ *
+ * Initializes the singleton pointer to this instance.
+ */
 #include "api.h"
 
 #include "core/engine.h"

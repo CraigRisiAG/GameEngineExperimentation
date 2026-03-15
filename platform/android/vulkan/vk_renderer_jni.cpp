@@ -1,33 +1,78 @@
-/*************************************************************************/
-/*  vk_renderer_jni.cpp                                                  */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file vk_renderer_jni.cpp
+ * @brief JNI bridge for forwarding Android Vulkan surface and renderer lifecycle events
+ *        from Java to the native Vulkan renderer backend.
+ */
+
+/**
+ * @brief Notifies the native renderer that a Vulkan-compatible Android surface has been created.
+ *
+ * This callback is invoked from the Java layer when the rendering surface becomes available.
+ * Implementations typically acquire and store the native window or surface handle and begin
+ * initializing Vulkan objects that depend on surface availability.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param obj Java VkRenderer instance invoking the native method.
+ * @param j_surface Java Surface object associated with Vulkan presentation.
+ */
+
+/**
+ * @brief Notifies the native renderer that the Vulkan surface dimensions or configuration changed.
+ *
+ * This callback is typically used to update cached surface state, recreate the swapchain,
+ * and resize any render targets or viewport-dependent resources.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param object Java VkRenderer instance invoking the native method.
+ * @param j_surface Java Surface object associated with Vulkan presentation.
+ * @param width Updated surface width in pixels.
+ * @param height Updated surface height in pixels.
+ */
+
+/**
+ * @brief Resumes native Vulkan rendering activity.
+ *
+ * Called when the Java-side renderer or host activity resumes. Implementations commonly
+ * restart rendering, restore transient state, and resume any renderer-side processing
+ * paused during inactivity.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param obj Java VkRenderer instance invoking the native method.
+ */
+
+/**
+ * @brief Renders a single Vulkan frame.
+ *
+ * Invoked from the Java rendering loop to execute one frame of native rendering work,
+ * including command recording, submission, and presentation as appropriate.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param obj Java VkRenderer instance invoking the native method.
+ */
+
+/**
+ * @brief Pauses native Vulkan rendering activity.
+ *
+ * Called when the Java-side renderer or host activity is paused. Implementations typically
+ * suspend rendering, stop timing-sensitive processing, and prepare for possible surface loss
+ * or resource teardown.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param obj Java VkRenderer instance invoking the native method.
+ */
+
+/**
+ * @brief Shuts down the native Vulkan renderer and releases associated resources.
+ *
+ * This callback is invoked when the Java-side renderer is being destroyed. Implementations
+ * should release swapchain-dependent resources, surface references, device objects, and any
+ * other native state owned by the renderer.
+ *
+ * @param env JNI interface pointer for the current thread.
+ * @param obj Java VkRenderer instance invoking the native method.
+ */
 #include "vk_renderer_jni.h"
 
 extern "C" {

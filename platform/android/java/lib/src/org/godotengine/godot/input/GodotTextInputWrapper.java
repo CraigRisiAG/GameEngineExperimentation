@@ -1,33 +1,32 @@
-/*************************************************************************/
-/*  GodotTextInputWrapper.java                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * A wrapper class that handles text input events for Godot's Android platform.
+ * Implements {@link TextWatcher} and {@link OnEditorActionListener} to monitor
+ * and process text changes and editor actions from a {@link GodotEditText} input field.
+ *
+ * <p>This class bridges Android text input events to Godot's input system by
+ * translating text changes and key events into corresponding {@link GodotLib} key events.</p>
+ *
+ * <p>Key responsibilities:
+ * <ul>
+ *   <li>Monitors text changes and forwards corresponding key events to Godot</li>
+ *   <li>Handles character deletions by sending {@link KeyEvent#KEYCODE_DEL} events</li>
+ *   <li>Processes new character inputs and routes them through {@link GodotLib#key}</li>
+ *   <li>Handles editor actions including Enter key presses and fullscreen edit mode</li>
+ * </ul>
+ * </p>
+ *
+ * @see TextWatcher
+ * @see OnEditorActionListener
+ * @see GodotEditText
+ * @see GodotView
+ * @see GodotLib
+ *
+ * @field mView     The {@link GodotView} instance used to queue input events on the GL thread
+ * @field mEdit     The {@link GodotEditText} instance being monitored for text input
+ * @field mOriginText The original text content before any changes occur
+ */
 package org.godotengine.godot.input;
 import android.content.Context;
 import android.text.Editable;

@@ -1,33 +1,73 @@
-/*************************************************************************/
-/*  vk_renderer_jni.h                                                    */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file vk_renderer_jni.h
+ * @brief JNI interface for the Vulkan renderer on Android.
+ *
+ * This header file defines the JNI (Java Native Interface) functions that bridge
+ * the Java-side VkRenderer class (org.godotengine.godot.vulkan.VkRenderer) with
+ * the native C++ Vulkan rendering implementation.
+ *
+ * @note All functions are exported with C linkage to prevent C++ name mangling.
+ */
+
+/**
+ * @brief Called when the Vulkan surface is first created.
+ *
+ * Initializes the Vulkan renderer with the provided Android surface.
+ *
+ * @param env       Pointer to the JNI environment.
+ * @param obj       Reference to the calling Java object.
+ * @param j_surface The Android Surface object on which Vulkan will render.
+ */
+
+/**
+ * @brief Called when the Vulkan surface changes (e.g., resize or recreation).
+ *
+ * Updates the Vulkan renderer to handle the new surface configuration.
+ *
+ * @param env       Pointer to the JNI environment.
+ * @param object    Reference to the calling Java object.
+ * @param j_surface The updated Android Surface object.
+ * @param width     The new width of the surface in pixels.
+ * @param height    The new height of the surface in pixels.
+ */
+
+/**
+ * @brief Called when the application resumes from a paused state.
+ *
+ * Restores the Vulkan renderer to an active rendering state.
+ *
+ * @param env Pointer to the JNI environment.
+ * @param obj Reference to the calling Java object.
+ */
+
+/**
+ * @brief Called to render a single frame using Vulkan.
+ *
+ * Triggers the Vulkan renderer to draw the current frame to the surface.
+ *
+ * @param env Pointer to the JNI environment.
+ * @param obj Reference to the calling Java object.
+ */
+
+/**
+ * @brief Called when the application is paused.
+ *
+ * Suspends Vulkan rendering operations and preserves the current state.
+ *
+ * @param env Pointer to the JNI environment.
+ * @param obj Reference to the calling Java object.
+ */
+
+/**
+ * @brief Called when the Vulkan renderer is being destroyed.
+ *
+ * Performs cleanup of all Vulkan resources and terminates the renderer.
+ *
+ * @param env Pointer to the JNI environment.
+ * @param obj Reference to the calling Java object.
+ */
 #ifndef VK_RENDERER_JNI_H
 #define VK_RENDERER_JNI_H
 

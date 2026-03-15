@@ -1,33 +1,26 @@
-/*************************************************************************/
-/*  GodotInputHandler.java                                               */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * Handles Android input events for a {@code GodotView} and forwards them to the native Godot input layer.
+ *
+ * <p>This class listens for keyboard, gamepad, joystick, d-pad, stylus, and generic motion events,
+ * translates Android-specific input data into Godot-compatible values, and dispatches the resulting
+ * events through {@code GodotLib} on the render thread using {@code GodotView.queueEvent(...)}.</p>
+ *
+ * <p>Its responsibilities include:</p>
+ * <ul>
+ *   <li>Registering as an input device listener through {@code InputManagerCompat}.</li>
+ *   <li>Tracking connected joystick/gamepad devices and their motion ranges.</li>
+ *   <li>Mapping Android gamepad button codes to Godot button indices.</li>
+ *   <li>Forwarding key press/release events for both standard keyboards and game controllers.</li>
+ *   <li>Processing joystick axis and hat motion updates.</li>
+ *   <li>Handling stylus hover events.</li>
+ *   <li>Reporting controller connection, removal, and change events to the engine.</li>
+ * </ul>
+ *
+ * <p>Joystick devices are stored in insertion order and referenced by their internal list index when
+ * communicating with the engine. Motion ranges are sorted by axis to provide stable axis ordering.</p>
+ */
 package org.godotengine.godot.input;
 
 import static org.godotengine.godot.utils.GLUtils.DEBUG;

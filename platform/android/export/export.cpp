@@ -1,33 +1,215 @@
-/*************************************************************************/
-/*  export.cpp                                                           */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+
+/**
+ * @file export.cpp
+ * @brief Android platform export plugin for the Godot game engine editor.
+ *
+ * This file implements the Android export functionality for the Godot editor,
+ * providing the ability to package and deploy Godot projects as Android APK files.
+ *
+ * @section features Key Features
+ * - APK generation and modification (manifest fixing, resource patching)
+ * - Multi-ABI support (armeabi-v7a, arm64-v8a, x86, x86_64)
+ * - Custom and default launcher icon handling with multiple density support
+ * - Android permissions management
+ * - APK signing via jarsigner
+ * - ZIP alignment for optimized APK distribution
+ * - ADB device polling and one-click deployment
+ * - Custom Gradle build support
+ * - APK expansion file support
+ * - XR (VR) mode configuration (Regular and Oculus Mobile VR)
+ * - Adaptive icon support (foreground/background layers)
+ *
+ * @section constants Global Constants
+ * - `android_perms`: Null-terminated array of all supported Android permission names.
+ * - `icon_densities_count`: Number of icon density variants (6).
+ * - `launcher_icon_option`: Export preset key for the main launcher icon.
+ * - `launcher_adaptive_icon_foreground_option`: Export preset key for the adaptive icon foreground layer.
+ * - `launcher_adaptive_icon_background_option`: Export preset key for the adaptive icon background layer.
+ * - `launcher_icons`: Array of @ref LauncherIcon defining paths and dimensions for standard icons.
+ * - `launcher_adaptive_icon_foregrounds`: Array of @ref LauncherIcon for adaptive icon foreground layers.
+ * - `launcher_adaptive_icon_backgrounds`: Array of @ref LauncherIcon for adaptive icon background layers.
+ *
+ * @section structs Data Structures
+ *
+ * @subsection launcher_icon LauncherIcon
+ * A POD struct describing a single launcher icon variant:
+ * - `export_path`: Destination path within the APK (e.g., "res/mipmap-xxxhdpi-v4/icon.png").
+ * - `dimensions`: Square pixel size for this density variant.
+ *
+ * @section class EditorExportPlatformAndroid
+ * Extends @ref EditorExportPlatform to implement Android-specific export logic.
+ *
+ * @subsection private_members Private Members
+ *
+ * @subsubsection inner_structs Inner Structs
+ * - `Device`: Represents a connected ADB device with id, name, description, and API level.
+ * - `APKExportData`: Carries the open zipFile handle and a progress tracker pointer for export callbacks.
+ *
+ * @subsubsection fields Fields
+ * - `logo`: The Android platform logo texture shown in the editor.
+ * - `run_icon`: The run/deploy icon texture shown in the editor.
+ * - `devices`: List of currently detected ADB devices.
+ * - `devices_changed`: Volatile flag indicating the device list has changed.
+ * - `device_lock`: Mutex protecting access to the `devices` list.
+ * - `device_thread`: Background thread running the ADB device polling loop.
+ * - `quit_request`: Volatile flag to signal the polling thread to exit.
+ *
+ * @subsubsection private_methods Private Methods
+ *
+ * - `_device_poll_thread(void* ud)` [static]:
+ *   Background thread entry point. Periodically queries ADB for connected devices,
+ *   updates the `devices` list, and sets `devices_changed` when differences are detected.
+ *   On exit, optionally shuts down the ADB server based on editor settings.
+ *
+ * - `get_project_name(const String& p_name) const`:
+ *   Returns the effective project name: uses `p_name` if non-empty, falls back to the
+ *   project settings application name, and finally to the engine version name.
+ *
+ * - `get_package_name(const String& p_package) const`:
+ *   Resolves the final Android package name by substituting `$genname` with a sanitized
+ *   version of the project name (lowercase alphanumeric only, no leading digits).
+ *
+ * - `is_package_name_valid(const String& p_package, String* r_error) const`:
+ *   Validates that `p_package` conforms to Android package naming rules:
+ *   at least one `.` separator, no invalid characters, segments of non-zero length,
+ *   and no segment starting with a digit or underscore. Populates `r_error` on failure.
+ *
+ * - `_should_compress_asset(const String& p_path, const Vector<uint8_t>& p_data)` [static]:
+ *   Returns `false` for file types that are already compressed or benefit little from
+ *   compression (images, audio, video, Godot-specific binary formats). Returns `true`
+ *   otherwise, indicating that deflate compression should be applied.
+ *
+ * - `get_zip_fileinfo()` [static]:
+ *   Creates and returns a `zip_fileinfo` struct populated with the current system date/time,
+ *   suitable for use when adding entries to a ZIP/APK archive.
+ *
+ * - `get_abis()` [static]:
+ *   Returns the list of all supported Android ABI strings:
+ *   `{"armeabi-v7a", "arm64-v8a", "x86", "x86_64"}`.
+ *
+ * - `store_in_apk(APKExportData* ed, const String& p_path, const Vector<uint8_t>& p_data, int compression_method)` [static]:
+ *   Writes a single file entry into the open APK (ZIP) archive using the specified
+ *   compression method. Returns `OK` on success.
+ *
+ * - `save_apk_so(void* p_userdata, const SharedObject& p_so)` [static]:
+ *   Export callback for shared library (`.so`) files. Validates the filename prefix,
+ *   determines the target ABI from the shared object's tags, and stores the file at
+ *   `lib/<abi>/<filename>` inside the APK. Returns `FAILED` if no matching ABI is found.
+ *
+ * - `save_apk_file(void* p_userdata, const String& p_path, const Vector<uint8_t>& p_data, int p_file, int p_total)` [static]:
+ *   Export callback for project asset files. Remaps `res://` paths to `assets/` and
+ *   stores each file in the APK, choosing compression based on `_should_compress_asset`.
+ *
+ * - `ignore_apk_file(void* p_userdata, const String& p_path, const Vector<uint8_t>& p_data, int p_file, int p_total)` [static]:
+ *   No-op export callback used when files should be excluded (e.g., dumb-client mode).
+ *
+ * - `_fix_manifest(const Ref<EditorExportPreset>& p_preset, Vector<uint8_t>& p_manifest, bool p_give_internet)`:
+ *   Parses and patches the binary Android manifest (AXML format) in-place:
+ *   - Replaces package name, version code, and version name.
+ *   - Sets screen orientation and screen size support flags.
+ *   - Updates XR mode metadata values.
+ *   - Updates custom plugin metadata.
+ *   - Injects `<uses-feature>` elements for VR headtracking and hand tracking.
+ *   - Appends `<uses-permission>` elements for all enabled and custom permissions.
+ *   - Rebuilds the binary string pool after all modifications.
+ *
+ * - `_parse_string(const uint8_t* p_bytes, bool p_utf8)` [static]:
+ *   Reads a length-prefixed UTF-16 or UTF-8 string from a raw byte buffer and returns
+ *   it as a `String`.
+ *
+ * - `_fix_resources(const Ref<EditorExportPreset>& p_preset, Vector<uint8_t>& p_manifest)`:
+ *   Patches the binary `resources.arsc` file to substitute the placeholder string
+ *   `"godot-project-name"` (and its locale variants) with the actual project name.
+ *   Converts the string pool to UTF-16 format and updates all size fields.
+ *
+ * - `_process_launcher_icons(const String& p_processing_file_name, const Ref<Image>& p_source_image, const LauncherIcon p_icon, Vector<uint8_t>& p_data)`:
+ *   If `p_processing_file_name` matches `p_icon.export_path`, resizes `p_source_image`
+ *   to the icon's target dimensions using Lanczos interpolation (if needed) and
+ *   re-encodes the result as PNG data into `p_data`.
+ *
+ * - `get_enabled_abis(const Ref<EditorExportPreset>& p_preset)` [static]:
+ *   Filters the full ABI list to only those enabled in the export preset's
+ *   `architectures/<abi>` settings.
+ *
+ * @subsection public_methods Public Methods
+ *
+ * - `get_preset_features(const Ref<EditorExportPreset>& p_preset, List<String>* r_features)` [virtual]:
+ *   Appends texture compression features (`etc`, `etc2`) based on the rendering driver,
+ *   and appends the names of all enabled ABIs to `r_features`.
+ *
+ * - `get_export_options(List<ExportOption>* r_options)` [virtual]:
+ *   Populates the export preset property list with all configurable Android export options,
+ *   including graphics, XR, screen, package, versioning, keystore, icon, ABI, APK expansion,
+ *   and permission settings.
+ *
+ * - `get_name() const` [virtual]: Returns `"Android"`.
+ *
+ * - `get_os_name() const` [virtual]: Returns `"Android"`.
+ *
+ * - `get_logo() const` [virtual]: Returns the Android platform logo texture.
+ *
+ * - `poll_export()` [virtual]:
+ *   Returns `true` (and clears the flag) when the device list has changed since last polled.
+ *
+ * - `get_options_count() const` [virtual]: Returns the number of currently connected ADB devices.
+ *
+ * - `get_options_tooltip() const` [virtual]: Returns a localized tooltip string.
+ *
+ * - `get_option_label(int p_index) const` [virtual]:
+ *   Returns the display name of the device at `p_index`.
+ *
+ * - `get_option_tooltip(int p_index) const` [virtual]:
+ *   Returns a detailed description tooltip for the device at `p_index`.
+ *   When only one device is connected, the name is prepended to the description.
+ *
+ * - `run(const Ref<EditorExportPreset>& p_preset, int p_device, int p_debug_flags)` [virtual]:
+ *   Exports a debug APK to a temporary file and deploys it to the selected ADB device:
+ *   optionally uninstalls the previous version, installs the new APK, sets up ADB reverse
+ *   port forwarding for remote debugging and file server access, and launches the application.
+ *
+ * - `get_run_icon() const` [virtual]: Returns the run/deploy icon texture.
+ *
+ * - `can_export(const Ref<EditorExportPreset>& p_preset, String& r_error, bool& r_missing_templates) const` [virtual]:
+ *   Validates all export preconditions: template availability (standard or custom build),
+ *   ADB and jarsigner paths, debug keystore, custom build SDK path and Gradle template,
+ *   APK expansion public key, package name validity, and ETC2 texture support.
+ *   Populates `r_error` with human-readable diagnostics and sets `r_missing_templates`.
+ *
+ * - `get_binary_extensions(const Ref<EditorExportPreset>& p_preset) const` [virtual]:
+ *   Returns `{"apk"}` as the supported output file extension.
+ *
+ * - `export_project(const Ref<EditorExportPreset>& p_preset, bool p_debug, const String& p_path, int p_flags)` [virtual]:
+ *   Full APK export pipeline:
+ *   1. Locates or builds the source APK template.
+ *   2. Opens the template and creates an unaligned output APK.
+ *   3. Copies and patches each entry (manifest, resources, icons, .so filtering, signature stripping).
+ *   4. Exports project files (assets or APK expansion OBB).
+ *   5. Writes the command-line arguments asset (`assets/_cl_`).
+ *   6. Optionally signs the APK with jarsigner and verifies the signature.
+ *   7. ZIP-aligns the signed APK and writes the final output to `p_path`.
+ *   Cleans up temporary files on all code paths via the `CLEANUP_AND_RETURN` macro.
+ *
+ * - `get_platform_features(List<String>* r_features)` [virtual]:
+ *   Appends `"mobile"` and `"Android"` to the platform feature set.
+ *
+ * - `resolve_platform_feature_priorities(const Ref<EditorExportPreset>& p_preset, Set<String>& p_features)` [virtual]:
+ *   No-op; reserved for future platform-level feature priority resolution.
+ *
+ * @subsection constructor_destructor Constructor / Destructor
+ *
+ * - `EditorExportPlatformAndroid()`:
+ *   Initializes logo and run icon textures from embedded image data, sets initial state
+ *   flags, and starts the ADB device polling background thread.
+ *
+ * - `~EditorExportPlatformAndroid()`:
+ *   Signals the polling thread to stop, waits for it to finish, and frees the thread object.
+ *
+ * @section register_function register_android_exporter()
+ * Registers all Android-related editor settings (adb, jarsigner, keystore paths, etc.)
+ * and adds a new @ref EditorExportPlatformAndroid instance to the editor's export platform list.
+ */
 #include "export.h"
 
 #include "core/io/image_loader.h"

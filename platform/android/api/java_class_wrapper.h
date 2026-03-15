@@ -1,33 +1,232 @@
-/*************************************************************************/
-/*  java_class_wrapper.h                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
+
+/**
+ * @file java_class_wrapper.h
+ * @brief Android JNI reflection and invocation wrappers for exposing Java classes and instances to the engine.
+ *
+ * This header defines a small bridge layer used on Android to:
+ * - Wrap Java classes discovered through JNI and reflection.
+ * - Cache method and constant metadata.
+ * - Convert between Java/JNI types and engine Variant types.
+ * - Invoke Java static and instance methods through a Variant-based call interface.
+ *
+ * The main types are:
+ * - JavaClass: Represents a reflected Java class and its callable/static members.
+ * - JavaObject: Represents an instance of a wrapped Java class.
+ * - JavaClassWrapper: Singleton-style helper responsible for class loading, reflection, and wrapper creation.
+ */
+
+/**
+ * @class JavaClass
+ * @brief Variant-callable wrapper around a Java class.
+ *
+ * JavaClass stores reflected metadata for a Java class, including:
+ * - Available methods and overloads.
+ * - Method signatures and return types.
+ * - Constant/static field values.
+ * - The underlying JNI class reference.
+ *
+ * On Android builds, it uses reflection metadata gathered by JavaClassWrapper
+ * to resolve overloads and convert arguments/results between JNI and Variant.
+ *
+ * A JavaClass may be used to:
+ * - Call static Java methods.
+ * - Serve as the base type for JavaObject instances.
+ * - Expose Java constants to script-facing systems.
+ */
+
+/**
+ * @enum ArgumentType
+ * @brief Internal encoding for reflected Java argument and return types.
+ *
+ * These values describe primitive Java types, strings, objects, and arrays.
+ * Additional bit flags are used to indicate:
+ * - Array types.
+ * - Boxed numeric/object wrapper types.
+ * - A mask for extracting the base type.
+ *
+ * This encoding is used during overload resolution and Variant conversion.
+ */
+
+/**
+ * @struct MethodInfo
+ * @brief Reflection metadata for a Java method overload.
+ *
+ * Stores enough information to select and invoke a Java method through JNI:
+ * - Whether the method is static.
+ * - Encoded parameter types.
+ * - Parameter signature strings for class/object types.
+ * - Encoded return type.
+ * - JNI method ID for fast invocation.
+ */
+
+/**
+ * @brief Converts an internal Java signature code to an engine Variant type.
+ *
+ * This helper maps reflected Java/JNI type information to the most appropriate
+ * Variant::Type and assigns a likelihood score used when resolving overloaded
+ * methods. Higher likelihood values indicate a stronger expected match.
+ *
+ * @param p_sig Encoded Java type signature.
+ * @param r_type Output Variant type corresponding to the Java type.
+ * @param likelihood Output score indicating how strongly the type maps to the Variant type.
+ */
+
+/**
+ * @brief Converts a JNI object reference into a Variant.
+ *
+ * Handles object-to-Variant conversion for boxed primitives, strings, arrays,
+ * and wrapped Java objects depending on the provided encoded signature.
+ *
+ * @param env Active JNI environment.
+ * @param obj JNI object to convert.
+ * @param var Output Variant receiving the converted value.
+ * @param p_sig Encoded Java type signature describing the expected object type.
+ * @return true if the conversion succeeded; false otherwise.
+ */
+
+/**
+ * @brief Invokes a reflected Java method.
+ *
+ * Resolves the best matching overload for the supplied arguments, performs
+ * Variant-to-JNI argument conversion, calls the method on either a class or
+ * an instance, and converts the return value back to Variant.
+ *
+ * @param p_instance Target Java object instance, or null for static calls.
+ * @param p_method Name of the Java method to invoke.
+ * @param p_args Array of argument pointers.
+ * @param p_argcount Number of arguments in @p p_args.
+ * @param r_error Output call error information.
+ * @param ret Output Variant receiving the return value.
+ * @return true if a suitable overload was found and invoked successfully.
+ */
+
+/**
+ * @brief Dispatches a Variant-based method call to the wrapped Java class.
+ *
+ * This is the public call entry point used by the engine when invoking static
+ * Java methods through a JavaClass wrapper.
+ *
+ * @param p_method Name of the method to call.
+ * @param p_args Array of argument pointers.
+ * @param p_argcount Number of arguments.
+ * @param r_error Output call error state.
+ * @return The converted return value from the Java method, or an empty Variant on failure.
+ */
+
+/**
+ * @brief Constructs an empty JavaClass wrapper.
+ *
+ * The wrapper is typically populated by JavaClassWrapper after reflecting a
+ * Java class and collecting its methods and constants.
+ */
+
+/**
+ * @class JavaObject
+ * @brief Wrapper around a Java object instance.
+ *
+ * JavaObject represents a concrete Java instance associated with a JavaClass
+ * wrapper. It exposes the same Variant-based call interface used elsewhere in
+ * the engine, allowing reflected instance methods to be invoked dynamically.
+ *
+ * The object retains:
+ * - A reference to its base JavaClass metadata.
+ * - The underlying JNI object reference.
+ */
+
+/**
+ * @brief Dispatches a Variant-based method call to the wrapped Java instance.
+ *
+ * Uses the associated JavaClass metadata to resolve and invoke an instance
+ * method on the stored JNI object reference.
+ *
+ * @param p_method Name of the method to call.
+ * @param p_args Array of argument pointers.
+ * @param p_argcount Number of arguments.
+ * @param r_error Output call error state.
+ * @return The converted return value from the Java method, or an empty Variant on failure.
+ */
+
+/**
+ * @brief Creates a wrapper for a Java object instance.
+ *
+ * @param p_base Reflected JavaClass metadata describing the object's class.
+ * @param p_instance Pointer to the JNI object reference to wrap.
+ */
+
+/**
+ * @brief Releases the wrapped JNI object resources.
+ *
+ * Responsible for cleaning up any owned JNI references associated with the instance.
+ */
+
+/**
+ * @class JavaClassWrapper
+ * @brief Factory and reflection cache for JavaClass wrappers.
+ *
+ * JavaClassWrapper is the central Android JNI helper responsible for:
+ * - Loading Java classes through the Android activity/class loader.
+ * - Reflecting methods, fields, modifiers, and type information.
+ * - Building JavaClass wrappers and caching them by class name.
+ * - Providing access to frequently used JNI reflection method IDs.
+ *
+ * This type acts as the main entry point for obtaining wrapped Java classes.
+ */
+
+/**
+ * @brief Determines the internal signature encoding for a reflected Java type.
+ *
+ * Inspects a reflected Java type object and produces:
+ * - An encoded internal type signature.
+ * - A string signature for object/class types when needed.
+ *
+ * This information is used to build method metadata and perform conversions.
+ *
+ * @param env Active JNI environment.
+ * @param obj Reflected Java type object.
+ * @param sig Output encoded type signature.
+ * @param strsig Output class/type signature string for non-primitive types.
+ * @return true if the type was recognized and encoded successfully.
+ */
+
+/**
+ * @brief Binds methods and properties for engine-side exposure.
+ *
+ * Registers this type with the engine's object/class database.
+ */
+
+/**
+ * @brief Returns the global JavaClassWrapper instance.
+ *
+ * @return Pointer to the singleton wrapper instance.
+ */
+
+/**
+ * @brief Wraps a Java class by name and returns a cached/reflected JavaClass.
+ *
+ * If the class has already been wrapped, the cached wrapper is returned.
+ * Otherwise, the class is loaded through the Android class loader, reflected,
+ * cached, and returned.
+ *
+ * @param p_class Fully qualified Java class name.
+ * @return A reference to the wrapped JavaClass, or an empty reference on failure.
+ */
+
+/**
+ * @brief Constructs the Android Java reflection wrapper.
+ *
+ * Initializes JNI reflection helpers, caches frequently used method IDs, and
+ * stores the activity/class loader context required to locate application classes.
+ *
+ * @param p_activity Android activity object used to access the class loader.
+ */
+
+/**
+ * @brief Constructs a non-Android placeholder wrapper.
+ *
+ * Exists to allow the type to be declared on non-Android builds where JNI
+ * functionality is unavailable.
+ */
 #ifndef JAVA_CLASS_WRAPPER_H
 #define JAVA_CLASS_WRAPPER_H
 
