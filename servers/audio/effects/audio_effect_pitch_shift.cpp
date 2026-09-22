@@ -1,38 +1,3 @@
-/*************************************************************************/
-/*  audio_effect_pitch_shift.cpp                                         */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-
-/**
- * @file audio_effect_pitch_shift.cpp
- * @brief Implementation of audio_effect_pitch_shift functionality.
- */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
 #include "audio_effect_pitch_shift.h"
 
@@ -289,84 +254,94 @@ void SMBPitchShift::smbFft(float *fftBuffer, long fftFrameSize, long sign)
 /* Godot code again */
 /* clang-format on */
 
-void AudioEffectPitchShiftInstance::process(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) {
+void AudioEffectPitchShiftInstance::process(const AudioFrame *p_src_frames,
+                                            AudioFrame *p_dst_frames,
+                                            int p_frame_count) {
 
-	float sample_rate = AudioServer::get_singleton()->get_mix_rate();
+  float sample_rate = AudioServer::get_singleton()->get_mix_rate();
 
-	float *in_l = (float *)p_src_frames;
-	float *in_r = in_l + 1;
+  float *in_l = (float *)p_src_frames;
+  float *in_r = in_l + 1;
 
-	float *out_l = (float *)p_dst_frames;
-	float *out_r = out_l + 1;
+  float *out_l = (float *)p_dst_frames;
+  float *out_r = out_l + 1;
 
-	shift_l.PitchShift(base->pitch_scale, p_frame_count, fft_size, base->oversampling, sample_rate, in_l, out_l, 2);
-	shift_r.PitchShift(base->pitch_scale, p_frame_count, fft_size, base->oversampling, sample_rate, in_r, out_r, 2);
+  shift_l.PitchShift(base->pitch_scale, p_frame_count, fft_size,
+                     base->oversampling, sample_rate, in_l, out_l, 2);
+  shift_r.PitchShift(base->pitch_scale, p_frame_count, fft_size,
+                     base->oversampling, sample_rate, in_r, out_r, 2);
 }
 
 Ref<AudioEffectInstance> AudioEffectPitchShift::instance() {
-	Ref<AudioEffectPitchShiftInstance> ins;
-	ins.instance();
-	ins->base = Ref<AudioEffectPitchShift>(this);
-	static const int fft_sizes[FFT_SIZE_MAX] = { 256, 512, 1024, 2048, 4096 };
-	ins->fft_size = fft_sizes[fft_size];
+  Ref<AudioEffectPitchShiftInstance> ins;
+  ins.instance();
+  ins->base = Ref<AudioEffectPitchShift>(this);
+  static const int fft_sizes[FFT_SIZE_MAX] = {256, 512, 1024, 2048, 4096};
+  ins->fft_size = fft_sizes[fft_size];
 
-	return ins;
+  return ins;
 }
 
 void AudioEffectPitchShift::set_pitch_scale(float p_pitch_scale) {
-	ERR_FAIL_COND(p_pitch_scale <= 0.0);
-	pitch_scale = p_pitch_scale;
+  ERR_FAIL_COND(p_pitch_scale <= 0.0);
+  pitch_scale = p_pitch_scale;
 }
 
-float AudioEffectPitchShift::get_pitch_scale() const {
-
-	return pitch_scale;
-}
+float AudioEffectPitchShift::get_pitch_scale() const { return pitch_scale; }
 
 void AudioEffectPitchShift::set_oversampling(int p_oversampling) {
-	ERR_FAIL_COND(p_oversampling < 4);
-	oversampling = p_oversampling;
+  ERR_FAIL_COND(p_oversampling < 4);
+  oversampling = p_oversampling;
 }
 
-int AudioEffectPitchShift::get_oversampling() const {
-
-	return oversampling;
-}
+int AudioEffectPitchShift::get_oversampling() const { return oversampling; }
 
 void AudioEffectPitchShift::set_fft_size(FFT_Size p_fft_size) {
-	ERR_FAIL_INDEX(p_fft_size, FFT_SIZE_MAX);
-	fft_size = p_fft_size;
+  ERR_FAIL_INDEX(p_fft_size, FFT_SIZE_MAX);
+  fft_size = p_fft_size;
 }
 
 AudioEffectPitchShift::FFT_Size AudioEffectPitchShift::get_fft_size() const {
-	return fft_size;
+  return fft_size;
 }
 
 void AudioEffectPitchShift::_bind_methods() {
 
-	ClassDB::bind_method(D_METHOD("set_pitch_scale", "rate"), &AudioEffectPitchShift::set_pitch_scale);
-	ClassDB::bind_method(D_METHOD("get_pitch_scale"), &AudioEffectPitchShift::get_pitch_scale);
+  ClassDB::bind_method(D_METHOD("set_pitch_scale", "rate"),
+                       &AudioEffectPitchShift::set_pitch_scale);
+  ClassDB::bind_method(D_METHOD("get_pitch_scale"),
+                       &AudioEffectPitchShift::get_pitch_scale);
 
-	ClassDB::bind_method(D_METHOD("set_oversampling", "amount"), &AudioEffectPitchShift::set_oversampling);
-	ClassDB::bind_method(D_METHOD("get_oversampling"), &AudioEffectPitchShift::get_oversampling);
+  ClassDB::bind_method(D_METHOD("set_oversampling", "amount"),
+                       &AudioEffectPitchShift::set_oversampling);
+  ClassDB::bind_method(D_METHOD("get_oversampling"),
+                       &AudioEffectPitchShift::get_oversampling);
 
-	ClassDB::bind_method(D_METHOD("set_fft_size", "size"), &AudioEffectPitchShift::set_fft_size);
-	ClassDB::bind_method(D_METHOD("get_fft_size"), &AudioEffectPitchShift::get_fft_size);
+  ClassDB::bind_method(D_METHOD("set_fft_size", "size"),
+                       &AudioEffectPitchShift::set_fft_size);
+  ClassDB::bind_method(D_METHOD("get_fft_size"),
+                       &AudioEffectPitchShift::get_fft_size);
 
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "pitch_scale", PROPERTY_HINT_RANGE, "0.01,16,0.01"), "set_pitch_scale", "get_pitch_scale");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "oversampling", PROPERTY_HINT_RANGE, "4,32,1"), "set_oversampling", "get_oversampling");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "fft_size", PROPERTY_HINT_ENUM, "256,512,1024,2048,4096"), "set_fft_size", "get_fft_size");
+  ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "pitch_scale", PROPERTY_HINT_RANGE,
+                            "0.01,16,0.01"),
+               "set_pitch_scale", "get_pitch_scale");
+  ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "oversampling", PROPERTY_HINT_RANGE,
+                            "4,32,1"),
+               "set_oversampling", "get_oversampling");
+  ADD_PROPERTY(PropertyInfo(Variant::INT, "fft_size", PROPERTY_HINT_ENUM,
+                            "256,512,1024,2048,4096"),
+               "set_fft_size", "get_fft_size");
 
-	BIND_ENUM_CONSTANT(FFT_SIZE_256);
-	BIND_ENUM_CONSTANT(FFT_SIZE_512);
-	BIND_ENUM_CONSTANT(FFT_SIZE_1024);
-	BIND_ENUM_CONSTANT(FFT_SIZE_2048);
-	BIND_ENUM_CONSTANT(FFT_SIZE_4096);
-	BIND_ENUM_CONSTANT(FFT_SIZE_MAX);
+  BIND_ENUM_CONSTANT(FFT_SIZE_256);
+  BIND_ENUM_CONSTANT(FFT_SIZE_512);
+  BIND_ENUM_CONSTANT(FFT_SIZE_1024);
+  BIND_ENUM_CONSTANT(FFT_SIZE_2048);
+  BIND_ENUM_CONSTANT(FFT_SIZE_4096);
+  BIND_ENUM_CONSTANT(FFT_SIZE_MAX);
 }
 
 AudioEffectPitchShift::AudioEffectPitchShift() {
-	pitch_scale = 1.0;
-	oversampling = 4;
-	fft_size = FFT_SIZE_2048;
+  pitch_scale = 1.0;
+  oversampling = 4;
+  fft_size = FFT_SIZE_2048;
 }

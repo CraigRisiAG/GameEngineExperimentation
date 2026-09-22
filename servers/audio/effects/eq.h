@@ -1,38 +1,3 @@
-/*************************************************************************/
-/*  eq.h                                                                 */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-
-/**
- * @file eq.h
- * @brief Implementation of EQ class.
- */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
 // Author: reduzio@gmail.com (C) 2006
 
@@ -48,71 +13,72 @@
 
 class EQ {
 public:
-	enum Preset {
+  enum Preset {
 
-		PRESET_6_BANDS,
-		PRESET_8_BANDS,
-		PRESET_10_BANDS,
-		PRESET_21_BANDS,
-		PRESET_31_BANDS
-	};
+    PRESET_6_BANDS,
+    PRESET_8_BANDS,
+    PRESET_10_BANDS,
+    PRESET_21_BANDS,
+    PRESET_31_BANDS
+  };
 
-	class BandProcess {
+  class BandProcess {
 
-		friend class EQ;
-		float c1, c2, c3;
-		struct History {
-			float a1, a2, a3;
-			float b1, b2, b3;
+    friend class EQ;
+    float c1, c2, c3;
+    struct History {
+      float a1, a2, a3;
+      float b1, b2, b3;
 
-		} history;
+    } history;
 
-	public:
-		inline void process_one(float &p_data);
+  public:
+    inline void process_one(float &p_data);
 
-		BandProcess();
-	};
+    BandProcess();
+  };
 
 private:
-	struct Band {
+  struct Band {
 
-		float freq;
-		float c1, c2, c3;
-	};
+    float freq;
+    float c1, c2, c3;
+  };
 
-	Vector<Band> band;
+  Vector<Band> band;
 
-	float mix_rate;
+  float mix_rate;
 
-	void recalculate_band_coefficients();
+  void recalculate_band_coefficients();
 
 public:
-	void set_mix_rate(float p_mix_rate);
+  void set_mix_rate(float p_mix_rate);
 
-	int get_band_count() const;
-	void set_preset_band_mode(Preset p_preset);
-	void set_bands(const Vector<float> &p_bands);
-	BandProcess get_band_processor(int p_band) const;
-	float get_band_frequency(int p_band);
+  int get_band_count() const;
+  void set_preset_band_mode(Preset p_preset);
+  void set_bands(const Vector<float> &p_bands);
+  BandProcess get_band_processor(int p_band) const;
+  float get_band_frequency(int p_band);
 
-	EQ();
-	~EQ();
+  EQ();
+  ~EQ();
 };
 
 /* Inline Function */
 
 inline void EQ::BandProcess::process_one(float &p_data) {
 
-	history.a1 = p_data;
+  history.a1 = p_data;
 
-	history.b1 = c1 * (history.a1 - history.a3) + c3 * history.b2 - c2 * history.b3;
+  history.b1 =
+      c1 * (history.a1 - history.a3) + c3 * history.b2 - c2 * history.b3;
 
-	p_data = history.b1;
+  p_data = history.b1;
 
-	history.a3 = history.a2;
-	history.a2 = history.a1;
-	history.b3 = history.b2;
-	history.b2 = history.b1;
+  history.a3 = history.a2;
+  history.a2 = history.a1;
+  history.b3 = history.b2;
+  history.b2 = history.b1;
 }
 
 #endif
