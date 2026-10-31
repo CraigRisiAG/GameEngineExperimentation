@@ -1,38 +1,3 @@
-/*************************************************************************/
-/*  visual_server_scene.h                                                */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-
-/**
- * @file visual_server_scene.h
- * @brief Rendering command queue and graphics API abstraction.
- */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
 #ifndef VISUALSERVERSCENE_H
 #define VISUALSERVERSCENE_H
@@ -49,398 +14,438 @@
 
 class VisualServerScene {
 public:
-	enum {
+  enum {
+
+    MAX_INSTANCE_CULL = 65536,
+    MAX_LIGHTS_CULLED = 4096,
+    MAX_REFLECTION_PROBES_CULLED = 4096,
+    MAX_GI_PROBES_CULLED = 4096,
+    MAX_ROOM_CULL = 32,
+    MAX_EXTERIOR_PORTALS = 128,
+  };
+
+  uint64_t render_pass;
 
-		MAX_INSTANCE_CULL = 65536,
-		MAX_LIGHTS_CULLED = 4096,
-		MAX_REFLECTION_PROBES_CULLED = 4096,
-		MAX_GI_PROBES_CULLED = 4096,
-		MAX_ROOM_CULL = 32,
-		MAX_EXTERIOR_PORTALS = 128,
-	};
+  static VisualServerScene *singleton;
+
+  /* CAMERA API */
+
+  struct Camera {
+
+    enum Type { PERSPECTIVE, ORTHOGONAL, FRUSTUM };
+    Type type;
+    float fov;
+    float znear, zfar;
+    float size;
+    Vector2 offset;
+    uint32_t visible_layers;
+    bool vaspect;
+    RID env;
+    RID effects;
 
-	uint64_t render_pass;
+    Transform transform;
+
+    Camera() {
+
+      visible_layers = 0xFFFFFFFF;
+      fov = 70;
+      type = PERSPECTIVE;
+      znear = 0.05;
+      zfar = 100;
+      size = 1.0;
+      offset = Vector2();
+      vaspect = false;
+    }
+  };
 
-	static VisualServerScene *singleton;
+  mutable RID_PtrOwner<Camera> camera_owner;
+
+  virtual RID camera_create();
+  virtual void camera_set_perspective(RID p_camera, float p_fovy_degrees,
+                                      float p_z_near, float p_z_far);
+  virtual void camera_set_orthogonal(RID p_camera, float p_size, float p_z_near,
+                                     float p_z_far);
+  virtual void camera_set_frustum(RID p_camera, float p_size, Vector2 p_offset,
+                                  float p_z_near, float p_z_far);
+  virtual void camera_set_transform(RID p_camera, const Transform &p_transform);
+  virtual void camera_set_cull_mask(RID p_camera, uint32_t p_layers);
+  virtual void camera_set_environment(RID p_camera, RID p_env);
+  virtual void camera_set_camera_effects(RID p_camera, RID p_fx);
+  virtual void camera_set_use_vertical_aspect(RID p_camera, bool p_enable);
+
+  /* SCENARIO API */
 
-	/* CAMERA API */
+  struct Instance;
+
+  struct Scenario {
 
-	struct Camera {
+    VS::ScenarioDebugMode debug;
+    RID self;
 
-		enum Type {
-			PERSPECTIVE,
-			ORTHOGONAL,
-			FRUSTUM
-		};
-		Type type;
-		float fov;
-		float znear, zfar;
-		float size;
-		Vector2 offset;
-		uint32_t visible_layers;
-		bool vaspect;
-		RID env;
-		RID effects;
+    Octree<Instance, true> octree;
 
-		Transform transform;
+    List<Instance *> directional_lights;
+    RID environment;
+    RID fallback_environment;
+    RID camera_effects;
+    RID reflection_probe_shadow_atlas;
+    RID reflection_atlas;
 
-		Camera() {
+    SelfList<Instance>::List instances;
 
-			visible_layers = 0xFFFFFFFF;
-			fov = 70;
-			type = PERSPECTIVE;
-			znear = 0.05;
-			zfar = 100;
-			size = 1.0;
-			offset = Vector2();
-			vaspect = false;
-		}
-	};
+    Scenario() { debug = VS::SCENARIO_DEBUG_DISABLED; }
+  };
 
-	mutable RID_PtrOwner<Camera> camera_owner;
+  mutable RID_PtrOwner<Scenario> scenario_owner;
 
-	virtual RID camera_create();
-	virtual void camera_set_perspective(RID p_camera, float p_fovy_degrees, float p_z_near, float p_z_far);
-	virtual void camera_set_orthogonal(RID p_camera, float p_size, float p_z_near, float p_z_far);
-	virtual void camera_set_frustum(RID p_camera, float p_size, Vector2 p_offset, float p_z_near, float p_z_far);
-	virtual void camera_set_transform(RID p_camera, const Transform &p_transform);
-	virtual void camera_set_cull_mask(RID p_camera, uint32_t p_layers);
-	virtual void camera_set_environment(RID p_camera, RID p_env);
-	virtual void camera_set_camera_effects(RID p_camera, RID p_fx);
-	virtual void camera_set_use_vertical_aspect(RID p_camera, bool p_enable);
+  static void *_instance_pair(void *p_self, OctreeElementID, Instance *p_A, int,
+                              OctreeElementID, Instance *p_B, int);
+  static void _instance_unpair(void *p_self, OctreeElementID, Instance *p_A,
+                               int, OctreeElementID, Instance *p_B, int,
+                               void *);
 
-	/* SCENARIO API */
+  virtual RID scenario_create();
 
-	struct Instance;
+  virtual void scenario_set_debug(RID p_scenario,
+                                  VS::ScenarioDebugMode p_debug_mode);
+  virtual void scenario_set_environment(RID p_scenario, RID p_environment);
+  virtual void scenario_set_camera_effects(RID p_scenario, RID p_fx);
+  virtual void scenario_set_fallback_environment(RID p_scenario,
+                                                 RID p_environment);
+  virtual void scenario_set_reflection_atlas_size(RID p_scenario,
+                                                  int p_reflection_size,
+                                                  int p_reflection_count);
 
-	struct Scenario {
+  /* INSTANCING API */
 
-		VS::ScenarioDebugMode debug;
-		RID self;
+  struct InstanceBaseData {
 
-		Octree<Instance, true> octree;
+    virtual ~InstanceBaseData() {}
+  };
 
-		List<Instance *> directional_lights;
-		RID environment;
-		RID fallback_environment;
-		RID camera_effects;
-		RID reflection_probe_shadow_atlas;
-		RID reflection_atlas;
+  struct Instance : RasterizerScene::InstanceBase {
 
-		SelfList<Instance>::List instances;
+    RID self;
+    // scenario stuff
+    OctreeElementID octree_id;
+    Scenario *scenario;
+    SelfList<Instance> scenario_item;
 
-		Scenario() { debug = VS::SCENARIO_DEBUG_DISABLED; }
-	};
+    // aabb stuff
+    bool update_aabb;
+    bool update_dependencies;
 
-	mutable RID_PtrOwner<Scenario> scenario_owner;
+    SelfList<Instance> update_item;
 
-	static void *_instance_pair(void *p_self, OctreeElementID, Instance *p_A, int, OctreeElementID, Instance *p_B, int);
-	static void _instance_unpair(void *p_self, OctreeElementID, Instance *p_A, int, OctreeElementID, Instance *p_B, int, void *);
+    AABB *custom_aabb; // <Zylann> would using aabb directly with a bool be
+                       // better?
+    float extra_margin;
+    ObjectID object_id;
 
-	virtual RID scenario_create();
+    float lod_begin;
+    float lod_end;
+    float lod_begin_hysteresis;
+    float lod_end_hysteresis;
+    RID lod_instance;
 
-	virtual void scenario_set_debug(RID p_scenario, VS::ScenarioDebugMode p_debug_mode);
-	virtual void scenario_set_environment(RID p_scenario, RID p_environment);
-	virtual void scenario_set_camera_effects(RID p_scenario, RID p_fx);
-	virtual void scenario_set_fallback_environment(RID p_scenario, RID p_environment);
-	virtual void scenario_set_reflection_atlas_size(RID p_scenario, int p_reflection_size, int p_reflection_count);
+    uint64_t last_render_pass;
+    uint64_t last_frame_pass;
 
-	/* INSTANCING API */
+    uint64_t version; // changes to this, and changes to base increase version
 
-	struct InstanceBaseData {
+    InstanceBaseData *base_data;
 
-		virtual ~InstanceBaseData() {}
-	};
+    virtual void dependency_deleted(RID p_dependency) {
+      if (p_dependency == base) {
+        singleton->instance_set_base(self, RID());
+      } else if (p_dependency == skeleton) {
+        singleton->instance_attach_skeleton(self, RID());
+      } else {
+        singleton->_instance_queue_update(this, false, true);
+      }
+    }
 
-	struct Instance : RasterizerScene::InstanceBase {
+    virtual void dependency_changed(bool p_aabb, bool p_dependencies) {
+      singleton->_instance_queue_update(this, p_aabb, p_dependencies);
+    }
 
-		RID self;
-		//scenario stuff
-		OctreeElementID octree_id;
-		Scenario *scenario;
-		SelfList<Instance> scenario_item;
+    Instance() : scenario_item(this), update_item(this) {
 
-		//aabb stuff
-		bool update_aabb;
-		bool update_dependencies;
+      octree_id = 0;
+      scenario = NULL;
 
-		SelfList<Instance> update_item;
+      update_aabb = false;
+      update_dependencies = false;
 
-		AABB *custom_aabb; // <Zylann> would using aabb directly with a bool be better?
-		float extra_margin;
-		ObjectID object_id;
+      extra_margin = 0;
 
-		float lod_begin;
-		float lod_end;
-		float lod_begin_hysteresis;
-		float lod_end_hysteresis;
-		RID lod_instance;
+      visible = true;
 
-		uint64_t last_render_pass;
-		uint64_t last_frame_pass;
+      lod_begin = 0;
+      lod_end = 0;
+      lod_begin_hysteresis = 0;
+      lod_end_hysteresis = 0;
 
-		uint64_t version; // changes to this, and changes to base increase version
+      last_render_pass = 0;
+      last_frame_pass = 0;
+      version = 1;
+      base_data = NULL;
 
-		InstanceBaseData *base_data;
+      custom_aabb = NULL;
+    }
 
-		virtual void dependency_deleted(RID p_dependency) {
-			if (p_dependency == base) {
-				singleton->instance_set_base(self, RID());
-			} else if (p_dependency == skeleton) {
-				singleton->instance_attach_skeleton(self, RID());
-			} else {
-				singleton->_instance_queue_update(this, false, true);
-			}
-		}
+    ~Instance() {
 
-		virtual void dependency_changed(bool p_aabb, bool p_dependencies) {
-			singleton->_instance_queue_update(this, p_aabb, p_dependencies);
-		}
+      if (base_data)
+        memdelete(base_data);
+      if (custom_aabb)
+        memdelete(custom_aabb);
+    }
+  };
 
-		Instance() :
-				scenario_item(this),
-				update_item(this) {
+  SelfList<Instance>::List _instance_update_list;
+  void _instance_queue_update(Instance *p_instance, bool p_update_aabb,
+                              bool p_update_dependencies = false);
 
-			octree_id = 0;
-			scenario = NULL;
+  struct InstanceGeometryData : public InstanceBaseData {
 
-			update_aabb = false;
-			update_dependencies = false;
+    List<Instance *> lighting;
+    bool lighting_dirty;
+    bool can_cast_shadows;
+    bool material_is_animated;
 
-			extra_margin = 0;
+    List<Instance *> reflection_probes;
+    bool reflection_dirty;
 
-			visible = true;
+    List<Instance *> gi_probes;
+    bool gi_probes_dirty;
 
-			lod_begin = 0;
-			lod_end = 0;
-			lod_begin_hysteresis = 0;
-			lod_end_hysteresis = 0;
+    List<Instance *> lightmap_captures;
 
-			last_render_pass = 0;
-			last_frame_pass = 0;
-			version = 1;
-			base_data = NULL;
+    InstanceGeometryData() {
 
-			custom_aabb = NULL;
-		}
+      lighting_dirty = false;
+      reflection_dirty = true;
+      can_cast_shadows = true;
+      material_is_animated = true;
+      gi_probes_dirty = true;
+    }
+  };
 
-		~Instance() {
+  struct InstanceReflectionProbeData : public InstanceBaseData {
 
-			if (base_data)
-				memdelete(base_data);
-			if (custom_aabb)
-				memdelete(custom_aabb);
-		}
-	};
+    Instance *owner;
 
-	SelfList<Instance>::List _instance_update_list;
-	void _instance_queue_update(Instance *p_instance, bool p_update_aabb, bool p_update_dependencies = false);
+    struct PairInfo {
+      List<Instance *>::Element *L; // reflection iterator in geometry
+      Instance *geometry;
+    };
+    List<PairInfo> geometries;
 
-	struct InstanceGeometryData : public InstanceBaseData {
+    RID instance;
+    bool reflection_dirty;
+    SelfList<InstanceReflectionProbeData> update_list;
 
-		List<Instance *> lighting;
-		bool lighting_dirty;
-		bool can_cast_shadows;
-		bool material_is_animated;
+    int render_step;
 
-		List<Instance *> reflection_probes;
-		bool reflection_dirty;
+    InstanceReflectionProbeData() : update_list(this) {
 
-		List<Instance *> gi_probes;
-		bool gi_probes_dirty;
+      reflection_dirty = true;
+      render_step = -1;
+    }
+  };
 
-		List<Instance *> lightmap_captures;
+  SelfList<InstanceReflectionProbeData>::List reflection_probe_render_list;
 
-		InstanceGeometryData() {
+  struct InstanceLightData : public InstanceBaseData {
 
-			lighting_dirty = false;
-			reflection_dirty = true;
-			can_cast_shadows = true;
-			material_is_animated = true;
-			gi_probes_dirty = true;
-		}
-	};
+    struct PairInfo {
+      List<Instance *>::Element *L; // light iterator in geometry
+      Instance *geometry;
+    };
 
-	struct InstanceReflectionProbeData : public InstanceBaseData {
+    RID instance;
+    uint64_t last_version;
+    List<Instance *>::Element *D; // directional light in scenario
 
-		Instance *owner;
+    bool shadow_dirty;
 
-		struct PairInfo {
-			List<Instance *>::Element *L; //reflection iterator in geometry
-			Instance *geometry;
-		};
-		List<PairInfo> geometries;
+    List<PairInfo> geometries;
 
-		RID instance;
-		bool reflection_dirty;
-		SelfList<InstanceReflectionProbeData> update_list;
+    Instance *baked_light;
 
-		int render_step;
+    InstanceLightData() {
 
-		InstanceReflectionProbeData() :
-				update_list(this) {
+      shadow_dirty = true;
+      D = NULL;
+      last_version = 0;
+      baked_light = NULL;
+    }
+  };
 
-			reflection_dirty = true;
-			render_step = -1;
-		}
-	};
+  struct InstanceGIProbeData : public InstanceBaseData {
 
-	SelfList<InstanceReflectionProbeData>::List reflection_probe_render_list;
+    Instance *owner;
 
-	struct InstanceLightData : public InstanceBaseData {
+    struct PairInfo {
+      List<Instance *>::Element *L; // gi probe iterator in geometry
+      Instance *geometry;
+    };
 
-		struct PairInfo {
-			List<Instance *>::Element *L; //light iterator in geometry
-			Instance *geometry;
-		};
+    List<PairInfo> geometries;
+    List<PairInfo> dynamic_geometries;
 
-		RID instance;
-		uint64_t last_version;
-		List<Instance *>::Element *D; // directional light in scenario
+    Set<Instance *> lights;
 
-		bool shadow_dirty;
+    struct LightCache {
 
-		List<PairInfo> geometries;
+      VS::LightType type;
+      Transform transform;
+      Color color;
+      float energy;
+      float bake_energy;
+      float radius;
+      float attenuation;
+      float spot_angle;
+      float spot_attenuation;
+      bool has_shadow;
+    };
 
-		Instance *baked_light;
+    Vector<LightCache> light_cache;
+    Vector<RID> light_instances;
 
-		InstanceLightData() {
+    RID probe_instance;
 
-			shadow_dirty = true;
-			D = NULL;
-			last_version = 0;
-			baked_light = NULL;
-		}
-	};
+    bool invalid;
+    uint32_t base_version;
 
-	struct InstanceGIProbeData : public InstanceBaseData {
+    SelfList<InstanceGIProbeData> update_element;
 
-		Instance *owner;
+    InstanceGIProbeData() : update_element(this) {
+      invalid = true;
+      base_version = 0;
+    }
+  };
 
-		struct PairInfo {
-			List<Instance *>::Element *L; //gi probe iterator in geometry
-			Instance *geometry;
-		};
-
-		List<PairInfo> geometries;
-		List<PairInfo> dynamic_geometries;
-
-		Set<Instance *> lights;
-
-		struct LightCache {
-
-			VS::LightType type;
-			Transform transform;
-			Color color;
-			float energy;
-			float bake_energy;
-			float radius;
-			float attenuation;
-			float spot_angle;
-			float spot_attenuation;
-			bool has_shadow;
-		};
-
-		Vector<LightCache> light_cache;
-		Vector<RID> light_instances;
-
-		RID probe_instance;
-
-		bool invalid;
-		uint32_t base_version;
-
-		SelfList<InstanceGIProbeData> update_element;
-
-		InstanceGIProbeData() :
-				update_element(this) {
-			invalid = true;
-			base_version = 0;
-		}
-	};
-
-	SelfList<InstanceGIProbeData>::List gi_probe_update_list;
-
-	struct InstanceLightmapCaptureData : public InstanceBaseData {
-
-		struct PairInfo {
-			List<Instance *>::Element *L; //iterator in geometry
-			Instance *geometry;
-		};
-		List<PairInfo> geometries;
-
-		Set<Instance *> users;
-
-		InstanceLightmapCaptureData() {
-		}
-	};
-
-	int instance_cull_count;
-	Instance *instance_cull_result[MAX_INSTANCE_CULL];
-	Instance *instance_shadow_cull_result[MAX_INSTANCE_CULL]; //used for generating shadowmaps
-	Instance *light_cull_result[MAX_LIGHTS_CULLED];
-	RID light_instance_cull_result[MAX_LIGHTS_CULLED];
-	int light_cull_count;
-	int directional_light_count;
-	RID reflection_probe_instance_cull_result[MAX_REFLECTION_PROBES_CULLED];
-	int reflection_probe_cull_count;
-	RID gi_probe_instance_cull_result[MAX_GI_PROBES_CULLED];
-	int gi_probe_cull_count;
-
-	RID_PtrOwner<Instance> instance_owner;
-
-	virtual RID instance_create();
-
-	virtual void instance_set_base(RID p_instance, RID p_base);
-	virtual void instance_set_scenario(RID p_instance, RID p_scenario);
-	virtual void instance_set_layer_mask(RID p_instance, uint32_t p_mask);
-	virtual void instance_set_transform(RID p_instance, const Transform &p_transform);
-	virtual void instance_attach_object_instance_id(RID p_instance, ObjectID p_id);
-	virtual void instance_set_blend_shape_weight(RID p_instance, int p_shape, float p_weight);
-	virtual void instance_set_surface_material(RID p_instance, int p_surface, RID p_material);
-	virtual void instance_set_visible(RID p_instance, bool p_visible);
-	virtual void instance_set_use_lightmap(RID p_instance, RID p_lightmap_instance, RID p_lightmap);
-
-	virtual void instance_set_custom_aabb(RID p_instance, AABB p_aabb);
-
-	virtual void instance_attach_skeleton(RID p_instance, RID p_skeleton);
-	virtual void instance_set_exterior(RID p_instance, bool p_enabled);
-
-	virtual void instance_set_extra_visibility_margin(RID p_instance, real_t p_margin);
-
-	// don't use these in a game!
-	virtual Vector<ObjectID> instances_cull_aabb(const AABB &p_aabb, RID p_scenario = RID()) const;
-	virtual Vector<ObjectID> instances_cull_ray(const Vector3 &p_from, const Vector3 &p_to, RID p_scenario = RID()) const;
-	virtual Vector<ObjectID> instances_cull_convex(const Vector<Plane> &p_convex, RID p_scenario = RID()) const;
-
-	virtual void instance_geometry_set_flag(RID p_instance, VS::InstanceFlags p_flags, bool p_enabled);
-	virtual void instance_geometry_set_cast_shadows_setting(RID p_instance, VS::ShadowCastingSetting p_shadow_casting_setting);
-	virtual void instance_geometry_set_material_override(RID p_instance, RID p_material);
-
-	virtual void instance_geometry_set_draw_range(RID p_instance, float p_min, float p_max, float p_min_margin, float p_max_margin);
-	virtual void instance_geometry_set_as_instance_lod(RID p_instance, RID p_as_lod_of_instance);
-
-	_FORCE_INLINE_ void _update_instance(Instance *p_instance);
-	_FORCE_INLINE_ void _update_instance_aabb(Instance *p_instance);
-	_FORCE_INLINE_ void _update_dirty_instance(Instance *p_instance);
-	_FORCE_INLINE_ void _update_instance_lightmap_captures(Instance *p_instance);
-
-	_FORCE_INLINE_ bool _light_instance_update_shadow(Instance *p_instance, const Transform p_cam_transform, const CameraMatrix &p_cam_projection, bool p_cam_orthogonal, RID p_shadow_atlas, Scenario *p_scenario);
-
-	bool _render_reflection_probe_step(Instance *p_instance, int p_step);
-	void _prepare_scene(const Transform p_cam_transform, const CameraMatrix &p_cam_projection, bool p_cam_orthogonal, RID p_force_environment, RID p_force_camera_effects, uint32_t p_visible_layers, RID p_scenario, RID p_shadow_atlas, RID p_reflection_probe, bool p_using_shadows = true);
-	void _render_scene(RID p_render_buffers, const Transform p_cam_transform, const CameraMatrix &p_cam_projection, bool p_cam_orthogonal, RID p_force_environment, RID p_force_camera_effects, RID p_scenario, RID p_shadow_atlas, RID p_reflection_probe, int p_reflection_probe_pass);
-	void render_empty_scene(RID p_render_buffers, RID p_scenario, RID p_shadow_atlas);
-
-	void render_camera(RID p_render_buffers, RID p_camera, RID p_scenario, Size2 p_viewport_size, RID p_shadow_atlas);
-	void render_camera(RID p_render_buffers, Ref<ARVRInterface> &p_interface, ARVRInterface::Eyes p_eye, RID p_camera, RID p_scenario, Size2 p_viewport_size, RID p_shadow_atlas);
-	void update_dirty_instances();
-
-	void render_probes();
-
-	bool free(RID p_rid);
-
-	VisualServerScene();
-	virtual ~VisualServerScene();
+  SelfList<InstanceGIProbeData>::List gi_probe_update_list;
+
+  struct InstanceLightmapCaptureData : public InstanceBaseData {
+
+    struct PairInfo {
+      List<Instance *>::Element *L; // iterator in geometry
+      Instance *geometry;
+    };
+    List<PairInfo> geometries;
+
+    Set<Instance *> users;
+
+    InstanceLightmapCaptureData() {}
+  };
+
+  int instance_cull_count;
+  Instance *instance_cull_result[MAX_INSTANCE_CULL];
+  Instance
+      *instance_shadow_cull_result[MAX_INSTANCE_CULL]; // used for generating
+                                                       // shadowmaps
+  Instance *light_cull_result[MAX_LIGHTS_CULLED];
+  RID light_instance_cull_result[MAX_LIGHTS_CULLED];
+  int light_cull_count;
+  int directional_light_count;
+  RID reflection_probe_instance_cull_result[MAX_REFLECTION_PROBES_CULLED];
+  int reflection_probe_cull_count;
+  RID gi_probe_instance_cull_result[MAX_GI_PROBES_CULLED];
+  int gi_probe_cull_count;
+
+  RID_PtrOwner<Instance> instance_owner;
+
+  virtual RID instance_create();
+
+  virtual void instance_set_base(RID p_instance, RID p_base);
+  virtual void instance_set_scenario(RID p_instance, RID p_scenario);
+  virtual void instance_set_layer_mask(RID p_instance, uint32_t p_mask);
+  virtual void instance_set_transform(RID p_instance,
+                                      const Transform &p_transform);
+  virtual void instance_attach_object_instance_id(RID p_instance,
+                                                  ObjectID p_id);
+  virtual void instance_set_blend_shape_weight(RID p_instance, int p_shape,
+                                               float p_weight);
+  virtual void instance_set_surface_material(RID p_instance, int p_surface,
+                                             RID p_material);
+  virtual void instance_set_visible(RID p_instance, bool p_visible);
+  virtual void instance_set_use_lightmap(RID p_instance,
+                                         RID p_lightmap_instance,
+                                         RID p_lightmap);
+
+  virtual void instance_set_custom_aabb(RID p_instance, AABB p_aabb);
+
+  virtual void instance_attach_skeleton(RID p_instance, RID p_skeleton);
+  virtual void instance_set_exterior(RID p_instance, bool p_enabled);
+
+  virtual void instance_set_extra_visibility_margin(RID p_instance,
+                                                    real_t p_margin);
+
+  // don't use these in a game!
+  virtual Vector<ObjectID> instances_cull_aabb(const AABB &p_aabb,
+                                               RID p_scenario = RID()) const;
+  virtual Vector<ObjectID> instances_cull_ray(const Vector3 &p_from,
+                                              const Vector3 &p_to,
+                                              RID p_scenario = RID()) const;
+  virtual Vector<ObjectID> instances_cull_convex(const Vector<Plane> &p_convex,
+                                                 RID p_scenario = RID()) const;
+
+  virtual void instance_geometry_set_flag(RID p_instance,
+                                          VS::InstanceFlags p_flags,
+                                          bool p_enabled);
+  virtual void instance_geometry_set_cast_shadows_setting(
+      RID p_instance, VS::ShadowCastingSetting p_shadow_casting_setting);
+  virtual void instance_geometry_set_material_override(RID p_instance,
+                                                       RID p_material);
+
+  virtual void instance_geometry_set_draw_range(RID p_instance, float p_min,
+                                                float p_max, float p_min_margin,
+                                                float p_max_margin);
+  virtual void instance_geometry_set_as_instance_lod(RID p_instance,
+                                                     RID p_as_lod_of_instance);
+
+  _FORCE_INLINE_ void _update_instance(Instance *p_instance);
+  _FORCE_INLINE_ void _update_instance_aabb(Instance *p_instance);
+  _FORCE_INLINE_ void _update_dirty_instance(Instance *p_instance);
+  _FORCE_INLINE_ void _update_instance_lightmap_captures(Instance *p_instance);
+
+  _FORCE_INLINE_ bool _light_instance_update_shadow(
+      Instance *p_instance, const Transform p_cam_transform,
+      const CameraMatrix &p_cam_projection, bool p_cam_orthogonal,
+      RID p_shadow_atlas, Scenario *p_scenario);
+
+  bool _render_reflection_probe_step(Instance *p_instance, int p_step);
+  void _prepare_scene(const Transform p_cam_transform,
+                      const CameraMatrix &p_cam_projection,
+                      bool p_cam_orthogonal, RID p_force_environment,
+                      RID p_force_camera_effects, uint32_t p_visible_layers,
+                      RID p_scenario, RID p_shadow_atlas,
+                      RID p_reflection_probe, bool p_using_shadows = true);
+  void _render_scene(RID p_render_buffers, const Transform p_cam_transform,
+                     const CameraMatrix &p_cam_projection,
+                     bool p_cam_orthogonal, RID p_force_environment,
+                     RID p_force_camera_effects, RID p_scenario,
+                     RID p_shadow_atlas, RID p_reflection_probe,
+                     int p_reflection_probe_pass);
+  void render_empty_scene(RID p_render_buffers, RID p_scenario,
+                          RID p_shadow_atlas);
+
+  void render_camera(RID p_render_buffers, RID p_camera, RID p_scenario,
+                     Size2 p_viewport_size, RID p_shadow_atlas);
+  void render_camera(RID p_render_buffers, Ref<ARVRInterface> &p_interface,
+                     ARVRInterface::Eyes p_eye, RID p_camera, RID p_scenario,
+                     Size2 p_viewport_size, RID p_shadow_atlas);
+  void update_dirty_instances();
+
+  void render_probes();
+
+  bool free(RID p_rid);
+
+  VisualServerScene();
+  virtual ~VisualServerScene();
 };
 
 #endif // VISUALSERVERSCENE_H
