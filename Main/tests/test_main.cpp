@@ -1,32 +1,3 @@
-/*************************************************************************/
-/*  test_main.cpp                                                        */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
 
 #include "test_main.h"
 
@@ -48,119 +19,102 @@
 
 const char **tests_get_names() {
 
-	static const char *test_names[] = {
-		"string",
-		"math",
-		"physics",
-		"physics_2d",
-		"render",
-		"oa_hash_map",
-		"gui",
-		"shaderlang",
-		"gd_tokenizer",
-		"gd_parser",
-		"gd_compiler",
-		"gd_bytecode",
-		"ordered_hash_map",
-		"astar",
-		NULL
-	};
+  static const char *test_names[] = {
+      "string",           "math",        "physics",     "physics_2d",
+      "render",           "oa_hash_map", "gui",         "shaderlang",
+      "gd_tokenizer",     "gd_parser",   "gd_compiler", "gd_bytecode",
+      "ordered_hash_map", "astar",       NULL};
 
-	return test_names;
+  return test_names;
 }
 
 MainLoop *test_main(String p_test, const List<String> &p_args) {
 
-	if (p_test == "string") {
+  if (p_test == "string") {
 
-		return TestString::test();
-	}
+    return TestString::test();
+  }
 
-	if (p_test == "math") {
+  if (p_test == "math") {
 
-		return TestMath::test();
-	}
+    return TestMath::test();
+  }
 
-	if (p_test == "physics") {
+  if (p_test == "physics") {
 
-		return TestPhysics::test();
-	}
+    return TestPhysics::test();
+  }
 
-	if (p_test == "physics_2d") {
+  if (p_test == "physics_2d") {
 
-		return TestPhysics2D::test();
-	}
+    return TestPhysics2D::test();
+  }
 
-	if (p_test == "render") {
+  if (p_test == "render") {
 
-		return TestRender::test();
-	}
+    return TestRender::test();
+  }
 
-	if (p_test == "oa_hash_map") {
+  if (p_test == "oa_hash_map") {
 
-		return TestOAHashMap::test();
-	}
+    return TestOAHashMap::test();
+  }
 
 #ifndef _3D_DISABLED
-	if (p_test == "gui") {
+  if (p_test == "gui") {
 
-		return TestGUI::test();
-	}
+    return TestGUI::test();
+  }
 #endif
 
-	if (p_test == "shaderlang") {
+  if (p_test == "shaderlang") {
 
-		return TestShaderLang::test();
-	}
+    return TestShaderLang::test();
+  }
 
-	if (p_test == "gd_tokenizer") {
+  if (p_test == "gd_tokenizer") {
 
-		return TestGDScript::test(TestGDScript::TEST_TOKENIZER);
-	}
+    return TestGDScript::test(TestGDScript::TEST_TOKENIZER);
+  }
 
-	if (p_test == "gd_parser") {
+  if (p_test == "gd_parser") {
 
-		return TestGDScript::test(TestGDScript::TEST_PARSER);
-	}
+    return TestGDScript::test(TestGDScript::TEST_PARSER);
+  }
 
-	if (p_test == "gd_compiler") {
+  if (p_test == "gd_compiler") {
 
-		return TestGDScript::test(TestGDScript::TEST_COMPILER);
-	}
+    return TestGDScript::test(TestGDScript::TEST_COMPILER);
+  }
 
-	if (p_test == "gd_bytecode") {
+  if (p_test == "gd_bytecode") {
 
-		return TestGDScript::test(TestGDScript::TEST_BYTECODE);
-	}
+    return TestGDScript::test(TestGDScript::TEST_BYTECODE);
+  }
 
-	if (p_test == "ordered_hash_map") {
+  if (p_test == "ordered_hash_map") {
 
-		return TestOrderedHashMap::test();
-	}
+    return TestOrderedHashMap::test();
+  }
 
-	if (p_test == "astar") {
+  if (p_test == "astar") {
 
-		return TestAStar::test();
-	}
+    return TestAStar::test();
+  }
 
-	print_line("Unknown test: " + p_test);
-	return NULL;
+  print_line("Unknown test: " + p_test);
+  return NULL;
 }
 
 #else
 
 const char **tests_get_names() {
 
-	static const char *test_names[] = {
-		NULL
-	};
+  static const char *test_names[] = {NULL};
 
-	return test_names;
+  return test_names;
 }
 
-MainLoop *test_main(String p_test, const List<String> &p_args) {
-
-	return NULL;
-}
+MainLoop *test_main(String p_test, const List<String> &p_args) { return NULL; }
 
 #endif
