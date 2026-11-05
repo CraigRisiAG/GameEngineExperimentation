@@ -1,3 +1,7 @@
+// This file contains the implementation of the ICloud class for handling
+// iCloud key-value storage on iOS. It includes methods for setting, getting,
+// and removing key-value pairs, as well as synchronizing and retrieving all
+// key-value pairs from iCloud.
 
 #ifdef ICLOUD_ENABLED
 

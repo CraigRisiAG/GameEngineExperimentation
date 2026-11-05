@@ -1,3 +1,7 @@
+// This file contains the implementation of the ViewController class for handling
+// the main view controller on iOS. It includes methods for memory warnings,
+// view loading, screen orientation, status bar visibility, home indicator
+// behavior, and Game Center integration.
 
 #import "view_controller.h"
 

@@ -1,3 +1,6 @@
+// This file contains the implementation of the InAppStore class for handling
+// in-app purchases on iOS using StoreKit. It includes methods for requesting
+// product information, restoring purchases, and handling transactions.
 
 #ifdef STOREKIT_ENABLED
 

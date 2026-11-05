@@ -1,3 +1,6 @@
+// This file contains the implementation of the VulkanContextIPhone class for handling
+// Vulkan context creation and management on iOS. It includes methods for creating
+// Vulkan surfaces and windows specific to the iOS platform.
 
 #include "vulkan_context_iphone.h"
 #include <vulkan/vulkan_ios.h>
