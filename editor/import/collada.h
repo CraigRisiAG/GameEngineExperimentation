@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the Collada class,
+// which handles importing and processing Collada (.dae) files,
+// including parsing transformations, animations, and textures.
 #ifndef COLLADA_H
 #define COLLADA_H
 

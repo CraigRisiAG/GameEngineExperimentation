@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the EditorSceneImporterGLTF class,
+// which handles importing GLTF (.gltf) and GLB (.glb) files into the engine,
+// including parsing JSON, binary data, and converting arrays to engine-specific
+// types.
 #include "editor_scene_importer_gltf.h"
 
 #include "core/crypto/crypto_core.h"

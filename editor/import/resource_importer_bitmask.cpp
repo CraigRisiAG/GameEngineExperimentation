@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ResourceImporterBitMap class,
+// which handles importing bitmap images into the engine as BitMap resources,
+// including options for creating from black & white or alpha channels and
+// applying a threshold.
 #include "resource_importer_bitmask.h"
 #include "core/image.h"
 #include "core/io/config_file.h"

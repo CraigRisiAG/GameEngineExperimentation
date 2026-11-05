@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the EditorSceneImporterCollada class,
+// which handles importing Collada (.dae) files into the engine,
+// including creating scenes and importing animations.
 #ifndef EDITOR_IMPORT_COLLADA_H
 #define EDITOR_IMPORT_COLLADA_H
 

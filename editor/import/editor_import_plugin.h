@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the EditorImportPlugin class,
+// which serves as a bridge between the engine and script-based import plugins,
+// handling various import-related queries and delegating them to the script
+// instance.
 #ifndef EDITOR_IMPORT_PLUGIN_H
 #define EDITOR_IMPORT_PLUGIN_H
 

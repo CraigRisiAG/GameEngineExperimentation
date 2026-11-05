@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the EditorImportPlugin class,
+// which serves as a bridge between the engine and script-based import plugins,
+// handling various import-related queries and delegating them to the script
+// instance.
 #include "editor_import_plugin.h"
 #include "core/script_language.h"
 

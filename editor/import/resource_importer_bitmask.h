@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ResourceImporterBitMap class,
+// which handles importing bitmap images into the engine as BitMap resources,
+// including options for creating from black & white or alpha channels and
+// applying a threshold.
 #ifndef RESOURCE_IMPORTER_BITMASK_H
 #define RESOURCE_IMPORTER_BITMASK_H
 

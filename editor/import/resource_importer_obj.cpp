@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the EditorOBJImporter class,
+// which handles importing OBJ files into the engine as 3D scene resources,
+// including parsing material libraries and setting up standard PBR materials.
 #include "resource_importer_obj.h"
 
 #include "core/io/resource_saver.h"
@@ -303,7 +305,7 @@ static Error _parse_obj(const String &p_path, List<Ref<Mesh>> &r_meshes,
           Vector3 vertex = vertices[vtx];
           // if (weld_vertices)
           //	vertex.snap(Vector3(weld_tolerance, weld_tolerance,
-          //weld_tolerance));
+          // weld_tolerance));
           surf_tool->add_vertex(vertex);
         }
 

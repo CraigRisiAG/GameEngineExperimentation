@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ResourceImporterLayeredTexture
+// class, which handles importing layered texture files into the engine as
+// Cubemap, Texture2DArray, or CubemapArray resources.
 #include "resource_importer_layered_texture.h"
 
 #include "resource_importer_texture.h"

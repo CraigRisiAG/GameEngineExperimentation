@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the ResourceImporterCSV class,
+// which handles importing CSV files into the engine as TextFile resources.
 #ifndef RESOURCEIMPORTERCSV_H
 #define RESOURCEIMPORTERCSV_H
 

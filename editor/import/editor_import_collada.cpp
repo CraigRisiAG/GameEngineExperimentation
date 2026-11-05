@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ColladaImport class,
+// which handles importing Collada (.dae) files into the engine,
+// including creating scenes, skeletons, meshes, materials, and animations.
 #include "editor_import_collada.h"
 
 #include "core/os/os.h"

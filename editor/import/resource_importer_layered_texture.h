@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the ResourceImporterLayeredTexture
+// class, which handles importing layered texture files into the engine as
+// Cubemap, Texture2DArray, or CubemapArray resources.
 #if 0
 
 #ifndef RESOURCE_IMPORTER_LAYERED_TEXTURE_H

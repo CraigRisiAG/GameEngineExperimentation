@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the ResourceImporterImage class,
+// which handles importing image files into the engine as Image resources.
 #ifndef RESOURCE_IMPORTER_IMAGE_H
 #define RESOURCE_IMPORTER_IMAGE_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ResourceImporterCSVTranslation
+// class, which handles importing CSV translation files into the engine as
+// Translation resources, including options for compression and specifying the
+// delimiter used in the CSV file.
 #include "resource_importer_csv_translation.h"
 
 #include "core/compressed_translation.h"

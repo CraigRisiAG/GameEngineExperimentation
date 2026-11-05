@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the ResourceImporterImage class,
+// which handles importing image files into the engine as Image resources.
 #include "resource_importer_image.h"
 
 #include "core/io/image_loader.h"

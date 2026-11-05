@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the EditorSceneImporterGLTF class,
+// which handles importing GLTF (.gltf) and GLB (.glb) files into the engine,
+// including parsing JSON, binary data, and converting arrays to engine-specific
+// types.
 #ifndef EDITOR_SCENE_IMPORTER_GLTF_H
 #define EDITOR_SCENE_IMPORTER_GLTF_H
 
