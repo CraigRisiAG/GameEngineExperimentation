@@ -1,4 +1,7 @@
-
+// This file contains tests for the Physics2D component in the engine, including
+// collision shapes, rigid bodies, and physics interactions. It defines the
+// TestPhysics2D namespace and provides functions to run Physics2D-related tests
+// and obtain the main loop for execution.
 #include "test_physics_2d.h"
 
 #include "core/map.h"

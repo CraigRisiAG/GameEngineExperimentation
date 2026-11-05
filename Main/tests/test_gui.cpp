@@ -1,4 +1,7 @@
-
+// This file contains tests for the GUI components in the engine, including
+// various controls such as buttons, labels, line edits, trees, scroll bars,
+// spin boxes, progress bars, menu buttons, and option buttons. It defines a
+// custom main loop for setting up and interacting with these GUI elements.
 #ifndef _3D_DISABLED
 
 #include "test_gui.h"

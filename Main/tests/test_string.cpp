@@ -1,4 +1,7 @@
-
+// This file contains tests for the String component in the engine, including
+// assignment, comparison, concatenation, and various string operations. It
+// defines the TestString namespace and provides functions to run String-related
+// tests and obtain the main loop for execution.
 #include "test_string.h"
 
 #include "core/io/ip_address.h"

@@ -1,4 +1,7 @@
-
+// This file contains the main test runner for various engine components,
+// including string, math, physics, rendering, GUI, shader language, GDScript,
+// and hash map tests. It provides functions to retrieve the list of available
+// tests and to execute a specific test based on its name.
 #include "test_main.h"
 
 #include "core/list.h"

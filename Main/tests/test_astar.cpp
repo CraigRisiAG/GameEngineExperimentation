@@ -1,3 +1,6 @@
+// This file contains tests for the AStar class, including pathfinding and
+// connectivity checks. It defines a custom graph (ABCX) and various test
+// functions to verify the correctness of the AStar implementation.
 
 #include "test_astar.h"
 

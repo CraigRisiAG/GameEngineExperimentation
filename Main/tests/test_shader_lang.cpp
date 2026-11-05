@@ -1,4 +1,7 @@
-
+// This file contains tests for the ShaderLanguage component in the engine,
+// including shader parsing, uniform and varying handling, and code generation.
+// It defines the TestShaderLang namespace and provides functions to run
+// ShaderLanguage-related tests and obtain the main loop for execution.
 #include "test_shader_lang.h"
 
 #include "core/os/file_access.h"

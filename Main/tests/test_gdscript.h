@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TestGDScript namespace, which
+// includes the test function for various GDScript components such as the
+// tokenizer, parser, compiler, and bytecode. It provides a way to run
+// GDScript-related tests and obtain the main loop for execution.
 #ifndef TEST_GDSCRIPT_H
 #define TEST_GDSCRIPT_H
 

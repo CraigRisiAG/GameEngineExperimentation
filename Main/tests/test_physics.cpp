@@ -1,4 +1,7 @@
-
+// This file contains tests for the Physics component in the engine, including
+// collision shapes, rigid bodies, and physics interactions. It defines the
+// TestPhysics namespace and provides functions to run Physics-related tests
+// and obtain the main loop for execution.
 #include "test_physics.h"
 
 #include "core/map.h"

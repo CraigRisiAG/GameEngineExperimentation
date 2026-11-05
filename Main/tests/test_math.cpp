@@ -1,4 +1,8 @@
-
+// This file contains tests for the Math components in the engine, including
+// various mathematical operations and structures such as Basis, CameraMatrix,
+// Transform, and other math functions. It defines the TestMath namespace and
+// provides functions to run math-related tests and obtain the main loop for
+// execution.
 #include "test_math.h"
 
 #include "core/math/basis.h"

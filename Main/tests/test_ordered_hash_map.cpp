@@ -1,4 +1,8 @@
-
+// This file contains tests for the OrderedHashMap component in the engine,
+// including insertion, overwriting, erasure via element and key, size checking,
+// iteration, and const iteration. It defines the TestOrderedHashMap namespace
+// and provides functions to run OrderedHashMap-related tests and obtain the
+// main loop for execution.
 #include "test_ordered_hash_map.h"
 
 #include "core/ordered_hash_map.h"

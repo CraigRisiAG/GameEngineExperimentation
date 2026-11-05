@@ -1,4 +1,7 @@
-
+// This file contains tests for the Render component in the engine, including
+// mesh creation, instance management, camera setup, and viewport configuration.
+// It defines the TestRender namespace and provides functions to run
+// Render-related tests and obtain the main loop for execution.
 #include "test_render.h"
 
 #include "core/math/math_funcs.h"

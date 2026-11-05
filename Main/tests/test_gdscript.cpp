@@ -1,4 +1,7 @@
-
+// This file contains tests for the GDScript parser, including functions to
+// print and analyze the structure of GDScript code. It defines helper
+// functions for parsing expressions, class inheritance, and other
+// GDScript constructs.
 #include "test_gdscript.h"
 
 #include "core/os/file_access.h"

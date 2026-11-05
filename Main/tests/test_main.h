@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the main test runner functions for
+// various engine components. It provides the function to retrieve the list of
+// available tests and to execute a specific test based on its name, returning
+// the corresponding main loop for the test.
 #ifndef TEST_MAIN_H
 #define TEST_MAIN_H
 

@@ -1,4 +1,8 @@
-
+// This file contains tests for the OAHashMap component in the engine, including
+// element tracking, rehashing, deletion, iteration, stress tests, and
+// regression tests for specific issues. It defines the TestOAHashMap namespace
+// and provides functions to run OAHashMap-related tests and obtain the main
+// loop for execution.
 #include "test_oa_hash_map.h"
 
 #include "core/oa_hash_map.h"
