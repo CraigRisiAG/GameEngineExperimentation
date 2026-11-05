@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the ResourceSaverPNG class,
+// which handles saving ImageTexture resources as PNG files, including
+// support for saving to disk and to memory buffers.
 #ifndef RESOURCE_SAVER_PNG_H
 #define RESOURCE_SAVER_PNG_H
 

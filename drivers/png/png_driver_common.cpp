@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the PNGDriverCommon namespace,
+// which provides common functionality for handling PNG images, including
+// loading PNG images into the engine and converting engine images to PNG
+// format.
 #include "png_driver_common.h"
 
 #include "core/os/os.h"

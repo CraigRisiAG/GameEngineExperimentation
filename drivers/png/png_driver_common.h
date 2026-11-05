@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the PNGDriverCommon namespace,
+// which provides common functionality for handling PNG images, including
+// loading PNG images into the engine and converting engine images to PNG
+// format.
 #ifndef PNG_DRIVER_COMMON_H
 #define PNG_DRIVER_COMMON_H
 

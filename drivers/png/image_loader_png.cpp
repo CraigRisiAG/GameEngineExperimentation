@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ImageLoaderPNG class,
+// which handles loading PNG images into the engine, including support for
+// Godot's own "PNG " prefixed format for lossless packing and unpacking.
 #include "image_loader_png.h"
 
 #include "core/os/os.h"

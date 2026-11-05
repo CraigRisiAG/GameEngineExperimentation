@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ResourceSaverPNG class,
+// which handles saving ImageTexture resources as PNG files, including
+// support for saving to disk and to memory buffers.
 #include "resource_saver_png.h"
 
 #include "core/image.h"
