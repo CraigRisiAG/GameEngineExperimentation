@@ -1,4 +1,9 @@
-
+/**
+ * @file editor_debugger_inspector.h
+ * @brief Declaration of the EditorDebuggerInspector and
+ * EditorDebuggerRemoteObject classes for managing remote object inspection in
+ * the editor debugger.
+ */
 
 #ifndef EDITOR_DEBUGGER_INSPECTOR_H
 #define EDITOR_DEBUGGER_INSPECTOR_H

@@ -1,39 +1,8 @@
-/*************************************************************************/
-/*  editor_network_profiler.h                                            */
-/*************************************************************************/
-/*                       This file is part of:                           */
-/*                           GODOT ENGINE                                */
-
 /**
  * @file editor_network_profiler.h
- * @brief Implementation of EditorNetworkProfiler class.
+ * @brief Declaration of the EditorNetworkProfiler class for handling network
+ * profiling in the editor.
  */
-
-/*                      https://godotengine.org                          */
-/*************************************************************************/
-/* Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur.                 */
-/* Copyright (c) 2014-2020 Godot Engine contributors (cf. AUTHORS.md).   */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
-
 #ifndef EDITORNETWORKPROFILER_H
 #define EDITORNETWORKPROFILER_H
 
@@ -46,34 +15,35 @@
 
 class EditorNetworkProfiler : public VBoxContainer {
 
-	GDCLASS(EditorNetworkProfiler, VBoxContainer)
+  GDCLASS(EditorNetworkProfiler, VBoxContainer)
 
 private:
-	Button *activate;
-	Button *clear_button;
-	Tree *counters_display;
-	LineEdit *incoming_bandwidth_text;
-	LineEdit *outgoing_bandwidth_text;
+  Button *activate;
+  Button *clear_button;
+  Tree *counters_display;
+  LineEdit *incoming_bandwidth_text;
+  LineEdit *outgoing_bandwidth_text;
 
-	Timer *frame_delay;
+  Timer *frame_delay;
 
-	Map<ObjectID, DebuggerMarshalls::MultiplayerNodeInfo> nodes_data;
+  Map<ObjectID, DebuggerMarshalls::MultiplayerNodeInfo> nodes_data;
 
-	void _update_frame();
+  void _update_frame();
 
-	void _activate_pressed();
-	void _clear_pressed();
+  void _activate_pressed();
+  void _clear_pressed();
 
 protected:
-	void _notification(int p_what);
-	static void _bind_methods();
+  void _notification(int p_what);
+  static void _bind_methods();
 
 public:
-	void add_node_frame_data(const DebuggerMarshalls::MultiplayerNodeInfo p_frame);
-	void set_bandwidth(int p_incoming, int p_outgoing);
-	bool is_profiling();
+  void
+  add_node_frame_data(const DebuggerMarshalls::MultiplayerNodeInfo p_frame);
+  void set_bandwidth(int p_incoming, int p_outgoing);
+  bool is_profiling();
 
-	EditorNetworkProfiler();
+  EditorNetworkProfiler();
 };
 
-#endif //EDITORNETWORKPROFILER_H
+#endif // EDITORNETWORKPROFILER_H
