@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the EditorFileServer class,
+// which handles network communication for the editor's file server,
+// including client authentication, file existence checks, modification
+// time queries, and file access commands.
 #ifndef EDITOR_FILE_SERVER_H
 #define EDITOR_FILE_SERVER_H
 

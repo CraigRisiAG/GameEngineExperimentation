@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the EditorFileServer class,
+// which handles network communication for the editor's file server,
+// including client authentication, file existence checks, modification
+// time queries, and file access commands.
 #include "editor_file_server.h"
 
 #include "../editor_settings.h"
