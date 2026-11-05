@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the InputDefault class, which
+// handles input from various devices such as keyboard, mouse, and game
+// controllers. It provides functions to check the state of keys, mouse
+// buttons, joystick buttons, and actions, as well as to retrieve joystick
+// axis values, names, and vibration information.
 // checks to see if file is defined. If not, sets up default mapping.
 #ifndef INPUT_DEFAULT_H
 #define INPUT_DEFAULT_H

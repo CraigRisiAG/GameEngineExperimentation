@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Performance class, which provides
+// functionality to monitor and retrieve various performance metrics of the
+// engine, such as processing times, memory usage, object counts, rendering
+// statistics, physics statistics, and audio latency. It also includes
+// enumerations for different performance monitors and their types.
 #ifndef PERFORMANCE_H
 #define PERFORMANCE_H
 

@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the InputDefault class, which
+// handles input from various devices such as keyboard, mouse, and game
+// controllers. It provides functions to check the state of keys, mouse
+// buttons, joystick buttons, and actions, as well as to retrieve joystick
+// axis values, names, and vibration information.
 #include "input_default.h"
 
 #include "core/input_map.h"

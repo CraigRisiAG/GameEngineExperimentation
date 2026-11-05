@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Main class, which manages the main
+// loop and overall execution of the application. It provides functions for
+// setup, iteration, force redraw, and cleanup, as well as utility functions
+// to check the current state of the main loop.
 #ifndef MAIN_H
 #define MAIN_H
 
