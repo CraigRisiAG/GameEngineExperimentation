@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the InterpolatedCamera class,
+// which handles a camera that interpolates its transform and projection
+// parameters towards a target Spatial node in 3D, including managing
+// interpolation speed, enabling/disabling interpolation, and updating
+// the camera's global transform and projection settings accordingly.
 #include "interpolated_camera.h"
 
 #include "core/engine.h"

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CPUParticles class,
+// which handles CPU-based particle systems in 3D, including managing
+// particle emission, lifetime, order, mesh, and various particle
+// properties such as speed, randomness, and local coordinates.
 #include "cpu_particles.h"
 
 #include "scene/3d/camera.h"

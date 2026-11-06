@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CollisionPolygon class,
+// which handles 3D collision polygons, including building the polygon
+// from convex decomposition, updating the shape owner, and managing
+// properties such as depth and disabled state.
 #include "collision_polygon.h"
 
 #include "collision_object.h"

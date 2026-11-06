@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the GIProbeData and GIProbe classes,
+// which handle Global Illumination (GI) probes in 3D, including managing
+// the probe's bounds, octree data, distance field, level counts, and various
+// GI-related properties such as dynamic range, propagation, anisotropy
+// strength, energy, and ambient occlusion (AO). The GIProbe class also handles
+// baking and visualization of the GI probe within the 3D scene.
 #ifndef GIPROBE_H
 #define GIPROBE_H
 

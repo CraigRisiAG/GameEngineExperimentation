@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CollisionObject class,
+// which handles collision objects in the 3D physics world, including
+// managing their transform, visibility, ray pickability, and interaction
+// with the physics server.
 #include "collision_object.h"
 
 #include "scene/scene_string_names.h"

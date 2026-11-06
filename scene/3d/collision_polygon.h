@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CollisionPolygon class,
+// which handles 3D collision polygons, including building the polygon
+// from convex decomposition, updating the shape owner, and managing
+// properties such as depth and disabled state.
 #ifndef COLLISION_POLYGON_H
 #define COLLISION_POLYGON_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CollisionObject class,
+// which handles collision objects in the 3D physics world, including
+// managing their transform, visibility, ray pickability, and interaction
+// with the physics server.
 #ifndef COLLISION_OBJECT_H
 #define COLLISION_OBJECT_H
 

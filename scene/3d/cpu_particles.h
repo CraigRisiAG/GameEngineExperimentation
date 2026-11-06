@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CPUParticles class,
+// which handles CPU-based particle systems in 3D, including managing
+// particle emission, lifetime, order, mesh, and various particle
+// properties such as speed, randomness, and local coordinates.
 #ifndef CPU_PARTICLES_H
 #define CPU_PARTICLES_H
 

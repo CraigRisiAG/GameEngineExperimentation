@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Light class,
+// which handles various types of lights in 3D, including directional,
+// omni, and spot lights. It manages light parameters, shadows, culling,
+// color, visibility, and baking modes, as well as providing the light's
+// axis-aligned bounding box (AABB) and faces for rendering purposes.
 #include "light.h"
 
 #include "core/engine.h"

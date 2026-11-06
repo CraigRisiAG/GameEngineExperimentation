@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the GIProbeData class,
+// which handles Global Illumination (GI) probes in 3D, including
+// managing the probe's bounds, octree data, distance field, level counts,
+// and various GI-related properties such as dynamic range, propagation,
+// anisotropy strength, energy, and ambient occlusion (AO).
 #include "gi_probe.h"
 
 #include "core/os/os.h"

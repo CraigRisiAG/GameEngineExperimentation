@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the ImmediateGeometry class,
+// which handles immediate mode geometry in 3D, including managing vertex
+// attributes such as normals, tangents, colors, UVs, and positions, as well
+// as building primitive shapes like spheres and handling the geometry's
+// axis-aligned bounding box (AABB).
 #ifndef IMMEDIATE_GEOMETRY_H
 #define IMMEDIATE_GEOMETRY_H
 

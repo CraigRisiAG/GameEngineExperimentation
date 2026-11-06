@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CollisionShape class,
+// which handles 3D collision shapes, including managing the shape resource,
+// updating the shape owner, and handling configuration warnings and debug
+// visualization.
 #include "collision_shape.h"
 #include "scene/resources/box_shape.h"
 #include "scene/resources/capsule_shape.h"

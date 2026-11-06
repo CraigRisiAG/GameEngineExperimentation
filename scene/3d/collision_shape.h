@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CollisionShape class,
+// which handles 3D collision shapes, including managing the shape resource,
+// updating the shape owner, and handling configuration warnings and debug
+// visualization.
 #ifndef COLLISION_SHAPE_H
 #define COLLISION_SHAPE_H
 

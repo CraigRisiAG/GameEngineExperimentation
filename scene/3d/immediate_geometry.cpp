@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the ImmediateGeometry class,
+// which handles immediate mode geometry in 3D, including managing vertex
+// attributes such as normals, tangents, colors, UVs, and positions, as well
+// as building primitive shapes like spheres and handling the geometry's
+// axis-aligned bounding box (AABB).
 #include "immediate_geometry.h"
 
 void ImmediateGeometry::begin(Mesh::PrimitiveType p_primitive,

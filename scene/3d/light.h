@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Light class and its derived
+// classes, which handle various types of lights in 3D, including directional,
+// omni, and spot lights. It manages light parameters, shadows, culling, color,
+// visibility, and baking modes, as well as providing the light's axis-aligned
+// bounding box (AABB) and faces for rendering purposes.
 #ifndef LIGHT_H
 #define LIGHT_H
 

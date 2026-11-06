@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Listener class,
+// which handles audio listeners in 3D, including managing the current
+// listener state, updating the listener's transform, and interacting
+// with the viewport to set or clear the active listener.
 #ifndef LISTENER_H
 #define LISTENER_H
 
