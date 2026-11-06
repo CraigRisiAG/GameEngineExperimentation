@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Camera2D class,
+// which represents a 2D camera in the scene. It provides functionality
+// for setting and getting various properties of the camera, such as zoom,
+// anchor mode, and drag margins. It also handles updating the camera's
+// scroll and process mode based on the current state and editor hints.
 #ifndef CAMERA_2D_H
 #define CAMERA_2D_H
 

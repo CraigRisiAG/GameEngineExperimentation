@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the BackBufferCopy class,
+// which represents a node that can copy the back buffer to a specified
+// rectangle or the entire viewport. It provides functionality for setting
+// and getting the copy mode and the rectangle to copy.
 #ifndef BACKBUFFERCOPY_H
 #define BACKBUFFERCOPY_H
 

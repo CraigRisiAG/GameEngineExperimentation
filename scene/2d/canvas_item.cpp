@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CanvasItemMaterial class,
+// which represents a material used for 2D canvas items. It provides
+// functionality for managing shaders, updating shader parameters, and
+// handling changes to the material.
 #include "canvas_item.h"
 #include "core/message_queue.h"
 #include "core/method_bind_ext.gen.inc"

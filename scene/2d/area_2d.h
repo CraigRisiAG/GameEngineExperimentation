@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Area2D class,
+// which represents a 2D area in the scene. It provides functionality
+// for setting and getting various properties of the area, such as
+// gravity, linear and angular damping, priority, and space override mode.
+// It also handles signals for when bodies enter or exit the area.
 #ifndef AREA_2D_H
 #define AREA_2D_H
 

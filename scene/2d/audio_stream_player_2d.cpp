@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the AudioStreamPlayer2D class,
+// which represents a 2D audio stream player in the scene. It provides
+// functionality for playing, pausing, and mixing audio streams in 2D space.
 #include "audio_stream_player_2d.h"
 
 #include "core/engine.h"

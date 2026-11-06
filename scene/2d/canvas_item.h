@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the CanvasItemMaterial and CanvasItem
+// classes, which represent materials and 2D canvas items in the scene. The
+// CanvasItemMaterial class provides functionality for managing shaders,
+// updating shader parameters, and handling changes to the material. The
+// CanvasItem class provides functionality for managing 2D canvas items,
+// including their properties, transformations, and rendering.
 #ifndef CANVAS_ITEM_H
 #define CANVAS_ITEM_H
 

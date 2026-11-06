@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the AnimatedSprite class,
+// which represents a 2D animated sprite in the scene. It provides
+// functionality for setting and getting various properties of the animated
+// sprite, such as offset, pivot, and animation frames. It also handles
+// editing and rect calculations for the sprite.
 #include "animated_sprite.h"
 
 #include "core/os/os.h"

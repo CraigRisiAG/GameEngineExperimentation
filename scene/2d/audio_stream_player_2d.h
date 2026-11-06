@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the AudioStreamPlayer2D class,
+// which represents a 2D audio stream player in the scene. It provides
+// functionality for playing, pausing, and mixing audio streams in 2D space.
 #ifndef AUDIO_STREAM_PLAYER_2D_H
 #define AUDIO_STREAM_PLAYER_2D_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the BackBufferCopy class,
+// which represents a node that can copy the back buffer to a specified
+// rectangle or the entire viewport. It provides functionality for setting
+// and getting the copy mode and the rectangle to copy.
 #include "back_buffer_copy.h"
 
 void BackBufferCopy::_update_copy_mode() {

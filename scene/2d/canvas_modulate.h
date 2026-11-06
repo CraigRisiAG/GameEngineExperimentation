@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CanvasModulate class,
+// which represents a node that can modulate the color of a 2D canvas.
+// It provides functionality for setting and getting the modulation color,
+// and ensures that only one visible CanvasModulate is active per canvas.
 #ifndef CANVASMODULATE_H
 #define CANVASMODULATE_H
 

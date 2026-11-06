@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Camera2D class,
+// which represents a 2D camera in the scene. It provides functionality
+// for setting and getting various properties of the camera, such as zoom,
+// anchor mode, and drag margins. It also handles updating the camera's
+// scroll and process mode based on the current state and editor hints.
 #include "camera_2d.h"
 
 #include "core/engine.h"
