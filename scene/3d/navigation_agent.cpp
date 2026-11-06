@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the NavigationAgent class,
+// which handles navigation agents in 3D. It manages agent properties such as
+// target location, desired distance, radius, height offset, and navigation
+// parameters. It provides functionality for setting and getting these
+// properties, as well as querying the agent's navigation state and path.
 #include "navigation_agent.h"
 
 #include "core/engine.h"

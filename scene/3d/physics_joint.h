@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the Joint class and its derived
+// classes, such as PinJoint, HingeJoint, and SliderJoint, which handle 3D
+// physics joints. It provides functionality for setting and getting the nodes
+// connected by the joint, solver priority, and collision exclusion between the
+// connected nodes. It interacts with the physics server to manage the joint and
+// its properties.
 #ifndef PHYSICS_JOINT_H
 #define PHYSICS_JOINT_H
 

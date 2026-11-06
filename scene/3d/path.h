@@ -1,4 +1,10 @@
-
+// This file contains the declaration of the Path and PathFollow classes,
+// which handle 3D paths defined by a Curve3D and nodes that follow these paths.
+// The Path class provides functionality for setting and getting the curve,
+// responding to curve changes, and updating the configuration warnings of
+// child PathFollow nodes. The PathFollow class provides functionality for
+// following the path with various rotation modes, offsets, and interpolation
+// settings.
 #ifndef PATH_H
 #define PATH_H
 

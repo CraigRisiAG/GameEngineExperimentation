@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Joint class and its derived
+// classes, such as PinJoint, which handle 3D physics joints. It provides
+// functionality for setting and getting the nodes connected by the joint,
+// solver priority, and collision exclusion between the connected nodes. It
+// interacts with the physics server to manage the joint and its properties.
 #include "physics_joint.h"
 
 void Joint::_update_joint(bool p_only_free) {

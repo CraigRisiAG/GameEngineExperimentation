@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the MultiMeshInstance class,
+// which handles instances of MultiMesh objects in 3D. It manages the
+// MultiMesh resource, updates the visual representation, and provides
+// functionality for retrieving the axis-aligned bounding box (AABB)
+// and faces for rendering purposes.
 #ifndef MULTIMESH_INSTANCE_H
 #define MULTIMESH_INSTANCE_H
 

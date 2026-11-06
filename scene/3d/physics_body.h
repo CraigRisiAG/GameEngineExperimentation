@@ -1,4 +1,10 @@
-
+// This file contains the declaration of the PhysicsBody class and its derived
+// classes, StaticBody and RigidBody, which handle 3D physics bodies. It
+// provides functionality for setting and getting collision layers and masks,
+// managing collision exceptions, and interacting with the physics server to
+// manage the physics body. StaticBody represents a static physics body with
+// constant velocities, while RigidBody represents a dynamic physics body with
+// various physical properties and modes.
 #ifndef PHYSICS_BODY__H
 #define PHYSICS_BODY__H
 

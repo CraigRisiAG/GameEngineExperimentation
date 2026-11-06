@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the NavigationAgent class,
+// which handles navigation agents in 3D. It manages agent properties such as
+// target location, desired distance, radius, height offset, and navigation
+// parameters. It provides functionality for setting and getting these
+// properties, as well as querying the agent's navigation state and path.
 #ifndef NAVIGATION_AGENT_H
 #define NAVIGATION_AGENT_H
 

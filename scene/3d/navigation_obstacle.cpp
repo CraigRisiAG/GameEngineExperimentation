@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the NavigationObstacle class,
+// which handles navigation obstacles in 3D. It manages the obstacle's
+// properties, updates the agent shape based on collision shapes, and
+// interacts with the navigation server to set the agent's position,
+// velocity, and other parameters.
 #include "navigation_obstacle.h"
 
 #include "scene/3d/collision_shape.h"

@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the ProximityGroup class,
+// which manages 3D proximity groups based on a grid system. It provides
+// functionality for adding and clearing groups, updating group membership
+// based on the node's position, broadcasting messages to group members,
+// and handling dispatch modes for message delivery.
 #ifndef PROXIMITY_GROUP_H
 #define PROXIMITY_GROUP_H
 

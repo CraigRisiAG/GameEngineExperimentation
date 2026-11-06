@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the PhysicsBody class,
+// which handles 3D physics bodies. It provides functionality for
+// setting and getting collision layers and masks, managing collision
+// exceptions, and interacting with the physics server to manage the
+// physics body.
 #include "physics_body.h"
 
 #include "core/core_string_names.h"

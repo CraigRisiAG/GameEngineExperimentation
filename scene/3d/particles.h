@@ -1,4 +1,10 @@
-
+// This file contains the declaration of the Particles class,
+// which handles particle systems in 3D. It provides functionality for
+// setting and getting particle properties such as emission, amount,
+// lifetime, one-shot mode, pre-process time, explosiveness ratio,
+// randomness ratio, visibility AABB, local coordinates, process material,
+// speed scale, draw order, and draw passes. It interacts with the visual
+// server to manage the particle system.
 #ifndef PARTICLES_H
 #define PARTICLES_H
 

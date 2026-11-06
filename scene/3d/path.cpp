@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Path class,
+// which handles 3D paths defined by a Curve3D. It provides functionality for
+// setting and getting the curve, responding to curve changes, and updating
+// the configuration warnings of child PathFollow nodes. It interacts with
+// the engine and scene tree to manage the path and its associated gizmos.
 #include "path.h"
 
 #include "core/engine.h"

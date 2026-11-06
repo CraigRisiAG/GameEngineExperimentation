@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the MeshInstance class,
+// which handles 3D mesh instances, including managing mesh resources,
+// blend shapes, materials, skeleton attachments, and skinning. It provides
+// functionality for setting and getting mesh properties, resolving skeleton
+// paths, and updating the visual representation of the mesh instance.
 #ifndef MESH_INSTANCE_H
 #define MESH_INSTANCE_H
 

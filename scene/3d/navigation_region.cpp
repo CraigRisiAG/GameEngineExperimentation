@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the NavigationRegion class,
+// which handles navigation regions in 3D. It manages the region's
+// properties, updates the navigation mesh, interacts with the navigation
+// server, and provides functionality for baking the navigation mesh and
+// handling debug visualization.
 #include "navigation_region.h"
 #include "core/os/thread.h"
 #include "mesh_instance.h"

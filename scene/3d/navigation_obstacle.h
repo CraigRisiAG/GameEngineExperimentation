@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the NavigationObstacle class,
+// which handles navigation obstacles in 3D. It manages the obstacle's
+// properties, updates the agent shape based on collision shapes, and
+// interacts with the navigation server to set the agent's position,
+// velocity, and other parameters.
 #ifndef NAVIGATION_OBSTACLE_H
 #define NAVIGATION_OBSTACLE_H
 

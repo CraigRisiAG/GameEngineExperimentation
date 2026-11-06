@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the MultiMeshInstance class,
+// which handles instances of MultiMesh objects in 3D. It manages the
+// MultiMesh resource, updates the visual representation, and provides
+// functionality for retrieving the axis-aligned bounding box (AABB)
+// and faces for rendering purposes.
 #include "multimesh_instance.h"
 
 void MultiMeshInstance::_bind_methods() {

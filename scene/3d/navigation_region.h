@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the NavigationRegion class,
+// which handles navigation regions in 3D. It manages the region's
+// properties, updates the navigation mesh, interacts with the navigation
+// server, and provides functionality for baking the navigation mesh and
+// handling debug visualization.
 #ifndef NAVIGATION_REGION_H
 #define NAVIGATION_REGION_H
 

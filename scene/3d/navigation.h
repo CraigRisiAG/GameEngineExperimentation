@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Navigation class,
+// which handles navigation maps in 3D. It provides functionality for
+// pathfinding, querying closest points, setting navigation parameters
+// such as up vector, cell size, and edge connection margin, and
+// interacts with the navigation server to manage the navigation map.
 #ifndef NAVIGATION_H
 #define NAVIGATION_H
 
