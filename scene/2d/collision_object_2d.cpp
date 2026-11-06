@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CollisionObject2D class,
+// which represents a 2D collision object in the scene. It provides
+// functionality for managing shape owners, handling collision shapes,
+// and interacting with the 2D physics server for areas and bodies.
 #include "collision_object_2d.h"
 
 #include "scene/scene_string_names.h"

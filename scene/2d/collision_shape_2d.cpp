@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the CollisionShape2D class,
+// which represents a 2D collision shape in the scene. It provides
+// functionality for setting and getting the shape, updating the
+// associated shape owner in the parent CollisionObject2D, and handling
+// drawing the shape for debugging purposes.
 #include "collision_shape_2d.h"
 
 #include "collision_object_2d.h"

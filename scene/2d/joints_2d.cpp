@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Joint2D class,
+// which represents a 2D joint in the scene. It provides functionality
+// for configuring the joint between two physics bodies, managing
+// collision exclusion, and updating the joint parameters in the
+// 2D physics server.
 #include "joints_2d.h"
 
 #include "core/engine.h"

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CollisionObject2D class,
+// which represents a 2D collision object in the scene. It provides
+// functionality for managing shape owners, handling collision shapes,
+// and interacting with the 2D physics server for areas and bodies.
 #ifndef COLLISION_OBJECT_2D_H
 #define COLLISION_OBJECT_2D_H
 

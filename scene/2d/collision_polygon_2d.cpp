@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the CollisionPolygon2D class,
+// which represents a 2D collision polygon in the scene. It provides
+// functionality for building the polygon, decomposing it into convex
+// shapes if necessary, and updating the associated shape owner in the
+// parent CollisionObject2D. It also handles drawing the polygon for
+// debugging purposes.
 #include "collision_polygon_2d.h"
 
 #include "collision_object_2d.h"
@@ -136,7 +141,8 @@ void CollisionPolygon2D::_notification(int p_what) {
 #endif
 
     if (one_way_collision) {
-      Color dcol = get_tree()->get_debug_collisions_color(); // 0.9,0.2,0.2,0.4);
+      Color dcol =
+          get_tree()->get_debug_collisions_color(); // 0.9,0.2,0.2,0.4);
       dcol.a = 1.0;
       Vector2 line_to(0, 20);
       draw_line(Vector2(), line_to, dcol, 3);

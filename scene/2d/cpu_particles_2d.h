@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the CPUParticles2D class,
+// which represents a 2D CPU-based particle system in the scene. It provides
+// functionality for managing particle emission, lifetime, randomness,
+// local coordinates, speed scaling, and draw order. It also handles updating
+// the particle mesh and texture for rendering.
 #ifndef CPU_PARTICLES_2D_H
 #define CPU_PARTICLES_2D_H
 

@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the CollisionPolygon2D class,
+// which represents a 2D collision polygon in the scene. It provides
+// functionality for building the polygon, decomposing it into convex
+// shapes if necessary, and updating the associated shape owner in the
+// parent CollisionObject2D. It also handles drawing the polygon for
+// debugging purposes.
 #ifndef COLLISION_POLYGON_2D_H
 #define COLLISION_POLYGON_2D_H
 

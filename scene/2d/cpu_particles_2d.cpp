@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the CPUParticles2D class,
+// which represents a 2D CPU-based particle system in the scene. It provides
+// functionality for managing particle emission, lifetime, randomness,
+// local coordinates, speed scaling, and draw order. It also handles updating
+// the particle mesh and texture for rendering.
 #include "cpu_particles_2d.h"
 
 #include "core/core_string_names.h"

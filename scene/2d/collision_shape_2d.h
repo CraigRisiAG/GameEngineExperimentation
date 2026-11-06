@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the CollisionShape2D class,
+// which represents a 2D collision shape in the scene. It provides
+// functionality for setting and getting the shape, updating the
+// associated shape owner in the parent CollisionObject2D, and handling
+// drawing the shape for debugging purposes.
 #ifndef COLLISION_SHAPE_2D_H
 #define COLLISION_SHAPE_2D_H
 
