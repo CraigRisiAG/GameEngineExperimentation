@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Voxelizer class,
+// which is used to convert 3D geometry into a voxel representation.
+// It provides functionality for testing the intersection of triangles with a
+// voxel grid, and for determining the occupancy of voxels based on the
+// geometry.
 #include "voxelizer.h"
 #include "core/os/os.h"
 #include "core/os/threaded_array_processor.h"

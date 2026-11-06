@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the VisibilityNotifier and
+// VisibilityEnabler classes, which are used to detect when a 3D object enters
+// or exits the camera's view. VisibilityNotifier provides signals for screen
+// and camera entry/exit events. VisibilityEnabler manages the visibility state
+// of nodes based on the screen presence of the notifier.
 #ifndef VISIBILITY_NOTIFIER_H
 #define VISIBILITY_NOTIFIER_H
 

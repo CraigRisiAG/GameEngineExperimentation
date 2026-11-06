@@ -1,4 +1,10 @@
-
+// This file contains the implementation of the SoftBody class,
+// which represents a 3D soft body in the scene. It provides functionality
+// for managing the visual representation of the soft body, handling
+// pinned points and attachments, and interacting with the physics server
+// to update the soft body's state. The class also manages the process
+// of updating the mesh and its vertices, normals, and axis-aligned bounding box
+// (AABB).
 #include "soft_body.h"
 #include "core/list.h"
 #include "core/object.h"

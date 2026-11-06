@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the VisualInstance and
+// GeometryInstance classes, which represent visual elements in the 3D scene.
+// VisualInstance provides functionality for managing the instance's transform,
+// visibility, and layer mask. GeometryInstance extends VisualInstance to
+// provide additional functionality for managing materials and level-of-detail
+// (LOD) settings.
 #include "visual_instance.h"
 
 #include "scene/scene_string_names.h"

@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the SpriteBase3D class and its derived
+// classes, which represent 3D sprites in the scene. The classes provide
+// functionality for managing the sprite's appearance, including color
+// modulation, pixel size, opacity, axis orientation, draw flags, and region
+// settings. They also handle updating the sprite's geometry and propagating
+// color changes to child sprites.
 #ifndef SPRITE_3D_H
 #define SPRITE_3D_H
 

@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the SpriteBase3D class,
+// which represents a 3D sprite in the scene.
+// It provides functionality for managing the sprite's appearance,
+// including color modulation, pixel size, opacity, axis orientation,
+// and various draw flags. The class handles updating the sprite's
+// geometry and propagating color changes to child sprites.
 #include "sprite_3d.h"
 
 #include "core/core_string_names.h"

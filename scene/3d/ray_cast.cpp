@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the RayCast class,
+// which represents a 3D ray cast in the scene. It provides functionality
+// for setting the cast direction, managing collision masks, checking for
+// collisions, and interacting with the physics server to perform ray
+// intersection tests.
 #include "ray_cast.h"
 
 #include "collision_object.h"

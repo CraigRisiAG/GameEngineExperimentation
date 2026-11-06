@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the VehicleWheel and VehicleBody
+// classes, which represent a wheel and a vehicle body in a vehicle system. The
+// VehicleWheel class provides functionality for managing the wheel's radius,
+// suspension, and interaction with the physics engine.
+// The VehicleBody class provides functionality for managing the vehicle's
+// movement, suspension, and wheel interactions with the physics engine.
 #ifndef VEHICLE_BODY_H
 #define VEHICLE_BODY_H
 

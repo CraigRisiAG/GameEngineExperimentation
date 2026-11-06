@@ -1,4 +1,10 @@
-
+// This file contains the declaration of the RemoteTransform class,
+// which allows a Spatial node to automatically update the transform of
+// another Spatial node (the remote node) in the scene. It provides
+// functionality for setting the remote node, choosing whether to use global
+// coordinates, and specifying which components of the transform (position,
+// rotation, scale) should be updated. The class handles caching the remote node
+// and updating its transform efficiently.
 #ifndef REMOTETRANSFORM_H
 #define REMOTETRANSFORM_H
 

@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the VisualInstance and GeometryInstance
+// classes, which represent visual elements in the 3D scene. VisualInstance
+// provides functionality for managing the instance's transform, visibility, and
+// layer mask. GeometryInstance extends VisualInstance to provide additional
+// functionality for managing materials and level-of-detail (LOD) settings.
 #ifndef VISUAL_INSTANCE_H
 #define VISUAL_INSTANCE_H
 

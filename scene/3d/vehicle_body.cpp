@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the VehicleWheel class,
+// which represents a wheel in a vehicle system.
+// It provides functionality for managing the wheel's radius, suspension,
+// and interaction with the physics engine.
+// The class handles updating the wheel's state based on contact with the ground
+// and the vehicle's movement.
 #include "vehicle_body.h"
 
 #define ROLLING_INFLUENCE_FIX

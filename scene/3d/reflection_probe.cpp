@@ -1,4 +1,10 @@
-
+// This file contains the implementation of the ReflectionProbe class,
+// which represents a 3D reflection probe in the scene. It provides
+// functionality for setting and getting various properties of the reflection
+// probe, such as intensity, interior ambient settings, extents, origin offset,
+// box projection, shadows, cull mask, and update mode. It interacts with the
+// rendering server to update the reflection probe's state and notifies the
+// engine of changes.
 #include "reflection_probe.h"
 
 void ReflectionProbe::set_intensity(float p_intensity) {

@@ -1,4 +1,10 @@
-
+// This file contains the implementation of the Spatial class,
+// which represents a 3D spatial node in the scene.
+// It provides functionality for managing the node's transform,
+// handling notifications for entering and exiting the scene tree and world,
+// propagating transform changes to child nodes, and interacting with the engine
+// to maintain the node's state. The class also supports editor-specific gizmo
+// handling.
 #include "spatial.h"
 
 #include "core/engine.h"

@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the Skeleton class,
+// which represents a 3D skeleton in the scene. It provides functionality
+// for managing bones, including adding, setting, and retrieving bone
+// properties, handling bone hierarchy, and binding child nodes to bones. The
+// class also manages the process order of bones for efficient updates and
+// interacts with the engine to maintain the skeleton's state.
 #include "skeleton.h"
 
 #include "core/engine.h"

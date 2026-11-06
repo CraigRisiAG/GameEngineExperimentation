@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the SpringArm class,
+// which represents a 3D spring arm in the scene.
+// It provides functionality for managing the spring length, collision shape,
+// excluded objects, collision mask, and margin.
+// The class handles the process of updating the spring's current length
+// based on collisions and interactions with the physics server.
 #include "spring_arm.h"
 #include "core/engine.h"
 #include "scene/3d/collision_object.h"

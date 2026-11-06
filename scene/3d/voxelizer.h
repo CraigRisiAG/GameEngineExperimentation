@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Voxelizer class,
+// which is used to convert 3D geometry into a voxel representation.
+// It provides functionality for testing the intersection of triangles with a
+// voxel grid, and for determining the occupancy of voxels based on the
+// geometry.
 #ifndef VOXEL_LIGHT_BAKER_H
 #define VOXEL_LIGHT_BAKER_H
 

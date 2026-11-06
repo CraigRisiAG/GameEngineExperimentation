@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the WorldEnvironment class,
+// which is used to manage the environment and camera effects for a 3D world.
+// It provides functionality for setting and retrieving the environment and
+// camera effects, and ensures that only one WorldEnvironment is active per
+// scene or instanced scenes.
 #include "world_environment.h"
 #include "scene/main/viewport.h"
 

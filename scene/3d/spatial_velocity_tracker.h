@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the SpatialVelocityTracker class,
+// which tracks the linear velocity of a Spatial node in the scene.
+// It provides functionality for updating the position of the node,
+// calculating the tracked linear velocity based on the position history,
+// and resetting the tracker to a new position. The class can track
+// velocity either based on physics steps or idle frame ticks.
 #ifndef SPATIAL_VELOCITY_TRACKER_H
 #define SPATIAL_VELOCITY_TRACKER_H
 
