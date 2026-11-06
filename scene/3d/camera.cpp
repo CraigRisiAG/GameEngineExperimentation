@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Camera class,
+// which handles 3D camera functionality, including perspective,
+// orthogonal, and frustum projections, as well as camera updates
+// and interaction with the viewport and world.
 #include "camera.h"
 
 #include "collision_object.h"

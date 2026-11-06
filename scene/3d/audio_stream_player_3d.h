@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the AudioStreamPlayer3D class,
+// which handles 3D audio playback, including speaker placement correction
+// and volume calculation based on the listener's position and orientation.
 #ifndef AUDIO_STREAM_PLAYER_3D_H
 #define AUDIO_STREAM_PLAYER_3D_H
 

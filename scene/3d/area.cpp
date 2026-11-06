@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the Area class,
+// which represents a 3D area in the physics engine, handling
+// gravity, damping, and body interactions within the area.
 #include "area.h"
 
 #include "scene/scene_string_names.h"

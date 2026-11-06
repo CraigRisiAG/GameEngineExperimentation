@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the Area class,
+// which represents a 3D area in the physics engine, handling
+// gravity, damping, and body interactions within the area.
 #ifndef AREA_H
 #define AREA_H
 

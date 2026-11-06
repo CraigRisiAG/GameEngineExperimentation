@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the AudioStreamPlayer3D class,
+// which handles 3D audio playback, including speaker placement correction
+// and volume calculation based on the listener's position and orientation.
 #include "audio_stream_player_3d.h"
 #include "core/engine.h"
 #include "scene/3d/area.h"

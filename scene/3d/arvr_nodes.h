@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ARVRCamera class and related ARVR
+// nodes, which handle VR camera functionality, including projecting and
+// unprojecting rays and positions, as well as managing the ARVROrigin and ARVR
+// interface interactions.
 #ifndef ARVR_NODES_H
 #define ARVR_NODES_H
 

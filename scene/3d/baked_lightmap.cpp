@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the BakedLightmapData class,
+// which handles baked lightmap data, including bounds, octree structure,
+// cell space transform, energy, and user management for lightmap usage.
 #if 0
 #include "baked_lightmap.h"
 #include "core/io/config_file.h"

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the BakedLightmapData and BakedLightmap
+// classes, which handle baked lightmap data and the baking process for 3D
+// scenes, including managing lightmap users, octree structure, cell space
+// transform, and bake settings.
 #if 0
 #ifndef BAKED_INDIRECT_LIGHT_H
 #define BAKED_INDIRECT_LIGHT_H

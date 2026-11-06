@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the BoneAttachment class,
+// which handles attaching a node to a specific bone of a Skeleton,
+// including binding and unbinding the node when entering or exiting the scene
+// tree.
 #include "bone_attachment.h"
 
 void BoneAttachment::_validate_property(PropertyInfo &property) const {

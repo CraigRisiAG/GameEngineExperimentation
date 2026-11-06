@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Camera class,
+// which handles 3D camera functionality, including perspective,
+// orthogonal, and frustum projections, as well as camera updates
+// and interaction with the viewport and world.
 #ifndef CAMERA_H
 #define CAMERA_H
 

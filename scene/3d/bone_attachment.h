@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the BoneAttachment class,
+// which handles attaching a node to a specific bone of a Skeleton,
+// including binding and unbinding the node when entering or exiting the scene
+// tree.
 #ifndef BONE_ATTACHMENT_H
 #define BONE_ATTACHMENT_H
 
