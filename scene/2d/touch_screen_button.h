@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TouchScreenButton class,
+// which represents a touch screen button in the scene. It provides
+// functionality for managing the button's texture, pressed texture,
+// shape, visibility, and input handling for touch events.
 #ifndef TOUCH_SCREEN_BUTTON_H
 #define TOUCH_SCREEN_BUTTON_H
 

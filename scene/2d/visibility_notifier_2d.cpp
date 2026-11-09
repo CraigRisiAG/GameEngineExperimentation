@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the VisibilityNotifier2D class,
+// which represents a 2D visibility notifier in the scene. It provides
+// functionality for managing the notifier's rectangular area, detecting
+// when it enters or exits the screen or viewports, and emitting signals
+// accordingly.
 #include "visibility_notifier_2d.h"
 
 #include "core/engine.h"

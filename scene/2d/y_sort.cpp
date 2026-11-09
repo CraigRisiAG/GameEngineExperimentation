@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the YSort class,
+// which represents a 2D node that sorts its children by their Y coordinate.
+// It provides functionality for enabling or disabling the Y sorting of child
+// nodes.
 #include "y_sort.h"
 
 void YSort::set_sort_enabled(bool p_enabled) {

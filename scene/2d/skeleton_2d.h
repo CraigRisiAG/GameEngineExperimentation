@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the Bone2D and Skeleton2D classes,
+// which represent a 2D skeletal system in the scene. Bone2D represents an
+// individual bone, providing functionality for managing its rest pose,
+// default length, and hierarchical relationship with other bones and the
+// Skeleton2D. Skeleton2D manages the collection of bones and handles
+// updates to the bone setup and transformations.
 #ifndef SKELETON_2D_H
 #define SKELETON_2D_H
 

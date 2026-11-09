@@ -1,4 +1,11 @@
-
+// This file contains the declaration of the VisibilityNotifier2D and
+// VisibilityEnabler2D classes, which represent 2D visibility notifiers and
+// enablers in the scene. VisibilityNotifier2D provides functionality for
+// managing a rectangular area, detecting when it enters or exits the screen or
+// viewports, and emitting signals accordingly. VisibilityEnabler2D extends
+// VisibilityNotifier2D to enable or disable specific behaviors (such as pausing
+// animations, freezing bodies, or pausing particles) based on the visibility
+// state.
 #ifndef VISIBILITY_NOTIFIER_2D_H
 #define VISIBILITY_NOTIFIER_2D_H
 

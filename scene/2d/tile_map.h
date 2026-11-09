@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the TileMap class,
+// which represents a 2D tile map in the scene. It provides
+// functionality for managing tilesets, cell sizes, quadrants,
+// collision, navigation, and occluders, as well as handling
+// notifications and updates related to the tile map's state.
 #ifndef TILE_MAP_H
 #define TILE_MAP_H
 

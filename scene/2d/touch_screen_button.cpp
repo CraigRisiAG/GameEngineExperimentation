@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TouchScreenButton class,
+// which represents a touch screen button in the scene. It provides
+// functionality for managing the button's texture, pressed texture,
+// shape, visibility, and input handling for touch events.
 #include "touch_screen_button.h"
 
 #include "core/input_map.h"

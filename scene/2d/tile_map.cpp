@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the TileMap class,
+// which represents a 2D tile map in the scene. It provides
+// functionality for managing tilesets, cell sizes, quadrants,
+// collision, navigation, and occluders, as well as handling
+// notifications and updates related to the tile map's state.
 #include "tile_map.h"
 
 #include "collision_object_2d.h"

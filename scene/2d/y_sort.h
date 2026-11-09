@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the YSort class,
+// which represents a 2D node that sorts its children by their Y coordinate.
+// It provides functionality for enabling or disabling the Y sorting of child
+// nodes.
 #ifndef Y_SORT_H
 #define Y_SORT_H
 

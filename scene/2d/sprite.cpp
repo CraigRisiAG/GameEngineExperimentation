@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Sprite class,
+// which represents a 2D sprite in the scene. It provides
+// functionality for managing the sprite's texture, normal map,
+// specular map, offset, flipping, and other visual properties.
 #include "sprite.h"
 
 #include "core/core_string_names.h"
