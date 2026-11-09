@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ScrollContainer class, which is
+// responsible for managing scrollable containers within the GUI. It provides
+// functionality for handling user input, scrolling behavior, and visual
+// updates of the scroll container components.
 #include "scroll_container.h"
 #include "core/os/os.h"
 #include "scene/main/viewport.h"

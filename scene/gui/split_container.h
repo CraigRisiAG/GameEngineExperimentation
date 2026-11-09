@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the SplitContainer class, which is
+// responsible for managing split container widgets within the GUI. It provides
+// functionality for handling the layout of child controls, managing the split
+// offset, and rendering the visual representation of the split container.
 #ifndef SPLIT_CONTAINER_H
 #define SPLIT_CONTAINER_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the SpinBox class, which is
+// responsible for managing spin box widgets within the GUI. It provides
+// functionality for handling user input, updating the spin box value, and
+// rendering the visual representation of the spin box.
 #include "spin_box.h"
 #include "core/math/expression.h"
 #include "core/os/input.h"

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ScrollContainer class, which is
+// responsible for managing scrollable containers within the GUI. It provides
+// functionality for handling user input, scrolling behavior, and visual
+// updates of the scroll container components.
 #ifndef SCROLL_CONTAINER_H
 #define SCROLL_CONTAINER_H
 

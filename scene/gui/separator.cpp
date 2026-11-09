@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Separator class, which is
+// responsible for managing separator lines within the GUI. It provides
+// functionality for handling the visual representation and layout of
+// horizontal and vertical separators.
 #include "separator.h"
 
 Size2 Separator::get_minimum_size() const {

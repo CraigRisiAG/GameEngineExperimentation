@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Range class, which is
+// responsible for managing a range control within the GUI. It provides
+// functionality for handling minimum, maximum, step, page values, and
+// ratio-based value calculations.
 #include "range.h"
 
 String Range::get_configuration_warning() const {

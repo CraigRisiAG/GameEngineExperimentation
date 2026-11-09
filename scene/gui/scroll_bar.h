@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ScrollBar class, which is
+// responsible for managing scroll bars within the GUI. It provides
+// functionality for handling user input, scrolling behavior, and visual
+// updates of the scroll bar components.
 #ifndef SCROLL_BAR_H
 #define SCROLL_BAR_H
 

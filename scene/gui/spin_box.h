@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the SpinBox class, which is
+// responsible for managing spin box widgets within the GUI. It provides
+// functionality for handling user input, updating the spin box value, and
+// rendering the visual representation of the spin box.
 #ifndef SPIN_BOX_H
 #define SPIN_BOX_H
 

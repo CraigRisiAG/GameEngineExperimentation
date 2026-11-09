@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ShortCut class, which is
+// responsible for managing keyboard shortcuts within the GUI. It provides
+// functionality for setting, retrieving, and validating shortcuts, as well
+// as converting them to a human-readable text representation.
 #include "shortcut.h"
 
 #include "core/os/keyboard.h"

@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ReferenceRect class, which is
+// responsible for managing a reference rectangle within the GUI. It provides
+// functionality for handling border color and editor-only visibility.
 #include "reference_rect.h"
 
 #include "core/engine.h"

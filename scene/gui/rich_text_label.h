@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the RichTextLabel class, which is
+// responsible for managing rich text labels within the GUI. It provides
+// functionality for handling text layout, item navigation, and rendering
+// of rich text content.
 #ifndef RICH_TEXT_LABEL_H
 #define RICH_TEXT_LABEL_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ScrollBar class, which is
+// responsible for managing scroll bars within the GUI. It provides
+// functionality for handling user input, scrolling behavior, and visual
+// updates of the scroll bar components.
 #include "scroll_bar.h"
 
 #include "core/os/keyboard.h"

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the RichTextEffect class, which is
+// responsible for managing custom effects on rich text characters within the
+// GUI. It provides functionality for processing character effects and handling
+// associated transformations through the CharFXTransform class.
 #ifndef RICH_TEXT_EFFECT_H
 #define RICH_TEXT_EFFECT_H
 

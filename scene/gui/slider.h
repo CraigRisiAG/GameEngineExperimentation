@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Slider class, which is
+// responsible for managing slider widgets within the GUI. It provides
+// functionality for handling user input, updating the slider value, and
+// rendering the visual representation of the slider.
 #ifndef SLIDER_H
 #define SLIDER_H
 

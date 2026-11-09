@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the ReferenceRect class, which is
+// responsible for managing a reference rectangle within the GUI. It provides
+// functionality for handling border color and editor-only visibility.
 #ifndef REFERENCE_RECT_H
 #define REFERENCE_RECT_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the RichTextLabel class, which is
+// responsible for managing rich text labels within the GUI. It provides
+// functionality for handling text layout, item navigation, and rendering
+// of rich text content.
 #include "rich_text_label.h"
 
 #include "core/math/math_defs.h"

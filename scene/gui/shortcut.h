@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ShortCut class, which is
+// responsible for managing keyboard shortcuts within the GUI. It provides
+// functionality for setting, retrieving, and validating shortcuts, as well
+// as converting them to a human-readable text representation.
 #ifndef SHORTCUT_H
 #define SHORTCUT_H
 
