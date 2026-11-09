@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the VideoPlayer class, which is
+// responsible for managing video player widgets within the GUI. It provides
+// functionality for handling video playback, audio mixing, stream management,
+// and rendering the visual representation of the video player.
 #ifndef VIDEO_PLAYER_H
 #define VIDEO_PLAYER_H
 

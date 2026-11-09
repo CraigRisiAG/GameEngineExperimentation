@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TextEdit class, which is
+// responsible for managing text editing widgets within the GUI. It provides
+// functionality for handling text input, cursor movement, syntax highlighting,
+// and rendering the visual representation of the text editor.
 #ifndef TEXT_EDIT_H
 #define TEXT_EDIT_H
 

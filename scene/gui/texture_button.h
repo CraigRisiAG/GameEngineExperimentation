@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TextureButton class, which is
+// responsible for managing texture button widgets within the GUI. It provides
+// functionality for handling button states, click masks, and rendering the
+// visual representation of the texture button.
 #ifndef TEXTURE_BUTTON_H
 #define TEXTURE_BUTTON_H
 

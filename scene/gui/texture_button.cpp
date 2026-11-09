@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TextureButton class, which is
+// responsible for managing texture button widgets within the GUI. It provides
+// functionality for handling button states, click masks, and rendering the
+// visual representation of the texture button.
 #include "texture_button.h"
 #include "core/typedefs.h"
 #include <stdlib.h>

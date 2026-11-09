@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Tabs class, which is
+// responsible for managing tab widgets within the GUI. It provides
+// functionality for handling tab selection, navigation buttons, and rendering
+// the visual representation of the tabs.
 #include "tabs.h"
 
 #include "core/message_queue.h"

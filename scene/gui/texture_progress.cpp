@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the TextureProgress class, which is
+// responsible for managing texture progress bar widgets within the GUI. It
+// provides functionality for handling under, over, and progress textures,
+// stretch margins, nine-patch stretching, and rendering the visual
+// representation of the texture progress bar.
 #include "texture_progress.h"
 
 #include "core/engine.h"

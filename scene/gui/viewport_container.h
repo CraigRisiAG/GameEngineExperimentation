@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the ViewportContainer class, which is
+// responsible for managing viewport container widgets within the GUI. It
+// provides functionality for handling viewport stretching, input
+// transformation, and rendering the visual representation of the contained
+// viewports.
 #ifndef VIEWPORTCONTAINER_H
 #define VIEWPORTCONTAINER_H
 

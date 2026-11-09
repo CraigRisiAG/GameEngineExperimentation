@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TextureRect class, which is
+// responsible for managing texture rectangle widgets within the GUI. It
+// provides functionality for handling texture display, stretching, tiling,
+// flipping, and rendering the visual representation of the texture rectangle.
 #ifndef TEXTURE_FRAME_H
 #define TEXTURE_FRAME_H
 

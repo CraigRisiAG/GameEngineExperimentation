@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the TabContainer class, which is
+// responsible for managing tab container widgets within the GUI. It provides
+// functionality for handling tab selection, navigation buttons, and rendering
+// the visual representation of the tab container.
 #ifndef TAB_CONTAINER_H
 #define TAB_CONTAINER_H
 

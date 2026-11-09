@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TextEdit class, which is
+// responsible for managing text editing widgets within the GUI. It provides
+// functionality for handling text input, cursor movement, syntax highlighting,
+// and rendering the visual representation of the text editor.
 #include "text_edit.h"
 
 #include "core/message_queue.h"

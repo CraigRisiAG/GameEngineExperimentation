@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TreeItem class, which is
+// responsible for managing tree item widgets within the GUI. It provides
+// functionality for handling item hierarchy, cell modes, check states, text,
+// icons, and rendering the visual representation of the tree item.
 #include "tree.h"
 
 #include "core/math/math_funcs.h"

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TabContainer class, which is
+// responsible for managing tab container widgets within the GUI. It provides
+// functionality for handling tab selection, navigation buttons, and rendering
+// the visual representation of the tab container.
 #include "tab_container.h"
 
 #include "core/message_queue.h"

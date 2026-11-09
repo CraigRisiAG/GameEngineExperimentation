@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the TextureRect class, which is
+// responsible for managing texture rectangle widgets within the GUI. It
+// provides functionality for handling texture display, stretching, tiling,
+// flipping, and rendering the visual representation of the texture rectangle.
 #include "texture_rect.h"
 #include "core/core_string_names.h"
 #include "servers/visual_server.h"

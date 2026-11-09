@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Tabs class, which is
+// responsible for managing tab widgets within the GUI. It provides
+// functionality for handling tab selection, navigation buttons, and rendering
+// the visual representation of the tabs.
 #ifndef TABS_H
 #define TABS_H
 

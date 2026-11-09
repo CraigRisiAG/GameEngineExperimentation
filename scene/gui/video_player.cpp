@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the VideoPlayer class, which is
+// responsible for managing video player widgets within the GUI. It provides
+// functionality for handling video playback, audio mixing, stream management,
+// and rendering the visual representation of the video player.
 #include "video_player.h"
 #include "scene/scene_string_names.h"
 
