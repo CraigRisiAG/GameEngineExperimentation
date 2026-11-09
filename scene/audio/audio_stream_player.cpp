@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the AudioStreamPlayer class, which
+// is responsible for playing audio streams within the scene. It provides
+// functionality for mixing audio to the bus, handling internal mixing with
+// fade-in and fade-out, managing playback state, and responding to
+// notifications related to the audio stream player.
 #include "audio_stream_player.h"
 
 #include "core/engine.h"

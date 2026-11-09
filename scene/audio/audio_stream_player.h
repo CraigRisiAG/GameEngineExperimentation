@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the AudioStreamPlayer class, which is
+// responsible for playing audio streams within the scene. It provides
+// functionality for managing audio playback, including volume, pitch, autoplay,
+// bus routing, mix targets, and handling pause and stop states. It also defines
+// the MixTarget enum for specifying the desired audio mix target.
 #ifndef AUDIO_STREAM_PLAYER_H
 #define AUDIO_STREAM_PLAYER_H
 
