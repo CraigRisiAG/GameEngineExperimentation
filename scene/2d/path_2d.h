@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Path2D and PathFollow2D classes,
+// which represent a 2D path and a node that follows the path, respectively.
+// It provides functionality for managing the path curve, editing the path
+// in the editor, drawing the path, and updating the transform of the follower
+// along the path.
 #ifndef PATH_2D_H
 #define PATH_2D_H
 

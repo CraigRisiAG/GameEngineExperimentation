@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the PhysicsBody2D class,
+// which represents a 2D physics body in the scene. It provides
+// functionality for managing collision layers, collision masks,
+// collision exceptions, and interaction with the Physics2DServer.
 #ifndef PHYSICS_BODY_2D_H
 #define PHYSICS_BODY_2D_H
 

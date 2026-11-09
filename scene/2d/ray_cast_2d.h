@@ -1,11 +1,13 @@
-************************************************************************/
-
+// This file contains the declaration of the RayCast2D class,
+// which represents a 2D ray cast in the scene. It provides
+// functionality for setting the cast direction, managing collision
+// masks, detecting collisions, and handling editor-related interactions.
 #ifndef RAY_CAST_2D_H
 #define RAY_CAST_2D_H
 
 #include "scene/2d/node_2d.h"
 
-    class RayCast2D : public Node2D {
+class RayCast2D : public Node2D {
 
   GDCLASS(RayCast2D, Node2D);
 

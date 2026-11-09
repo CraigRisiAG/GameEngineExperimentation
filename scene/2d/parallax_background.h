@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ParallaxBackground class,
+// which represents a 2D parallax background in the scene. It provides
+// functionality for managing scroll offsets, base offsets, base scales,
+// limits, and handling camera movement to create a parallax effect.
 #ifndef PARALLAX_BACKGROUND_H
 #define PARALLAX_BACKGROUND_H
 

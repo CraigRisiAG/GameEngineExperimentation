@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the RayCast2D class,
+// which represents a 2D ray cast in the scene. It provides
+// functionality for setting the cast direction, managing collision
+// masks, detecting collisions, and handling editor-related interactions.
 #include "ray_cast_2d.h"
 
 #include "collision_object_2d.h"

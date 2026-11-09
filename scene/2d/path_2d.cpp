@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Path2D and PathFollow2D classes,
+// which represent a 2D path and a node that follows the path, respectively.
+// It provides functionality for managing the path curve, editing the path
+// in the editor, drawing the path, and updating the transform of the follower
+// along the path.
 #include "path_2d.h"
 
 #include "core/engine.h"

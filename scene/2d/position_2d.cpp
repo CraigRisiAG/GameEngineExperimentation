@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Position2D class,
+// which represents a 2D position marker in the scene. It provides
+// functionality for drawing a cross gizmo at the position, managing
+// the gizmo extents, and handling editor-related interactions.
 #include "position_2d.h"
 
 #include "core/engine.h"

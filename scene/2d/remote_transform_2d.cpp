@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the RemoteTransform2D class,
+// which represents a 2D remote transform in the scene. It provides
+// functionality for updating the transform of a remote Node2D based
+// on the local transform, with options for global or local coordinates,
+// and selective updating of position, rotation, and scale.
 #include "remote_transform_2d.h"
 #include "scene/scene_string_names.h"
 

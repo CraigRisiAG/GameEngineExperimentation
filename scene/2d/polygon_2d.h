@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the Polygon2D class,
+// which represents a 2D polygon in the scene. It provides
+// functionality for managing the polygon's vertices, offset,
+// inversion, internal vertices, and interaction with a Skeleton2D
+// for bone-based deformation. It also includes editor-related
+// functions for handling pivot, rect, and selection.
 #ifndef POLYGON_2D_H
 #define POLYGON_2D_H
 

@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the ParallaxLayer class,
+// which represents a layer within a 2D parallax background. It provides
+// functionality for managing motion scale, motion offset, mirroring,
+// and updating the layer's position and scale based on the parent
+// ParallaxBackground's scroll offset and scale.
 #ifndef PARALLAX_LAYER_H
 #define PARALLAX_LAYER_H
 

@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Particles2D class,
+// which represents a 2D particle system in the scene. It provides
+// functionality for managing particle emission, amount, lifetime,
+// one-shot mode, pre-process time, explosiveness ratio, randomness ratio,
+// visibility rectangle, local coordinates, process material, and speed scale.
 #include "particles_2d.h"
 
 #include "core/os/os.h"

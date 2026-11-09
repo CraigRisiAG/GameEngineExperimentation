@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the PhysicsBody2D class,
+// which represents a 2D physics body in the scene. It provides
+// functionality for managing collision layers, collision masks,
+// collision exceptions, and interaction with the Physics2DServer.
 #include "physics_body_2d.h"
 
 #include "core/core_string_names.h"

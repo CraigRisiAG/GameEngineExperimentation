@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the RemoteTransform2D class,
+// which represents a 2D remote transform in the scene. It provides
+// functionality for updating the transform of a remote Node2D based
+// on the local transform, with options for global or local coordinates,
+// and selective updating of position, rotation, and scale.
 #ifndef REMOTE_TRANSFORM_2D_H
 #define REMOTE_TRANSFORM_2D_H
 

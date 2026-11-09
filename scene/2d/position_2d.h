@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Position2D class,
+// which represents a 2D position marker in the scene. It provides
+// functionality for drawing a cross gizmo at the position, managing
+// the gizmo extents, and handling editor-related interactions.
 #ifndef POSITION_2D_H
 #define POSITION_2D_H
 

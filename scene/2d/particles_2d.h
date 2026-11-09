@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Particles2D class,
+// which represents a 2D particle system in the scene. It provides
+// functionality for managing particle emission, amount, lifetime,
+// one-shot mode, pre-process time, explosiveness ratio, randomness ratio,
+// visibility rectangle, local coordinates, process material, and speed scale.
 #ifndef PARTICLES_2D_H
 #define PARTICLES_2D_H
 
