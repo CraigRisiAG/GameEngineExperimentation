@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the NavigationPolygon class,
+// which represents a 2D navigation polygon in the scene. It provides
+// functionality for setting and getting vertices, polygons, and outlines, as
+// well as generating a navigation mesh based on the polygon data. It also
+// handles editing and selection of the polygon in the editor.
 #include "navigation_polygon.h"
 
 #include "core/core_string_names.h"

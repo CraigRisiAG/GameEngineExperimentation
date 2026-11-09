@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Node2D class,
+// which represents a 2D node in the scene. It provides functionality
+// for setting and getting the node's position, rotation, and scale,
+// as well as handling transformations, editing, and interaction with the
+// visual server.
 #include "node_2d.h"
 
 #include "core/message_queue.h"

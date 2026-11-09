@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Navigation2D class,
+// which represents a 2D navigation map in the scene. It provides functionality
+// for setting and getting the cell size and edge connection margin, as well as
+// finding paths and closest points within the navigation map. It also handles
+// updating the navigation map when its properties change.
 #include "navigation_2d.h"
 #include "servers/navigation_2d_server.h"
 

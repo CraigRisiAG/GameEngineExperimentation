@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the NavigationAgent2D class,
+// which represents a 2D navigation agent in the scene. It provides
+// functionality for setting and getting various navigation parameters such as
+// target desired distance, radius, neighbor distance, maximum neighbors, time
+// horizon, maximum speed, and path maximum distance. It also handles updating
+// the agent's navigation state and responding to avoidance events.
 #ifndef NAVIGATION_AGENT_2D_H
 #define NAVIGATION_AGENT_2D_H
 

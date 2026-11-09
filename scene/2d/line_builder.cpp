@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the LineBuilder class,
+// which is responsible for constructing the visual representation
+// of a 2D line based on its points, width, color, gradient, texture,
+// joint mode, and cap modes. It provides utility functions for
+// calculating intersections, distances, and interpolations needed
+// during the line building process.
 #include "line_builder.h"
 
 //----------------------------------------------------------------------------

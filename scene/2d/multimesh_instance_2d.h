@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the MultiMeshInstance2D class,
+// which represents a 2D multi-mesh instance in the scene. It provides
+// functionality for setting and getting the multi-mesh, texture, and normal
+// map. It also handles updating the visual representation of the multi-mesh
+// instance when its properties change.
 #ifndef MULTIMESH_INSTANCE_2D_H
 #define MULTIMESH_INSTANCE_2D_H
 

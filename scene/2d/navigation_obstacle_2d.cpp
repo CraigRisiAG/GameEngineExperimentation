@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the NavigationObstacle2D class,
+// which represents a 2D navigation obstacle in the scene. It provides
+// functionality for setting and getting the navigation node, updating the agent
+// shape, and handling the obstacle's interaction with the navigation system.
 #include "navigation_obstacle_2d.h"
 
 #include "scene/2d/collision_shape_2d.h"

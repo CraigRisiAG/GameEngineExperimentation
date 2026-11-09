@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the LightOccluder2D and
+// OccluderPolygon2D classes, which represent 2D light occluders and their
+// polygon shapes in the scene. It provides functionality for setting and
+// getting the polygon shape, closed state, cull mode, and handling changes to
+// the polygon. It also manages the interaction with the visual server for
+// rendering the occluders.
 #include "light_occluder_2d.h"
 
 #include "core/engine.h"

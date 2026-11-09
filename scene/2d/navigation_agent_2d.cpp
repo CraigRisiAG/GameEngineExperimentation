@@ -1,4 +1,9 @@
-
+// This file contains the implementation of the NavigationAgent2D class,
+// which represents a 2D navigation agent in the scene. It provides
+// functionality for setting and getting various navigation parameters such as
+// target desired distance, radius, neighbor distance, maximum neighbors, time
+// horizon, maximum speed, and path maximum distance. It also handles updating
+// the agent's navigation state and responding to avoidance events.
 #include "navigation_agent_2d.h"
 
 #include "core/engine.h"

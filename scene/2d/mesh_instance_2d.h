@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the MeshInstance2D class,
+// which represents a 2D mesh instance in the scene. It provides functionality
+// for setting and getting the mesh, texture, and normal map. It also handles
+// updating the visual representation of the mesh instance when its properties
+// change.
 #ifndef MESH_INSTANCE_2D_H
 #define MESH_INSTANCE_2D_H
 

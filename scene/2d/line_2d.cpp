@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Line2D class,
+// which represents a 2D line in the scene. It provides functionality
+// for setting and getting the line's points, width, color, gradient,
+// texture, joint mode, and cap modes. It also handles updating the
+// line's visual representation when its properties change.
 #include "line_2d.h"
 
 #include "core/core_string_names.h"

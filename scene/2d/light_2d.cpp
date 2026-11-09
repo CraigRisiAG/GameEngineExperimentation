@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Light2D class,
+// which represents a 2D light in the scene. It provides functionality
+// for setting and getting the light's texture, color, height, energy,
+// texture scale, z-range, and layer range. It also handles updating
+// the light's visibility and configuration in the visual server.
 #include "light_2d.h"
 
 #include "core/engine.h"

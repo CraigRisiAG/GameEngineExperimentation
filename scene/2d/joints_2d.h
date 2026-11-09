@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the Joint2D class and its derived
+// classes, which represent 2D joints in the scene. It provides functionality
+// for configuring joints between two physics bodies, managing collision
+// exclusion, and updating joint parameters in the 2D physics server. Specific
+// joint types like PinJoint2D, GrooveJoint2D, and DampedSpringJoint2D are also
+// declared here.
 #ifndef JOINTS_2D_H
 #define JOINTS_2D_H
 
