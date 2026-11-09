@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the GraphEdit class, which is
+// responsible for managing graph editing within the GUI. It provides
+// functionality for connecting and disconnecting nodes, handling scroll
+// offsets, updating the visual representation of connections, and managing
+// the layout and scaling of graph nodes.
 #include "graph_edit.h"
 
 #include "core/os/input.h"

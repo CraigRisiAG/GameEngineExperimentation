@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the LinkButton class, which is
+// responsible for managing a clickable text link within the GUI.
+// It provides functionality for handling text display, underline modes,
+// focus indication, and visual feedback for different interaction states.
 #include "link_button.h"
 
 void LinkButton::set_text(const String &p_text) {

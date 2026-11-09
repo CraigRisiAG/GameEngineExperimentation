@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Popup class, which is
+// responsible for managing a popup window within the GUI. It provides
+// functionality for handling popup positioning, sizing, centering, and focus
+// management.
 #include "popup.h"
 
 #include "core/engine.h"

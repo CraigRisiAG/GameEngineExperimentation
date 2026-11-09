@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the FileDialog class, which is
+// responsible for managing file dialogs within the GUI. It provides
+// functionality for handling directory navigation, file selection, input
+// events, and updating the file list based on the current directory.
 #include "file_dialog.h"
 
 #include "core/os/keyboard.h"

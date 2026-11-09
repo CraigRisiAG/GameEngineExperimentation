@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the ItemList class, which is
+// responsible for managing a list of items within the GUI. It provides
+// functionality for adding, modifying, and retrieving items, including
+// their text, icons, tooltips, and custom colors.
 #ifndef ITEMLIST_H
 #define ITEMLIST_H
 

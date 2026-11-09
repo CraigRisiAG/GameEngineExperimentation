@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the GraphNode class, which is
+// responsible for managing individual graph nodes within the GUI. It provides
+// functionality for handling node slots, updating the node layout, managing
+// node selection and dragging, and rendering the node and its connections.
 #include "graph_node.h"
 
 #include "core/method_bind_ext.gen.inc"

@@ -1,4 +1,8 @@
-
+// This file contains the declarations of the FileDialog and LineEditFileChooser
+// classes, which are responsible for managing file dialogs and file chooser
+// controls within the GUI. It provides functionality for handling directory
+// navigation, file selection, input events, and updating the file list based on
+// the current directory.
 #ifndef FILE_DIALOG_H
 #define FILE_DIALOG_H
 

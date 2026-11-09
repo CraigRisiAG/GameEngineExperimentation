@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the GridContainer class, which is
+// responsible for managing a grid layout of child controls within the GUI.
+// It provides functionality for computing the minimum size of each cell,
+// handling column and row expansion, and arranging child controls based on
+// the specified number of columns and spacing constants.
 #include "grid_container.h"
 
 void GridContainer::_notification(int p_what) {

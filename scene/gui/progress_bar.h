@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the ProgressBar class, which is
+// responsible for managing a progress bar within the GUI. It provides
+// functionality for handling progress display, percentage visibility, and
+// drawing the progress bar.
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
 

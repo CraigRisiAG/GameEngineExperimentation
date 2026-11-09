@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the NinePatchRect class, which is
+// responsible for managing a nine-patch rectangle within the GUI. It provides
+// functionality for handling texture regions, patch margins, axis stretch
+// modes, and drawing the center of the rectangle.
 #ifndef NINE_PATCH_RECT_H
 #define NINE_PATCH_RECT_H
 

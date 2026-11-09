@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Label class, which is
+// responsible for displaying text within the GUI. It provides functionality
+// for handling text alignment, word wrapping, line spacing, font settings,
+// and visual effects such as shadows and outlines.
 #include "label.h"
 #include "core/print_string.h"
 #include "core/project_settings.h"

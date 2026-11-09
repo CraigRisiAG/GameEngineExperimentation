@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the LineEdit class, which is
+// responsible for managing a single-line text input field within the GUI.
+// It provides functionality for handling text input, cursor movement,
+// selection, clipboard operations, and interaction with virtual keyboards.
 #include "line_edit.h"
 
 #include "core/message_queue.h"

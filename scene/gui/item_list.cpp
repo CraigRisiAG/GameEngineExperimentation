@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ItemList class, which is
+// responsible for managing a list of items within the GUI. It provides
+// functionality for adding, modifying, and retrieving items, including
+// their text, icons, tooltips, and custom colors.
 #include "item_list.h"
 #include "core/os/os.h"
 #include "core/project_settings.h"
@@ -1058,7 +1061,7 @@ void ItemList::_notification(int p_what) {
 
         Size2 icon_size;
         //= _adjust_to_max_size(items[i].get_icon_size(),fixed_icon_size) *
-        //icon_scale;
+        // icon_scale;
 
         if (fixed_icon_size.x > 0 && fixed_icon_size.y > 0) {
           icon_size = fixed_icon_size * icon_scale;

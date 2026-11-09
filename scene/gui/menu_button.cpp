@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the MenuButton class, which is
+// responsible for managing a button that displays a popup menu within the GUI.
+// It provides functionality for handling key input, button presses, popup
+// positioning, and managing menu items and interaction states.
 #include "menu_button.h"
 
 #include "core/os/keyboard.h"

@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the GradientEdit class, which is
+// responsible for managing gradient editing within the GUI. It provides
+// functionality for adding, removing, and selecting gradient points, as well
+// as displaying a color picker for modifying the colors of the gradient points.
 #ifndef GRADIENT_EDIT_H
 #define GRADIENT_EDIT_H
 

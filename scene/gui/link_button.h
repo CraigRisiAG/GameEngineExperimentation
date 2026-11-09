@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the LinkButton class, which is
+// responsible for managing a clickable text link within the GUI.
+// It provides functionality for handling text display, underline modes,
+// focus indication, and visual feedback for different interaction states.
 #ifndef LINKBUTTON_H
 #define LINKBUTTON_H
 

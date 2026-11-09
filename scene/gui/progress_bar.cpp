@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ProgressBar class, which is
+// responsible for managing a progress bar within the GUI. It provides
+// functionality for handling progress display, percentage visibility, and
+// drawing the progress bar.
 #include "progress_bar.h"
 
 Size2 ProgressBar::get_minimum_size() const {

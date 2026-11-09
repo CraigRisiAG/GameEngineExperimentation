@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the PopupMenu class, which is
+// responsible for managing a popup menu within the GUI. It provides
+// functionality for handling menu items, submenus, mouse interaction, and
+// scrolling.
 #include "popup_menu.h"
 
 #include "core/os/input.h"

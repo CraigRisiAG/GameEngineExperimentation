@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the OptionButton class, which is
+// responsible for managing a button that displays a popup menu with selectable
+// options within the GUI. It provides functionality for handling item addition,
+// selection, icons, and interaction states.
 #ifndef OPTION_BUTTON_H
 #define OPTION_BUTTON_H
 

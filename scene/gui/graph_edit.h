@@ -1,4 +1,8 @@
-
+// This file contains the declarations of the GraphEdit and GraphEditFilter
+// classes, which are responsible for managing graph editing within the GUI. It
+// provides functionality for connecting and disconnecting nodes, handling
+// scroll offsets, updating the visual representation of connections, and
+// managing the layout and scaling of graph nodes.
 #ifndef GRAPH_EDIT_H
 #define GRAPH_EDIT_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the OptionButton class, which is
+// responsible for managing a button that displays a popup menu with selectable
+// options within the GUI. It provides functionality for handling item addition,
+// selection, icons, and interaction states.
 #include "option_button.h"
 
 #include "core/print_string.h"

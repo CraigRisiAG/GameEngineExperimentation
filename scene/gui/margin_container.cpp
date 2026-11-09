@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the MarginContainer class, which is
+// responsible for managing a container with configurable margins within the
+// GUI. It provides functionality for calculating the minimum size based on
+// child controls and arranging child controls within the specified margins.
 #include "margin_container.h"
 
 Size2 MarginContainer::get_minimum_size() const {

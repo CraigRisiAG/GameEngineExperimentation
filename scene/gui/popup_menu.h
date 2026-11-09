@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the PopupMenu class, which is
+// responsible for managing a popup menu within the GUI. It provides
+// functionality for handling menu items, submenus, mouse interaction, and
+// scrolling.
 #ifndef POPUP_MENU_H
 #define POPUP_MENU_H
 

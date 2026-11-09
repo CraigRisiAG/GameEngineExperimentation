@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the WindowDialog class, which is
+// responsible for managing window dialogs within the GUI. It provides
+// functionality for handling window dragging, resizing, input events, and
+// ensuring the window remains within the viewport boundaries.
 #include "dialogs.h"
 #include "core/print_string.h"
 #include "core/translation.h"

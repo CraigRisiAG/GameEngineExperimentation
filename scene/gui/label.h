@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the Label class, which is
+// responsible for displaying text within the GUI. It provides functionality
+// for handling text alignment, word wrapping, line spacing, font settings,
+// and visual effects such as shadows and outlines.
 #ifndef LABEL_H
 #define LABEL_H
 

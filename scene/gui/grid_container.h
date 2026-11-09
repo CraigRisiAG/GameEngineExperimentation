@@ -1,11 +1,14 @@
-**********************************************************************/
-
+// This file contains the declarations of the GridContainer class, which is
+// responsible for managing a grid layout of child controls within the GUI.
+// It provides functionality for computing the minimum size of each cell,
+// handling column and row expansion, and arranging child controls based on
+// the specified number of columns and spacing constants.
 #ifndef GRID_CONTAINER_H
 #define GRID_CONTAINER_H
 
 #include "scene/gui/container.h"
 
-    class GridContainer : public Container {
+class GridContainer : public Container {
 
   GDCLASS(GridContainer, Container);
 

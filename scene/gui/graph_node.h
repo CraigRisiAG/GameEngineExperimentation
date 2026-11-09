@@ -1,4 +1,7 @@
-
+// This file contains the declarations of the GraphNode class, which is
+// responsible for managing individual graph nodes within the GUI. It provides
+// functionality for handling node slots, updating the node layout, managing
+// node selection and dragging, and rendering the node and its connections.
 #ifndef GRAPH_NODE_H
 #define GRAPH_NODE_H
 

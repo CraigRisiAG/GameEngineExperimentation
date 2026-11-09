@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the GradientEdit class, which is
+// responsible for managing gradient editing within the GUI. It provides
+// functionality for adding, removing, and selecting gradient points, as well
+// as displaying a color picker for modifying the colors of the gradient points.
 #include "gradient_edit.h"
 
 #include "core/os/keyboard.h"

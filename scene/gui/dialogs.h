@@ -1,4 +1,8 @@
-
+// This file contains the declarations of the WindowDialog, PopupDialog,
+// AcceptDialog, and ConfirmationDialog classes, which are responsible for
+// managing various types of dialogs within the GUI. It provides functionality
+// for handling window dragging, resizing, input events, and ensuring the
+// dialogs remain within the viewport boundaries.
 #ifndef DIALOGS_H
 #define DIALOGS_H
 

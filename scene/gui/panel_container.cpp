@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the PanelContainer class, which is
+// responsible for managing a container with a panel style within the GUI.
+// It provides functionality for calculating the minimum size based on child
+// controls, drawing the panel, and arranging child controls within the panel.
 #include "panel_container.h"
 
 Size2 PanelContainer::get_minimum_size() const {

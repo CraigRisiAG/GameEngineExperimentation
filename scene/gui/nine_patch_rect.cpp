@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the NinePatchRect class, which is
+// responsible for managing a nine-patch rectangle within the GUI. It provides
+// functionality for handling texture regions, patch margins, axis stretch
+// modes, and drawing the center of the rectangle.
 #include "nine_patch_rect.h"
 
 #include "servers/visual_server.h"
