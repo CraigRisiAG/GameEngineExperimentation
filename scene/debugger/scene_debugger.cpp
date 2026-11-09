@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the SceneDebugger class, which is
+// responsible for handling scene-related debugging messages. It provides
+// functionality for initializing and deinitializing the debugger, parsing
+// messages related to the scene tree, live editing, and object inspection, and
+// interacting with the LiveEditor singleton for live updates.
 #include "scene_debugger.h"
 
 #include "core/debugger/engine_debugger.h"

@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the SceneDebugger class and related
+// classes, which are responsible for handling scene-related debugging messages.
+// It provides functionality for initializing and deinitializing the debugger,
+// parsing messages related to the scene tree, live editing, and object
+// inspection, and interacting with the LiveEditor singleton for live updates.
 #ifndef SCENE_DEBUGGER_H
 #define SCENE_DEBUGGER_H
 
