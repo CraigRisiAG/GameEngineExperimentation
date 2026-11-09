@@ -1,11 +1,14 @@
-************************************************************************/
-
+// This file contains the implementation of the CheckButton class, which is
+// responsible for rendering and managing check button controls within the GUI.
+// It provides functionality for calculating minimum sizes, handling internal
+// margins, drawing the check button in various states (on, off, disabled),
+// and managing icons and text within the check button.
 #include "check_button.h"
 
 #include "core/print_string.h"
 #include "servers/visual_server.h"
 
-    Size2 CheckButton::get_icon_size() const {
+Size2 CheckButton::get_icon_size() const {
 
   Ref<Texture2D> on = Control::get_icon(is_disabled() ? "on_disabled" : "on");
   Ref<Texture2D> off =

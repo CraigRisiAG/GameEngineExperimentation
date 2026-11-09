@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the BaseButton class, which is
+// responsible for handling button interactions within the GUI. It provides
+// functionality for managing button states, handling input events, and
+// emitting signals for button presses, toggles, and other actions.
 #include "base_button.h"
 
 #include "core/os/keyboard.h"

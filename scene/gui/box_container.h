@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the BoxContainer class and its derived
+// classes (HBoxContainer and VBoxContainer), which are responsible for
+// arranging child controls in a vertical or horizontal layout. It provides
+// functionality for calculating minimum sizes, handling stretchable elements,
+// and aligning children within the container.
 #ifndef BOX_CONTAINER_H
 #define BOX_CONTAINER_H
 

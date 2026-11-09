@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Button class, which is
+// responsible for rendering and managing button controls within the GUI. It
+// provides functionality for calculating minimum sizes, handling internal
+// margins, drawing the button in various states (normal, hover, pressed,
+// disabled), and managing icons and text within the button.
 #include "button.h"
 
 #include "core/translation.h"

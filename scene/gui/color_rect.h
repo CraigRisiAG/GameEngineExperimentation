@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the ColorRect class, which is
+// responsible for rendering and managing color rectangle controls within the
+// GUI. It provides functionality for setting and getting the frame color, as
+// well as handling drawing notifications to display the color rectangle.
 #ifndef COLOR_RECT_H
 #define COLOR_RECT_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ColorRect class, which is
+// responsible for rendering and managing color rectangle controls within the
+// GUI. It provides functionality for setting and getting the frame color, as
+// well as handling drawing notifications to display the color rectangle.
 #include "color_rect.h"
 
 void ColorRect::set_frame_color(const Color &p_color) {

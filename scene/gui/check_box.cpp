@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the CheckBox class, which is
+// responsible for rendering and managing checkbox controls within the GUI.
+// It provides functionality for calculating minimum sizes, handling internal
+// margins, drawing the checkbox in various states (checked, unchecked, radio),
+// and managing icons and text within the checkbox.
 #include "check_box.h"
 
 #include "servers/visual_server.h"

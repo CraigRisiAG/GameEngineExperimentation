@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the ColorPicker class, which is
+// responsible for rendering and managing color picker controls within the GUI.
+// It provides functionality for handling color selection, updating sliders,
+// managing presets, and interacting with the user through various input
+// methods.
 #ifndef COLOR_PICKER_H
 #define COLOR_PICKER_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CenterContainer class, which is
+// responsible for centering child controls within the container. It provides
+// functionality for calculating minimum sizes, handling top-left alignment,
+// and sorting children to ensure proper positioning within the container.
 #include "center_container.h"
 
 Size2 CenterContainer::get_minimum_size() const {

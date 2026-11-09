@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the ColorPicker class, which is
+// responsible for rendering and managing color picker controls within the GUI.
+// It provides functionality for handling color selection, updating sliders,
+// managing presets, and interacting with the user through various input
+// methods.
 #include "color_picker.h"
 
 #include "core/os/input.h"

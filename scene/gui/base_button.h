@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the BaseButton class, which is
+// responsible for handling button interactions within the GUI. It provides
+// functionality for managing button states, handling input events, and
+// emitting signals for button presses, toggles, and other actions.
 #ifndef BASE_BUTTON_H
 #define BASE_BUTTON_H
 

@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the Container class, which is
+// responsible for managing the layout and sorting of child controls within the
+// GUI. It provides functionality for handling child notifications, fitting
+// children into specified rectangles, and managing sorting and resizing
+// behavior.
 #include "container.h"
 #include "core/message_queue.h"
 #include "scene/scene_string_names.h"

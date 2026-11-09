@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Container class, which is
+// responsible for managing the layout and sorting of child controls within the
+// GUI. It provides functionality for handling child notifications, fitting
+// children into specified rectangles, and managing sorting and resizing
+// behavior.
 #ifndef CONTAINER_H
 #define CONTAINER_H
 

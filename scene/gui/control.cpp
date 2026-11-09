@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Control class, which is
+// responsible for rendering and managing control elements within the GUI.
+// It provides functionality for handling editing states, position, scale,
+// rotation, pivot, minimum size, and other control-related properties.
 #include "control.h"
 
 #include "core/message_queue.h"

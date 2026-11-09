@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the BoxContainer class, which is
+// responsible for arranging child controls in a vertical or horizontal layout.
+// It provides functionality for calculating minimum sizes, handling stretchable
+// elements, and aligning children within the container.
 #include "box_container.h"
 #include "label.h"
 #include "margin_container.h"
