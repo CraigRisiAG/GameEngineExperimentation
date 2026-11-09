@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the AnimationNodeBlendSpace2D class,
+// which represents a 2D blend space animation node in the scene. It provides
+// functionality for managing blend points, their positions, and associated
+// animation nodes, as well as handling the blend space parameters such as
+// blend position, closest point, and length internal.
 #ifndef ANIMATION_BLEND_SPACE_2D_H
 #define ANIMATION_BLEND_SPACE_2D_H
 

@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the AnimationCache class, which is
+// responsible for caching animation paths and connected nodes within the scene.
+// It provides functionality for handling node exit events, updating the cache
+// when animations change, and managing track transforms efficiently.
 #ifndef ANIMATION_CACHE_H
 #define ANIMATION_CACHE_H
 

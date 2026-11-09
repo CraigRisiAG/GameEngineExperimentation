@@ -1,4 +1,12 @@
-
+// This file contains the declaration of the FabrikInverseKinematic class and
+// the SkeletonIK node. FabrikInverseKinematic provides functionality for
+// building and solving inverse kinematics chains using the FABRIK algorithm,
+// including methods for constructing chains from a root to end effectors,
+// updating chain items based on the skeleton, and solving the IK problem with
+// simple forward and backward passes. SkeletonIK is a Node that uses
+// FabrikInverseKinematic to perform inverse kinematics on a skeleton, allowing
+// configuration of root and tip bones, target transforms, magnet usage, and
+// solver settings.
 #ifndef SKELETON_IK_H
 #define SKELETON_IK_H
 

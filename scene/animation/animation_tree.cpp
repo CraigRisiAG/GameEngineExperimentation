@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the AnimationNode class and related
+// functionality for managing animation nodes within an animation tree. It
+// provides methods for handling parameters, child nodes, blending animations,
+// preprocessing, and marking nodes as invalid.
 #include "animation_tree.h"
 
 #include "animation_blend_tree.h"

@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the
+// AnimationNodeStateMachineTransition class, which represents a transition
+// between states in an animation state machine. It provides functionality for
+// managing switch modes, auto-advance behavior, advance conditions, crossfade
+// times, priority, and disabled state.
 #include "animation_node_state_machine.h"
 
 /////////////////////////////////////////////////

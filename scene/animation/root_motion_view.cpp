@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the RootMotionView class, which
+// provides a visual representation of root motion within an animation tree. It
+// allows setting the animation path, color, cell size, radius, and zero Y-axis
+// option, and handles the visualization of root motion using immediate
+// geometry.
 #include "root_motion_view.h"
 #include "scene/animation/animation_tree.h"
 #include "scene/resources/material.h"

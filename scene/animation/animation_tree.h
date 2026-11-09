@@ -1,4 +1,11 @@
-
+// This file contains the declaration of the AnimationNode, AnimationRootNode,
+// and AnimationTree classes. AnimationNode represents a node within an
+// animation tree, providing functionality for handling inputs, blending
+// animations, managing child nodes, and filtering. AnimationRootNode is a
+// specialized AnimationNode that serves as the root of the animation tree and
+// does not allow inputs. AnimationTree manages the overall animation graph,
+// including processing animations, caching tracks, and handling different
+// animation process modes.
 #ifndef ANIMATION_GRAPH_PLAYER_H
 #define ANIMATION_GRAPH_PLAYER_H
 

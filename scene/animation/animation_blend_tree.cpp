@@ -1,4 +1,10 @@
-
+// This file contains the implementation of the AnimationNodeAnimation and
+// AnimationNodeOneShot classes, which are part of the animation blend tree
+// system. AnimationNodeAnimation handles individual animations, providing
+// functionality for setting and getting the animation, processing it over
+// time, and managing its parameters. AnimationNodeOneShot represents a
+// one-shot animation node with support for fade-in, fade-out, and
+// autorestart behavior.
 #include "animation_blend_tree.h"
 
 #include "scene/scene_string_names.h"

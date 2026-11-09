@@ -1,4 +1,10 @@
-
+// This file contains the declaration of the AnimationNodeAnimation,
+// AnimationNodeOneShot, AnimationNodeAdd2, AnimationNodeAdd3,
+// AnimationNodeBlend2, AnimationNodeBlend3, and AnimationNodeTimeScale classes,
+// which are part of the animation blend tree system. These classes provide
+// functionality for handling individual animations, one-shot animations with
+// fade-in and fade-out, additive animations, blend animations, and time scaling
+// within the animation blend tree.
 #ifndef ANIMATION_BLEND_TREE_H
 #define ANIMATION_BLEND_TREE_H
 

@@ -1,11 +1,14 @@
-***********************************************************************/
-
+// This file contains the declaration of the RootMotionView class, which
+// provides a visual representation of root motion within an animation tree. It
+// allows setting the animation path, color, cell size, radius, and zero Y-axis
+// option, and handles the visualization of root motion using immediate
+// geometry.
 #ifndef ROOT_MOTION_VIEW_H
 #define ROOT_MOTION_VIEW_H
 
 #include "scene/3d/visual_instance.h"
 
-    class RootMotionView : public VisualInstance {
+class RootMotionView : public VisualInstance {
   GDCLASS(RootMotionView, VisualInstance);
 
 public:

@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the AnimationCache class, which is
+// responsible for caching animation paths and connected nodes within the scene.
+// It provides functionality for handling node exit events, updating the cache
+// when animations change, and managing track transforms efficiently.
 #include "animation_cache.h"
 
 void AnimationCache::_node_exit_tree(Node *p_node) {

@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the AnimationNodeBlendSpace1D class,
+// which represents a 1D blend space animation node in the scene. It provides
+// functionality for managing blend points, their positions, and associated
+// animation nodes, as well as handling the blend space parameters such as
+// minimum and maximum space, snap, and value label.
 #ifndef ANIMATION_BLEND_SPACE_1D_H
 #define ANIMATION_BLEND_SPACE_1D_H
 

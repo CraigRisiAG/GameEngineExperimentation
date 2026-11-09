@@ -1,4 +1,8 @@
-
+// This file contains the declaration of the Tween class, which provides
+// functionality for managing and executing tween animations. It includes enums
+// for transition and ease types, structures for storing interpolation data and
+// pending commands, and methods for controlling playback, adding
+// interpolations, and processing pending commands.
 #ifndef TWEEN_H
 #define TWEEN_H
 

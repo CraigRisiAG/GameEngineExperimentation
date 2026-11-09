@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the AnimationPlayer class, which is
+// responsible for managing and playing animations within a scene. It provides
+// functionality for setting and getting animations, handling playback,
+// blending, and processing animation updates over time.
 #include "animation_player.h"
 
 #include "core/engine.h"

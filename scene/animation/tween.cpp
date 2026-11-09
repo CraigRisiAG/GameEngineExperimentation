@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Tween class, which provides
+// functionality for managing and executing tween animations. It includes
+// methods for adding pending commands, processing them, and handling playback
+// properties such as speed, active state, and repeat behavior.
 #include "tween.h"
 
 #include "core/method_bind_ext.gen.inc"

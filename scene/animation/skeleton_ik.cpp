@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the FabrikInverseKinematic class,
+// which provides functionality for building and solving inverse kinematics
+// chains using the FABRIK algorithm. It includes methods for constructing
+// chains from a root to end effectors, updating chain items based on the
+// skeleton, and solving the IK problem with simple forward and backward passes.
 /**
  * @author AndreaCatania
  */
@@ -108,8 +112,8 @@ bool FabrikInverseKinematic::build_chain(Task *p_task,
     if (p_force_simple_chain) {
       // NOTE:
       //	This is an "hack" that force to create only one tip per chain
-      //since the solver of multi tip (end effector) 	is not yet created. 	Remove
-      //this code when this is done
+      // since the solver of multi tip (end effector) 	is not yet created.
+      // Remove this code when this is done
       break;
     }
   }

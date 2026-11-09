@@ -1,4 +1,8 @@
-
+// This file contains the implementation of the AnimationNodeBlendSpace2D class,
+// which represents a 2D blend space animation node in the scene. It provides
+// functionality for managing blend points, their positions, and associated
+// animation nodes, as well as handling the blend space parameters such as
+// blend position, closest point, and length internal.
 #include "animation_blend_space_2d.h"
 #include "core/math/delaunay.h"
 

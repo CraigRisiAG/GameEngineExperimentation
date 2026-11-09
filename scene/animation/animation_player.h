@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the AnimationPlayer class, which is
+// responsible for managing and playing animations within a scene. It provides
+// functionality for setting and getting animations, handling playback,
+// blending, and processing animation updates over time.
 #ifndef ANIMATION_PLAYER_H
 #define ANIMATION_PLAYER_H
 

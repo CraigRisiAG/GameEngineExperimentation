@@ -1,4 +1,13 @@
-
+// This file contains the declaration of the
+// AnimationNodeStateMachineTransition, AnimationNodeStateMachinePlayback, and
+// AnimationNodeStateMachine classes. AnimationNodeStateMachineTransition
+// represents a transition between states in an animation state machine,
+// providing functionality for switch modes, auto-advance, advance conditions,
+// crossfade times, priority, and disabled state.
+// AnimationNodeStateMachinePlayback handles the playback of an animation state
+// machine, including travel between states, processing time, and managing the
+// current play state. AnimationNodeStateMachine represents the state machine
+// itself, managing states, transitions, and playback within the animation tree.
 #ifndef ANIMATION_NODE_STATE_MACHINE_H
 #define ANIMATION_NODE_STATE_MACHINE_H
 
