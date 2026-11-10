@@ -1,4 +1,5 @@
-
+// This file contains the definition of the MeshDataTool class,
+// which is responsible for managing and manipulating mesh data for rendering.
 #ifndef MESH_DATA_TOOL_H
 #define MESH_DATA_TOOL_H
 

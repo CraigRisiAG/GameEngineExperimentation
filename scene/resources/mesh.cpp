@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the Mesh class,
+// which is responsible for managing 3D mesh data, including generating triangle
+// meshes and debug information.
 #include "mesh.h"
 
 #include "core/pair.h"

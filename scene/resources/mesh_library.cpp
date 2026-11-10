@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the MeshLibrary class,
+// which is responsible for managing a collection of mesh items, including their
+// shapes, navmeshes, and previews.
 #include "mesh_library.h"
 
 bool MeshLibrary::_set(const StringName &p_name, const Variant &p_value) {
@@ -37,7 +39,9 @@ bool MeshLibrary::_set(const StringName &p_name, const Variant &p_value) {
 
   return false;
 }
-
+// This file contains the implementation of the MeshLibrary class,
+// which is responsible for managing a collection of mesh items, including their
+// shapes, navmeshes, and previews.
 bool MeshLibrary::_get(const StringName &p_name, Variant &r_ret) const {
 
   String name = p_name;
@@ -62,7 +66,8 @@ bool MeshLibrary::_get(const StringName &p_name, Variant &r_ret) const {
 
   return true;
 }
-
+// This function populates the property list for the MeshLibrary class, which is
+// used by the editor to display and edit the properties of mesh items.
 void MeshLibrary::_get_property_list(List<PropertyInfo> *p_list) const {
 
   for (Map<int, Item>::Element *E = item_map.front(); E; E = E->next()) {

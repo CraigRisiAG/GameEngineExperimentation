@@ -1,4 +1,6 @@
-
+// This file contains the definition of the MeshLibrary class,
+// which is responsible for managing a collection of mesh items, including their
+// shapes, navmeshes, and previews.
 #ifndef GRID_THEME_H
 #define GRID_THEME_H
 

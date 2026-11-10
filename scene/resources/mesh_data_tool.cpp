@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the MeshDataTool class,
+// which is responsible for managing and manipulating mesh data for rendering.
 #include "mesh_data_tool.h"
 
 void MeshDataTool::clear() {

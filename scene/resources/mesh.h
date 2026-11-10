@@ -1,4 +1,6 @@
-
+// This file contains the definition of the Mesh class,
+// which is responsible for managing 3D mesh data, including generating triangle
+// meshes and debug information.
 #ifndef MESH_H
 #define MESH_H
 
