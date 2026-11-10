@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the CanvasLayer class, which is
+// responsible for managing canvas layers within the scene. It provides
+// functionality for handling layer ordering, transformations, offsets,
+// rotations, scaling, and interaction with the viewport.
 #ifndef CANVAS_LAYER_H
 #define CANVAS_LAYER_H
 

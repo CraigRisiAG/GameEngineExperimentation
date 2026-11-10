@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the Timer class, which is
+// responsible for managing timers within the scene. It provides functionality
+// for starting, stopping, pausing, and configuring timers.
 #ifndef TIMER_H
 #define TIMER_H
 

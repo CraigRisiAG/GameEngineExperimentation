@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the CanvasLayer class, which is
+// responsible for managing canvas layers within the scene. It provides
+// functionality for handling layer ordering, transformations, offsets,
+// rotations, scaling, and interaction with the viewport.
 #include "canvas_layer.h"
 #include "viewport.h"
 

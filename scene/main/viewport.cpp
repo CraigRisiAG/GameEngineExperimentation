@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the ViewportTexture class, which is
+// responsible for managing viewport textures within the scene. It provides
+// functionality for setting up viewport paths, retrieving texture data, and
+// handling viewport-related operations.
 #include "viewport.h"
 
 #include "core/core_string_names.h"
@@ -358,7 +361,7 @@ void Viewport::_notification(int p_what) {
 
     VisualServer::get_singleton()->viewport_set_scenario(viewport, RID());
     //			SpatialSoundServer::get_singleton()->listener_set_space(internal_listener,
-    //RID());
+    // RID());
     VisualServer::get_singleton()->viewport_remove_canvas(viewport,
                                                           current_canvas);
     if (contact_2d_debug.is_valid()) {
@@ -915,7 +918,7 @@ void Viewport::_listener_transform_changed_notify() {
 #ifndef _3D_DISABLED
 // if (listener)
 //		SpatialSoundServer::get_singleton()->listener_set_transform(internal_listener,
-//listener->get_listener_transform());
+// listener->get_listener_transform());
 #endif
 }
 
@@ -979,7 +982,7 @@ void Viewport::_camera_transform_changed_notify() {
 // camera
 //	if (camera && !listener)
 //		SpatialSoundServer::get_singleton()->listener_set_transform(internal_listener,
-//camera->get_camera_transform());
+// camera->get_camera_transform());
 #endif
 }
 
@@ -2338,7 +2341,7 @@ void Viewport::_gui_input_event(Ref<InputEvent> p_event) {
 
         gui.tooltip = over;
         gui.tooltip_pos = mpos; //(parent_xform *
-                                //get_transform()).affine_inverse().xform(pos);
+                                // get_transform()).affine_inverse().xform(pos);
         gui.tooltip_timer = gui.tooltip_delay;
       }
     }

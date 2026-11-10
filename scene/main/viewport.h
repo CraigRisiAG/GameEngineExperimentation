@@ -1,4 +1,9 @@
-
+// This file contains the declaration of the ViewportTexture and Viewport
+// classes, which are responsible for managing viewport textures and viewports
+// within the scene. The ViewportTexture class provides functionality for
+// setting up viewport paths, retrieving texture data, and handling
+// viewport-related operations, while the Viewport class manages the rendering
+// viewport, camera overrides, and related scene elements.
 #ifndef VIEWPORT_H
 #define VIEWPORT_H
 

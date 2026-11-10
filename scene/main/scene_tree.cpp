@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the SceneTree class, which is
+// responsible for managing the scene hierarchy, node lifecycle events,
+// group management, and scene tree notifications.
 #include "scene_tree.h"
 
 #include "core/debugger/engine_debugger.h"

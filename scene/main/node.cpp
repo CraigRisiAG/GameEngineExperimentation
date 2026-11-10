@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the Node class, which is
+// responsible for managing nodes within the scene. It provides
+// functionality for handling notifications, script instance calls,
+// input processing, tree management, and node lifecycle events.
 #include "node.h"
 
 #include "core/core_string_names.h"

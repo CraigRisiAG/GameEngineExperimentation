@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the Timer class, which is
+// responsible for managing timers within the scene. It provides functionality
+// for starting, stopping, pausing, and configuring timers.
 #include "timer.h"
 
 #include "core/engine.h"

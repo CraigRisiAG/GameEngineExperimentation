@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the ResourcePreloader class, which is
+// responsible for managing preloaded resources within the scene. It provides
+// functionality for adding, removing, renaming, and retrieving resources.
 #ifndef RESOURCE_PRELOADER_H
 #define RESOURCE_PRELOADER_H
 

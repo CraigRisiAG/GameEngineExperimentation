@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the InstancePlaceholder class, which
+// is responsible for managing instance placeholders within the scene. It
+// provides functionality for storing property values, creating instances of
+// scenes, and handling instance paths.
 #include "instance_placeholder.h"
 
 #include "core/io/resource_loader.h"

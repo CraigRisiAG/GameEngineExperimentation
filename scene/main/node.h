@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the Node class, which is
+// responsible for managing nodes within the scene. It provides
+// functionality for handling notifications, script instance calls,
+// input processing, tree management, and node lifecycle events.
 #ifndef NODE_H
 #define NODE_H
 

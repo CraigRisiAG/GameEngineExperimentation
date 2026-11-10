@@ -1,4 +1,7 @@
-
+// This file contains the implementation of the HTTPRequest class, which is
+// responsible for managing HTTP requests within the scene. It provides
+// functionality for handling URL parsing, request sending, response handling,
+// redirections, and interaction with the HTTP client.
 #include "http_request.h"
 
 void HTTPRequest::_redirect_request(const String &p_new_url) {}

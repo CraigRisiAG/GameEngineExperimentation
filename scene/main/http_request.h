@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the HTTPRequest class, which is
+// responsible for managing HTTP requests within the scene. It provides
+// functionality for handling URL parsing, request sending, response handling,
+// redirections, and interaction with the HTTP client.
 #ifndef HTTPREQUEST_H
 #define HTTPREQUEST_H
 

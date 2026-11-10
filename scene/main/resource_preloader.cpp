@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ResourcePreloader class, which
+// is responsible for managing preloaded resources within the scene. It provides
+// functionality for adding, removing, renaming, and retrieving resources.
 #include "resource_preloader.h"
 
 void ResourcePreloader::_set_resources(const Array &p_data) {

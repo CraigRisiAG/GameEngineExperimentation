@@ -1,4 +1,7 @@
-
+// This file contains the declaration of the InstancePlaceholder class, which is
+// responsible for managing instance placeholders within the scene. It provides
+// functionality for storing property values, creating instances of scenes,
+// and handling instance paths.
 #ifndef INSTANCE_PLACEHOLDER_H
 #define INSTANCE_PLACEHOLDER_H
 

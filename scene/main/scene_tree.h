@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the SceneTree class, which is
+// responsible for managing the scene hierarchy, node lifecycle events,
+// group management, and scene tree notifications.
 #ifndef SCENE_MAIN_LOOP_H
 #define SCENE_MAIN_LOOP_H
 
