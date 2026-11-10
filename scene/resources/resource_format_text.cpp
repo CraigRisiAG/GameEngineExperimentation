@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the ResourceLoaderText class,
+// which is responsible for loading resources from text-based formats.
 #include "resource_format_text.h"
 
 #include "core/io/resource_format_binary.h"

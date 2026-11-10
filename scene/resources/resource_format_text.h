@@ -1,4 +1,5 @@
-
+// This file contains the definition of the ResourceLoaderText class,
+// which is responsible for loading resources from text-based formats.
 #ifndef RESOURCE_FORMAT_TEXT_H
 #define RESOURCE_FORMAT_TEXT_H
 

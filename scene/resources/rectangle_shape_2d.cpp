@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the RectangleShape2D class,
+// which is responsible for managing rectangle shape properties, including
+// extents and drawing.
 #include "rectangle_shape_2d.h"
 
 #include "servers/physics_2d_server.h"

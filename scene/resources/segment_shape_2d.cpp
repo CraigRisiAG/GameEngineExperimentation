@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the SegmentShape2D class,
+// which is responsible for managing segment shape properties, including
+// endpoints and drawing.
 #include "segment_shape_2d.h"
 
 #include "servers/physics_2d_server.h"

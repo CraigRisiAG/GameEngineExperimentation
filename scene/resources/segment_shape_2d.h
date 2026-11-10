@@ -1,4 +1,6 @@
-
+// This file contains the definition of the SegmentShape2D class,
+// which is responsible for managing segment shape properties, including
+// endpoints and drawing.
 #ifndef SEGMENT_SHAPE_2D_H
 #define SEGMENT_SHAPE_2D_H
 

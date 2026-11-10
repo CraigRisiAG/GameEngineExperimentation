@@ -1,4 +1,6 @@
-
+// This file contains the definition of the RectangleShape2D class,
+// which is responsible for managing rectangle shape properties, including
+// extents and drawing.
 #ifndef RECTANGLE_SHAPE_2D_H
 #define RECTANGLE_SHAPE_2D_H
 
