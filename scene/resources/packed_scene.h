@@ -1,4 +1,6 @@
-
+// This file contains the definition of the PackedScene class,
+// which is responsible for managing packed scene data, including nodes,
+// properties, connections, and instancing information.
 #ifndef PACKED_SCENE_H
 #define PACKED_SCENE_H
 

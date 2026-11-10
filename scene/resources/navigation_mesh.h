@@ -1,4 +1,6 @@
-
+// This file contains the definition of the NavigationMesh class,
+// which is responsible for managing navigation mesh data, including generating
+// navigation polygons and handling collision masks.
 #ifndef NAVIGATION_MESH_H
 #define NAVIGATION_MESH_H
 

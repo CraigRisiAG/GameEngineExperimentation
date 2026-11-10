@@ -1,4 +1,6 @@
-
+// This file contains the definition of the ParticlesMaterial class,
+// which is responsible for managing particle material properties, including
+// shaders, textures, and various particle parameters.
 #include "core/rid.h"
 #include "scene/resources/material.h"
 

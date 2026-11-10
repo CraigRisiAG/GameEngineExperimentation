@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the NavigationMesh class,
+// which is responsible for managing navigation mesh data, including generating
+// navigation polygons and handling collision masks.
 #include "navigation_mesh.h"
 
 void NavigationMesh::create_from_mesh(const Ref<Mesh> &p_mesh) {

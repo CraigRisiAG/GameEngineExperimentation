@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the MultiMesh class,
+// which is responsible for managing multiple instances of a mesh, including
+// their transforms, colors, and custom data.
 #include "multimesh.h"
 
 #include "servers/visual_server.h"

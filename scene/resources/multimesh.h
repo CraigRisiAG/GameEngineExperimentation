@@ -1,4 +1,6 @@
-
+// This file contains the definition of the MultiMesh class,
+// which is responsible for managing multiple instances of a mesh, including
+// their transforms, colors, and custom data.
 #ifndef MULTIMESH_H
 #define MULTIMESH_H
 

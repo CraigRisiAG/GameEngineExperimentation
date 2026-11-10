@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the PrimitiveMesh class,
+// which is responsible for managing primitive mesh data, including vertices,
+// normals, indices, and materials.
 #include "primitive_meshes.h"
 #include "servers/visual_server.h"
 

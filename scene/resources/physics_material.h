@@ -1,4 +1,6 @@
-
+// This file contains the definition of the PhysicsMaterial class,
+// which is responsible for managing physics material properties, including
+// friction, roughness, bounce, and absorbency.
 #ifndef physics_material_override_H
 #define physics_material_override_H
 

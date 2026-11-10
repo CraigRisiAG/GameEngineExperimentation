@@ -1,4 +1,6 @@
-
+// This file contains the definition of the PolygonPathFinder class,
+// which is responsible for managing polygon pathfinding, including setting up
+// points and edges, and finding paths within the polygon.
 #ifndef POLYGON_PATH_FINDER_H
 #define POLYGON_PATH_FINDER_H
 

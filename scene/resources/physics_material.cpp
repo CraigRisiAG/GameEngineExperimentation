@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the PhysicsMaterial class,
+// which is responsible for managing physics material properties, including
+// friction, roughness, bounce, and absorbency.
 #include "physics_material.h"
 
 void PhysicsMaterial::_bind_methods() {

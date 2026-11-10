@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the PolygonPathFinder class,
+// which is responsible for managing polygon pathfinding, including setting up
+// points and edges, and finding paths within the polygon.
 #include "polygon_path_finder.h"
 #include "core/math/geometry.h"
 

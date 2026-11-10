@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ParticlesMaterial class,
+// which is responsible for managing particle material properties, including
+// shaders, textures, and various particle parameters.
 #include "particles_material.h"
 
 Mutex ParticlesMaterial::material_mutex;
@@ -558,8 +560,8 @@ void ParticlesMaterial::_update_shader() {
   code += "		mat4(vec4(0.701, -0.587, -0.114, 0.0),\n";
   code += "			vec4(-0.299, 0.413, -0.114, 0.0),\n";
   code += "			vec4(-0.300, -0.588, 0.886, 0.0),\n";
-  code +=
-      "			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_c +\n";
+  code += "			vec4(0.000, 0.000, 0.000, 0.0)) * hue_rot_c "
+          "+\n";
   code += "		mat4(vec4(0.168, 0.330, -0.497, 0.0),\n";
   code += "			vec4(-0.328, 0.035,  0.292, 0.0),\n";
   code += "			vec4(1.250, -1.050, -0.203, 0.0),\n";

@@ -1,4 +1,6 @@
-
+// This file contains the definition of the PrimitiveMesh class,
+// which is responsible for managing primitive mesh data, including vertices,
+// normals, indices, and materials.
 #ifndef PRIMITIVE_MESHES_H
 #define PRIMITIVE_MESHES_H
 

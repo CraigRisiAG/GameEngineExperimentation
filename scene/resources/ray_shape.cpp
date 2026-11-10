@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the RayShape class,
+// which is responsible for managing ray shape properties, including
+// length and slope behavior.
 #include "ray_shape.h"
 
 #include "servers/physics_server.h"

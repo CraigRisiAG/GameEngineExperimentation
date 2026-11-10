@@ -1,4 +1,6 @@
-
+// This file contains the definition of the RayShape class,
+// which is responsible for managing ray shape properties, including
+// length and slope behavior.
 #ifndef RAY_SHAPE_H
 #define RAY_SHAPE_H
 #include "scene/resources/shape.h"
