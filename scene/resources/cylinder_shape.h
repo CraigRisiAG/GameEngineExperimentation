@@ -1,4 +1,6 @@
-
+// This file contains the definition of the CylinderShape class,
+// which is responsible for managing a 3D cylinder shape for physics
+// simulations.
 #ifndef CYLINDER_SHAPE_H
 #define CYLINDER_SHAPE_H
 

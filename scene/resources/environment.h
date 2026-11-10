@@ -1,4 +1,5 @@
-
+// This file contains the definition of the Environment class,
+// which is responsible for managing the environment settings for rendering.
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Gradient class,
+// which is responsible for managing color gradients for rendering.
 #include "gradient.h"
 
 #include "core/core_string_names.h"

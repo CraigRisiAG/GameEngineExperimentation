@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the HeightMapShape class,
+// which is responsible for managing a height map shape for physics simulations.
 #include "height_map_shape.h"
 #include "servers/physics_server.h"
 

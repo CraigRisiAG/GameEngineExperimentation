@@ -1,4 +1,5 @@
-
+// This file contains the definition of the DynamicFontData class,
+// which is responsible for managing dynamic fonts for rendering text.
 #include "modules/modules_enabled.gen.h"
 #ifdef MODULE_FREETYPE_ENABLED
 

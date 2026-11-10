@@ -1,4 +1,5 @@
-
+// This file contains the definition of the Font class,
+// which is responsible for managing fonts for rendering text.
 #ifndef FONT_H
 #define FONT_H
 

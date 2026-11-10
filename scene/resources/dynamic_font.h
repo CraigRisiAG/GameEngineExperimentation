@@ -1,4 +1,5 @@
-
+// This file contains the definition of the DynamicFontData class,
+// which is responsible for managing dynamic fonts for rendering text.
 #ifndef DYNAMIC_FONT_H
 #define DYNAMIC_FONT_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the definition of the Gradient class,
+// which is responsible for managing color gradients for rendering.
 #ifndef GRADIENT_H
 #define GRADIENT_H
 

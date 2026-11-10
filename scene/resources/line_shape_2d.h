@@ -1,4 +1,5 @@
-
+// This file contains the definition of the LineShape2D class,
+// which is responsible for managing a 2D line shape for physics simulations.
 #ifndef LINE_SHAPE_2D_H
 #define LINE_SHAPE_2D_H
 

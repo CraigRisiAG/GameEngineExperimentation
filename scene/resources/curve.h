@@ -1,4 +1,5 @@
-
+// This file contains the definition of the Curve class,
+// which is responsible for managing a 2D curve for various purposes.
 #ifndef CURVE_H
 #define CURVE_H
 

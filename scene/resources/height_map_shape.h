@@ -1,4 +1,5 @@
-
+// This file contains the definition of the HeightMapShape class,
+// which is responsible for managing a height map shape for physics simulations.
 #ifndef HEIGHT_MAP_SHAPE_H
 #define HEIGHT_MAP_SHAPE_H
 

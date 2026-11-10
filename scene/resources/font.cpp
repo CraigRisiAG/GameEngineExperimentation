@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Font class,
+// which is responsible for managing fonts for rendering text.
 #include "font.h"
 
 #include "core/io/resource_loader.h"
@@ -14,7 +15,7 @@ void Font::draw_halign(RID p_canvas_item, const Point2 &p_pos, HAlign p_align,
     draw(p_canvas_item, p_pos, p_text, p_modulate, p_width, p_outline_modulate);
     return;
   }
-
+  // calculate offset based on alignment
   float ofs = 0.f;
   switch (p_align) {
   case HALIGN_LEFT: {
@@ -33,7 +34,7 @@ void Font::draw_halign(RID p_canvas_item, const Point2 &p_pos, HAlign p_align,
   draw(p_canvas_item, p_pos + Point2(ofs, 0), p_text, p_modulate, p_width,
        p_outline_modulate);
 }
-
+// Draws the text with the specified horizontal alignment.
 void Font::draw(RID p_canvas_item, const Point2 &p_pos, const String &p_text,
                 const Color &p_modulate, int p_clip_w,
                 const Color &p_outline_modulate) const {
@@ -62,9 +63,9 @@ void Font::draw(RID p_canvas_item, const Point2 &p_pos, const String &p_text,
     }
   }
 }
-
+// Updates the font and notifies any listeners about the changes.
 void Font::update_changes() { emit_changed(); }
-
+// Binds the methods of the Font class to the scripting API.
 void Font::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("draw", "canvas_item", "position", "string",
@@ -91,6 +92,8 @@ void Font::_bind_methods() {
 Font::Font() {}
 
 /////////////////////////////////////////////////////////////////
+// Implementation of the BitmapFont class, which is responsible for managing
+// bitmap fonts for rendering text.
 
 void BitmapFont::_set_chars(const Vector<int> &p_chars) {
 
@@ -134,7 +137,7 @@ Vector<int> BitmapFont::_get_chars() const {
 
   return chars;
 }
-
+// Implementation of the kerning-related methods for the BitmapFont class.
 void BitmapFont::_set_kernings(const Vector<int> &p_kernings) {
 
   int len = p_kernings.size();
@@ -164,7 +167,7 @@ Vector<int> BitmapFont::_get_kernings() const {
 
   return kernings;
 }
-
+// Implementation of the texture-related methods for the BitmapFont class.
 void BitmapFont::_set_textures(const Vector<Variant> &p_textures) {
 
   textures.clear();
@@ -183,9 +186,9 @@ Vector<Variant> BitmapFont::_get_textures() const {
   return rtextures;
 }
 
+// Implementation of the method to create a BitmapFont from an AngelCode BMFont
+// .fnt file.
 Error BitmapFont::create_from_fnt(const String &p_file) {
-  // fnt format used by angelcode bmfont
-  // http://www.angelcode.com/products/bmfont/
 
   FileAccess *f = FileAccess::open(p_file, FileAccess::READ);
 

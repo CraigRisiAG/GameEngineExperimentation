@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Environment class,
+// which is responsible for managing the environment settings for rendering.
 #include "environment.h"
 #include "core/project_settings.h"
 #include "servers/visual_server.h"

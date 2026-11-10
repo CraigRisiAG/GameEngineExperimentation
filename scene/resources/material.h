@@ -1,4 +1,5 @@
-
+// This file contains the definition of the Material class,
+// which is responsible for managing materials for rendering.
 #ifndef MATERIAL_H
 #define MATERIAL_H
 

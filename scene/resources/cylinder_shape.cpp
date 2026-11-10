@@ -1,3 +1,8 @@
+
+// This file contains the definition of the CylinderShape class,
+// which is responsible for managing a 3D cylinder shape for physics
+// simulations.
+
 #include "cylinder_shape.h"
 #include "servers/physics_server.h"
 

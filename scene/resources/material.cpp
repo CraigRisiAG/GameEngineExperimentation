@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Material class
+// which is responsible for managing materials for rendering.
 #include "material.h"
 
 #include "core/engine.h"
