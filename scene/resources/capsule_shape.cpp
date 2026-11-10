@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the CapsuleShape class,
+// which is responsible for managing a 3D capsule shape for physics simulations.
 #include "capsule_shape.h"
 #include "servers/physics_server.h"
 
@@ -8,7 +9,7 @@ Vector<Vector3> CapsuleShape::get_debug_mesh_lines() {
   float height = get_height();
 
   Vector<Vector3> points;
-
+  // Generate the debug mesh lines for the capsule shape.
   Vector3 d(0, height * 0.5, 0);
   for (int i = 0; i < 360; i++) {
 
@@ -39,11 +40,12 @@ Vector<Vector3> CapsuleShape::get_debug_mesh_lines() {
 
   return points;
 }
-
+// Returns the radius of the sphere that encloses the capsule shape.
 real_t CapsuleShape::get_enclosing_radius() const {
   return radius + height * 0.5;
 }
 
+// Updates the shape data in the physics server.
 void CapsuleShape::_update_shape() {
 
   Dictionary d;
@@ -52,7 +54,7 @@ void CapsuleShape::_update_shape() {
   PhysicsServer::get_singleton()->shape_set_data(get_shape(), d);
   Shape::_update_shape();
 }
-
+// Sets the radius of the capsule shape.
 void CapsuleShape::set_radius(float p_radius) {
 
   radius = p_radius;
@@ -63,6 +65,7 @@ void CapsuleShape::set_radius(float p_radius) {
 
 float CapsuleShape::get_radius() const { return radius; }
 
+// Sets the height of the capsule shape.
 void CapsuleShape::set_height(float p_height) {
 
   height = p_height;
@@ -70,9 +73,9 @@ void CapsuleShape::set_height(float p_height) {
   notify_change_to_owners();
   _change_notify("height");
 }
-
+// Returns the height of the capsule shape.
 float CapsuleShape::get_height() const { return height; }
-
+// Binds the methods of the CapsuleShape class to the scripting API.
 void CapsuleShape::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("set_radius", "radius"),
@@ -89,7 +92,8 @@ void CapsuleShape::_bind_methods() {
                             "0.01,4096,0.01"),
                "set_height", "get_height");
 }
-
+// Constructor for the CapsuleShape class, initializes the shape with default
+// radius and height.
 CapsuleShape::CapsuleShape()
     : Shape(PhysicsServer::get_singleton()->shape_create(
           PhysicsServer::SHAPE_CAPSULE)) {

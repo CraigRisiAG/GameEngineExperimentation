@@ -1,15 +1,21 @@
-
+// This file contains the definition of the ConcavePolygonShape class,
+// which is responsible for managing a 3D concave polygon shape for physics
+// simulations.
 #ifndef CONCAVE_POLYGON_SHAPE_H
 #define CONCAVE_POLYGON_SHAPE_H
 
 #include "scene/resources/shape.h"
-
+/**
+ * ConcavePolygonShape class definition.
+ */
 class ConcavePolygonShape : public Shape {
 
   GDCLASS(ConcavePolygonShape, Shape);
 
   struct DrawEdge {
-
+    /**
+     * Represents an edge for drawing purposes.
+     */
     Vector3 a;
     Vector3 b;
     bool operator<(const DrawEdge &p_edge) const {

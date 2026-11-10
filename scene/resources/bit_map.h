@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the BitMap class,
+// which is responsible for managing a 2D bitmap for various purposes,
+// such as collision detection or alpha masking.
 #ifndef BIT_MAP_H
 #define BIT_MAP_H
 

@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the Animation class, which is
+// responsible for managing animations within the scene. It provides
+// functionality for handling animation tracks, keyframes, and interpolation.
 #include "animation.h"
 #include "scene/scene_string_names.h"
 

@@ -1,8 +1,12 @@
-
+// This file contains the implementation of the ConcavePolygonShape class,
+// which is responsible for managing a 3D concave polygon shape for physics
+// simulations.
 #include "concave_polygon_shape.h"
 
 #include "servers/physics_server.h"
-
+/**
+ * Returns the debug mesh lines for the concave polygon shape.
+ */
 Vector<Vector3> ConcavePolygonShape::get_debug_mesh_lines() {
 
   Set<DrawEdge> edges;
@@ -21,7 +25,9 @@ Vector<Vector3> ConcavePolygonShape::get_debug_mesh_lines() {
       edges.insert(de);
     }
   }
-
+  /**
+   * Converts the set of unique edges into a vector of points.
+   */
   Vector<Vector3> points;
   points.resize(edges.size() * 2);
   int idx = 0;
@@ -34,7 +40,9 @@ Vector<Vector3> ConcavePolygonShape::get_debug_mesh_lines() {
 
   return points;
 }
-
+/**
+ * Returns the enclosing radius of the concave polygon shape.
+ */
 real_t ConcavePolygonShape::get_enclosing_radius() const {
   Vector<Vector3> data = get_faces();
   const Vector3 *read = data.ptr();
@@ -57,7 +65,9 @@ Vector<Vector3> ConcavePolygonShape::get_faces() const {
 
   return PhysicsServer::get_singleton()->shape_get_data(get_shape());
 }
-
+/**
+ * Binds the methods of the ConcavePolygonShape class to the scripting API.
+ */
 void ConcavePolygonShape::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("set_faces", "faces"),
@@ -68,7 +78,9 @@ void ConcavePolygonShape::_bind_methods() {
                             PROPERTY_USAGE_NOEDITOR | PROPERTY_USAGE_INTERNAL),
                "set_faces", "get_faces");
 }
-
+/**
+ * Constructor for the ConcavePolygonShape class.
+ */
 ConcavePolygonShape::ConcavePolygonShape()
     : Shape(PhysicsServer::get_singleton()->shape_create(
           PhysicsServer::SHAPE_CONCAVE_POLYGON)) {

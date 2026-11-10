@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the AudioStreamPlaybackSample class,
+// which is responsible for managing audio stream playback for sample-based
+// audio.
 #include "audio_stream_sample.h"
 
 #include "core/io/marshalls.h"

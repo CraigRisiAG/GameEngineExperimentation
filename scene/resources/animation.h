@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the Animation class, which is
+// responsible for managing animations within the scene. It provides
+// functionality for handling animation tracks, keyframes, and interpolation.
 #ifndef ANIMATION_H
 #define ANIMATION_H
 

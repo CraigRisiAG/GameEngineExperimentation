@@ -1,4 +1,6 @@
-
+// This file contains the definition of the ConvexPolygonShape2D class,
+// which is responsible for managing a 2D convex polygon shape for physics
+// simulations.
 #ifndef CONVEX_POLYGON_SHAPE_2D_H
 #define CONVEX_POLYGON_SHAPE_2D_H
 

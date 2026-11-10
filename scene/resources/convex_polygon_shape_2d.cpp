@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ConvexPolygonShape2D class,
+// which is responsible for managing a 2D convex polygon shape for physics
+// simulations.
 #include "convex_polygon_shape_2d.h"
 
 #include "core/math/geometry.h"

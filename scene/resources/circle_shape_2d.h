@@ -1,4 +1,5 @@
-
+// This file contains the definition of the CircleShape2D class,
+// which is responsible for managing a 2D circle shape for physics simulations.
 #ifndef CIRCLE_SHAPE_2D_H
 #define CIRCLE_SHAPE_2D_H
 

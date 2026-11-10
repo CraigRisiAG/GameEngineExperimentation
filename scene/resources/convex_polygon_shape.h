@@ -1,4 +1,6 @@
-
+// This file contains the definition of the ConvexPolygonShape class,
+// which is responsible for managing a 3D convex polygon shape for physics
+// simulations.
 #ifndef CONVEX_POLYGON_SHAPE_H
 #define CONVEX_POLYGON_SHAPE_H
 

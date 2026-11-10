@@ -1,8 +1,12 @@
-
+// This file contains the implementation of the Curve class,
+// which is responsible for managing a 2D curve with control points and
+// tangents.
 #include "curve.h"
 
 #include "core/core_string_names.h"
-
+/**
+ * Bezier interpolation helper function.
+ */
 template <class T>
 static _FORCE_INLINE_ T _bezier_interp(real_t t, T start, T control_1,
                                        T control_2, T end) {
@@ -17,6 +21,9 @@ static _FORCE_INLINE_ T _bezier_interp(real_t t, T start, T control_1,
          control_2 * omt * t2 * 3.0 + end * t3;
 }
 
+/**
+ * Signal emitted when the curve's range changes.
+ */
 const char *Curve::SIGNAL_RANGE_CHANGED = "range_changed";
 
 Curve::Curve() {
@@ -26,7 +33,9 @@ Curve::Curve() {
   _max_value = 1;
   _minmax_set_once = 0b00;
 }
-
+/**
+ * Constructor for the Curve class.
+ */
 int Curve::add_point(Vector2 p_pos, real_t left_tangent, real_t right_tangent,
                      TangentMode left_mode, TangentMode right_mode) {
   // Add a point and preserve order
@@ -83,7 +92,9 @@ int Curve::add_point(Vector2 p_pos, real_t left_tangent, real_t right_tangent,
 
   return ret;
 }
-
+/**
+ * Returns the index of the point closest to the given offset.
+ */
 int Curve::get_index(real_t offset) const {
 
   // Lower-bound float binary search
@@ -114,6 +125,9 @@ int Curve::get_index(real_t offset) const {
   return imin;
 }
 
+/**
+ * Removes duplicate points from the curve.
+ */
 void Curve::clean_dupes() {
 
   bool dirty = false;
@@ -130,7 +144,9 @@ void Curve::clean_dupes() {
   if (dirty)
     mark_dirty();
 }
-
+/**
+ * Sets the left tangent of the specified point.
+ */
 void Curve::set_point_left_tangent(int i, real_t tangent) {
   ERR_FAIL_INDEX(i, _points.size());
   _points.write[i].left_tangent = tangent;
@@ -138,6 +154,9 @@ void Curve::set_point_left_tangent(int i, real_t tangent) {
   mark_dirty();
 }
 
+/**
+ * Sets the right tangent of the specified point.
+ */
 void Curve::set_point_right_tangent(int i, real_t tangent) {
   ERR_FAIL_INDEX(i, _points.size());
   _points.write[i].right_tangent = tangent;
@@ -145,6 +164,9 @@ void Curve::set_point_right_tangent(int i, real_t tangent) {
   mark_dirty();
 }
 
+/**
+ * Sets the left tangent mode of the specified point.
+ */
 void Curve::set_point_left_mode(int i, TangentMode p_mode) {
   ERR_FAIL_INDEX(i, _points.size());
   _points.write[i].left_mode = p_mode;
@@ -157,6 +179,9 @@ void Curve::set_point_left_mode(int i, TangentMode p_mode) {
   mark_dirty();
 }
 
+/**
+ * Sets the right tangent mode of the specified point.
+ */
 void Curve::set_point_right_mode(int i, TangentMode p_mode) {
   ERR_FAIL_INDEX(i, _points.size());
   _points.write[i].right_mode = p_mode;
@@ -169,37 +194,58 @@ void Curve::set_point_right_mode(int i, TangentMode p_mode) {
   mark_dirty();
 }
 
+/**
+ * Returns the left tangent of the specified point.
+ */
 real_t Curve::get_point_left_tangent(int i) const {
   ERR_FAIL_INDEX_V(i, _points.size(), 0);
   return _points[i].left_tangent;
 }
 
+/**
+ * Returns the right tangent of the specified point.
+ */
 real_t Curve::get_point_right_tangent(int i) const {
   ERR_FAIL_INDEX_V(i, _points.size(), 0);
   return _points[i].right_tangent;
 }
 
+/**
+ * Returns the left tangent mode of the specified point.
+ */
 Curve::TangentMode Curve::get_point_left_mode(int i) const {
   ERR_FAIL_INDEX_V(i, _points.size(), TANGENT_FREE);
   return _points[i].left_mode;
 }
 
+/**
+ * Returns the right tangent mode of the specified point.
+ */
 Curve::TangentMode Curve::get_point_right_mode(int i) const {
   ERR_FAIL_INDEX_V(i, _points.size(), TANGENT_FREE);
   return _points[i].right_mode;
 }
 
+/**
+ * Removes the point at the specified index.
+ */
 void Curve::remove_point(int p_index) {
   ERR_FAIL_INDEX(p_index, _points.size());
   _points.remove(p_index);
   mark_dirty();
 }
 
+/**
+ * Clears all points from the curve.
+ */
 void Curve::clear_points() {
   _points.clear();
   mark_dirty();
 }
 
+/**
+ * Sets the value (y-coordinate) of the specified point.
+ */
 void Curve::set_point_value(int p_index, real_t pos) {
   ERR_FAIL_INDEX(p_index, _points.size());
   _points.write[p_index].pos.y = pos;
@@ -207,6 +253,10 @@ void Curve::set_point_value(int p_index, real_t pos) {
   mark_dirty();
 }
 
+/**
+ * Sets the offset (x-coordinate) of the specified point.
+ * Returns the new index of the point.
+ */
 int Curve::set_point_offset(int p_index, float offset) {
   ERR_FAIL_INDEX_V(p_index, _points.size(), -1);
   Point p = _points[p_index];
@@ -222,16 +272,25 @@ int Curve::set_point_offset(int p_index, float offset) {
   return i;
 }
 
+/**
+ * Returns the position (Vector2) of the specified point.
+ */
 Vector2 Curve::get_point_position(int p_index) const {
   ERR_FAIL_INDEX_V(p_index, _points.size(), Vector2(0, 0));
   return _points[p_index].pos;
 }
 
+/**
+ * Returns the full Point structure of the specified point.
+ */
 Curve::Point Curve::get_point(int p_index) const {
   ERR_FAIL_INDEX_V(p_index, _points.size(), Point());
   return _points[p_index];
 }
 
+/**
+ * Updates the automatic tangents for the specified point.
+ */
 void Curve::update_auto_tangents(int i) {
 
   Point &p = _points.write[i];
@@ -259,6 +318,9 @@ void Curve::update_auto_tangents(int i) {
   }
 }
 
+/**
+ * Minimum allowed range between min and max values.
+ */
 #define MIN_Y_RANGE 0.01
 
 void Curve::set_min_value(float p_min) {
@@ -272,7 +334,9 @@ void Curve::set_min_value(float p_min) {
   // it's still possible that existing points are out of range at this point.
   emit_signal(SIGNAL_RANGE_CHANGED);
 }
-
+/**
+ * Sets the maximum allowed value for the curve.
+ */
 void Curve::set_max_value(float p_max) {
   if (_minmax_set_once & 0b11 && p_max < _min_value + MIN_Y_RANGE) {
     _max_value = _min_value + MIN_Y_RANGE;
@@ -282,7 +346,9 @@ void Curve::set_max_value(float p_max) {
   }
   emit_signal(SIGNAL_RANGE_CHANGED);
 }
-
+/**
+ * Interpolates the curve at the given offset.
+ */
 real_t Curve::interpolate(real_t offset) const {
   if (_points.size() == 0)
     return 0;
@@ -302,6 +368,10 @@ real_t Curve::interpolate(real_t offset) const {
   return interpolate_local_nocheck(i, local);
 }
 
+/**
+ * Interpolates the curve at the given local offset relative to the specified
+ * point index. Does not perform bounds checking.
+ */
 real_t Curve::interpolate_local_nocheck(int index, real_t local_offset) const {
 
   const Point a = _points[index];
@@ -335,11 +405,17 @@ real_t Curve::interpolate_local_nocheck(int index, real_t local_offset) const {
   return y;
 }
 
+/**
+ * Marks the curve as dirty, indicating that cached data needs to be updated.
+ */
 void Curve::mark_dirty() {
   _baked_cache_dirty = true;
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Returns the curve data as an array.
+ */
 Array Curve::get_data() const {
 
   Array output;
@@ -361,6 +437,9 @@ Array Curve::get_data() const {
   return output;
 }
 
+/**
+ * Sets the curve data from an array.
+ */
 void Curve::set_data(Array input) {
   const unsigned int ELEMS = 5;
   ERR_FAIL_COND(input.size() % ELEMS != 0);
@@ -401,7 +480,9 @@ void Curve::set_data(Array input) {
 
   mark_dirty();
 }
-
+/**
+ * Bakes the curve into a cached array for faster interpolation.
+ */
 void Curve::bake() {
   _baked_cache.clear();
 
@@ -421,7 +502,9 @@ void Curve::bake() {
 
   _baked_cache_dirty = false;
 }
-
+/**
+ * Sets the bake resolution for the curve.
+ */
 void Curve::set_bake_resolution(int p_resolution) {
   ERR_FAIL_COND(p_resolution < 1);
   ERR_FAIL_COND(p_resolution > 1000);
@@ -429,6 +512,9 @@ void Curve::set_bake_resolution(int p_resolution) {
   _baked_cache_dirty = true;
 }
 
+/**
+ * Interpolates the curve using the baked cache at the given offset.
+ */
 real_t Curve::interpolate_baked(real_t offset) {
   if (_baked_cache_dirty) {
     // Last-second bake if not done already
@@ -464,6 +550,10 @@ real_t Curve::interpolate_baked(real_t offset) {
   }
 }
 
+/**
+ * Ensures the curve has a default setup with two points if it is empty.
+ * Sets the minimum and maximum values for the curve.
+ */
 void Curve::ensure_default_setup(float p_min, float p_max) {
   if (_points.size() == 0 && _min_value == 0 && _max_value == 1) {
 
@@ -473,7 +563,9 @@ void Curve::ensure_default_setup(float p_min, float p_max) {
     set_max_value(p_max);
   }
 }
-
+/**
+ * Binds the Curve class methods to the scripting API.
+ */
 void Curve::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("get_point_count"), &Curve::get_point_count);
@@ -540,8 +632,15 @@ void Curve::_bind_methods() {
   BIND_ENUM_CONSTANT(TANGENT_LINEAR);
   BIND_ENUM_CONSTANT(TANGENT_MODE_COUNT);
 }
-
+/**
+ * Returns the number of points in the curve.
+ */
 int Curve2D::get_point_count() const { return points.size(); }
+/**
+ * Adds a new point to the curve at the specified position.
+ * If p_atpos is within the valid range, the point is inserted at that index.
+ * Otherwise, it is appended to the end of the points array.
+ */
 void Curve2D::add_point(const Vector2 &p_pos, const Vector2 &p_in,
                         const Vector2 &p_out, int p_atpos) {
 
@@ -558,6 +657,9 @@ void Curve2D::add_point(const Vector2 &p_pos, const Vector2 &p_in,
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Sets the position of the point at the specified index.
+ */
 void Curve2D::set_point_position(int p_index, const Vector2 &p_pos) {
 
   ERR_FAIL_INDEX(p_index, points.size());
@@ -566,12 +668,17 @@ void Curve2D::set_point_position(int p_index, const Vector2 &p_pos) {
   baked_cache_dirty = true;
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
+/**
+ * Returns the position of the point at the specified index.
+ */
 Vector2 Curve2D::get_point_position(int p_index) const {
 
   ERR_FAIL_INDEX_V(p_index, points.size(), Vector2());
   return points[p_index].pos;
 }
-
+/**
+ * Sets the "in" handle of the point at the specified index.
+ */
 void Curve2D::set_point_in(int p_index, const Vector2 &p_in) {
 
   ERR_FAIL_INDEX(p_index, points.size());
@@ -580,12 +687,18 @@ void Curve2D::set_point_in(int p_index, const Vector2 &p_in) {
   baked_cache_dirty = true;
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
+/**
+ * Returns the "in" handle of the point at the specified index.
+ */
 Vector2 Curve2D::get_point_in(int p_index) const {
 
   ERR_FAIL_INDEX_V(p_index, points.size(), Vector2());
   return points[p_index].in;
 }
 
+/**
+ * Sets the "out" handle of the point at the specified index.
+ */
 void Curve2D::set_point_out(int p_index, const Vector2 &p_out) {
 
   ERR_FAIL_INDEX(p_index, points.size());
@@ -595,12 +708,18 @@ void Curve2D::set_point_out(int p_index, const Vector2 &p_out) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Returns the "out" handle of the point at the specified index.
+ */
 Vector2 Curve2D::get_point_out(int p_index) const {
 
   ERR_FAIL_INDEX_V(p_index, points.size(), Vector2());
   return points[p_index].out;
 }
 
+/**
+ * Removes the point at the specified index.
+ */
 void Curve2D::remove_point(int p_index) {
 
   ERR_FAIL_INDEX(p_index, points.size());
@@ -609,6 +728,9 @@ void Curve2D::remove_point(int p_index) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Clears all points from the curve.
+ */
 void Curve2D::clear_points() {
   if (!points.empty()) {
     points.clear();
@@ -617,6 +739,9 @@ void Curve2D::clear_points() {
   }
 }
 
+/**
+ * Interpolates the curve at the specified point index and offset.
+ */
 Vector2 Curve2D::interpolate(int p_index, float p_offset) const {
 
   int pc = points.size();
@@ -635,6 +760,9 @@ Vector2 Curve2D::interpolate(int p_index, float p_offset) const {
   return _bezier_interp(p_offset, p0, p1, p2, p3);
 }
 
+/**
+ * Interpolates the curve at the specified floating-point index.
+ */
 Vector2 Curve2D::interpolatef(real_t p_findex) const {
 
   if (p_findex < 0)
@@ -645,6 +773,10 @@ Vector2 Curve2D::interpolatef(real_t p_findex) const {
   return interpolate((int)p_findex, Math::fmod(p_findex, (real_t)1.0));
 }
 
+/**
+ * Recursively bakes a segment of the curve into the provided map for efficient
+ * interpolation.
+ */
 void Curve2D::_bake_segment2d(Map<float, Vector2> &r_bake, float p_begin,
                               float p_end, const Vector2 &p_a,
                               const Vector2 &p_out, const Vector2 &p_b,
@@ -673,6 +805,9 @@ void Curve2D::_bake_segment2d(Map<float, Vector2> &r_bake, float p_begin,
   }
 }
 
+/**
+ * Bakes the entire curve into a cache for efficient interpolation.
+ */
 void Curve2D::_bake() const {
 
   if (!baked_cache_dirty)
@@ -764,6 +899,9 @@ void Curve2D::_bake() const {
   }
 }
 
+/**
+ * Returns the total length of the baked curve.
+ */
 float Curve2D::get_baked_length() const {
 
   if (baked_cache_dirty)
@@ -771,6 +909,11 @@ float Curve2D::get_baked_length() const {
 
   return baked_max_ofs;
 }
+/**
+ * Interpolates the baked curve at the specified offset.
+ * If p_cubic is true, cubic interpolation is used; otherwise, linear
+ * interpolation is used.
+ */
 Vector2 Curve2D::interpolate_baked(float p_offset, bool p_cubic) const {
 
   if (baked_cache_dirty)
@@ -813,6 +956,9 @@ Vector2 Curve2D::interpolate_baked(float p_offset, bool p_cubic) const {
   }
 }
 
+/**
+ * Returns an array of all baked points of the curve.
+ */
 PackedVector2Array Curve2D::get_baked_points() const {
 
   if (baked_cache_dirty)
@@ -821,6 +967,11 @@ PackedVector2Array Curve2D::get_baked_points() const {
   return baked_point_cache;
 }
 
+/**
+ * Sets the bake interval for the curve.
+ * A smaller interval results in more accurate baked points but increases memory
+ * usage.
+ */
 void Curve2D::set_bake_interval(float p_tolerance) {
 
   bake_interval = p_tolerance;
@@ -828,9 +979,15 @@ void Curve2D::set_bake_interval(float p_tolerance) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Returns the current bake interval of the curve.
+ */
 float Curve2D::get_bake_interval() const { return bake_interval; }
-
+/**
+ * Returns the closest point on the baked curve to the specified point.
+ */
 Vector2 Curve2D::get_closest_point(const Vector2 &p_to_point) const {
+  // Brute force method
   // Brute force method
 
   if (baked_cache_dirty)
@@ -866,8 +1023,11 @@ Vector2 Curve2D::get_closest_point(const Vector2 &p_to_point) const {
   return nearest;
 }
 
+/**
+ * Returns the offset along the baked curve of the point closest to the
+ * specified point.
+ */
 float Curve2D::get_closest_offset(const Vector2 &p_to_point) const {
-  // Brute force method
 
   if (baked_cache_dirty)
     _bake();
@@ -904,7 +1064,9 @@ float Curve2D::get_closest_offset(const Vector2 &p_to_point) const {
 
   return nearest;
 }
-
+/**
+ * Returns the curve data as a dictionary.
+ */
 Dictionary Curve2D::_get_data() const {
 
   Dictionary dc;
@@ -944,6 +1106,13 @@ void Curve2D::_set_data(const Dictionary &p_data) {
   baked_cache_dirty = true;
 }
 
+/**
+ * Tessellates the curve into a series of points.
+ *
+ * @param p_max_stages The maximum number of recursive subdivision stages.
+ * @param p_tolerance The tolerance for curve approximation.
+ * @return A PackedVector2Array containing the tessellated points.
+ */
 PackedVector2Array Curve2D::tessellate(int p_max_stages,
                                        float p_tolerance) const {
 
@@ -986,7 +1155,9 @@ PackedVector2Array Curve2D::tessellate(int p_max_stages,
 
   return tess;
 }
-
+/**
+ * Binds the methods of the Curve2D class to the scripting API.
+ */
 void Curve2D::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("get_point_count"), &Curve2D::get_point_count);
@@ -1040,7 +1211,8 @@ void Curve2D::_bind_methods() {
                             PROPERTY_USAGE_NOEDITOR | PROPERTY_USAGE_INTERNAL),
                "_set_data", "_get_data");
 }
-
+/** Constructor for the Curve2D class. Initializes the bake interval and sets
+ * the baked cache as dirty. */
 Curve2D::Curve2D() {
   baked_cache_dirty = false;
   baked_max_ofs = 0;
@@ -1057,7 +1229,19 @@ Curve2D::Curve2D() {
 /***********************************************************************************/
 /***********************************************************************************/
 
+/**
+ * Returns the number of points in the Curve3D.
+ */
 int Curve3D::get_point_count() const { return points.size(); }
+/**
+ * Adds a point to the Curve3D at the specified position.
+ *
+ * @param p_pos The position of the point.
+ * @param p_in The incoming control point.
+ * @param p_out The outgoing control point.
+ * @param p_atpos The index at which to insert the point. If negative or out of
+ * range, the point is appended.
+ */
 void Curve3D::add_point(const Vector3 &p_pos, const Vector3 &p_in,
                         const Vector3 &p_out, int p_atpos) {
 
@@ -1138,6 +1322,23 @@ void Curve3D::remove_point(int p_index) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Clears all points from the Curve3D.
+ */
+/**
+ * Sets the tilt of the specified point.
+ *
+ * @param p_index The index of the point.
+ * @param p_tilt The tilt value to set.
+ */
+/**
+ * Interpolates the position on the curve at the specified point index and
+ * offset.
+ *
+ * @param p_index The index of the point to interpolate from.
+ * @param p_offset The offset along the segment between points.
+ * @return The interpolated position as a Vector3.
+ */
 void Curve3D::clear_points() {
 
   if (!points.empty()) {
@@ -1146,7 +1347,14 @@ void Curve3D::clear_points() {
     emit_signal(CoreStringNames::get_singleton()->changed);
   }
 }
-
+/**
+ * Interpolates the position on the curve at the specified point index and
+ * offset.
+ *
+ * @param p_index The index of the point to interpolate from.
+ * @param p_offset The offset along the segment between points.
+ * @return The interpolated position as a Vector3.
+ */
 Vector3 Curve3D::interpolate(int p_index, float p_offset) const {
 
   int pc = points.size();
@@ -1164,7 +1372,12 @@ Vector3 Curve3D::interpolate(int p_index, float p_offset) const {
 
   return _bezier_interp(p_offset, p0, p1, p2, p3);
 }
-
+/**
+ * Interpolates the position on the curve at the specified fractional index.
+ *
+ * @param p_findex The fractional index along the curve.
+ * @return The interpolated position as a Vector3.
+ */
 Vector3 Curve3D::interpolatef(real_t p_findex) const {
 
   if (p_findex < 0)
@@ -1174,7 +1387,20 @@ Vector3 Curve3D::interpolatef(real_t p_findex) const {
 
   return interpolate((int)p_findex, Math::fmod(p_findex, (real_t)1.0));
 }
-
+/**
+ * Recursively bakes a segment of the curve into the provided map.
+ *
+ * @param r_bake The map to store baked points.
+ * @param p_begin The starting parameter of the segment.
+ * @param p_end The ending parameter of the segment.
+ * @param p_a The starting point of the segment.
+ * @param p_out The outgoing control point of the starting point.
+ * @param p_b The ending point of the segment.
+ * @param p_in The incoming control point of the ending point.
+ * @param p_depth The current recursion depth.
+ * @param p_max_depth The maximum recursion depth.
+ * @param p_tol The tolerance for curve approximation.
+ */
 void Curve3D::_bake_segment3d(Map<float, Vector3> &r_bake, float p_begin,
                               float p_end, const Vector3 &p_a,
                               const Vector3 &p_out, const Vector3 &p_b,
@@ -1201,7 +1427,9 @@ void Curve3D::_bake_segment3d(Map<float, Vector3> &r_bake, float p_begin,
                     p_max_depth, p_tol);
   }
 }
-
+/**
+ * Bakes the entire curve into the cached data structures.
+ */
 void Curve3D::_bake() const {
 
   if (!baked_cache_dirty)
@@ -1233,7 +1461,8 @@ void Curve3D::_bake() const {
 
     return;
   }
-
+  /** Begin baking the curve by initializing the first point and setting up the
+   * point list. */
   Vector3 pos = points[0].pos;
   List<Plane> pointlist;
   pointlist.push_back(Plane(pos, points[0].tilt));
@@ -1289,7 +1518,8 @@ void Curve3D::_bake() const {
       }
     }
   }
-
+  /** Finalize the baking process by adding the last point and updating the
+   * cached data structures. */
   Vector3 lastpos = points[points.size() - 1].pos;
   float lastilt = points[points.size() - 1].tilt;
 
@@ -1314,7 +1544,7 @@ void Curve3D::_bake() const {
   Vector3 prev_sideways = Vector3(1, 0, 0);
   Vector3 prev_up = Vector3(0, 1, 0);
   Vector3 prev_forward = Vector3(0, 0, 1);
-
+  /** Iterate through the baked points and compute the up vectors if enabled. */
   for (List<Plane>::Element *E = pointlist.front(); E; E = E->next()) {
 
     w[idx] = E->get().normal;
@@ -1324,11 +1554,12 @@ void Curve3D::_bake() const {
       idx++;
       continue;
     }
-
+    /** Compute the forward vector based on the current and previous points. */
     forward = idx > 0 ? (w[idx] - w[idx - 1]).normalized() : prev_forward;
 
     float y_dot = prev_up.dot(forward);
-
+    /** Compute the dot product between the previous up vector and the forward
+     * vector. */
     if (y_dot > (1.0f - CMP_EPSILON)) {
       sideways = prev_sideways;
       up = -prev_forward;
@@ -1352,7 +1583,7 @@ void Curve3D::_bake() const {
     idx++;
   }
 }
-
+/** Returns the total length of the baked curve. */
 float Curve3D::get_baked_length() const {
 
   if (baked_cache_dirty)
@@ -1360,6 +1591,14 @@ float Curve3D::get_baked_length() const {
 
   return baked_max_ofs;
 }
+/**
+ * Interpolates the position on the baked curve at the specified offset.
+ *
+ * @param p_offset The offset along the baked curve.
+ * @param p_cubic Whether to use cubic interpolation (true) or linear
+ * interpolation (false).
+ * @return The interpolated position as a Vector3.
+ */
 Vector3 Curve3D::interpolate_baked(float p_offset, bool p_cubic) const {
 
   if (baked_cache_dirty)
@@ -1402,6 +1641,12 @@ Vector3 Curve3D::interpolate_baked(float p_offset, bool p_cubic) const {
   }
 }
 
+/**
+ * Interpolates the tilt on the baked curve at the specified offset.
+ *
+ * @param p_offset The offset along the baked curve.
+ * @return The interpolated tilt as a float.
+ */
 float Curve3D::interpolate_baked_tilt(float p_offset) const {
 
   if (baked_cache_dirty)
@@ -1437,6 +1682,13 @@ float Curve3D::interpolate_baked_tilt(float p_offset) const {
   return Math::lerp(r[idx], r[idx + 1], frac);
 }
 
+/**
+ * Interpolates the up vector on the baked curve at the specified offset.
+ *
+ * @param p_offset The offset along the baked curve.
+ * @param p_apply_tilt Whether to apply the tilt to the up vector.
+ * @return The interpolated up vector as a Vector3.
+ */
 Vector3 Curve3D::interpolate_baked_up_vector(float p_offset,
                                              bool p_apply_tilt) const {
 
@@ -1460,7 +1712,8 @@ Vector3 Curve3D::interpolate_baked_up_vector(float p_offset,
 
   int idx = Math::floor((double)offset / (double)bake_interval);
   float frac = Math::fmod(offset, bake_interval) / bake_interval;
-
+  /** Compute the fractional part of the offset within the current bake
+   * interval. */
   if (idx == count - 1)
     return p_apply_tilt
                ? r[idx].rotated((rp[idx] - rp[idx - 1]).normalized(), rt[idx])
@@ -1494,7 +1747,11 @@ PackedVector3Array Curve3D::get_baked_points() const {
 
   return baked_point_cache;
 }
-
+/**
+ * Returns the array of baked tilts for the curve.
+ *
+ * @return A PackedFloat32Array containing the baked tilts.
+ */
 PackedFloat32Array Curve3D::get_baked_tilts() const {
 
   if (baked_cache_dirty)
@@ -1503,6 +1760,11 @@ PackedFloat32Array Curve3D::get_baked_tilts() const {
   return baked_tilt_cache;
 }
 
+/**
+ * Returns the array of baked up vectors for the curve.
+ *
+ * @return A PackedVector3Array containing the baked up vectors.
+ */
 PackedVector3Array Curve3D::get_baked_up_vectors() const {
 
   if (baked_cache_dirty)
@@ -1511,6 +1773,12 @@ PackedVector3Array Curve3D::get_baked_up_vectors() const {
   return baked_up_vector_cache;
 }
 
+/**
+ * Returns the closest point on the baked curve to the specified point.
+ *
+ * @param p_to_point The point to find the closest point to.
+ * @return The closest point on the curve as a Vector3.
+ */
 Vector3 Curve3D::get_closest_point(const Vector3 &p_to_point) const {
   // Brute force method
 
@@ -1547,9 +1815,15 @@ Vector3 Curve3D::get_closest_point(const Vector3 &p_to_point) const {
   return nearest;
 }
 
+/**
+ * Returns the offset along the baked curve that is closest to the specified
+ * point.
+ *
+ * @param p_to_point The point to find the closest offset to.
+ * @return The offset along the curve as a float.
+ */
 float Curve3D::get_closest_offset(const Vector3 &p_to_point) const {
-  // Brute force method
-
+  // Brute force method to find the closest offset along the baked curve.
   if (baked_cache_dirty)
     _bake();
 
@@ -1585,7 +1859,10 @@ float Curve3D::get_closest_offset(const Vector3 &p_to_point) const {
 
   return nearest;
 }
-
+/** Sets the bake interval for the curve.
+ *
+ * @param p_tolerance The new bake interval.
+ */
 void Curve3D::set_bake_interval(float p_tolerance) {
 
   bake_interval = p_tolerance;
@@ -1593,8 +1870,18 @@ void Curve3D::set_bake_interval(float p_tolerance) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Returns the current bake interval for the curve.
+ *
+ * @return The bake interval as a float.
+ */
 float Curve3D::get_bake_interval() const { return bake_interval; }
 
+/**
+ * Enables or disables the up vector for the curve.
+ *
+ * @param p_enable True to enable the up vector, false to disable it.
+ */
 void Curve3D::set_up_vector_enabled(bool p_enable) {
 
   up_vector_enabled = p_enable;
@@ -1602,6 +1889,11 @@ void Curve3D::set_up_vector_enabled(bool p_enable) {
   emit_signal(CoreStringNames::get_singleton()->changed);
 }
 
+/**
+ * Checks if the up vector is enabled for the curve.
+ *
+ * @return True if the up vector is enabled, false otherwise.
+ */
 bool Curve3D::is_up_vector_enabled() const { return up_vector_enabled; }
 
 Dictionary Curve3D::_get_data() const {
@@ -1628,6 +1920,11 @@ Dictionary Curve3D::_get_data() const {
 
   return dc;
 }
+/**
+ * Sets the curve data from a dictionary.
+ *
+ * @param p_data The dictionary containing the curve data.
+ */
 void Curve3D::_set_data(const Dictionary &p_data) {
 
   ERR_FAIL_COND(!p_data.has("points"));
@@ -1651,6 +1948,13 @@ void Curve3D::_set_data(const Dictionary &p_data) {
 
   baked_cache_dirty = true;
 }
+/**
+ * Returns the tessellated points of the curve.
+ *
+ * @param p_max_stages The maximum number of subdivision stages.
+ * @param p_tolerance The tolerance for subdivision.
+ * @return A PackedVector3Array containing the tessellated points.
+ */
 
 PackedVector3Array Curve3D::tessellate(int p_max_stages,
                                        float p_tolerance) const {
@@ -1660,13 +1964,14 @@ PackedVector3Array Curve3D::tessellate(int p_max_stages,
   if (points.size() == 0) {
     return tess;
   }
+  // Initialize the midpoints for each segment of the curve.
   Vector<Map<float, Vector3>> midpoints;
 
   midpoints.resize(points.size() - 1);
 
   int pc = 1;
   for (int i = 0; i < points.size() - 1; i++) {
-
+    // Bake the segment to compute midpoints for tessellation.
     _bake_segment3d(midpoints.write[i], 0, 1, points[i].pos, points[i].out,
                     points[i + 1].pos, points[i + 1].in, 0, p_max_stages,
                     p_tolerance);
@@ -1678,7 +1983,8 @@ PackedVector3Array Curve3D::tessellate(int p_max_stages,
   Vector3 *bpw = tess.ptrw();
   bpw[0] = points[0].pos;
   int pidx = 0;
-
+  // Iterate through each segment's midpoints and add them to the tessellated
+  // array.
   for (int i = 0; i < points.size() - 1; i++) {
 
     for (Map<float, Vector3>::Element *E = midpoints[i].front(); E;
@@ -1694,7 +2000,7 @@ PackedVector3Array Curve3D::tessellate(int p_max_stages,
 
   return tess;
 }
-
+/** Binds the methods of the Curve3D class to the scripting API. */
 void Curve3D::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("get_point_count"), &Curve3D::get_point_count);
@@ -1766,7 +2072,7 @@ void Curve3D::_bind_methods() {
   ADD_PROPERTY(PropertyInfo(Variant::BOOL, "up_vector_enabled"),
                "set_up_vector_enabled", "is_up_vector_enabled");
 }
-
+/** Constructor for the Curve3D class. Initializes default values. */
 Curve3D::Curve3D() {
   baked_cache_dirty = false;
   baked_max_ofs = 0;

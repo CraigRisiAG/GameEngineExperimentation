@@ -1,4 +1,6 @@
-
+// This file contains the definition of the ConcavePolygonShape2D class,
+// which is responsible for managing a 2D concave polygon shape for physics
+// simulations.
 #ifndef CONCAVE_POLYGON_SHAPE_2D_H
 #define CONCAVE_POLYGON_SHAPE_2D_H
 

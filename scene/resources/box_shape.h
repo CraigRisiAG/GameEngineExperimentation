@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the BoxShape class,
+// which is responsible for managing a 3D box shape for physics simulations.
 #ifndef BOX_SHAPE_H
 #define BOX_SHAPE_H
 

@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the ConvexPolygonShape class,
+// which is responsible for managing a 3D convex polygon shape for physics
+// simulations.
 #include "convex_polygon_shape.h"
 #include "core/math/quick_hull.h"
 #include "servers/physics_server.h"
@@ -7,6 +9,8 @@ Vector<Vector3> ConvexPolygonShape::get_debug_mesh_lines() {
 
   Vector<Vector3> points = get_points();
 
+  // Only attempt to build the debug mesh if there are enough points to form a
+  // convex hull.
   if (points.size() > 3) {
 
     Vector<Vector3> varr = Variant(points);
@@ -25,7 +29,9 @@ Vector<Vector3> ConvexPolygonShape::get_debug_mesh_lines() {
 
   return Vector<Vector3>();
 }
-
+/**
+ * Returns the enclosing radius of the convex polygon shape.
+ */
 real_t ConvexPolygonShape::get_enclosing_radius() const {
   Vector<Vector3> data = get_points();
   const Vector3 *read = data.ptr();
@@ -36,6 +42,9 @@ real_t ConvexPolygonShape::get_enclosing_radius() const {
   return Math::sqrt(r);
 }
 
+/**
+ * Updates the shape data in the physics server.
+ */
 void ConvexPolygonShape::_update_shape() {
 
   PhysicsServer::get_singleton()->shape_set_data(get_shape(), points);
@@ -50,7 +59,9 @@ void ConvexPolygonShape::set_points(const Vector<Vector3> &p_points) {
 }
 
 Vector<Vector3> ConvexPolygonShape::get_points() const { return points; }
-
+/**
+ * Binds the methods of the ConvexPolygonShape class to the scripting API.
+ */
 void ConvexPolygonShape::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("set_points", "points"),

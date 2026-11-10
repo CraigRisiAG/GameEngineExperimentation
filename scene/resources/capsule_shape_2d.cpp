@@ -1,9 +1,12 @@
-
+// This file contains the implementation of the CapsuleShape2D class,
+// which is responsible for managing a 2D capsule shape for physics simulations.
 #include "capsule_shape_2d.h"
 
 #include "servers/physics_2d_server.h"
 #include "servers/visual_server.h"
 
+// Helper function to generate the points of the capsule shape for debugging and
+// editing purposes.
 Vector<Vector2> CapsuleShape2D::_get_points() const {
 
   Vector<Vector2> points;
@@ -24,13 +27,14 @@ Vector<Vector2> CapsuleShape2D::_get_points() const {
 
   return points;
 }
-
+// Determines if the capsule shape is selected based on a click within a certain
+// tolerance.
 bool CapsuleShape2D::_edit_is_selected_on_click(const Point2 &p_point,
                                                 double p_tolerance) const {
 
   return Geometry::is_point_in_polygon(p_point, _get_points());
 }
-
+// Updates the shape data in the physics server.
 void CapsuleShape2D::_update_shape() {
 
   Physics2DServer::get_singleton()->shape_set_data(get_rid(),
@@ -61,7 +65,7 @@ void CapsuleShape2D::draw(const RID &p_to_rid, const Color &p_color) {
   col.push_back(p_color);
   VisualServer::get_singleton()->canvas_item_add_polygon(p_to_rid, points, col);
 }
-
+// Returns the axis-aligned bounding rectangle of the capsule shape.
 Rect2 CapsuleShape2D::get_rect() const {
 
   Vector2 he = Point2(get_radius(), get_radius() + get_height() * 0.5);
@@ -74,7 +78,7 @@ Rect2 CapsuleShape2D::get_rect() const {
 real_t CapsuleShape2D::get_enclosing_radius() const {
   return radius + height * 0.5;
 }
-
+// Binds the methods of the CapsuleShape2D class to the scripting API.
 void CapsuleShape2D::_bind_methods() {
 
   ClassDB::bind_method(D_METHOD("set_radius", "radius"),

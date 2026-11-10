@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the BoxShape class,
+// which is responsible for managing a 3D box shape for physics simulations.
 #include "box_shape.h"
 #include "servers/physics_server.h"
 

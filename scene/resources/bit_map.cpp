@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the BitMap class,
+// which is responsible for managing a 2D bitmap for various purposes,
+// such as collision detection or alpha masking.
 #include "bit_map.h"
 
 #include "core/io/image_loader.h"

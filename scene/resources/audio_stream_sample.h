@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the AudioStreamPlaybackSample class,
+// which is responsible for managing audio stream playback for sample-based
+// audio.
 #ifndef AUDIO_STREAM_SAMPLE_H
 #define AUDIO_STREAM_SAMPLE_H
 

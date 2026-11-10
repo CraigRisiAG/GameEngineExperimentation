@@ -1,4 +1,5 @@
-
+// This file contains the definition of the CapsuleShape class,
+// which is responsible for managing a 3D capsule shape for physics simulations.
 #ifndef CAPSULE_SHAPE_H
 #define CAPSULE_SHAPE_H
 

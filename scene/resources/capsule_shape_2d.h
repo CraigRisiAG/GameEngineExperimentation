@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the CapsuleShape2D class,
+// which is responsible for managing a 2D capsule shape for physics simulations.
 #ifndef CAPSULE_SHAPE_2D_H
 #define CAPSULE_SHAPE_2D_H
 
@@ -10,7 +11,10 @@ class CapsuleShape2D : public Shape2D {
   real_t height;
   real_t radius;
 
+  // Updates the shape data in the physics server.
   void _update_shape();
+  // Generates the points of the capsule shape for debugging and editing
+  // purposes.
   Vector<Vector2> _get_points() const;
 
 protected:
