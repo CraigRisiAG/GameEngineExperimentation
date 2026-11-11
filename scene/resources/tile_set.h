@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the TileSet class and its
+// associated resource management functionality.
 #ifndef TILE_SET_H
 #define TILE_SET_H
 

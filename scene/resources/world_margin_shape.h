@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the WorldMarginShape class and its
+// associated plane shape functionality.
 #ifndef WORLD_MARGIN_SHAPE_H
 #define WORLD_MARGIN_SHAPE_H
 

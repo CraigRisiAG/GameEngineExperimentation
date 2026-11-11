@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the VisualShaderNode class and its
+// associated visual shader functionality.
 #include "visual_shader.h"
 
 #include "core/vmap.h"

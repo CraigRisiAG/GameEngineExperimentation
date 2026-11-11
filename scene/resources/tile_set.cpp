@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the TileSet class and its
+// associated resource management functionality.
 #include "tile_set.h"
 #include "core/array.h"
 #include "core/engine.h"

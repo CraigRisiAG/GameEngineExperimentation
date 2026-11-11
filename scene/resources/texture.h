@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Texture and Texture2D classes and
+// their associated drawing and resource management functionality.
 #ifndef TEXTURE_H
 #define TEXTURE_H
 

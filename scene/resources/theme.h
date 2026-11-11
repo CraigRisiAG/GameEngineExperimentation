@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Theme class and its
+// associated resource management functionality.
 #ifndef THEME_H
 #define THEME_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the VisualShader class and its
+// associated visual shader functionality.
 #ifndef VISUAL_SHADER_H
 #define VISUAL_SHADER_H
 

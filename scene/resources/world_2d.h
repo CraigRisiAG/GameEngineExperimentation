@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the World2D class and its
+// associated 2D spatial indexing and visibility management functionality.
 #ifndef WORLD_2D_H
 #define WORLD_2D_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the WorldMarginShape class and its
+// associated plane shape functionality.
 #include "world_margin_shape.h"
 
 #include "servers/physics_server.h"

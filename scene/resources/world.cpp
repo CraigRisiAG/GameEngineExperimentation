@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the World class and its
+// associated 3D spatial indexing and visibility management functionality.
 #include "world.h"
 
 #include "core/math/camera_matrix.h"

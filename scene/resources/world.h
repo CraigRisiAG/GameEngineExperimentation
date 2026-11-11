@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the World class and its
+// associated 3D spatial indexing and visibility management functionality.
 #ifndef WORLD_H
 #define WORLD_H
 

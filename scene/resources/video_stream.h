@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the VideoStream and VideoStreamPlayback
+// classes and their associated video playback and resource management
+// functionality.
 #ifndef VIDEO_STREAM_H
 #define VIDEO_STREAM_H
 

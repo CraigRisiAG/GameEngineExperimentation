@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Theme class and its
+// associated resource management functionality.
 #include "theme.h"
 #include "core/os/file_access.h"
 #include "core/print_string.h"

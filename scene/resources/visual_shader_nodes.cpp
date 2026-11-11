@@ -1,4 +1,6 @@
-
+// This file contains the implementation of the VisualShaderNodeFloatConstant,
+// VisualShaderNodeIntConstant, and VisualShaderNodeBooleanConstant classes and
+// their associated visual shader functionality.
 #include "visual_shader_nodes.h"
 
 ////////////// Scalar(Float)

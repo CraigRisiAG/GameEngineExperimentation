@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the World2D class and its
+// associated 2D spatial indexing and visibility management functionality.
 #include "world_2d.h"
 
 #include "core/project_settings.h"

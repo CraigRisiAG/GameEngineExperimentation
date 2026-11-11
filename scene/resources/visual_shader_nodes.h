@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the VisualShaderNodeFloatConstant,
+// VisualShaderNodeIntConstant, and VisualShaderNodeBooleanConstant classes and
+// their associated visual shader functionality.
 #ifndef VISUAL_SHADER_NODES_H
 #define VISUAL_SHADER_NODES_H
 
