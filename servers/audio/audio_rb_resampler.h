@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioRBResampler class and
+// its associated ring buffer based audio resampling functionality.
 #ifndef AUDIO_RB_RESAMPLER_H
 #define AUDIO_RB_RESAMPLER_H
 

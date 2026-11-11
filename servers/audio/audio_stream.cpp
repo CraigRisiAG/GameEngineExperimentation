@@ -1,10 +1,9 @@
-
+// This file contains the implementation of the AudioStream class and
+// its associated audio stream functionality.
 #include "audio_stream.h"
 
 #include "core/os/os.h"
 #include "core/project_settings.h"
-
-//////////////////////////////
 
 void AudioStreamPlaybackResampled::_begin_resample() {
 

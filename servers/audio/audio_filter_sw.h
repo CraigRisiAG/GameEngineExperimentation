@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioFilterSW class and
+// its associated software audio filter functionality.
 #ifndef AUDIO_FILTER_SW_H
 #define AUDIO_FILTER_SW_H
 

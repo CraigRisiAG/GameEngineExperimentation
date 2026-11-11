@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioFilterSW class and
+// its associated software audio filter functionality.
 #include "audio_filter_sw.h"
 
 void AudioFilterSW::set_mode(Mode p_mode) { mode = p_mode; }

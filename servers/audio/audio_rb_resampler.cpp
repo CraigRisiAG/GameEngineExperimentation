@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioRBResampler class and
+// its associated ring buffer based audio resampling functionality.
 #include "audio_rb_resampler.h"
 #include "core/math/math_funcs.h"
 #include "core/os/os.h"

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioDriverDummy class and
+// its associated dummy audio driver functionality.
 #include "audio_driver_dummy.h"
 
 #include "core/os/os.h"

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffect class and
+// its associated audio effect functionality.
 #ifndef AUDIOEFFECT_H
 #define AUDIOEFFECT_H
 

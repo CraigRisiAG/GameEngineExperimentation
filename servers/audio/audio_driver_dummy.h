@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioDriverDummy class and
+// its associated dummy audio driver functionality.
 #ifndef AUDIO_DRIVER_DUMMY_H
 #define AUDIO_DRIVER_DUMMY_H
 
