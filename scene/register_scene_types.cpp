@@ -1,4 +1,5 @@
-
+// This file contains the registration of various scene types and their
+// associated functionality.
 #include "register_scene_types.h"
 
 #include "core/class_db.h"

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of functions for registering and
+// unregistering various scene types and their associated functionality.
 #ifndef REGISTER_SCENE_TYPES_H
 #define REGISTER_SCENE_TYPES_H
 

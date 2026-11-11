@@ -1,4 +1,5 @@
-
+// This file contains the definition of the SceneStringNames class and its
+// associated static string names used throughout the scene system.
 #include "scene_string_names.h"
 
 SceneStringNames *SceneStringNames::singleton = NULL;

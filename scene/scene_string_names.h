@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the SceneStringNames class and its
+// associated static string names used throughout the scene system.
 #ifndef SCENE_STRING_NAMES_H
 #define SCENE_STRING_NAMES_H
 
