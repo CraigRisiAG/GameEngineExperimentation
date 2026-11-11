@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectAmplify class and its
+// associated audio amplification functionality.
 #include "audio_effect_amplify.h"
 
 void AudioEffectAmplifyInstance::process(const AudioFrame *p_src_frames,

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectEQ class and its
+// associated audio equalization functionality.
 #include "audio_effect_eq.h"
 #include "servers/audio_server.h"
 

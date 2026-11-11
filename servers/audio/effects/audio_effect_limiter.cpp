@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectLimiter class and its
+// associated audio limiting functionality.
 #include "audio_effect_limiter.h"
 
 void AudioEffectLimiterInstance::process(const AudioFrame *p_src_frames,
@@ -26,14 +27,14 @@ void AudioEffectLimiterInstance::process(const AudioFrame *p_src_frames,
     float abs1 = Math::abs(spl1);
     float overdb0 = Math::linear2db(abs0) - ceildb;
     float overdb1 = Math::linear2db(abs1) - ceildb;
-
+    // Apply soft clipping if necessary
     if (abs0 > scv) {
       spl0 = sign0 * (scv + Math::db2linear(overdb0 * scmult));
     }
     if (abs1 > scv) {
       spl1 = sign1 * (scv + Math::db2linear(overdb1 * scmult));
     }
-
+    // Apply ceiling limiting
     spl0 = MIN(ceiling, Math::abs(spl0)) * (spl0 < 0.0 ? -1.0 : 1.0);
     spl1 = MIN(ceiling, Math::abs(spl1)) * (spl1 < 0.0 ? -1.0 : 1.0);
 
@@ -113,7 +114,7 @@ void AudioEffectLimiter::_bind_methods() {
                             PROPERTY_HINT_RANGE, "3,20,0.1"),
                "set_soft_clip_ratio", "get_soft_clip_ratio");
 }
-
+// Constructor for the AudioEffectLimiter class
 AudioEffectLimiter::AudioEffectLimiter() {
   threshold = 0;
   ceiling = -0.1;

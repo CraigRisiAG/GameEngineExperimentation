@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectDistortion class and
+// its associated audio distortion functionality.
 #include "audio_effect_distortion.h"
 #include "core/math/math_funcs.h"
 #include "servers/audio_server.h"

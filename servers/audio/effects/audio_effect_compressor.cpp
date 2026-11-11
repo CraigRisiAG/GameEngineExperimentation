@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectCompressor class and
+// its associated audio compression functionality.
 #include "audio_effect_compressor.h"
 #include "servers/audio_server.h"
 

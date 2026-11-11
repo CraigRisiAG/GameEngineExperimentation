@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectFilter class and its
+// associated audio filtering functionality.
 #include "audio_effect_filter.h"
 #include "servers/audio_server.h"
 

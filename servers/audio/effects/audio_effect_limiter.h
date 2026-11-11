@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectLimiter class and its
+// associated audio limiting functionality.
 #ifndef AUDIO_EFFECT_LIMITER_H
 #define AUDIO_EFFECT_LIMITER_H
 

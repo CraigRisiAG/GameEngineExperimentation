@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectFilter class and its
+// associated audio filtering functionality.
 #ifndef AUDIOEFFECTFILTER_H
 #define AUDIOEFFECTFILTER_H
 

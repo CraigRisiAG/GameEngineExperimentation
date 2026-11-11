@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectPanner class and its
+// associated audio panning functionality.
 #include "audio_effect_panner.h"
 
 void AudioEffectPannerInstance::process(const AudioFrame *p_src_frames,

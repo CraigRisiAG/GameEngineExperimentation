@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectChorus class and its
+// associated audio chorus functionality.
 #ifndef AUDIOEFFECTCHORUS_H
 #define AUDIOEFFECTCHORUS_H
 

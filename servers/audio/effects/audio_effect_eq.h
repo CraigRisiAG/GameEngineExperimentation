@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectEQ class and its
+// associated audio equalization functionality.
 #ifndef AUDIOEFFECTEQ_H
 #define AUDIOEFFECTEQ_H
 

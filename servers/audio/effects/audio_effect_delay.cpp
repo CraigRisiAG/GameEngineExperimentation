@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectDelay class and its
+// associated audio delay functionality.
 #include "audio_effect_delay.h"
 #include "core/math/math_funcs.h"
 #include "servers/audio_server.h"

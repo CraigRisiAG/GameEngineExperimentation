@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectChorus class and its
+// associated audio chorus functionality.
 #include "audio_effect_chorus.h"
 #include "core/math/math_funcs.h"
 #include "servers/audio_server.h"

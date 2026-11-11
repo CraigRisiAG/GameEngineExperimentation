@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectCompressor class and its
+// associated audio compression functionality.
 #ifndef AUDIOEFFECTCOMPRESSOR_H
 #define AUDIOEFFECTCOMPRESSOR_H
 

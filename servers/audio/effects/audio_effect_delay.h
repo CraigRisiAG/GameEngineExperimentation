@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectDelay class and its
+// associated audio delay functionality.
 #ifndef AUDIOEFFECTDELAY_H
 #define AUDIOEFFECTDELAY_H
 

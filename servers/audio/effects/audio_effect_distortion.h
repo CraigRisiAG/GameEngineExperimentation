@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectDistortion class and its
+// associated audio distortion functionality.
 #ifndef AUDIOEFFECTDISTORTION_H
 #define AUDIOEFFECTDISTORTION_H
 

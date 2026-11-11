@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectAmplify class and its
+// associated audio amplification functionality.
 #ifndef AUDIOEFFECTAMPLIFY_H
 #define AUDIOEFFECTAMPLIFY_H
 
