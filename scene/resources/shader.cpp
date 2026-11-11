@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Shader class and its associated
+// resource loader.
 #include "shader.h"
 #include "core/os/file_access.h"
 #include "scene/scene_string_names.h"

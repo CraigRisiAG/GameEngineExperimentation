@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Shape class and its interaction
+// with the PhysicsServer.
 #ifndef SHAPE_H
 #define SHAPE_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Sky class and its interaction
+// with the VisualServer.
 #include "sky.h"
 
 #include "core/io/image_loader.h"

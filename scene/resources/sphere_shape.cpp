@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the SphereShape class and its
+// interaction with the PhysicsServer.
 #include "sphere_shape.h"
 #include "servers/physics_server.h"
 

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the SphereShape class and its
+// interaction with the PhysicsServer.
 #ifndef SPHERE_SHAPE_H
 #define SPHERE_SHAPE_H
 

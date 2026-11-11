@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the TextFile class and its
+// associated file loading functionality.
 #include "text_file.h"
 
 #include "core/os/file_access.h"

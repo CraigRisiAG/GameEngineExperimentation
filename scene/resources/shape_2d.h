@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Shape2D class and its interaction
+// with the Physics2DServer.
 #ifndef SHAPE_2D_H
 #define SHAPE_2D_H
 

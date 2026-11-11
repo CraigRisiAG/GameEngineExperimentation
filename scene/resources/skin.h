@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Skin class and its associated
+// resource management.
 #ifndef SKIN_H
 #define SKIN_H
 

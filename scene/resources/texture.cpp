@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Texture2D class and its
+// associated drawing functionality.
 #include "texture.h"
 
 #include "core/core_string_names.h"

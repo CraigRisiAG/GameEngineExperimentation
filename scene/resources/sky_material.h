@@ -1,4 +1,6 @@
-
+// This file contains the declaration of the ProceduralSkyMaterial,
+// PanoramaSkyMaterial, and PhysicalSkyMaterial classes and their associated
+// resource management.
 #include "core/rid.h"
 #include "scene/resources/material.h"
 

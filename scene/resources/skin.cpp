@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Skin class and its associated
+// resource management.
 #include "skin.h"
 
 void Skin::set_bind_count(int p_size) {

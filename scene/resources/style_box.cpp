@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the StyleBox class and its
+// associated resource management.
 #include "style_box.h"
 #include "scene/2d/canvas_item.h"
 

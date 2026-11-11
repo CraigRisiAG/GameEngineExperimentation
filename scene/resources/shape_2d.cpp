@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Shape2D class and its
+// interaction with the Physics2DServer.
 #include "shape_2d.h"
 #include "servers/physics_2d_server.h"
 RID Shape2D::get_rid() const { return shape; }

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the StyleBox class and its
+// associated resource management.
 #ifndef STYLE_BOX_H
 #define STYLE_BOX_H
 

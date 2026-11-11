@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the SurfaceTool class and its
+// associated mesh construction functionality.
 #ifndef SURFACE_TOOL_H
 #define SURFACE_TOOL_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Sky class and its interaction
+// with the VisualServer.
 #ifndef SKY_H
 #define SKY_H
 

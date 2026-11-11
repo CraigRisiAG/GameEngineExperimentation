@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Shader class and its associated
+// resource loader.
 #ifndef SHADER_H
 #define SHADER_H
 

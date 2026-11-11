@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the SurfaceTool class and its
+// associated mesh construction functionality.
 #include "surface_tool.h"
 
 #include "core/method_bind_ext.gen.inc"

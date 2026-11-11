@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the ProceduralSkyMaterial class and
+// its associated resource management.
 #include "sky_material.h"
 
 void ProceduralSkyMaterial::set_sky_top_color(const Color &p_sky_top) {

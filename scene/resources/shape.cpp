@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Shape class and its interaction
+// with the PhysicsServer.
 #include "shape.h"
 
 #include "core/os/os.h"

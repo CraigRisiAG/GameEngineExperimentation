@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the TextFile class and its
+// associated file loading functionality.
 #ifndef TEXTFILE_H
 #define TEXTFILE_H
 
