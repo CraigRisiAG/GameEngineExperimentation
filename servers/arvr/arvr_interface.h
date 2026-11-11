@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the ARVRInterface class and its
+// associated AR/VR functionality.
 #ifndef ARVR_INTERFACE_H
 #define ARVR_INTERFACE_H
 

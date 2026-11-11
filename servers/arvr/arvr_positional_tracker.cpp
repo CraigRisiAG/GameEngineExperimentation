@@ -1,9 +1,9 @@
-***********************************************************************/
-
+// This file contains the implementation of the ARVRPositionalTracker class and
+// its associated positional tracking functionality.
 #include "arvr_positional_tracker.h"
 #include "core/os/input.h"
 
-    void ARVRPositionalTracker::_bind_methods() {
+void ARVRPositionalTracker::_bind_methods() {
   BIND_ENUM_CONSTANT(TRACKER_HAND_UNKNOWN);
   BIND_ENUM_CONSTANT(TRACKER_LEFT_HAND);
   BIND_ENUM_CONSTANT(TRACKER_RIGHT_HAND);

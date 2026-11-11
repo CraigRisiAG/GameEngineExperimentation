@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the ARVRPositionalTracker class and its
+// associated positional tracking functionality.
 #ifndef ARVR_POSITIONAL_TRACKER_H
 #define ARVR_POSITIONAL_TRACKER_H
 

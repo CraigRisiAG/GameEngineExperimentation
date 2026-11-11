@@ -1,8 +1,8 @@
-************************************************************************/
-
+// This file contains the implementation of the ARVRInterface class and its
+// associated AR/VR functionality.
 #include "arvr_interface.h"
 
-    void ARVRInterface::_bind_methods() {
+void ARVRInterface::_bind_methods() {
   ClassDB::bind_method(D_METHOD("get_name"), &ARVRInterface::get_name);
   ClassDB::bind_method(D_METHOD("get_capabilities"),
                        &ARVRInterface::get_capabilities);
