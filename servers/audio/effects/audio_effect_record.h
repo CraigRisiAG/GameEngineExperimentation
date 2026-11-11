@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectRecord class and
+// its associated audio recording functionality.
 #ifndef AUDIOEFFECTRECORD_H
 #define AUDIOEFFECTRECORD_H
 

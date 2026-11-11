@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectSpectrumAnalyzer
+// class and its associated audio spectrum analysis functionality.
 #include "audio_effect_spectrum_analyzer.h"
 #include "servers/audio_server.h"
 

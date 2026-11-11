@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioStreamGenerator class and
+// its associated audio stream generation functionality.
 #ifndef AUDIO_STREAM_GENERATOR_H
 #define AUDIO_STREAM_GENERATOR_H
 

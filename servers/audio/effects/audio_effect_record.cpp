@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectRecord class and
+// its associated audio recording functionality.
 #include "audio_effect_record.h"
 
 void AudioEffectRecordInstance::process(const AudioFrame *p_src_frames,

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectReverb class and
+// its associated audio reverb functionality.
 #include "audio_effect_reverb.h"
 #include "servers/audio_server.h"
 void AudioEffectReverbInstance::process(const AudioFrame *p_src_frames,

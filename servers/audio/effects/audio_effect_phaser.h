@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectPhaser class and
+// its associated audio phasing functionality.
 #ifndef AUDIO_EFFECT_PHASER_H
 #define AUDIO_EFFECT_PHASER_H
 

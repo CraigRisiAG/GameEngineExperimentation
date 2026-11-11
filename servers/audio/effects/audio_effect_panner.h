@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectPanner class and
+// its associated audio panning functionality.
 #ifndef AUDIOEFFECTPANNER_H
 #define AUDIOEFFECTPANNER_H
 

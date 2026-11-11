@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectStereoEnhance class
+// and its associated audio stereo enhancement functionality.
 #include "audio_effect_stereo_enhance.h"
 #include "servers/audio_server.h"
 void AudioEffectStereoEnhanceInstance::process(const AudioFrame *p_src_frames,

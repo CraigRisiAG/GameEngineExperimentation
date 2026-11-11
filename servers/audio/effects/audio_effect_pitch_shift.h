@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectPitchShift class and
+// its associated audio pitch shifting functionality.
 #ifndef AUDIO_EFFECT_PITCH_SHIFT_H
 #define AUDIO_EFFECT_PITCH_SHIFT_H
 

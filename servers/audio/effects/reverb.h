@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the Reverb class and
+// its associated audio reverberation functionality.
 // Author: Juan Linietsky <reduzio@gmail.com>, (C) 2006
 
 #ifndef REVERB_H

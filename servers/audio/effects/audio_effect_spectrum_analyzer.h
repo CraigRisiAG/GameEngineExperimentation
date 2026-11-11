@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectSpectrumAnalyzer class
+// and its associated audio spectrum analysis functionality.
 #ifndef AUDIO_EFFECT_SPECTRUM_ANALYZER_H
 #define AUDIO_EFFECT_SPECTRUM_ANALYZER_H
 

@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioStreamGenerator class and
+// its associated audio stream generation functionality.
 #include "audio_stream_generator.h"
 
 void AudioStreamGenerator::set_mix_rate(float p_mix_rate) {

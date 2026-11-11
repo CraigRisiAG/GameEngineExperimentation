@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the EQ class and
+// its associated audio equalization functionality.
 // Author: reduzio@gmail.com (C) 2006
 
 #include "eq.h"

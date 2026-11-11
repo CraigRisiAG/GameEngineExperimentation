@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the AudioEffectPitchShift class and
+// its associated audio pitch shifting functionality.
 #include "audio_effect_pitch_shift.h"
 
 #include "core/math/math_funcs.h"

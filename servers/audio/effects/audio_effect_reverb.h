@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectReverb class and
+// its associated audio reverb functionality.
 #ifndef AUDIOEFFECTREVERB_H
 #define AUDIOEFFECTREVERB_H
 

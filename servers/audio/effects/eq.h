@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the EQ class and
+// its associated audio equalization functionality.
 // Author: reduzio@gmail.com (C) 2006
 
 #ifndef EQ_FILTER_H

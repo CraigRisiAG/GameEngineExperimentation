@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the Reverb class and
+// its associated audio reverberation functionality.
 // Author: Juan Linietsky <reduzio@gmail.com>, (C) 2006
 
 #include "reverb.h"

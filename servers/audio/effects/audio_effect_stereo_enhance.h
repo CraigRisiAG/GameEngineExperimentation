@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the AudioEffectStereoEnhance class and
+// its associated audio stereo enhancement functionality.
 #ifndef AUDIOEFFECTSTEREOENHANCE_H
 #define AUDIOEFFECTSTEREOENHANCE_H
 
