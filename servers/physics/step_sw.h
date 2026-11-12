@@ -1,4 +1,7 @@
-
+/* step_sw.h declares StepSW, which handles the physics simulation step,
+including force integration, constraint solving, and island management. It
+organizes bodies and constraints into islands for efficient processing and
+supports sleeping and suspension of inactive bodies. */
 #ifndef STEP_SW_H
 #define STEP_SW_H
 

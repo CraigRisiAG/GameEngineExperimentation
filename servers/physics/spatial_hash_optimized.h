@@ -1,3 +1,7 @@
+/* spatial_hash_optimized.h declares SpatialHashGridOptimized, an optimized
+spatial hash grid for physics objects. It provides efficient insertion, removal,
+and querying of bodies and areas using a fixed cell size, packed grid keys, and
+pre-allocated query caches. */
 #pragma once
 
 /**

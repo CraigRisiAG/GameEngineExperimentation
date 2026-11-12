@@ -1,4 +1,7 @@
-
+/* space_sw.h declares SpaceSW and PhysicsDirectSpaceStateSW, which manage the
+physics space, broadphase collision detection, and intersection queries. It
+provides functions for point and ray intersection tests, handling collision
+masks, and filtering by bodies or areas. */
 #ifndef SPACE_SW_H
 #define SPACE_SW_H
 

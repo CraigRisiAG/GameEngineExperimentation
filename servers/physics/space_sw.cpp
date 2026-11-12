@@ -1,4 +1,7 @@
-
+/* space_sw.cpp implements SpaceSW and PhysicsDirectSpaceStateSW, which manage
+the physics space, broadphase collision detection, and intersection queries. It
+provides functions for point and ray intersection tests, handling collision
+masks, and filtering by bodies or areas. */
 #include "space_sw.h"
 
 #include "collision_solver_sw.h"
@@ -1095,10 +1098,11 @@ bool SpaceSW::test_body_motion(BodySW *p_body, const Transform &p_from,
 
         const BodySW *body = static_cast<const BodySW *>(rcd.best_object);
         // Vector3 rel_vec = r_result->collision_point -
-        // body->get_transform().get_origin(); 				r_result->collider_velocity =
-        //Vector3(-body->get_angular_velocity() * rel_vec.y,
-        //body->get_angular_velocity() * rel_vec.x) +
-        //body->get_linear_velocity();
+        // body->get_transform().get_origin();
+        // r_result->collider_velocity =
+        // Vector3(-body->get_angular_velocity() * rel_vec.y,
+        // body->get_angular_velocity() * rel_vec.x) +
+        // body->get_linear_velocity();
         r_result->collider_velocity = body->get_linear_velocity() +
                                       (body->get_angular_velocity())
                                           .cross(body->get_transform().origin -

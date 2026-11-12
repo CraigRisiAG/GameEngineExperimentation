@@ -1,4 +1,7 @@
-
+/* step_sw.cpp implements StepSW, which handles the physics simulation step,
+including force integration, constraint solving, and island management. It
+organizes bodies and constraints into islands for efficient processing and
+supports sleeping and suspension of inactive bodies. */
 #include "step_sw.h"
 #include "joints_sw.h"
 

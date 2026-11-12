@@ -1,4 +1,6 @@
-
+/* shape_sw.h declares ShapeSW, a collision object that represents a physics
+shape. ShapeSW provides support functions, AABB configuration, and owner
+management. Derived shapes implement specific geometry and collision queries. */
 #ifndef SHAPE_SW_H
 #define SHAPE_SW_H
 

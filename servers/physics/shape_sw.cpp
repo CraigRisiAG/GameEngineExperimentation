@@ -1,5 +1,7 @@
-**************************************************************/
-
+/* shape_sw.cpp implements ShapeSW and its derived shapes, such as PlaneShapeSW
+and RayShapeSW. ShapeSW represents a collision shape, providing support
+functions, AABB configuration, and owner management. Derived shapes implement
+specific geometry and collision queries. */
 #include "shape_sw.h"
 
 #include "core/math/geometry.h"
@@ -10,7 +12,7 @@
 #define _EDGE_IS_VALID_SUPPORT_THRESHOLD 0.0002
 #define _FACE_IS_VALID_SUPPORT_THRESHOLD 0.9998
 
-    void ShapeSW::configure(const AABB &p_aabb) {
+void ShapeSW::configure(const AABB &p_aabb) {
   aabb = p_aabb;
   configured = true;
   for (Map<ShapeOwnerSW *, int>::Element *E = owners.front(); E;
