@@ -1,6 +1,6 @@
 
 /*
-Adapted to Godot from the Bullet library.
+Adapted from the Bullet library.
 */
 
 #ifndef HINGE_JOINT_SW_H
