@@ -1,4 +1,7 @@
-
+/* Adapted from the Bullet library.  */
+/* area_sw.h declares AreaSW, a collision object that represents a physics area.
+The area can influence physics properties, track overlapping bodies or areas,
+and expose overlap changes through callbacks. */
 #ifndef AREA_SW_H
 #define AREA_SW_H
 
@@ -79,7 +82,7 @@ class AreaSW : public CollisionObjectSW {
 
 public:
   //_FORCE_INLINE_ const Transform& get_inverse_transform() const { return
-  //inverse_transform; } _FORCE_INLINE_ SpaceSW* get_owner() { return owner; }
+  // inverse_transform; } _FORCE_INLINE_ SpaceSW* get_owner() { return owner; }
 
   void set_monitor_callback(ObjectID p_id, const StringName &p_method);
   _FORCE_INLINE_ bool has_monitor_callback() const {

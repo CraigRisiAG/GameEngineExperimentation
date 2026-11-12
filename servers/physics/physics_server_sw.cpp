@@ -1,4 +1,6 @@
-
+/* area_sw.h declares AreaSW, a collision object that represents a physics area.
+ * The area can influence physics properties, track overlapping bodies or areas,
+ * and expose overlap changes through callbacks. */
 #include "physics_server_sw.h"
 
 #include "broad_phase_basic.h"

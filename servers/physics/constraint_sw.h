@@ -1,4 +1,6 @@
-
+/* constraint_sw.h declares ConstraintSW, a base class for physics constraints
+between bodies. It provides an interface for setting up and solving constraints,
+as well as managing their participation in the physics simulation islands. */
 #ifndef CONSTRAINT_SW_H
 #define CONSTRAINT_SW_H
 

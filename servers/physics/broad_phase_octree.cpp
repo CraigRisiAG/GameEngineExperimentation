@@ -1,4 +1,6 @@
-
+/* broad_phase_octree.cpp implements BroadPhaseOctree, a broad-phase collision
+detection system using an octree structure. It manages collision objects, tracks
+their AABBs, and handles pairing and unpairing of potential collisions. */
 #include "broad_phase_octree.h"
 #include "collision_object_sw.h"
 

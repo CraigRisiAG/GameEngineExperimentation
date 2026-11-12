@@ -1,4 +1,6 @@
-
+/* joints_sw.h declares JointSW, a base class for physics joints between bodies.
+It provides an interface for different types of joints and manages their
+participation in the physics simulation islands. */
 #ifndef JOINTS_SW_H
 #define JOINTS_SW_H
 

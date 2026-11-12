@@ -1,11 +1,13 @@
-**********************************************************************/
-
+/* collision_solver_sw.h declares the interface for the software-based collision
+solver in the physics engine. It provides functions to solve collisions between
+different types of shapes, including static planes, rays, and concave shapes, as
+well as distance queries. */
 #ifndef COLLISION_SOLVER_SW_H
 #define COLLISION_SOLVER_SW_H
 
 #include "shape_sw.h"
 
-    class CollisionSolverSW {
+class CollisionSolverSW {
 public:
   typedef void (*CallbackResult)(const Vector3 &p_point_A,
                                  const Vector3 &p_point_B, void *p_userdata);

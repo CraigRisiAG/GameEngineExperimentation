@@ -1,4 +1,6 @@
-
+/* body_pair_sw.h declares BodyPairSW, which manages contact points between two
+ * physics bodies, handles contact addition, validation, and continuous
+ * collision detection (CCD). */
 #ifndef BODY_PAIR_SW_H
 #define BODY_PAIR_SW_H
 

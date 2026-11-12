@@ -1,4 +1,7 @@
-
+/* collision_object_sw.h declares CollisionObjectSW, a collision object that can
+have multiple shapes and interact with the physics space. It handles adding,
+removing, and updating shapes, as well as managing their broad-phase IDs and
+AABBs. */
 #ifndef COLLISION_OBJECT_SW_H
 #define COLLISION_OBJECT_SW_H
 

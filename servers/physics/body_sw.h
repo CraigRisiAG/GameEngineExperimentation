@@ -1,4 +1,6 @@
-
+/* body_sw.h declares BodySW, a physics body that can be rigid, kinematic,
+static, or character. It handles inertia, mass, and transform updates, and
+interacts with the physics space and areas. */
 #ifndef BODY_SW_H
 #define BODY_SW_H
 

@@ -1,4 +1,7 @@
-
+/* Adapted from the Bullet library.  */
+// area_sw.cpp implements AreaSW, a physics area that can affect bodies with
+// gravity and damping, and notify listeners when bodies or other areas enter or
+// leave it. Its data and query helpers are declared in area_sw.h.
 #include "area_sw.h"
 #include "body_sw.h"
 #include "space_sw.h"

@@ -1,4 +1,7 @@
-
+/* collision_solver_sat.h declares the interface for the SAT-based collision
+solver in the physics engine. It provides the function sat_calculate_penetration
+to determine if two shapes are colliding and to generate contact points using
+the Separating Axis Theorem (SAT). */
 #ifndef COLLISION_SOLVER_SAT_H
 #define COLLISION_SOLVER_SAT_H
 

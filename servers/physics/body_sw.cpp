@@ -1,4 +1,6 @@
-
+/* body_sw.cpp implements BodySW, a physics body that can be rigid, kinematic,
+static, or character. It handles inertia, mass, and transform updates, and
+interacts with the physics space and areas. */
 #include "body_sw.h"
 #include "area_sw.h"
 #include "space_sw.h"

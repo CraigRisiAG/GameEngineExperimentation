@@ -1,4 +1,6 @@
-
+/* broad_phase_octree.h declares BroadPhaseOctree, a broad-phase collision
+detection system using an octree structure. It manages collision objects, tracks
+their AABBs, and handles pairing and unpairing of potential collisions. */
 #ifndef BROAD_PHASE_OCTREE_H
 #define BROAD_PHASE_OCTREE_H
 

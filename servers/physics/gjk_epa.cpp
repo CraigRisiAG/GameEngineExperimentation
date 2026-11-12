@@ -1,4 +1,6 @@
-
+/* gjk_epa.cpp implements the GJK-EPA collision solver for the physics engine.
+It provides functions to determine the distance between convex shapes and to
+detect and resolve collisions using the GJK and EPA algorithms. */
 #include "gjk_epa.h"
 
 /* Disabling formatting for thirdparty code snippet */

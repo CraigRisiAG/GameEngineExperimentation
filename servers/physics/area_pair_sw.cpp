@@ -1,4 +1,4 @@
-
+/* Adapted from the Bullet library.  */
 #include "area_pair_sw.h"
 #include "collision_solver_sw.h"
 
@@ -43,7 +43,7 @@ bool AreaPairSW::setup(real_t p_step) {
 
   return false; // never do any post solving
 }
-
+/* Adapted from the Bullet library.  */
 void AreaPairSW::solve(real_t p_step) {}
 
 AreaPairSW::AreaPairSW(BodySW *p_body, int p_body_shape, AreaSW *p_area,

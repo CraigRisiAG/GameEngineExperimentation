@@ -1,4 +1,6 @@
-
+/* physics_server_sw.h declares PhysicsServerSW, the software-based
+implementation of the physics server. It manages shapes, spaces, areas, bodies,
+and joints, and provides the API for interacting with the physics simulation. */
 #ifndef PHYSICS_SERVER_SW
 #define PHYSICS_SERVER_SW
 

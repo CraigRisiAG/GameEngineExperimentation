@@ -1,4 +1,7 @@
-
+/* collision_solver_sw.cpp implements the software-based collision solver for
+the physics engine. It provides functions to solve collisions between different
+types of shapes, including static planes, rays, and concave shapes, using
+various collision detection algorithms. */
 #include "collision_solver_sw.h"
 #include "collision_solver_sat.h"
 

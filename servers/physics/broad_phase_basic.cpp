@@ -1,4 +1,6 @@
-
+/* broad_phase_basic.cpp implements BroadPhaseBasic, a broad-phase collision
+detection system. It manages collision objects, tracks their AABBs, and handles
+pairing and unpairing of potential collisions. */
 #include "broad_phase_basic.h"
 #include "core/list.h"
 #include "core/print_string.h"

@@ -1,4 +1,7 @@
-
+/* collision_solver_sat.cpp implements the SAT-based collision solver for the
+physics engine. It provides functions to generate contact points between
+different types of collision primitives (points, edges, faces) using the
+Separating Axis Theorem (SAT). */
 #include "collision_solver_sat.h"
 #include "core/math/geometry.h"
 

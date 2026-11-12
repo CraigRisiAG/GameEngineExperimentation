@@ -1,4 +1,7 @@
-
+/* collision_object_sw.cpp implements CollisionObjectSW, a collision object that
+can have multiple shapes and interact with the physics space. It handles adding,
+removing, and updating shapes, as well as managing their broad-phase IDs and
+AABBs. */
 #include "collision_object_sw.h"
 #include "servers/physics/physics_server_sw.h"
 #include "space_sw.h"

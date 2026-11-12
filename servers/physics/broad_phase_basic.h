@@ -1,4 +1,6 @@
-
+/* broad_phase_basic.h declares BroadPhaseBasic, a broad-phase collision
+detection system. It manages collision objects, tracks their AABBs, and handles
+pairing and unpairing of potential collisions. */
 #ifndef BROAD_PHASE_BASIC_H
 #define BROAD_PHASE_BASIC_H
 

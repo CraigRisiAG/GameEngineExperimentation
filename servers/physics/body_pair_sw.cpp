@@ -1,4 +1,6 @@
-
+/* body_pair_sw.cpp implements BodyPairSW, which manages contact points between
+ * two physics bodies, handles contact addition, validation, and continuous
+ * collision detection (CCD). */
 #include "body_pair_sw.h"
 
 #include "collision_solver_sw.h"

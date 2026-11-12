@@ -1,4 +1,6 @@
-
+/* gjk_epa.h declares the interface for the GJK-EPA collision solver in the
+physics engine. It provides functions to determine the distance between convex
+shapes and to detect and resolve collisions using the GJK and EPA algorithms. */
 #ifndef GJK_EPA_H
 #define GJK_EPA_H
 

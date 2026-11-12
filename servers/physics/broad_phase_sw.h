@@ -1,4 +1,7 @@
-
+/* broad_phase_sw.h declares BroadPhaseSW, a base class for broad-phase
+collision detection systems. It provides an interface for creating, moving, and
+removing collision objects, as well as setting callbacks for pairing and
+unpairing potential collisions. */
 #ifndef BROAD_PHASE_SW_H
 #define BROAD_PHASE_SW_H
 

@@ -1,4 +1,4 @@
-
+/* Adapted from the Bullet library.  */
 #ifndef AREA_PAIR_SW_H
 #define AREA_PAIR_SW_H
 
