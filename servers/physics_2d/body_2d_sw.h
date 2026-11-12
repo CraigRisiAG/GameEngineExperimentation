@@ -1,4 +1,7 @@
-
+/* body_2d_sw.h declares Body2DSW, a collision object that represents a physics
+ * body in 2D. The body can have various modes (rigid, kinematic, static,
+ * character), track overlapping areas, and manage physical properties such as
+ * mass, inertia, and damping. */
 #ifndef BODY_2D_SW_H
 #define BODY_2D_SW_H
 

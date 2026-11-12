@@ -1,4 +1,6 @@
-
+/* body_pair_2d_sw.cpp implements BodyPair2DSW, which manages the interaction
+ * between two physics bodies in 2D. It handles collision detection, contact
+ * management, and continuous collision detection (CCD) for the body pair. */
 #include "body_pair_2d_sw.h"
 #include "collision_solver_2d_sw.h"
 #include "space_2d_sw.h"

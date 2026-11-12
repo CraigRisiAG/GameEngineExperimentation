@@ -1,4 +1,7 @@
-
+/* area_pair_2d_sw.h declares AreaPair2DSW and Area2Pair2DSW, which manage the
+interaction between a body and an area, and between two areas in 2D physics.
+They handle collision detection, query updates, and callbacks for overlapping
+bodies or areas. */
 #ifndef AREA_PAIR_2D_SW_H
 #define AREA_PAIR_2D_SW_H
 

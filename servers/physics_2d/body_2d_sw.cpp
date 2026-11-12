@@ -1,4 +1,7 @@
-
+/* body_2d_sw.cpp implements Body2DSW, a collision object that represents a
+ * physics body in 2D. The body can have various modes (rigid, kinematic,
+ * static, character), track overlapping areas, and manage physical properties
+ * such as mass, inertia, and damping. */
 #include "body_2d_sw.h"
 #include "area_2d_sw.h"
 #include "physics_2d_server_sw.h"

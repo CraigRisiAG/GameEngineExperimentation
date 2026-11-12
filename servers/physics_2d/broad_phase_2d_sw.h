@@ -1,4 +1,7 @@
-
+/* broad_phase_2d_sw.h declares BroadPhase2DSW, a software-based broad-phase
+ * collision detection system for 2D physics. It manages collision objects,
+ * tracks their axis-aligned bounding boxes (AABBs), and efficiently queries
+ * potential collision pairs. */
 #ifndef BROAD_PHASE_2D_SW_H
 #define BROAD_PHASE_2D_SW_H
 

@@ -1,4 +1,6 @@
-
+/* area_2d_sw.cpp implements Area2DSW, a collision object that represents a
+physics area in 2D. The area can influence physics properties, track overlapping
+bodies or areas, and expose overlap changes through callbacks. */
 #include "area_2d_sw.h"
 #include "body_2d_sw.h"
 #include "space_2d_sw.h"

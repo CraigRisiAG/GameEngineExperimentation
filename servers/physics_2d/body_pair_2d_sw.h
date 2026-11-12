@@ -1,4 +1,6 @@
-
+/* body_pair_2d_sw.h declares BodyPair2DSW, which manages the interaction
+ * between two physics bodies in 2D. It handles collision detection, contact
+ * management, and continuous collision detection (CCD) for the body pair. */
 #ifndef BODY_PAIR_2D_SW_H
 #define BODY_PAIR_2D_SW_H
 

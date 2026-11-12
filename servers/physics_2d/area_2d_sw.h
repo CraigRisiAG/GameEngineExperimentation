@@ -1,4 +1,6 @@
-
+/* area_2d_sw.h declares Area2DSW, a collision object that represents a physics
+area in 2D. The area can influence physics properties, track overlapping bodies
+or areas, and expose overlap changes through callbacks. */
 #ifndef AREA_2D_SW_H
 #define AREA_2D_SW_H
 
@@ -78,7 +80,7 @@ class Area2DSW : public CollisionObject2DSW {
 
 public:
   //_FORCE_INLINE_ const Matrix32& get_inverse_transform() const { return
-  //inverse_transform; } _FORCE_INLINE_ SpaceSW* get_owner() { return owner; }
+  // inverse_transform; } _FORCE_INLINE_ SpaceSW* get_owner() { return owner; }
 
   void set_monitor_callback(ObjectID p_id, const StringName &p_method);
   _FORCE_INLINE_ bool has_monitor_callback() const {

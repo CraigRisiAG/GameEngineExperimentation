@@ -1,4 +1,7 @@
-
+/* broad_phase_2d_hash_grid.h declares BroadPhase2DHashGrid, a broad-phase
+ * collision detection system for 2D physics using a spatial hash grid. It
+ * manages collision objects, tracks their axis-aligned bounding boxes (AABBs),
+ * and efficiently queries potential collision pairs using the hash grid. */
 #ifndef BROAD_PHASE_2D_HASH_GRID_H
 #define BROAD_PHASE_2D_HASH_GRID_H
 

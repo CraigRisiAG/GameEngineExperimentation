@@ -1,4 +1,7 @@
-
+/* broad_phase_2d_basic.h declares BroadPhase2DBasic, a basic broad-phase
+ * collision detection system for 2D physics. It manages collision objects,
+ * tracks their axis-aligned bounding boxes (AABBs), and efficiently queries
+ * potential collision pairs using simple spatial culling. */
 #ifndef BROAD_PHASE_2D_BASIC_H
 #define BROAD_PHASE_2D_BASIC_H
 

@@ -1,4 +1,7 @@
-
+/* broad_phase_2d_basic.cpp implements BroadPhase2DBasic, a basic broad-phase
+ * collision detection system for 2D physics. It manages collision objects,
+ * tracks their axis-aligned bounding boxes (AABBs), and efficiently queries
+ * potential collision pairs using simple spatial culling. */
 #include "broad_phase_2d_basic.h"
 
 BroadPhase2DBasic::ID BroadPhase2DBasic::create(CollisionObject2DSW *p_object_,

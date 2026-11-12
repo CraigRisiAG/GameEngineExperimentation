@@ -1,4 +1,7 @@
-
+/* area_pair_2d_sw.cpp implements AreaPair2DSW and Area2Pair2DSW, which manage
+the interaction between a body and an area, and between two areas in 2D physics.
+They handle collision detection, query updates, and callbacks for overlapping
+bodies or areas. */
 #include "area_pair_2d_sw.h"
 #include "collision_solver_2d_sw.h"
 
