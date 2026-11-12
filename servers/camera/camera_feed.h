@@ -1,4 +1,5 @@
-
+// This file contains the declaration of the CameraFeed class and
+// its associated camera feed functionality.
 #ifndef CAMERA_FEED_H
 #define CAMERA_FEED_H
 

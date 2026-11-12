@@ -1,4 +1,5 @@
-
+// This file contains the implementation of the CameraFeed class and
+// its associated camera feed functionality.
 #include "camera_feed.h"
 
 #include "servers/visual_server.h"
