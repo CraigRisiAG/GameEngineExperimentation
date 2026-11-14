@@ -1,4 +1,8 @@
-
+// This file implements the software-based 2D collision solver for the physics
+// engine. It provides functions to solve static line collisions, raycast
+// collisions, and concave shape collisions. It uses either the SAT (Separating
+// Axis Theorem) or GJK-EPA algorithms for penetration calculation, depending on
+// the defined solver.
 #include "collision_solver_2d_sw.h"
 #include "collision_solver_2d_sat.h"
 

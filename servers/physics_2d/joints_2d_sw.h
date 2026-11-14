@@ -1,4 +1,8 @@
-
+// This file declares the software-based 2D joints for the physics engine.
+// It defines the Joint2DSW base class and specific joint types such as
+// PinJoint2DSW, GrooveJoint2DSW, and DampedSpringJoint2DSW. These classes
+// manage the setup and solving of joint constraints between 2D bodies,
+// including bias calculation, impulse application, and parameter management.
 #ifndef JOINTS_2D_SW_H
 #define JOINTS_2D_SW_H
 

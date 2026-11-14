@@ -1,4 +1,7 @@
-
+// This file declares the software-based 2D constraint for the physics engine.
+// It defines the Constraint2DSW class, which manages the relationship between
+// multiple 2D bodies, including their collision disabling, island management,
+// and setup/solve steps for the physics simulation.
 #ifndef CONSTRAINT_2D_SW_H
 #define CONSTRAINT_2D_SW_H
 

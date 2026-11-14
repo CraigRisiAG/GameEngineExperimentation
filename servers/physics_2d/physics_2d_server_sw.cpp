@@ -1,4 +1,9 @@
-
+// This file implements the software-based 2D physics server for the engine.
+// It provides functions to create and manage 2D shapes, set their properties,
+// and handle collision callbacks. The server supports various shape types
+// including lines, rays, segments, circles, rectangles, capsules, convex
+// polygons, and concave polygons, and allows customization of solver bias for
+// collision handling.
 #include "physics_2d_server_sw.h"
 #include "broad_phase_2d_basic.h"
 #include "broad_phase_2d_hash_grid.h"

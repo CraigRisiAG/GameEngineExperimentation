@@ -1,4 +1,9 @@
-
+// This file declares the multithreaded wrapper for the 2D physics server.
+// It manages a separate physics thread, handles command queuing, and
+// synchronizes physics steps between the main thread and the physics thread.
+// The wrapper ensures that physics calculations can be performed concurrently
+// with the main game loop, providing functions for stepping, syncing, and
+// flushing queries.
 #ifndef PHYSICS2DSERVERWRAPMT_H
 #define PHYSICS2DSERVERWRAPMT_H
 

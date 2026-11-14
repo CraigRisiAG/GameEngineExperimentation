@@ -1,4 +1,7 @@
-
+// This file implements the SAT (Separating Axis Theorem) based collision solver
+// for 2D physics. It provides functions to generate contact points between
+// different types of shapes (points, edges) and handles the collection of
+// collision information through callbacks.
 #include "collision_solver_2d_sat.h"
 
 #include "core/math/geometry.h"

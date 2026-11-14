@@ -1,4 +1,7 @@
-
+// This file implements the software-based 2D joints for the physics engine.
+// It provides the PinJoint2DSW class, which manages the setup and solving of
+// pin joint constraints between two 2D bodies, including bias calculation,
+// impulse application, and parameter management such as softness.
 #include "joints_2d_sw.h"
 
 #include "space_2d_sw.h"

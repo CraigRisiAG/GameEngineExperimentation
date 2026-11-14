@@ -1,4 +1,8 @@
-
+// This file implements the software-based 2D collision object for the physics
+// engine. It handles adding, removing, and updating shapes, as well as managing
+// their transforms, metadata, and disabled state. It interacts with the
+// broadphase collision detection system to keep track of active shapes and
+// their spatial partitioning IDs (bpid).
 #include "collision_object_2d_sw.h"
 #include "servers/physics_2d/physics_2d_server_sw.h"
 #include "space_2d_sw.h"

@@ -1,4 +1,9 @@
-
+// This file declares the software-based 2D physics server for the engine.
+// It provides functions to create and manage 2D shapes, set their properties,
+// and handle collision callbacks. The server supports various shape types
+// including lines, rays, segments, circles, rectangles, capsules, convex
+// polygons, and concave polygons, and allows customization of solver bias for
+// collision handling.
 #ifndef PHYSICS_2D_SERVER_SW
 #define PHYSICS_2D_SERVER_SW
 

@@ -1,4 +1,7 @@
-
+// This file declares the SAT (Separating Axis Theorem) based collision solver
+// for 2D physics. It provides the function to calculate penetration between two
+// shapes using SAT and handles the collection of collision information through
+// callbacks.
 #ifndef COLLISION_SOLVER_2D_SAT_H
 #define COLLISION_SOLVER_2D_SAT_H
 

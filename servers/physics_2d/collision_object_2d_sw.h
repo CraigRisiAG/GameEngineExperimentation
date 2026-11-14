@@ -1,4 +1,8 @@
-
+// This file declares the software-based 2D collision object for the physics
+// engine. It defines the CollisionObject2DSW class, which manages shapes, their
+// transforms, metadata, and disabled state. It interacts with the broadphase
+// collision detection system to keep track of active shapes and their spatial
+// partitioning IDs (bpid).
 #ifndef COLLISION_OBJECT_2D_SW_H
 #define COLLISION_OBJECT_2D_SW_H
 

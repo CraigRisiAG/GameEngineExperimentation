@@ -1,4 +1,9 @@
-
+// This file implements the multithreaded wrapper for the 2D physics server.
+// It manages a separate physics thread, handles command queuing, and
+// synchronizes physics steps between the main thread and the physics thread.
+// The wrapper ensures that physics calculations can be performed concurrently
+// with the main game loop, providing functions for stepping, syncing, and
+// flushing queries.
 #include "physics_2d_server_wrap_mt.h"
 
 #include "core/os/os.h"
