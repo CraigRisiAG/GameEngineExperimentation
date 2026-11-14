@@ -1,4 +1,8 @@
-
+// This file declares the high-end scene rasterizer for the engine using the RD
+// backend. It defines the RasterizerSceneHighEndRD class, which handles the
+// setup and management of shaders, pipelines, and rendering states for high-end
+// scene rendering, including support for various material properties, lighting,
+// and camera transformations.
 #ifndef RASTERIZER_SCENE_HIGHEND_RD_H
 #define RASTERIZER_SCENE_HIGHEND_RD_H
 

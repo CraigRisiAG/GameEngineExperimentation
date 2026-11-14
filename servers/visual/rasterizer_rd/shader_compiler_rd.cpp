@@ -1,4 +1,7 @@
-
+// This file implements the shader compiler for the RD backend of the engine's
+// rasterizer. It provides utility functions for handling shader language
+// constructs, data types, precision, interpolation, and argument qualifiers, as
+// well as generating appropriate GLSL-compatible identifiers and formatting.
 #include "shader_compiler_rd.h"
 
 #include "core/os/os.h"

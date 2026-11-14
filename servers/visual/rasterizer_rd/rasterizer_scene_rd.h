@@ -1,4 +1,7 @@
-
+// This file declares the scene rasterizer for the engine using the RD backend.
+// It defines the RasterizerSceneRD class, which handles the setup and
+// management of reflection data, including creating and updating cubemap
+// textures, mipmaps, and framebuffers for image-based lighting and reflections.
 #ifndef RASTERIZER_SCENE_RD_H
 #define RASTERIZER_SCENE_RD_H
 
@@ -411,12 +414,12 @@ private:
       RID texture;  // color normally, or emission on first pass
       RID fb_depth; // actual depth buffer for the first pass, float depth for
                     // later passes
-      RID depth; // actual depth buffer for the first pass, float depth for
-                 // later passes
-      RID normal; // normal buffer for the first pass
-      RID albedo; // emission buffer for the first pass
-      RID orm;    // orm buffer for the first pass
-      RID fb;     // used for rendering, only valid on first map
+      RID depth;    // actual depth buffer for the first pass, float depth for
+                    // later passes
+      RID normal;   // normal buffer for the first pass
+      RID albedo;   // emission buffer for the first pass
+      RID orm;      // orm buffer for the first pass
+      RID fb;       // used for rendering, only valid on first map
       RID uniform_set;
       uint32_t size;
       int mipmap; // mipmap to write to, -1 if no mipmap assigned

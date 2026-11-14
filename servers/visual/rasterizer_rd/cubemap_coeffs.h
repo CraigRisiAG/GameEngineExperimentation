@@ -1,4 +1,7 @@
-
+// This file declares the low-quality cubemap coefficients used for image-based
+// lighting. The coefficients are stored in a 4-dimensional array, representing
+// different orders and bands of spherical harmonics for approximating the
+// lighting from a cubemap environment.
 #ifndef CUBEMAP_COEFFS_H
 #define CUBEMAP_COEFFS_H
 

@@ -1,4 +1,8 @@
-
+// This file declares the rasterizer effects for the engine.
+// It defines the RasterizerEffectsRD class, which provides structures and
+// enumerations for managing blur, cubemap roughness, tonemapping, and luminance
+// reduction effects within the rasterizer. It includes push constants, shader
+// references, and pipeline caches for each effect.
 #ifndef RASTERIZER_EFFECTS_RD_H
 #define RASTERIZER_EFFECTS_RD_H
 

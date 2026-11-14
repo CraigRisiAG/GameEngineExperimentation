@@ -1,4 +1,8 @@
-
+// This file implements the rasterizer effects for the engine.
+// It defines the RasterizerEffectsRD class, which provides functions for
+// managing uniform sets for images and textures, as well as performing
+// operations like copying textures to framebuffers with optional flipping
+// and luminance forcing.
 #include "rasterizer_effects_rd.h"
 #include "core/os/os.h"
 #include "core/project_settings.h"

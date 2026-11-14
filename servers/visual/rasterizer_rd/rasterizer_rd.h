@@ -1,4 +1,7 @@
-
+// This file declares the rasterizer for the engine using the RD backend.
+// It defines the RasterizerRD class, which handles the management of the
+// canvas, storage, and scene components, as well as the setup and usage
+// of shaders, pipelines, and render targets for rendering.
 #ifndef RASTERIZER_RD_H
 #define RASTERIZER_RD_H
 

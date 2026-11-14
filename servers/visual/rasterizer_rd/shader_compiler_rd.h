@@ -1,4 +1,7 @@
-
+// This file declares the shader compiler for the RD backend of the engine's
+// rasterizer. It defines the ShaderCompilerRD class, which handles the
+// compilation of shader code, management of shader identifiers, and generation
+// of GLSL-compatible code for vertex, fragment, and light shaders.
 #ifndef SHADER_COMPILER_RD_H
 #define SHADER_COMPILER_RD_H
 

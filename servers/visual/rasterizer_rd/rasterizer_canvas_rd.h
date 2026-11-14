@@ -1,4 +1,8 @@
-
+// This file declares the rasterizer canvas for the engine.
+// It defines the RasterizerCanvasRD class, which handles the conversion
+// of 2D and 3D transforms to matrix formats suitable for the rasterizer,
+// updates specular and shininess values, and creates texture bindings
+// for canvas items.
 #ifndef RASTERIZER_CANVAS_RD_H
 #define RASTERIZER_CANVAS_RD_H
 

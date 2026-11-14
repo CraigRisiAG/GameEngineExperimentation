@@ -1,4 +1,9 @@
-
+// This file declares the light cluster builder for the rasterizer.
+// It defines the LightClusterBuilder class, which is responsible for
+// organizing lights and reflection probes into a 3D grid of cells (clusters)
+// based on their positions and bounding volumes. The clusters are used to
+// efficiently determine which lights affect which parts of the scene during
+// rendering.
 #ifndef LIGHT_CLUSTER_BUILDER_H
 #define LIGHT_CLUSTER_BUILDER_H
 

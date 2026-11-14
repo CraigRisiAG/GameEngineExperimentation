@@ -1,4 +1,7 @@
-
+// This file declares the render pipeline vertex format cache for the RD backend
+// of the engine's rasterizer. It defines the RenderPipelineVertexFormatCacheRD
+// class, which handles the creation, management, and caching of render
+// pipelines based on vertex format and framebuffer format combinations.
 #ifndef RENDER_PIPELINE_CACHE_RD_H
 #define RENDER_PIPELINE_CACHE_RD_H
 

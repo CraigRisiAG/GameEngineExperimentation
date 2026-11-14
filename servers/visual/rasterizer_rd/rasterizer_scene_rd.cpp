@@ -1,4 +1,7 @@
-
+// This file implements the scene rasterizer for the engine using the RD
+// backend. It defines the RasterizerSceneRD class, which handles the setup and
+// management of reflection data, including creating and updating cubemap
+// textures, mipmaps, and framebuffers for image-based lighting and reflections.
 #include "rasterizer_scene_rd.h"
 
 #include "core/os/os.h"

@@ -1,4 +1,8 @@
-
+// This file implements the shader handling for the RD backend of the engine's
+// rasterizer. It defines the ShaderRD class, which manages the setup and
+// storage of vertex, fragment, and compute shader code, splitting it into
+// various sections such as defines, globals, material uniforms, and
+// shader-specific code blocks.
 #include "shader_rd.h"
 
 #include "core/string_builder.h"

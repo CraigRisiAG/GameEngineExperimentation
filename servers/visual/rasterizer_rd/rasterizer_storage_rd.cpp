@@ -1,4 +1,8 @@
-
+// This file implements the storage management for the RD backend of the
+// engine's rasterizer. It defines the RasterizerStorageRD class, which handles
+// the validation and conversion of texture formats to ensure compatibility with
+// the RD backend, including swizzling and format adjustments for various image
+// types.
 #include "rasterizer_storage_rd.h"
 #include "core/engine.h"
 #include "core/project_settings.h"

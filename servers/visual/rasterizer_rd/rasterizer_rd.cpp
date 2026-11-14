@@ -1,4 +1,7 @@
-
+// This file implements the rasterizer for the engine using the RD backend.
+// It defines the RasterizerRD class, which handles preparing the screen for
+// drawing, blitting render targets to the screen, managing frame timing,
+// and initializing the necessary shaders and pipelines for rendering.
 #include "rasterizer_rd.h"
 
 void RasterizerRD::prepare_for_blitting_render_targets() {
