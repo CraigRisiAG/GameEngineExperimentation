@@ -1,4 +1,9 @@
-
+// This file declares the software-based 2D space for the physics engine.
+// It defines the Space2DSW class, which manages collision objects, broadphase
+// collision detection, and intersection queries. It also declares the
+// Physics2DDirectSpaceStateSW class, which provides direct access to the space
+// for performing point, ray, and shape intersection tests, as well as motion
+// casting and collision queries.
 #ifndef SPACE_2D_SW_H
 #define SPACE_2D_SW_H
 

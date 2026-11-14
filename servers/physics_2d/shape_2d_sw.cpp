@@ -1,4 +1,8 @@
-
+// This file implements the software-based 2D shapes for the physics engine.
+// It defines the Shape2DSW base class and specific shape classes like
+// LineShape2DSW, RayShape2DSW, and SegmentShape2DSW. These classes provide
+// functions for configuring shapes, checking point containment, intersecting
+// segments, and calculating support points for collision detection.
 #include "shape_2d_sw.h"
 
 #include "core/math/geometry.h"

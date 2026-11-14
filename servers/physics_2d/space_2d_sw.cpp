@@ -1,4 +1,7 @@
-
+// This file implements the software-based 2D space for the physics engine.
+// It provides functions for intersection queries, raycasting, and broadphase
+// collision detection. The space manages collision objects and interacts with
+// the broadphase to efficiently cull potential collisions.
 #include "space_2d_sw.h"
 
 #include "collision_solver_2d_sw.h"

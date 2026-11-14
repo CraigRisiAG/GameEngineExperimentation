@@ -1,4 +1,9 @@
-
+// This file declares the software-based 2D shapes for the physics engine.
+// It defines the Shape2DSW base class and the ShapeOwner2DSW interface.
+// Specific shape classes like LineShape2DSW, RayShape2DSW, and SegmentShape2DSW
+// inherit from Shape2DSW and implement functions for configuring shapes,
+// checking point containment, intersecting segments, and calculating support
+// points for collision detection.
 #ifndef SHAPE_2D_2DSW_H
 #define SHAPE_2D_2DSW_H
 

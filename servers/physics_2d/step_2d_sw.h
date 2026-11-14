@@ -1,4 +1,9 @@
-
+// This file declares the software-based 2D physics step for the engine.
+// It defines the Step2DSW class, which handles the integration of forces,
+// generation of constraint islands, solving of constraints, and suspension
+// checks for bodies in the physics space. The class manages the processing
+// of islands of interconnected bodies and constraints to efficiently
+// simulate the physics world.
 #ifndef STEP_2D_SW_H
 #define STEP_2D_SW_H
 
