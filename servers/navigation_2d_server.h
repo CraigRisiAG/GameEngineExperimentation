@@ -1,4 +1,6 @@
-
+// Navigation 2D server interface for the engine. This file declares the
+// Navigation2DServer class, which provides the API for managing 2D navigation
+// maps, regions, and related functionality.
 /**
         @author AndreaCatania
 */

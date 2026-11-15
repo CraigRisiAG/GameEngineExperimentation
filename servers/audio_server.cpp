@@ -1,4 +1,6 @@
-
+// Audio server interface for the engine. This file implements the AudioDriver
+// and AudioDriverManager classes, which provide the API for managing audio
+// drivers, processing audio buffers, and handling audio input and output.
 #include "audio_server.h"
 
 #include "core/debugger/engine_debugger.h"

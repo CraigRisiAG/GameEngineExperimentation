@@ -1,4 +1,6 @@
-
+// Physics 2D server interface for the engine. This file declares the
+// Physics2DServer class, which provides the API for managing 2D physics bodies,
+// collisions, and related functionality.
 #ifndef PHYSICS_2D_SERVER_H
 #define PHYSICS_2D_SERVER_H
 

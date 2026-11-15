@@ -1,3 +1,6 @@
+// This file demonstrates the use of modern C++ features in a physics server
+// context. It covers smart pointers, optional types, move semantics, structured
+// bindings, and type-safe variant visitors.
 /**
  * @file servers/physics_server_modern.h
  * @brief Physics Server example using modern C++ (all 5 quick wins)

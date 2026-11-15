@@ -1,4 +1,6 @@
-
+// This file registers the various server types used in the engine.
+// It includes the registration of visual, audio, physics, AR/VR, and camera
+// servers, as well as their associated classes and interfaces.
 #include "register_server_types.h"
 #include "core/engine.h"
 #include "core/project_settings.h"

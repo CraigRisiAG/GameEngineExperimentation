@@ -1,3 +1,8 @@
+
+// This file declares the raytracing interface for the physics space.
+// It extends PhysicsDirectSpaceState with modern raytracing queries,
+// including single and multi-hit raycasts, shape overlaps, and shape sweeps.
+// All methods are virtual to allow custom implementations.
 /**
  * @file physics_space_raytracing.h
  * @brief Raytracing interface for PhysicsDirectSpaceState

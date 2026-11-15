@@ -1,4 +1,6 @@
-
+// This file implements the visual server, which is responsible for managing
+// rendering resources, handling scene instances, and providing various utility
+// functions for textures, shaders, and materials.
 #include "visual_server.h"
 
 #include "core/method_bind_ext.gen.inc"

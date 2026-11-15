@@ -1,4 +1,6 @@
-
+// Camera server interface for the engine. This file implements the CameraServer
+// class, which provides the API for managing camera feeds, retrieving feed
+// information, and handling feed-related signals.
 #include "camera_server.h"
 #include "servers/camera/camera_feed.h"
 #include "visual_server.h"

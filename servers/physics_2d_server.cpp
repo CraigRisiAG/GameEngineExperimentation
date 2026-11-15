@@ -1,4 +1,6 @@
-
+// Physics 2D server interface for the engine. This file implements the
+// Physics2DServer class, which provides the API for managing 2D physics bodies,
+// collisions, and related functionality.
 #include "physics_2d_server.h"
 
 #include "core/method_bind_ext.gen.inc"

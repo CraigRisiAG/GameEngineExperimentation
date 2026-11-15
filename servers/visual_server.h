@@ -1,4 +1,7 @@
-
+// This file declares the interface for the visual server.
+// The visual server is responsible for managing rendering resources,
+// handling scene instances, and providing various utility functions for
+// textures, shaders, and materials.
 #ifndef VISUAL_SERVER_H
 #define VISUAL_SERVER_H
 

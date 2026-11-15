@@ -1,4 +1,6 @@
-
+// Camera server interface for the engine. This file declares the CameraServer
+// class, which provides the API for managing camera feeds, retrieving feed
+// information, and handling feed-related signals.
 #ifndef CAMERA_SERVER_H
 #define CAMERA_SERVER_H
 

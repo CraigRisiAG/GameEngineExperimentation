@@ -1,4 +1,6 @@
-
+// Navigation server interface for the engine. This file implements the
+// NavigationServer class, which provides the API for managing 3D navigation
+// maps, regions, agents, and related functionality.
 /**
         @author AndreaCatania
 */

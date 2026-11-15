@@ -1,4 +1,7 @@
-
+// This file declares the interface for the physics server.
+// It includes the definitions for physics body states, shape query parameters,
+// and direct space state interactions, providing the necessary API for
+// physics simulations, force integration, and collision handling.
 #ifndef PHYSICS_SERVER_H
 #define PHYSICS_SERVER_H
 

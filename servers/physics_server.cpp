@@ -1,4 +1,6 @@
-
+// This file implements the physics server using traditional C++ features.
+// It covers the core physics server functionality, including body state
+// integration, contact handling, and method binding for scripting.
 #include "physics_server.h"
 
 #include "core/method_bind_ext.gen.inc"

@@ -1,4 +1,7 @@
-
+// This file provides common macros for wrapping server methods in a
+// multi-threaded context. It includes macros for defining functions that handle
+// thread-safe command queuing, ID pool management, and server method delegation
+// based on the calling thread.
 #define FUNC0R(m_r, m_type)                                                    \
   virtual m_r m_type() {                                                       \
     if (Thread::get_caller_id() != server_thread) {                            \

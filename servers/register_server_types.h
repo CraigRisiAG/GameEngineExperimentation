@@ -1,4 +1,7 @@
-
+// This file declares the functions for registering and unregistering server
+// types in the engine. It includes functions for preregistering server types,
+// registering server types, unregistering server types, and registering server
+// singletons.
 #ifndef REGISTER_SERVER_TYPES_H
 #define REGISTER_SERVER_TYPES_H
 

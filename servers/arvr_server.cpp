@@ -1,4 +1,6 @@
-
+// ARVR server interface for the engine. This file implements the ARVRServer
+// class, which provides the API for managing AR/VR interfaces, trackers, and
+// related functionality.
 #include "arvr_server.h"
 #include "arvr/arvr_interface.h"
 #include "arvr/arvr_positional_tracker.h"

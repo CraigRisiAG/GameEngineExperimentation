@@ -1,4 +1,7 @@
-
+// Audio server interface for the engine. This file declares the AudioDriver,
+// AudioDriverManager, and AudioServer classes, which provide the API for
+// managing audio drivers, processing audio buffers, and handling audio input
+// and output.
 #ifndef AUDIO_SERVER_H
 #define AUDIO_SERVER_H
 

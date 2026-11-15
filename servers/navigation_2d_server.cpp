@@ -1,4 +1,6 @@
-
+// Navigation 2D server interface for the engine. This file implements the
+// Navigation2DServer class, which provides the API for managing 2D navigation
+// maps, regions, and related functionality.
 #include "servers/navigation_2d_server.h"
 #include "core/math/transform.h"
 #include "core/math/transform_2d.h"
