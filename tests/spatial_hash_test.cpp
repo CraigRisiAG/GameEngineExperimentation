@@ -1,3 +1,5 @@
+// This file contains unit tests for the spatial hash grid implementation used
+// in the physics engine.
 /**
  * @file spatial_hash_test.cpp
  * @brief Unit tests for spatial hash physics optimization

@@ -1,3 +1,5 @@
+// This file contains unit tests and performance benchmarks for the optimized
+// spatial hash with vector pre-allocation.
 #include "../servers/physics/spatial_hash_optimized.h"
 #include <chrono>
 #include <gtest/gtest.h>

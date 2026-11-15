@@ -1,3 +1,5 @@
+// This file contains unit tests and benchmarks for the lazy node counting cache
+// optimization in the Performance class.
 /**
  * @file performance_cache_test.cpp
  * @brief Unit tests for lazy node counting cache optimization

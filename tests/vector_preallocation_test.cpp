@@ -1,3 +1,5 @@
+// This file contains unit tests and performance benchmarks for the vector
+// pre-allocation optimization.
 /**
  * @file vector_preallocation_test.cpp
  * @brief Tests and benchmarks for vector pre-allocation optimization
