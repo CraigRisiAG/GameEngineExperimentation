@@ -1,4 +1,7 @@
-
+// Shader language interface for the engine. This file implements the
+// ShaderLanguage class, which provides the API for handling shader tokens,
+// operators, and keywords, as well as utility functions for parsing and
+// representing shader code.
 #include "shader_language.h"
 #include "core/os/os.h"
 #include "core/print_string.h"

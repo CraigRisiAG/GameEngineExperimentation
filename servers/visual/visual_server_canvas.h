@@ -1,4 +1,7 @@
-
+// Visual server canvas interface for the engine. This file declares the
+// VisualServerCanvas class, which provides the API for managing and rendering
+// canvas items, including culling, sorting, and handling of clipping and
+// material ownership.
 #ifndef VISUALSERVERCANVAS_H
 #define VISUALSERVERCANVAS_H
 

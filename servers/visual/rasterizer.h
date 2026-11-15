@@ -1,4 +1,6 @@
-
+// Rasterizer interface for the engine. This file declares the RasterizerScene
+// class, which provides the API for managing shadows, skies, and environment
+// settings within the rendering engine.
 #ifndef RASTERIZER_H
 #define RASTERIZER_H
 

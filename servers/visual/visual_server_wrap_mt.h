@@ -1,4 +1,7 @@
-
+// Visual server wrap multithreaded interface for the engine. This file declares
+// the VisualServerWrapMT class, which provides a multithreaded wrapper around
+// the visual server, managing a separate rendering thread and command queue for
+// thread-safe drawing and synchronization.
 #ifndef VISUAL_SERVER_WRAP_MT_H
 #define VISUAL_SERVER_WRAP_MT_H
 

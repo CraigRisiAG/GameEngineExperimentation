@@ -1,4 +1,6 @@
-
+// Visual server raster interface for the engine. This file declares the
+// VisualServerRaster class, which provides the API for managing rasterization,
+// including black bars, frame drawing, and rendering information.
 #ifndef VISUAL_SERVER_RASTER_H
 #define VISUAL_SERVER_RASTER_H
 

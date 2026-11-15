@@ -1,10 +1,10 @@
-
+/ explain1
 #include "rasterizer.h"
 
 #include "core/os/os.h"
 #include "core/print_string.h"
 
-Rasterizer *(*Rasterizer::_create_func)() = NULL;
+    Rasterizer *(*Rasterizer::_create_func)() = NULL;
 
 void RasterizerScene::InstanceDependency::instance_notify_changed(
     bool p_aabb, bool p_dependencies) {

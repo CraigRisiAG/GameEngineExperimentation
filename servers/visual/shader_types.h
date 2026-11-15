@@ -1,4 +1,6 @@
-
+// Shader types interface for the engine. This file declares the ShaderTypes
+// class, which provides the API for managing shader functions, modes, and
+// built-in types.
 #ifndef SHADERTYPES_H
 #define SHADERTYPES_H
 

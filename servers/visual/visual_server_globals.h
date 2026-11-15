@@ -1,4 +1,7 @@
-
+// Visual server globals interface for the engine. This file declares the
+// VisualServerGlobals class, which provides the API for managing global
+// resources and references to various visual server components such as the
+// canvas, viewport, and scene.
 #ifndef VISUAL_SERVER_GLOBALS_H
 #define VISUAL_SERVER_GLOBALS_H
 

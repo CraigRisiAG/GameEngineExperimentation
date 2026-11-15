@@ -1,4 +1,6 @@
-
+// Shader types interface for the engine. This file implements the ShaderTypes
+// class, which provides the API for managing shader functions, modes, and
+// built-in types.
 #include "shader_types.h"
 
 const Map<StringName, ShaderLanguage::FunctionInfo> &

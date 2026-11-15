@@ -1,4 +1,6 @@
-
+// Visual server raster interface for the engine. This file implements the
+// VisualServerRaster class, which provides the API for managing rasterization,
+// including black bars, frame drawing, and rendering information.
 #include "visual_server_raster.h"
 
 #include "core/io/marshalls.h"

@@ -1,4 +1,6 @@
-
+// Visual server scene interface for the engine. This file declares the
+// VisualServerScene class, which provides the API for managing cameras,
+// scenarios, and instances within the visual server.
 #ifndef VISUALSERVERSCENE_H
 #define VISUALSERVERSCENE_H
 

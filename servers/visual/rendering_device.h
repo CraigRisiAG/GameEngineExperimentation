@@ -1,4 +1,7 @@
-
+// Rendering device interface for the engine. This file declares the
+// RenderingDevice class, which provides the API for managing shader compilation
+// and caching, as well as maintaining a singleton instance of the rendering
+// device.
 #ifndef RENDERING_DEVICE_H
 #define RENDERING_DEVICE_H
 
@@ -609,10 +612,10 @@ public:
                                               // type)
     UNIFORM_TYPE_IMAGE_BUFFER, // texel buffer, (imageBuffer type), for compute
                                // mostly
-    UNIFORM_TYPE_UNIFORM_BUFFER, // regular uniform buffer (or UBO).
-    UNIFORM_TYPE_STORAGE_BUFFER, // storage buffer ("buffer" qualifier) like
-                                 // UBO, but supports storage, for compute
-                                 // mostly
+    UNIFORM_TYPE_UNIFORM_BUFFER,   // regular uniform buffer (or UBO).
+    UNIFORM_TYPE_STORAGE_BUFFER,   // storage buffer ("buffer" qualifier) like
+                                   // UBO, but supports storage, for compute
+                                   // mostly
     UNIFORM_TYPE_INPUT_ATTACHMENT, // used for sub-pass read/write, for compute
                                    // mostly
     UNIFORM_TYPE_MAX
@@ -951,8 +954,8 @@ public:
   enum InitialAction {
     INITIAL_ACTION_CLEAR, // start rendering and clear the framebuffer (supply
                           // params)
-    INITIAL_ACTION_KEEP, // start rendering, but keep attached color texture
-                         // contents (depth will be cleared)
+    INITIAL_ACTION_KEEP,  // start rendering, but keep attached color texture
+                          // contents (depth will be cleared)
     INITIAL_ACTION_CONTINUE, // continue rendering (framebuffer must have been
                              // left in "continue" state as final action
                              // previously)

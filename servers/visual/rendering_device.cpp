@@ -1,4 +1,7 @@
-
+// This file implements the rendering device for the engine. It defines the
+// RenderingDevice class, which provides the API for managing shader compilation
+// and caching, as well as maintaining a singleton instance of the rendering
+// device.
 #include "rendering_device.h"
 
 RenderingDevice *RenderingDevice::singleton = NULL;

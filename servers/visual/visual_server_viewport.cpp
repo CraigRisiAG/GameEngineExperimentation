@@ -1,4 +1,7 @@
-
+// Visual server viewport interface for the engine. This file implements the
+// VisualServerViewport class, which provides the API for managing and rendering
+// viewports, including handling 3D and 2D drawing, ARVR support, and canvas
+// integration.
 #include "visual_server_viewport.h"
 
 #include "core/project_settings.h"
@@ -157,7 +160,7 @@ void VisualServerViewport::_draw_viewport(Viewport *p_viewport,
             cl->filter_next_ptr = lights;
             lights = cl;
             //						cl->texture_cache =
-            //NULL;
+            // NULL;
             Transform2D scale;
             scale.scale(cl->rect_cache.size);
             scale.elements[2] = cl->rect_cache.position;
@@ -497,7 +500,7 @@ void VisualServerViewport::viewport_set_size(RID p_viewport, int p_width,
   ERR_FAIL_COND(!viewport);
 
   //	if (viewport->size.width == p_width && viewport->size.height ==
-  //p_height) { 		return; //nothing to do
+  // p_height) { 		return; //nothing to do
   //	}
   viewport->size = Size2(p_width, p_height);
   VSG::storage->render_target_set_size(viewport->render_target, p_width,

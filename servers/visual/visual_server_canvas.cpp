@@ -1,4 +1,7 @@
-
+// Visual server canvas interface for the engine. This file implements the
+// VisualServerCanvas class, which provides the API for managing and rendering
+// canvas items, including culling, sorting, and handling of clipping and
+// material ownership.
 #include "visual_server_canvas.h"
 #include "visual_server_globals.h"
 #include "visual_server_raster.h"

@@ -1,4 +1,6 @@
-
+// Visual server scene interface for the engine. This file implements the
+// VisualServerScene class, which provides the API for managing cameras,
+// scenarios, and instances within the visual server.
 #include "visual_server_scene.h"
 
 #include "core/os/os.h"
@@ -2056,7 +2058,7 @@ void VisualServerScene::render_camera(RID p_render_buffers,
   // outcome for our right eye
   if (p_eye == ARVRInterface::EYE_LEFT) {
     ///@TODO possibly move responsibility for this into our ARVRServer or
-    ///ARVRInterface?
+    /// ARVRInterface?
 
     // Center our transform, we assume basis is equal.
     Transform mono_transform = cam_transform;

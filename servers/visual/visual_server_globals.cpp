@@ -1,4 +1,7 @@
-
+// Visual server globals interface for the engine. This file implements the
+// VisualServerGlobals class, which provides the API for managing global
+// resources and references to various visual server components such as the
+// canvas, viewport, and scene.
 #include "visual_server_globals.h"
 
 RasterizerStorage *VisualServerGlobals::storage = NULL;

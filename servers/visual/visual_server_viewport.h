@@ -1,4 +1,7 @@
-
+// Visual server viewport interface for the engine. This file declares the
+// VisualServerViewport class, which provides the API for managing and rendering
+// viewports, including handling 3D and 2D drawing, ARVR support, and canvas
+// integration.
 #ifndef VISUALSERVERVIEWPORT_H
 #define VISUALSERVERVIEWPORT_H
 
