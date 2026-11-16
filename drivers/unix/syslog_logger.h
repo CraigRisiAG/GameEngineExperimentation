@@ -1,4 +1,8 @@
-
+/**
+ * Syslog logger header for Unix-like systems in Godot Engine.
+ * This file defines the SyslogLogger class, which implements logging using the
+ * syslog facility.
+ */
 #ifndef SYSLOG_LOGGER_H
 #define SYSLOG_LOGGER_H
 

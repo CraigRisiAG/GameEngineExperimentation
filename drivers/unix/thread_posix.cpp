@@ -1,4 +1,8 @@
-
+/**
+ * POSIX thread implementation for Godot Engine.
+ * This file defines the ThreadPosix class, which implements the thread
+ * interface using POSIX threads.
+ */
 #include "thread_posix.h"
 #include "core/script_language.h"
 

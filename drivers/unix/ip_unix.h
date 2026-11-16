@@ -1,4 +1,8 @@
-
+/**
+ * IP address handling header for Unix-like systems in Godot Engine.
+ * This file defines the IP_Unix class, which implements the IP address
+ * interface for Unix-like systems.
+ */
 #ifndef IP_UNIX_H
 #define IP_UNIX_H
 

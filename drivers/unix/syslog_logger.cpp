@@ -1,4 +1,8 @@
-
+/**
+ * Syslog logger implementation for Unix-like systems in Godot Engine.
+ * This file defines the SyslogLogger class, which implements logging using the
+ * syslog facility.
+ */
 #ifdef UNIX_ENABLED
 
 #include "syslog_logger.h"

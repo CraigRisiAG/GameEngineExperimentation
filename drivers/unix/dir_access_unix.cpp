@@ -1,4 +1,6 @@
-
+/**
+ * Directory access implementation for Unix-like systems in Godot Engine.
+ */
 #include "dir_access_unix.h"
 
 #if defined(UNIX_ENABLED) || defined(LIBC_FILEIO_ENABLED)

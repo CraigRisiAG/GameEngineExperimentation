@@ -1,4 +1,8 @@
-
+/**
+ * Network socket handling implementation for Unix-like systems in Godot Engine.
+ * This file defines the NetSocketPosix class, which implements the network
+ * socket interface for Unix-like systems.
+ */
 #include "net_socket_posix.h"
 
 #ifndef UNIX_SOCKET_UNAVAILABLE

@@ -1,7 +1,8 @@
-/*************************************************************************/
-/*  rw_lock_posix.h                                                      */
-/*************************************************************************/
-
+/**
+ * POSIX read-write lock header for Godot Engine.
+ * This file defines the RWLockPosix class, which implements the read-write lock
+ * interface using POSIX threads.
+ */
 #ifndef RWLOCKPOSIX_H
 #define RWLOCKPOSIX_H
 

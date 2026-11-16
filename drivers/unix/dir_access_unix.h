@@ -1,4 +1,7 @@
 
+// Directory access header for Unix-like systems in Godot Engine.
+// This file defines the DirAccessUnix class, which implements the directory
+// access interface for Unix-like systems.
 #ifndef DIR_ACCESS_UNIX_H
 #define DIR_ACCESS_UNIX_H
 

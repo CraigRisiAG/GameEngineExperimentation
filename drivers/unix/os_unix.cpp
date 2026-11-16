@@ -1,4 +1,8 @@
-
+/**
+ * Unix-like system OS implementation for Godot Engine.
+ * This file defines the OS_Unix class, which implements the OS interface for
+ * Unix-like systems.
+ */
 #include "os_unix.h"
 
 #ifdef UNIX_ENABLED

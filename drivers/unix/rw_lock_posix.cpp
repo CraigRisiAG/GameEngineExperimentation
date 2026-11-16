@@ -1,4 +1,8 @@
-
+/**
+ * POSIX read-write lock implementation for Godot Engine.
+ * This file defines the RWLockPosix class, which implements the read-write lock
+ * interface using POSIX threads.
+ */
 #if defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)
 
 #include "rw_lock_posix.h"

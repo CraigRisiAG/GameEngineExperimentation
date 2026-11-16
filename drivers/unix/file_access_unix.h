@@ -1,4 +1,8 @@
-
+/**
+ * File access header for Unix-like systems in Godot Engine.
+ * This file defines the FileAccessUnix class, which implements the file access
+ * interface for Unix-like systems.
+ */
 #ifndef FILE_ACCESS_UNIX_H
 #define FILE_ACCESS_UNIX_H
 
