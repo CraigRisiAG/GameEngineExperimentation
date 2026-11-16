@@ -1,4 +1,6 @@
-
+/**
+ * Audio driver implementation for PulseAudio in Godot Engine.
+ */
 #include "audio_driver_pulseaudio.h"
 
 #ifdef PULSEAUDIO_ENABLED

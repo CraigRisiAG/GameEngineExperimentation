@@ -1,3 +1,6 @@
+"""
+Extract tool for processing XML documentation files and generating translation templates.
+"""
 #!/usr/bin/env python3
 
 import argparse

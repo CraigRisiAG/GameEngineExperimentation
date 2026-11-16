@@ -1,4 +1,6 @@
-
+// Audio driver header for PulseAudio in Godot Engine.
+// This file defines the AudioDriverPulseAudio class, which implements the audio
+// driver interface for PulseAudio.
 #ifdef PULSEAUDIO_ENABLED
 
 #ifndef AUDIO_DRIVER_PULSEAUDIO_H
