@@ -1,4 +1,8 @@
-
+/**
+ * Driver registration implementation for Godot Engine.
+ * This file defines functions to register and unregister core and
+ * platform-specific driver types, such as image loaders and resource savers.
+ */
 #include "register_driver_types.h"
 
 #include "drivers/png/image_loader_png.h"

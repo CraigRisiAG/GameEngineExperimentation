@@ -1,4 +1,8 @@
-
+/**
+ * Driver registration header for Godot Engine.
+ * This file declares functions to register and unregister core and
+ * platform-specific driver types, such as image loaders and resource savers.
+ */
 #ifndef REGISTER_DRIVER_TYPES_H
 #define REGISTER_DRIVER_TYPES_H
 
