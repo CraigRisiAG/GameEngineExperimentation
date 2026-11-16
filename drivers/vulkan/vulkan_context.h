@@ -1,4 +1,8 @@
-
+/**
+ * Vulkan context header for Godot Engine.
+ * This file defines the VulkanContext class, which manages the Vulkan
+ * instance, devices, and debug messenger for the engine.
+ */
 #ifndef VULKAN_CONTEXT_H
 #define VULKAN_CONTEXT_H
 
@@ -143,7 +147,7 @@ class VulkanContext {
 protected:
   virtual const char *_get_platform_surface_extension() const = 0;
   //	virtual VkResult _create_surface(VkSurfaceKHR *surface, VkInstance
-  //p_instance) = 0;
+  // p_instance) = 0;
 
   virtual int _window_create(VkSurfaceKHR p_surface, int p_width, int p_height);
 

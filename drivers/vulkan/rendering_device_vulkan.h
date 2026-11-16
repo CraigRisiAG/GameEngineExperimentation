@@ -1,4 +1,8 @@
-
+/**
+ * Rendering device header for Vulkan in Godot Engine.
+ * This file defines the RenderingDeviceVulkan class, which implements the
+ * rendering device interface using the Vulkan API.
+ */
 #ifndef RENDERING_DEVICE_VULKAN_H
 #define RENDERING_DEVICE_VULKAN_H
 

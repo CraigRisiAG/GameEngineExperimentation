@@ -1,4 +1,8 @@
-
+/**
+ * Vulkan context implementation for Godot Engine.
+ * This file defines the VulkanContext class, which manages the Vulkan
+ * instance, devices, and debug messenger for the engine.
+ */
 #include "vulkan_context.h"
 
 #include "core/engine.h"
@@ -24,9 +28,9 @@ VKAPI_ATTR VkBool32 VKAPI_CALL VulkanContext::_debug_messenger_callback(
   // This error needs to be ignored because the AMD allocator will mix up memory
   // types on IGP processors.
   if (strstr(pCallbackData->pMessage, "Mapping an image with layout") != NULL &&
-      strstr(pCallbackData->pMessage, "can result in undefined behavior if "
-                                      "this memory is used by the device") !=
-          NULL) {
+      strstr(pCallbackData->pMessage,
+             "can result in undefined behavior if "
+             "this memory is used by the device") != NULL) {
     return VK_FALSE;
   }
   // This needs to be ignored because Validator is wrong here.
@@ -1445,8 +1449,8 @@ Error VulkanContext::swap_buffers() {
       /*pNext*/ NULL,
       /*waitSemaphoreCount*/ 1,
       /*pWaitSemaphores*/
-          (separate_present_queue) ? &image_ownership_semaphores[frame_index]
-                                   : &draw_complete_semaphores[frame_index],
+      (separate_present_queue) ? &image_ownership_semaphores[frame_index]
+                               : &draw_complete_semaphores[frame_index],
       /*swapchainCount*/ 0,
       /*pSwapchain*/ NULL,
       /*pImageIndices*/ NULL,

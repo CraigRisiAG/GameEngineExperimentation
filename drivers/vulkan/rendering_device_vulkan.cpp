@@ -1,4 +1,8 @@
-
+/**
+ * Rendering device implementation for Vulkan in Godot Engine.
+ * This file defines the RenderingDeviceVulkan class, which implements the
+ * rendering device interface using the Vulkan API.
+ */
 #include "rendering_device_vulkan.h"
 #include "core/hashfuncs.h"
 #include "core/os/file_access.h"
