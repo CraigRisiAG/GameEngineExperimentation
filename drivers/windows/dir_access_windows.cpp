@@ -1,4 +1,8 @@
-
+/**
+ * Directory access implementation for Windows in Godot Engine.
+ * This file defines the DirAccessWindows class, which implements the directory
+ * access interface using Windows API functions.
+ */
 #if defined(WINDOWS_ENABLED)
 
 #include "dir_access_windows.h"

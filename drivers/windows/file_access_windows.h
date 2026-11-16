@@ -1,4 +1,8 @@
-
+/**
+ * File access header for Windows in Godot Engine.
+ * This file defines the FileAccessWindows class, which implements the file
+ * access interface using Windows API functions.
+ */
 #ifndef FILE_ACCESS_WINDOWS_H
 #define FILE_ACCESS_WINDOWS_H
 

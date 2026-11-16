@@ -1,4 +1,8 @@
-
+/**
+ * Thread implementation for Windows in Godot Engine.
+ * This file defines the ThreadWindows class, which implements the thread
+ * interface using Windows API functions.
+ */
 #include "thread_windows.h"
 
 #if defined(WINDOWS_ENABLED) && !defined(UWP_ENABLED)

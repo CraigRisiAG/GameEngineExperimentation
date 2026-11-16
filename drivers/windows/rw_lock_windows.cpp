@@ -1,4 +1,8 @@
-
+/**
+ * Read-write lock implementation for Windows in Godot Engine.
+ * This file defines the RWLockWindows class, which implements the read-write
+ * lock interface using Windows API functions.
+ */
 #if defined(WINDOWS_ENABLED)
 
 #include "rw_lock_windows.h"

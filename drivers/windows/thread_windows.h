@@ -1,4 +1,8 @@
-
+/**
+ * Thread header for Windows in Godot Engine.
+ * This file defines the ThreadWindows class, which implements the thread
+ * interface using Windows API functions.
+ */
 #ifndef THREAD_WINDOWS_H
 #define THREAD_WINDOWS_H
 

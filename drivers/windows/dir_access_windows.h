@@ -1,4 +1,8 @@
-
+/**
+ * Directory access header for Windows in Godot Engine.
+ * This file defines the DirAccessWindows class, which implements the directory
+ * access interface using Windows API functions.
+ */
 #ifndef DIR_ACCESS_WINDOWS_H
 #define DIR_ACCESS_WINDOWS_H
 

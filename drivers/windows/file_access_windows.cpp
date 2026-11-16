@@ -1,4 +1,8 @@
-
+/**
+ * File access implementation for Windows in Godot Engine.
+ * This file defines the FileAccessWindows class, which implements the file
+ * access interface using Windows API functions.
+ */
 #ifdef WINDOWS_ENABLED
 
 #include "file_access_windows.h"
