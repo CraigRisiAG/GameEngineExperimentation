@@ -1,4 +1,8 @@
-
+/**
+ * Audio driver implementation for WASAPI in Godot Engine.
+ * This file defines the AudioDriverWASAPI class, which implements the audio
+ * driver interface using the Windows Audio Session API (WASAPI).
+ */
 #ifdef WASAPI_ENABLED
 
 #include "audio_driver_wasapi.h"
