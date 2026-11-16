@@ -1,3 +1,7 @@
+"""
+Doc merge tool for combining XML documentation files.
+"""
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 

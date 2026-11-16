@@ -1,6 +1,3 @@
-
-
-from platform_methods import subprocess_main
 """
 Core builders module for generating C header files from various source data.
 This module provides functions to generate C header files containing embedded data such as
@@ -28,6 +25,7 @@ Usage:
     subprocess_main() function with the globals() dictionary.
 """
 
+from platform_methods import subprocess_main
 
 def escape_string(s):
     def charcode_to_c_escapes(c):

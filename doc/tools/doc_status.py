@@ -1,3 +1,6 @@
+"""
+Doc status tool for analyzing XML documentation files.
+"""
 #!/usr/bin/env python
 
 import fnmatch

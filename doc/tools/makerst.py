@@ -1,3 +1,6 @@
+"""
+Makerst tool for generating reStructuredText (RST) documentation from XML documentation files.
+"""
 #!/usr/bin/env python3
 
 import argparse
