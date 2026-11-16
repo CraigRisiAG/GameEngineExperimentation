@@ -1,4 +1,8 @@
-
+/**
+ * MIDI driver implementation for Windows using WinMIDI in Godot Engine.
+ * This file defines the MIDIDriverWinMidi class, which implements the MIDI
+ * driver interface using the Windows Multimedia API (WinMIDI).
+ */
 #ifdef WINMIDI_ENABLED
 
 #include "midi_driver_winmidi.h"
