@@ -1,4 +1,8 @@
-
+/**
+ * Audio driver header for Windows using XAudio2 in Godot Engine.
+ * This file defines the AudioDriverXAudio2 class, which implements the audio
+ * driver interface using the XAudio2 API.
+ */
 #ifndef AUDIO_DRIVER_XAUDIO2_H
 #define AUDIO_DRIVER_XAUDIO2_H
 
