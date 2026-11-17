@@ -1,4 +1,8 @@
-
+/**
+ * Animation Bezier Editor for Godot Engine.
+ * This file defines the AnimationBezierTrackEdit class, which provides
+ * functionality to edit Bezier tracks in the animation editor.
+ */
 #include "animation_bezier_editor.h"
 
 #include "editor/editor_node.h"

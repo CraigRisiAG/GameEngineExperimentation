@@ -1,4 +1,10 @@
-
+/**
+ * Animation Track Editor Plugins header for Godot Engine.
+ * This file declares various track editor plugins, such as
+ * AnimationTrackEditBool and AnimationTrackEditColor, which provide
+ * functionality to edit specific types of animation tracks in the animation
+ * editor.
+ */
 #ifndef ANIMATION_TRACK_EDITOR_PLUGINS_H
 #define ANIMATION_TRACK_EDITOR_PLUGINS_H
 

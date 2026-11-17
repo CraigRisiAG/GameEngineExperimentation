@@ -1,4 +1,8 @@
-
+/**
+ * Animation Track Editor for Godot Engine.
+ * This file defines the AnimationTrackKeyEdit class, which provides
+ * functionality to edit animation track keys in the animation editor.
+ */
 #include "animation_track_editor.h"
 
 #include "animation_track_editor_plugins.h"
