@@ -1,4 +1,10 @@
-
+/**
+ * Navigation Polygon Editor Plugin for Godot Engine.
+ * This file defines the NavigationPolygonEditor class, which provides
+ * functionality to manage NavigationPolygon resources within the editor,
+ * including creating, modifying, and removing polygon outlines, as well as
+ * handling undo/redo actions.
+ */
 #include "navigation_polygon_editor_plugin.h"
 
 Ref<NavigationPolygon> NavigationPolygonEditor::_ensure_navpoly() const {

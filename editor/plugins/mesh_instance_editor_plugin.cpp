@@ -1,4 +1,9 @@
-
+/**
+ * Mesh Instance Editor Plugin for Godot Engine.
+ * This file defines the MeshInstanceEditor class, which provides functionality
+ * to manage MeshInstance nodes within the editor, including creating collision
+ * shapes and static bodies based on the mesh geometry.
+ */
 #include "mesh_instance_editor_plugin.h"
 
 #include "editor/editor_scale.h"

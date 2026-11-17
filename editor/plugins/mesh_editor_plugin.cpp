@@ -1,4 +1,9 @@
-
+/**
+ * Mesh Editor Plugin for Godot Engine.
+ * This file defines the MeshEditor class, which provides functionality
+ * to preview and manipulate Mesh resources within the editor, including
+ * handling rotation, lighting, and mesh transformations.
+ */
 #include "mesh_editor_plugin.h"
 
 #include "editor/editor_scale.h"

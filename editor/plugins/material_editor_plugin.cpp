@@ -1,4 +1,9 @@
-
+/**
+ * Material Editor Plugin for Godot Engine.
+ * This file defines the MaterialEditor class, which provides functionality
+ * to edit Material resources within the editor, including previewing materials
+ * on different shapes, managing lighting, and handling material properties.
+ */
 #include "material_editor_plugin.h"
 
 #include "editor/editor_scale.h"

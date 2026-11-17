@@ -1,4 +1,10 @@
-
+/**
+ * MultiMesh Editor Plugin for Godot Engine.
+ * This file declares the MultiMeshEditor class and the MultiMeshEditorPlugin
+ * class, which provide functionality to manage MultiMesh instances within the
+ * editor, including populating instances based on surface geometry and handling
+ * random transformations.
+ */
 #ifndef MULTIMESH_EDITOR_PLUGIN_H
 #define MULTIMESH_EDITOR_PLUGIN_H
 

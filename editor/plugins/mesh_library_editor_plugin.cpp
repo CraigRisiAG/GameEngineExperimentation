@@ -1,4 +1,9 @@
-
+/**
+ * Mesh Library Editor Plugin for Godot Engine.
+ * This file defines the MeshLibraryEditor class, which provides functionality
+ * to manage MeshLibrary resources within the editor, including importing
+ * scenes, handling mesh instances, collisions, and navigation meshes.
+ */
 #include "mesh_library_editor_plugin.h"
 
 #include "editor/editor_node.h"
