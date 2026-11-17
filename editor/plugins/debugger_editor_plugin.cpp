@@ -1,4 +1,10 @@
-
+/**
+ * Debugger Editor Plugin for Godot Engine.
+ * This file defines the DebuggerEditorPlugin class, which provides
+ * functionality to integrate the debugger into the editor, including managing
+ * debug menus, handling multi-instance runs, and configuring various debug
+ * options.
+ */
 #include "debugger_editor_plugin.h"
 
 #include "core/os/keyboard.h"

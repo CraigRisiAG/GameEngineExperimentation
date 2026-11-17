@@ -1,4 +1,9 @@
-
+/**
+ * GI Probe Editor Plugin for Godot Engine.
+ * This file defines the GIProbeEditorPlugin class, which provides functionality
+ * to integrate GI Probe baking into the editor, including handling the bake
+ * process, displaying bake progress, and managing GI Probe data files.
+ */
 #include "gi_probe_editor_plugin.h"
 
 void GIProbeEditorPlugin::_bake() {

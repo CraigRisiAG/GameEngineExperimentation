@@ -1,4 +1,9 @@
-
+/**
+ * Editor Preview Plugins for Godot Engine.
+ * This file defines the EditorTexturePreviewPlugin and EditorImagePreviewPlugin
+ * classes, which provide functionality to generate previews for textures and
+ * images in the editor.
+ */
 #include "editor_preview_plugins.h"
 
 #include "core/io/file_access_memory.h"

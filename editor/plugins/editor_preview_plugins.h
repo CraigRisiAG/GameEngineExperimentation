@@ -1,4 +1,12 @@
-
+/**
+ * Editor Preview Plugins for Godot Engine.
+ * This file declares the EditorTexturePreviewPlugin, EditorImagePreviewPlugin,
+ * EditorBitmapPreviewPlugin, EditorPackedScenePreviewPlugin,
+ * EditorMaterialPreviewPlugin, EditorScriptPreviewPlugin,
+ * EditorAudioStreamPreviewPlugin, EditorMeshPreviewPlugin, and
+ * EditorFontPreviewPlugin classes, which provide functionality to generate
+ * previews for various resource types in the editor.
+ */
 #ifndef EDITORPREVIEWPLUGINS_H
 #define EDITORPREVIEWPLUGINS_H
 

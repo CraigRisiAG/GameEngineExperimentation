@@ -1,4 +1,9 @@
-
+/**
+ * Line 2D Editor Plugin for Godot Engine.
+ * This file defines the Line2DEditor and Line2DEditorPlugin classes,
+ * which provide functionality to edit Line2D nodes within the editor,
+ * including handling line points and related properties.
+ */
 #include "line_2d_editor_plugin.h"
 
 Node2D *Line2DEditor::_get_node() const { return node; }

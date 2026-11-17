@@ -1,4 +1,10 @@
-
+/**
+ * Item List Editor Plugin for Godot Engine.
+ * This file defines the ItemListPlugin, ItemListOptionButtonPlugin, and
+ * ItemListPopupMenuPlugin classes, which provide functionality to edit item
+ * lists within the editor, including handling item text, icons, checkable
+ * states, IDs, enabled states, and separators.
+ */
 #include "item_list_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

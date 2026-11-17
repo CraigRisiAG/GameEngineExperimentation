@@ -1,4 +1,10 @@
-
+/**
+ * Light Occluder 2D Editor Plugin for Godot Engine.
+ * This file declares the LightOccluder2DEditor and LightOccluder2DEditorPlugin
+ * classes, which provide functionality to edit LightOccluder2D nodes within the
+ * editor, including handling occluder polygons, polygon points, and related
+ * properties.
+ */
 #ifndef LIGHT_OCCLUDER_2D_EDITOR_PLUGIN_H
 #define LIGHT_OCCLUDER_2D_EDITOR_PLUGIN_H
 

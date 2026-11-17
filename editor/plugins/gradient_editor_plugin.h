@@ -1,4 +1,10 @@
-
+/**
+ * Gradient Editor Plugin for Godot Engine.
+ * This file declares the GradientEditor class, the
+ * EditorInspectorPluginGradient class, and the GradientEditorPlugin class,
+ * which provide functionality to edit Gradient resources within the editor,
+ * including handling gradient points, colors, and offsets.
+ */
 #ifndef TOOLS_EDITOR_PLUGINS_COLOR_RAMP_EDITOR_PLUGIN_H_
 #define TOOLS_EDITOR_PLUGINS_COLOR_RAMP_EDITOR_PLUGIN_H_
 
