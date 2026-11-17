@@ -1,4 +1,8 @@
-
+/**
+ * Animation Player Editor Plugin for Godot Engine.
+ * This file defines the AnimationPlayerEditor class, which provides
+ * functionality to edit animation players in the editor.
+ */
 #include "animation_player_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

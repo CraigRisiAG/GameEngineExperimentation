@@ -1,4 +1,8 @@
-
+/**
+ * Animation Tree Editor Plugin for Godot Engine.
+ * This file defines the AnimationTreeEditor class, which provides
+ * functionality to edit animation trees in the editor.
+ */
 #include "animation_tree_editor_plugin.h"
 
 #include "animation_blend_space_1d_editor.h"

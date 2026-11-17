@@ -1,4 +1,8 @@
-
+/**
+ * Animation Blend Space 1D Editor for Godot Engine.
+ * This file defines the AnimationNodeBlendSpace1DEditor class, which provides
+ * functionality to edit 1D animation blend spaces in the editor.
+ */
 #include "animation_blend_space_1d_editor.h"
 
 #include "core/os/keyboard.h"

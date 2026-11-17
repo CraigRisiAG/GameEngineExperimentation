@@ -1,4 +1,8 @@
-
+/**
+ * Abstract Polygon 2D Editor for Godot Engine.
+ * This file defines the AbstractPolygon2DEditor class, which provides
+ * functionality to edit 2D polygon shapes in the editor.
+ */
 #include "abstract_polygon_2d_editor.h"
 
 #include "canvas_item_editor_plugin.h"

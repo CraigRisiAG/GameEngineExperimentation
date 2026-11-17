@@ -1,4 +1,8 @@
-
+/**
+ * Animation Blend Space 1D Editor header for Godot Engine.
+ * This file declares the AnimationNodeBlendSpace1DEditor class, which provides
+ * functionality to edit 1D animation blend spaces in the editor.
+ */
 #ifndef ANIMATION_BLEND_SPACE_1D_EDITOR_H
 #define ANIMATION_BLEND_SPACE_1D_EDITOR_H
 

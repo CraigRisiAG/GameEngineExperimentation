@@ -1,4 +1,8 @@
-
+/**
+ * Abstract Polygon 2D Editor header for Godot Engine.
+ * This file declares the AbstractPolygon2DEditor class and its plugin,
+ * which provide functionality to edit 2D polygon shapes in the editor.
+ */
 #ifndef ABSTRACT_POLYGON_2D_EDITOR_H
 #define ABSTRACT_POLYGON_2D_EDITOR_H
 

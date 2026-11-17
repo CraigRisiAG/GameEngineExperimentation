@@ -1,4 +1,8 @@
-
+/**
+ * Animation Blend Tree Editor Plugin header for Godot Engine.
+ * This file declares the AnimationNodeBlendTreeEditor class, which provides
+ * functionality to edit animation blend trees in the editor.
+ */
 #ifndef ANIMATION_BLEND_TREE_EDITOR_PLUGIN_H
 #define ANIMATION_BLEND_TREE_EDITOR_PLUGIN_H
 

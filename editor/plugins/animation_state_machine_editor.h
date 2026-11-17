@@ -1,4 +1,8 @@
-
+/**
+ * Animation State Machine Editor header for Godot Engine.
+ * This file declares the AnimationNodeStateMachineEditor class, which provides
+ * functionality to edit animation state machines in the editor.
+ */
 #ifndef ANIMATION_STATE_MACHINE_EDITOR_H
 #define ANIMATION_STATE_MACHINE_EDITOR_H
 

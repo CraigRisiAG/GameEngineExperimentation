@@ -1,4 +1,8 @@
-
+/**
+ * Animation Blend Space 2D Editor for Godot Engine.
+ * This file defines the AnimationNodeBlendSpace2DEditor class, which provides
+ * functionality to edit 2D animation blend spaces in the editor.
+ */
 #include "animation_blend_space_2d_editor.h"
 
 #include "core/io/resource_loader.h"
