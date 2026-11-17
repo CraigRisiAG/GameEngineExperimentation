@@ -1,4 +1,10 @@
-
+/**
+ * Theme Editor Plugin for Godot Engine.
+ * This file declares the ThemeEditor class and the ThemeEditorPlugin class,
+ * which provide functionality to edit themes within the editor, including
+ * handling different theme types, managing theme properties, and saving
+ * theme templates.
+ */
 #ifndef THEME_EDITOR_PLUGIN_H
 #define THEME_EDITOR_PLUGIN_H
 

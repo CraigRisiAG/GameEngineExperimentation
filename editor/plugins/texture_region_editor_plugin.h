@@ -1,4 +1,10 @@
-
+/**
+ * Texture Region Editor Plugin for Godot Engine.
+ * This file declares the TextureRegionEditor class and the
+ * TextureRegionEditorPlugin class, which provide functionality to edit texture
+ * regions within the editor, including handling snapping, autoslicing, and
+ * displaying texture information.
+ */
 #ifndef TEXTURE_REGION_EDITOR_PLUGIN_H
 #define TEXTURE_REGION_EDITOR_PLUGIN_H
 

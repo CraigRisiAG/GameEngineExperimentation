@@ -1,4 +1,9 @@
-
+/**
+ * Text Editor Plugin for Godot Engine.
+ * This file declares the TextEditor class, which provides functionality to
+ * edit text within the editor, including syntax highlighting and theme
+ * management.
+ */
 #ifndef TEXT_EDITOR_H
 #define TEXT_EDITOR_H
 

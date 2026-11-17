@@ -1,4 +1,9 @@
-
+/**
+ * Tile Map Editor Plugin for Godot Engine.
+ * This file declares the TileMapEditor class, which provides functionality to
+ * edit tile maps within the editor, including handling different tools,
+ * managing tile selections, and updating the viewport.
+ */
 #ifndef TILE_MAP_EDITOR_PLUGIN_H
 #define TILE_MAP_EDITOR_PLUGIN_H
 

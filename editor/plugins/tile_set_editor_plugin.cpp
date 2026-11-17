@@ -1,4 +1,9 @@
-
+/**
+ * Tile Set Editor Plugin for Godot Engine.
+ * This file implements the TileSetEditor class, which provides functionality to
+ * edit tile sets within the editor, including importing scenes, managing tile
+ * properties, and handling collisions, navigation polygons, and occluders.
+ */
 #include "tile_set_editor_plugin.h"
 
 #include "core/os/input.h"

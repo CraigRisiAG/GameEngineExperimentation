@@ -1,4 +1,10 @@
-
+/**
+ * Visual Shader Editor Plugin for Godot Engine.
+ * This file implements the VisualShaderEditor class and the
+ * VisualShaderNodePlugin class, which provide functionality to edit visual
+ * shaders within the editor, including handling custom shader nodes, managing
+ * the shader graph, and updating the preview.
+ */
 #include "visual_shader_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

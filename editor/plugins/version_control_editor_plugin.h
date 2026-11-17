@@ -1,4 +1,10 @@
-
+/**
+ * Version Control Editor Plugin for Godot Engine.
+ * This file declares the VersionControlEditorPlugin class, which provides
+ * functionality to integrate version control systems (VCS) within the editor,
+ * including setting up VCS addons, managing staged files, committing changes,
+ * and updating the stage area.
+ */
 #ifndef VERSION_CONTROL_EDITOR_PLUGIN_H
 #define VERSION_CONTROL_EDITOR_PLUGIN_H
 

@@ -1,4 +1,10 @@
-
+/**
+ * Texture Editor Plugin for Godot Engine.
+ * This file declares the TextureEditor class and related plugin classes,
+ * which provide functionality to preview and edit textures within the editor,
+ * including handling different texture types and displaying texture
+ * information.
+ */
 #ifndef TEXTURE_EDITOR_PLUGIN_H
 #define TEXTURE_EDITOR_PLUGIN_H
 
