@@ -1,4 +1,9 @@
-
+/**
+ * Script Editor Plugin for Godot Engine.
+ * This file declares the ScriptEditorBase class and related classes, which
+ * provide functionality to edit scripts within the editor, including handling
+ * code completion, quick open, and script management.
+ */
 #ifndef SCRIPT_EDITOR_PLUGIN_H
 #define SCRIPT_EDITOR_PLUGIN_H
 

@@ -1,4 +1,9 @@
-
+/**
+ * Path2D Editor Plugin for Godot Engine.
+ * This file declares the Path2DEditor class and the Path2DEditorPlugin class,
+ * which provide functionality to edit Path2D nodes within the editor, including
+ * handling point movement, in/out controls, and point deletion.
+ */
 #ifndef PATH_2D_EDITOR_PLUGIN_H
 #define PATH_2D_EDITOR_PLUGIN_H
 

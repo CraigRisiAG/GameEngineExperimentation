@@ -1,4 +1,9 @@
-
+/**
+ * Path Editor Plugin for Godot Engine.
+ * This file implements the PathSpatialGizmo class, which provides functionality
+ * to edit Path nodes within the 3D editor, including handling point movement,
+ * in/out controls, and point deletion.
+ */
 #include "path_editor_plugin.h"
 
 #include "core/os/keyboard.h"

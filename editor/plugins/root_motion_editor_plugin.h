@@ -1,4 +1,10 @@
-
+/**
+ * Root Motion Editor Plugin for Godot Engine.
+ * This file declares the EditorPropertyRootMotion class and the
+ * EditorInspectorRootMotionPlugin class, which provide functionality to edit
+ * root motion properties within the editor, including handling node assignment,
+ * filtering, and selection of animation tracks and skeleton bones.
+ */
 #ifndef ROOT_MOTION_EDITOR_PLUGIN_H
 #define ROOT_MOTION_EDITOR_PLUGIN_H
 

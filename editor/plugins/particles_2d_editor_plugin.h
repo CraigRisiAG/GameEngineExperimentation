@@ -1,4 +1,10 @@
-
+/**
+ * Particles2D Editor Plugin for Godot Engine.
+ * This file declares the Particles2DEditorPlugin class, which provides
+ * functionality to edit Particles2D nodes within the editor, including
+ * generating visibility rectangles, handling emission masks, and converting
+ * to CPU particles.
+ */
 #ifndef PARTICLES_2D_EDITOR_PLUGIN_H
 #define PARTICLES_2D_EDITOR_PLUGIN_H
 

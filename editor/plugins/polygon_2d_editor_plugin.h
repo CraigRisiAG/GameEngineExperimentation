@@ -1,4 +1,10 @@
-
+/**
+ * Polygon2D Editor Plugin for Godot Engine.
+ * This file declares the Polygon2DEditor class and the Polygon2DEditorPlugin
+ * class, which provide functionality to edit Polygon2D nodes within the editor,
+ * including handling UV editing, bone synchronization, and polygon
+ * manipulation.
+ */
 #ifndef POLYGON_2D_EDITOR_PLUGIN_H
 #define POLYGON_2D_EDITOR_PLUGIN_H
 

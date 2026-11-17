@@ -1,4 +1,9 @@
-
+/**
+ * Resource Preloader Editor Plugin for Godot Engine.
+ * This file implements the ResourcePreloaderEditor class, which provides
+ * functionality to manage and edit preloaded resources within the editor,
+ * including adding, renaming, removing, and pasting resources.
+ */
 #include "resource_preloader_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

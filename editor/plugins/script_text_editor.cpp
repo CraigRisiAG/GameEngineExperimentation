@@ -1,4 +1,9 @@
-
+/**
+ * Script Text Editor for Godot Engine.
+ * This file implements the ScriptTextEditor class, which provides functionality
+ * to edit script text within the editor, including handling code validation,
+ * function extraction, and member keyword updates.
+ */
 #include "script_text_editor.h"
 
 #include "core/math/expression.h"

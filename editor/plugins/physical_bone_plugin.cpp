@@ -1,4 +1,9 @@
-
+/**
+ * Physical Bone Plugin for Godot Engine.
+ * This file implements the PhysicalBoneEditor class and the PhysicalBonePlugin
+ * class, which provide functionality to edit PhysicalBone nodes within the 3D
+ * editor, including handling joint movement and gizmo interactions.
+ */
 #include "physical_bone_plugin.h"
 #include "editor/plugins/spatial_editor_plugin.h"
 #include "scene/3d/physics_body.h"

@@ -1,4 +1,10 @@
-
+/**
+ * Particles Editor Plugin for Godot Engine.
+ * This file declares the ParticlesEditorBase class, the ParticlesEditor class,
+ * and the ParticlesEditorPlugin class, which provide functionality to edit
+ * Particles nodes within the editor, including generating emission points based
+ * on geometry and handling emission masks.
+ */
 #ifndef PARTICLES_EDITOR_PLUGIN_H
 #define PARTICLES_EDITOR_PLUGIN_H
 
