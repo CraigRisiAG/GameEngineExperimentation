@@ -1,4 +1,10 @@
-
+/**
+ * Style Box Editor Plugin for Godot Engine.
+ * This file declares the StyleBoxPreview class, the
+ * EditorInspectorPluginStyleBox class, and the StyleBoxEditorPlugin class,
+ * which provide functionality to edit StyleBox resources within the editor,
+ * including handling preview and property editing.
+ */
 #ifndef STYLE_BOX_EDITOR_PLUGIN_H
 #define STYLE_BOX_EDITOR_PLUGIN_H
 

@@ -1,4 +1,9 @@
-
+/**
+ * Shader Editor Plugin for Godot Engine.
+ * This file implements the ShaderTextEditor class, which provides functionality
+ * to edit Shader resources within the editor, including handling text editing,
+ * syntax highlighting, and theme settings.
+ */
 #include "shader_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

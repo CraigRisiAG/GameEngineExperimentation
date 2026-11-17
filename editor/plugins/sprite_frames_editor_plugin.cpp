@@ -1,4 +1,9 @@
-
+/**
+ * Sprite Frames Editor Plugin for Godot Engine.
+ * This file implements the SpriteFramesEditor class, which provides
+ * functionality to edit SpriteFrames resources within the 2D editor, including
+ * handling sprite sheet splitting, frame selection, and frame addition.
+ */
 #include "sprite_frames_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

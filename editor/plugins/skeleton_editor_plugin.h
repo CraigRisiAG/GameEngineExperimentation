@@ -1,4 +1,9 @@
-
+/**
+ * Skeleton Editor Plugin for Godot Engine.
+ * This file declares the SkeletonEditor class and the SkeletonEditorPlugin
+ * class, which provide functionality to edit Skeleton nodes within the 3D
+ * editor, including handling physical bone creation and management.
+ */
 #ifndef SKELETON_EDITOR_PLUGIN_H
 #define SKELETON_EDITOR_PLUGIN_H
 

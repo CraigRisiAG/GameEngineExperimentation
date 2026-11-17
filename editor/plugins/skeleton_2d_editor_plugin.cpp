@@ -1,4 +1,10 @@
-
+/**
+ * Skeleton2D Editor Plugin for Godot Engine.
+ * This file implements the Skeleton2DEditor class and the
+ * Skeleton2DEditorPlugin class, which provide functionality to edit Skeleton2D
+ * nodes within the 2D editor, including handling bone transformations and rest
+ * pose management.
+ */
 #include "skeleton_2d_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"

@@ -1,4 +1,10 @@
-
+/**
+ * Sprite Frames Editor Plugin for Godot Engine.
+ * This file declares the SpriteFramesEditor class and the
+ * SpriteFramesEditorPlugin class, which provide functionality to edit
+ * SpriteFrames resources within the 2D editor, including handling sprite sheet
+ * splitting, frame selection, and frame addition.
+ */
 #ifndef SPRITE_FRAMES_EDITOR_PLUGIN_H
 #define SPRITE_FRAMES_EDITOR_PLUGIN_H
 

@@ -1,4 +1,9 @@
-
+/**
+ * Skeleton IK Editor Plugin for Godot Engine.
+ * This file declares the SkeletonIKEditorPlugin class, which provides
+ * functionality to edit SkeletonIK nodes within the 3D editor, including
+ * handling IK playback and interaction with the editor interface.
+ */
 #ifndef SKELETON_IK_EDITOR_PLUGIN_H
 #define SKELETON_IK_EDITOR_PLUGIN_H
 

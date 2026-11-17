@@ -1,4 +1,9 @@
-
+/**
+ * Spatial Editor Plugin for Godot Engine.
+ * This file implements the SpatialEditorPlugin class, which provides
+ * functionality to edit 3D scenes within the editor, including handling
+ * viewport controls, gizmos, and camera interactions.
+ */
 #include "spatial_editor_plugin.h"
 
 #include "core/math/camera_matrix.h"

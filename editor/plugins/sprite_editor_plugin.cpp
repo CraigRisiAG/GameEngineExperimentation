@@ -1,4 +1,9 @@
-
+/**
+ * Sprite Editor Plugin for Godot Engine.
+ * This file implements the SpriteEditor class, which provides functionality
+ * to edit Sprite nodes within the 2D editor, including handling conversion
+ * to Mesh2D, Polygon2D, CollisionPolygon2D, and LightOccluder2D.
+ */
 #include "sprite_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"

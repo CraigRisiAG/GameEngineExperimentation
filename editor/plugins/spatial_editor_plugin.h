@@ -1,4 +1,10 @@
-
+/**
+ * Spatial Editor Plugin for Godot Engine.
+ * This file declares the EditorSpatialGizmo class and the
+ * ViewportRotationControl class, which provide functionality to edit 3D scenes
+ * within the editor, including handling gizmos, viewport controls, and camera
+ * interactions.
+ */
 #ifndef SPATIAL_EDITOR_PLUGIN_H
 #define SPATIAL_EDITOR_PLUGIN_H
 
