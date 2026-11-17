@@ -1,4 +1,8 @@
-
+/**
+ * Canvas Item Editor Plugin for Godot Engine.
+ * This file defines the CanvasItemEditor and CanvasItemEditorPlugin classes,
+ * which provide functionality to edit and manage canvas items in the editor.
+ */
 #include "canvas_item_editor_plugin.h"
 
 #include "core/os/input.h"

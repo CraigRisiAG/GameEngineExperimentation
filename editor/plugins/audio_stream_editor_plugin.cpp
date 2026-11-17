@@ -1,4 +1,8 @@
-
+/**
+ * Audio Stream Editor Plugin for Godot Engine.
+ * This file defines the AudioStreamEditor class, which provides
+ * functionality to edit and preview audio streams in the editor.
+ */
 #include "audio_stream_editor_plugin.h"
 
 #include "core/io/resource_loader.h"

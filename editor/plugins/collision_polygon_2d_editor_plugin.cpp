@@ -1,4 +1,9 @@
-
+/**
+ * Collision Polygon 2D Editor Plugin for Godot Engine.
+ * This file defines the CollisionPolygon2DEditor and
+ * CollisionPolygon2DEditorPlugin classes, which provide functionality to edit
+ * and manage CollisionPolygon2D nodes in the editor.
+ */
 #include "collision_polygon_2d_editor_plugin.h"
 
 Node2D *CollisionPolygon2DEditor::_get_node() const { return node; }

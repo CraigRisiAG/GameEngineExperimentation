@@ -1,4 +1,9 @@
-
+/**
+ * CPU Particles Editor Plugin header for Godot Engine.
+ * This file declares the CPUParticlesEditor and CPUParticlesEditorPlugin
+ * classes, which provide functionality to edit and manage CPUParticles nodes in
+ * the editor.
+ */
 #ifndef CPU_PARTICLES_EDITOR_PLUGIN_H
 #define CPU_PARTICLES_EDITOR_PLUGIN_H
 

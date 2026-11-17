@@ -1,4 +1,9 @@
-
+/**
+ * Curve Editor Plugin header for Godot Engine.
+ * This file declares the CurveEditor, EditorInspectorPluginCurve,
+ * CurveEditorPlugin, and CurvePreviewGenerator classes, which provide
+ * functionality to edit and manage Curve resources in the editor.
+ */
 #ifndef CURVE_EDITOR_PLUGIN_H
 #define CURVE_EDITOR_PLUGIN_H
 

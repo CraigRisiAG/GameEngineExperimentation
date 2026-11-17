@@ -1,4 +1,9 @@
-
+/**
+ * Canvas Item Editor Plugin header for Godot Engine.
+ * This file declares the CanvasItemEditor and CanvasItemEditorSelectedItem
+ * classes, which provide functionality to edit and manage canvas items in the
+ * editor.
+ */
 #ifndef CONTROL_EDITOR_PLUGIN_H
 #define CONTROL_EDITOR_PLUGIN_H
 

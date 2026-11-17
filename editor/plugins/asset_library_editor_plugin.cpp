@@ -1,4 +1,9 @@
-
+/**
+ * Asset Library Editor Plugin for Godot Engine.
+ * This file defines the EditorAssetLibraryItem and
+ * EditorAssetLibraryItemDescription classes, which provide functionality to
+ * display and interact with assets in the asset library.
+ */
 #include "asset_library_editor_plugin.h"
 
 #include "core/io/json.h"
@@ -691,8 +696,10 @@ const char *EditorAssetLibrary::sort_key[SORT_MAX] = {
 };
 
 const char *EditorAssetLibrary::sort_text[SORT_MAX] = {
-    TTRC("Recently Updated"), TTRC("Least Recently Updated"),
-    TTRC("Name (A-Z)"),       TTRC("Name (Z-A)"),
+    TTRC("Recently Updated"),
+    TTRC("Least Recently Updated"),
+    TTRC("Name (A-Z)"),
+    TTRC("Name (Z-A)"),
     TTRC("License (A-Z)"), // "cost" stores the SPDX license name in the Godot
                            // Asset Library.
     TTRC("License (Z-A)"), // "cost" stores the SPDX license name in the Godot

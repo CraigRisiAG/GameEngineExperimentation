@@ -1,4 +1,10 @@
-
+/**
+ * Asset Library Editor Plugin header for Godot Engine.
+ * This file declares the EditorAssetLibraryItem,
+ * EditorAssetLibraryItemDescription, and EditorAssetLibraryItemDownload
+ * classes, which provide functionality to display, interact with, and download
+ * assets from the asset library.
+ */
 #ifndef ASSET_LIBRARY_EDITOR_PLUGIN_H
 #define ASSET_LIBRARY_EDITOR_PLUGIN_H
 

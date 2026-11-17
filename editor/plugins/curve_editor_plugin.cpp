@@ -1,4 +1,9 @@
-
+/**
+ * Curve Editor Plugin for Godot Engine.
+ * This file defines the CurveEditor class,
+ * which provides functionality to edit and manage Curve resources in the
+ * editor.
+ */
 #include "curve_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"

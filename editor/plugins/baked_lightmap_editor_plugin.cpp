@@ -1,4 +1,8 @@
-
+/**
+ * Baked Lightmap Editor Plugin for Godot Engine.
+ * This file defines the BakedLightmapEditorPlugin class, which provides
+ * functionality to bake and manage lightmaps in the editor.
+ */
 #if 0
 #include "baked_lightmap_editor_plugin.h"
 

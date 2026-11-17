@@ -1,4 +1,8 @@
-
+/**
+ * Camera Editor Plugin header for Godot Engine.
+ * This file declares the CameraEditor and CameraEditorPlugin classes,
+ * which provide functionality to preview and manage cameras in the editor.
+ */
 #ifndef CAMERA_EDITOR_PLUGIN_H
 #define CAMERA_EDITOR_PLUGIN_H
 

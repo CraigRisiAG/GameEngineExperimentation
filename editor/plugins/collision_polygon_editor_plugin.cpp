@@ -1,4 +1,9 @@
-
+/**
+ * Collision Polygon Editor Plugin for Godot Engine.
+ * This file defines the Polygon3DEditor and CollisionPolygonEditorPlugin
+ * classes, which provide functionality to edit and manage CollisionPolygon
+ * nodes in the editor.
+ */
 #include "collision_polygon_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"

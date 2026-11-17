@@ -1,4 +1,9 @@
-
+/**
+ * CPU Particles 2D Editor Plugin for Godot Engine.
+ * This file defines the CPUParticles2DEditorPlugin class,
+ * which provides functionality to edit and manage CPUParticles2D nodes in the
+ * editor.
+ */
 #include "cpu_particles_2d_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"
@@ -246,7 +251,7 @@ CPUParticles2DEditorPlugin::CPUParticles2DEditorPlugin(EditorNode *p_node) {
   menu->get_popup()->add_separator();
   menu->get_popup()->add_item(TTR("Restart"), MENU_RESTART);
   //	menu->get_popup()->add_item(TTR("Clear Emission Mask"),
-  //MENU_CLEAR_EMISSION_MASK);
+  // MENU_CLEAR_EMISSION_MASK);
   menu->set_text(TTR("Particles"));
   menu->set_switch_on_hover(true);
   toolbar->add_child(menu);

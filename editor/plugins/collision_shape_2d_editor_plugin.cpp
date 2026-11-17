@@ -1,4 +1,9 @@
-
+/**
+ * Collision Shape 2D Editor Plugin for Godot Engine.
+ * This file defines the CollisionShape2DEditor and CollisionShape2DEditorPlugin
+ * classes, which provide functionality to edit and manage CollisionShape2D
+ * nodes in the editor.
+ */
 #include "collision_shape_2d_editor_plugin.h"
 
 #include "canvas_item_editor_plugin.h"
