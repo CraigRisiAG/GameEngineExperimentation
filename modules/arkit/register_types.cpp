@@ -1,4 +1,5 @@
-
+// This file registers and unregisters the ARKit module types with the engine,
+// specifically the ARKitInterface.
 #include "register_types.h"
 
 #include "arkit_interface.h"

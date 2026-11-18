@@ -1,4 +1,6 @@
-
+// This file declares the ARKitSessionDelegate class, which acts as the delegate
+// for ARKit sessions, handling anchor addition, removal, and updates, and
+// communicating these events to the ARKitInterface.
 #ifndef ARKIT_SESSION_DELEGATE_H
 #define ARKIT_SESSION_DELEGATE_H
 

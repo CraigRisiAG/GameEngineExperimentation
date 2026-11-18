@@ -1,4 +1,7 @@
-
+// This file declares the ARKitInterface class, which provides an interface
+// between
+// iPhone ARKit and the game engine, handling AR session management, anchor
+// tracking, and camera feed integration.
 #ifndef ARKIT_INTERFACE_H
 #define ARKIT_INTERFACE_H
 

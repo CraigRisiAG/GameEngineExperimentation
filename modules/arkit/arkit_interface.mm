@@ -1,4 +1,6 @@
-
+// This file implements the ARKitInterface class, which provides an interface between
+// iPhone ARKit and the game engine, handling AR session management, anchor tracking,
+// and camera feed integration.
 #include "core/os/input.h"
 #include "core/os/os.h"
 #include "scene/resources/surface_tool.h"

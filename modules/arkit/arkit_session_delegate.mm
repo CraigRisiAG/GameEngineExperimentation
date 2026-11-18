@@ -1,4 +1,5 @@
-
+// This file implements the ARKitSessionDelegate class, which acts as the delegate for ARKit sessions,
+// handling anchor addition, removal, and updates, and communicating these events to the ARKitInterface.
 #include "arkit_session_delegate.h"
 #include "arkit_interface.h"
 
