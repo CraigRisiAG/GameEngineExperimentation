@@ -1,3 +1,4 @@
+# This script generates .ico, .icns, and .zip sets of icons for Steam with various sizes.
 #!/usr/bin/env bash
 
 # Generate .ico, .icns and .zip set of icons for Steam

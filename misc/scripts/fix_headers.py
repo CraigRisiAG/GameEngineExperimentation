@@ -1,3 +1,5 @@
+# This script fixes the headers of files listed in the "files" file, 
+# replacing $filename with the actual filename and ensuring proper alignment.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 

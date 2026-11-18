@@ -1,3 +1,5 @@
+# This script applies code style fixes to the project, including running clang-format
+# and fixing copyright headers based on the specified command line arguments.
 #!/usr/bin/env bash
 
 # Command line arguments
