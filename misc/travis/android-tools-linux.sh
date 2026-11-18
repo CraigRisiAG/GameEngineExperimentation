@@ -1,3 +1,4 @@
+# This script downloads and installs the Android SDK and NDK for Linux, sets up the necessary environment variables, and accepts licenses.
 #!/bin/bash
 
 # SDK

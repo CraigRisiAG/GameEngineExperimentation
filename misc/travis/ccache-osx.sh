@@ -1,3 +1,4 @@
+# This script downloads, compiles, and installs ccache on macOS, setting up the necessary symlinks for various compilers.
 #!/bin/bash
 
 echo

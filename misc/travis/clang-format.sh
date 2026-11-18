@@ -1,3 +1,5 @@
+
+# This script checks the code style of the project using clang-format, generating a patch if any files do not comply.
 #!/bin/sh
 
 CLANG_FORMAT=clang-format-8
