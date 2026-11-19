@@ -1,4 +1,7 @@
-
+// This file declares the ImageLoaderBMP class, which provides functionality
+// for loading BMP images into the Godot engine. It defines the structures for
+// BMP headers, supported compression types, and the interface for converting
+// BMP image data into Godot's Image format.
 #ifndef IMAGE_LOADER_BMP_H
 #define IMAGE_LOADER_BMP_H
 

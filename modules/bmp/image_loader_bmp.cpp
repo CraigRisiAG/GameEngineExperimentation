@@ -1,4 +1,7 @@
-
+// This file implements the ImageLoaderBMP class, which provides functionality
+// for loading BMP images into the Godot engine. It handles the conversion of
+// BMP image data, including indexed and color formats, into Godot's Image
+// format, supporting various bit depths and color tables.
 #include "image_loader_bmp.h"
 
 Error ImageLoaderBMP::convert_to_image(Ref<Image> p_image,
