@@ -1,4 +1,7 @@
-
+// This file declares the TextureBasisU class, which provides support for Basis
+// Universal compressed textures within the Godot engine. It defines the
+// interface for importing, storing, and accessing Basis Universal texture data,
+// as well as integrating with the VisualServer for rendering.
 #include "scene/resources/texture.h"
 
 #ifdef TOOLS_ENABLED

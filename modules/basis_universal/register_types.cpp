@@ -1,4 +1,7 @@
-
+// This file registers and unregisters the Basis Universal module types within
+// the Godot engine. It handles the integration of the Basis Universal texture
+// compression and decompression functionality, providing the necessary hooks
+// for the editor and runtime.
 #include "register_types.h"
 
 #include "core/os/os.h"
