@@ -1,3 +1,7 @@
+
+# This script updates the Assimp library in the thirdparty directory by removing the existing
+# Assimp folder, cloning the latest version from the official GitHub repository, and removing
+# unnecessary files to reduce the build size.
 rm -rf ../../thirdparty/assimp
 cd ../../thirdparty/
 git clone https://github.com/assimp/assimp.git

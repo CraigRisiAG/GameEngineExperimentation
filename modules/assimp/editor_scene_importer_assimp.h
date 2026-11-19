@@ -1,4 +1,7 @@
-
+// This file declares the EditorSceneImporterAssimp class, which provides an
+// interface for importing 3D scenes using the Assimp library within the Godot
+// engine. It handles the registration of supported file extensions, import
+// settings, and the actual scene import process.
 #ifndef EDITOR_SCENE_IMPORTER_ASSIMP_H
 #define EDITOR_SCENE_IMPORTER_ASSIMP_H
 

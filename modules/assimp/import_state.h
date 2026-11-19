@@ -1,4 +1,8 @@
-
+// This file declares the ImportState, AssimpImageData, and RecursiveState
+// structures, which are used to manage the state and data during the import of
+// 3D scenes using the Assimp library within the Godot engine. ImportState holds
+// global import data, AssimpImageData stores image and texture information, and
+// RecursiveState is used to pass state recursively during the import process.
 #ifndef EDITOR_SCENE_IMPORT_STATE_H
 #define EDITOR_SCENE_IMPORT_STATE_H
 

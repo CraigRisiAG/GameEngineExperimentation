@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the Assimp module types within the Godot
+// engine. It handles the registration of the EditorSceneImporterAssimp class
+// and sets up the necessary editor initialization callbacks.
 #include "register_types.h"
 
 #include "editor/editor_node.h"

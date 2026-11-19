@@ -1,4 +1,7 @@
-
+// This file declares the AssimpUtils class, which provides utility functions
+// and conversion tools to facilitate the import of 3D assets from the Assimp
+// library into the Godot engine. It includes functions for calculating tangents
+// and handling various Assimp-specific material properties.
 #ifndef IMPORT_UTILS_IMPORTER_ASSIMP_H
 #define IMPORT_UTILS_IMPORTER_ASSIMP_H
 

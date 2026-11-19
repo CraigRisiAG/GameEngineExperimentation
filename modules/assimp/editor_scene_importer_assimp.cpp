@@ -1,4 +1,7 @@
-
+// This file implements the EditorSceneImporterAssimp class, which provides an
+// interface for importing 3D scenes using the Assimp library within the Godot
+// engine. It handles the registration of supported file extensions, import
+// settings, and the actual scene import process.
 #include "editor_scene_importer_assimp.h"
 #include "core/io/image_loader.h"
 #include "editor/import/resource_importer_scene.h"
@@ -749,7 +752,7 @@ void EditorSceneImporterAssimp::_import_animation(ImportState &state,
   // if ((p_path.get_file().get_extension().to_lower() == "glb" ||
   // p_path.get_file().get_extension().to_lower() == "gltf") &&
   // Math::is_equal_approx(ticks_per_second, 0.0f)) { 	ticks_per_second =
-  //1000.0f;
+  // 1000.0f;
   //}
 
   if (Math::is_equal_approx(ticks_per_second, 0.0f)) {
