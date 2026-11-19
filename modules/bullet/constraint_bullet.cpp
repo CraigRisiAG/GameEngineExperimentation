@@ -1,4 +1,8 @@
-
+// This file implements the ConstraintBullet class, which represents a
+// constraint in the Bullet physics engine within the Godot engine. It defines
+// the methods for setting up and managing constraints, handling their
+// association with the physics space, and managing collision behavior between
+// the connected bodies.
 #include "constraint_bullet.h"
 
 #include "collision_object_bullet.h"

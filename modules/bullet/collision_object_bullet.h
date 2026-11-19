@@ -1,4 +1,8 @@
-
+// This file declares the CollisionObjectBullet class, which represents a
+// collision object in the Bullet physics engine within the Godot engine. It
+// defines the structure for managing collision shapes, handling
+// transformations, setting up Bullet collision objects, and managing collision
+// exceptions.
 #ifndef COLLISION_OBJECT_BULLET_H
 #define COLLISION_OBJECT_BULLET_H
 

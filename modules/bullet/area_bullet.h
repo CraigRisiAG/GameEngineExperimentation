@@ -1,4 +1,7 @@
-
+// This file declares the AreaBullet class, which represents an area in the
+// Bullet physics engine within the Godot engine. It defines the structures and
+// methods for managing overlapping objects, handling area enter and exit
+// events, and interacting with the physics space.
 #ifndef AREABULLET_H
 #define AREABULLET_H
 

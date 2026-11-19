@@ -1,4 +1,8 @@
-
+// This file implements the btRayShape class, which represents a ray shape in
+// the Bullet physics engine within the Godot engine. It defines the methods for
+// setting the ray length, handling collision margins, computing supporting
+// vertices, calculating axis-aligned bounding boxes (AABBs), and managing
+// local inertia and preferred penetration directions.
 #include "btRayShape.h"
 
 #include "core/math/math_funcs.h"

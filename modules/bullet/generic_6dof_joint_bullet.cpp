@@ -1,4 +1,8 @@
-
+// This file implements the Generic6DOFJointBullet class, which represents a
+// generic 6 degrees of freedom joint in the Bullet physics engine within the
+// Godot engine. It defines the methods for creating and configuring the joint,
+// setting and getting joint parameters, and integrating with the Bullet physics
+// engine.
 #include "generic_6dof_joint_bullet.h"
 
 #include "bullet_types_converter.h"

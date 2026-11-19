@@ -1,4 +1,7 @@
-
+// This file declares the ConeTwistJointBullet class, which represents a cone
+// twist joint in the Bullet physics engine within the Godot engine. It defines
+// the structure for creating and configuring the joint, setting and getting
+// joint parameters, and integrating with the Bullet physics engine.
 #ifndef CONE_TWIST_JOINT_BULLET_H
 #define CONE_TWIST_JOINT_BULLET_H
 

@@ -1,4 +1,7 @@
-
+// This file implements the functions for converting between Bullet and Godot
+// types. It provides utilities for converting vectors, matrices, and
+// transforms between the Bullet physics engine and the Godot engine, as well
+// as functions for handling inverted and scaled bases.
 #include "bullet_types_converter.h"
 
 /**

@@ -1,4 +1,8 @@
-
+// This file implements the BulletPhysicsServer class, which serves as the
+// interface between the Godot engine and the Bullet physics engine. It handles
+// the creation and management of physics spaces, shapes, and joints, as well as
+// the integration of Bullet's collision and constraint systems with Godot's
+// physics server API.
 #include "bullet_physics_server.h"
 
 #include "bullet_utilities.h"
