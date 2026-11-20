@@ -1,4 +1,7 @@
-
+// This file implements the registration of the Bullet physics server types
+// within the Godot engine. It defines the functions for registering and
+// unregistering the Bullet physics server, as well as setting it as the default
+// physics server for 3D physics.
 #include "register_types.h"
 
 #include "bullet_physics_server.h"

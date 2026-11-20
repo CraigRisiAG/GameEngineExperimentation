@@ -1,4 +1,9 @@
-
+// This file implements the ShapeBullet class, which provides an interface for
+// creating and managing various collision shapes in the Bullet physics engine
+// within the Godot engine. It includes methods for creating different types of
+// shapes such as boxes, spheres, capsules, cylinders, convex hulls, concave
+// meshes, heightfields, and rays, as well as managing shape margins and
+// notifying owners of shape changes.
 #include "shape_bullet.h"
 
 #include "btRayShape.h"

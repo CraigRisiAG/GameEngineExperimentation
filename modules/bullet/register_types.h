@@ -1,4 +1,5 @@
-
+// This file declares the functions for registering and unregistering the Bullet
+// physics server types within the Godot engine.
 #ifndef REGISTER_BULLET_TYPES_H
 #define REGISTER_BULLET_TYPES_H
 

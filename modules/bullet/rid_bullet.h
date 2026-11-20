@@ -1,4 +1,7 @@
-
+// This file declares the RIDBullet class, which represents a wrapper around a
+// RID (Resource ID) for the Bullet physics server within the Godot engine. It
+// provides methods for setting and getting the RID and the associated
+// BulletPhysicsServer.
 #ifndef RID_BULLET_H
 #define RID_BULLET_H
 

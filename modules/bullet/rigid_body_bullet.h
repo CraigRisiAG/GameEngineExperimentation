@@ -1,4 +1,9 @@
-
+// This file declares the BulletPhysicsDirectBodyState and RigidBodyBullet
+// classes, which provide interfaces for accessing and manipulating the state of
+// a rigid body in the Bullet physics engine within the Godot engine. It
+// includes methods for getting and setting linear and angular velocities,
+// applying forces and impulses, managing sleep state, and retrieving contact
+// information.
 #ifndef BODYBULLET_H
 #define BODYBULLET_H
 
