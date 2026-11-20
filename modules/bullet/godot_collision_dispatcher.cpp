@@ -1,4 +1,8 @@
-
+// This file implements the GodotCollisionDispatcher class, which provides a
+// custom collision dispatcher for the Bullet physics engine within the Godot
+// engine. It defines the methods for determining whether collisions and
+// responses are needed between collision objects, with special handling for
+// area-type objects.
 #include "godot_collision_dispatcher.h"
 
 #include "collision_object_bullet.h"

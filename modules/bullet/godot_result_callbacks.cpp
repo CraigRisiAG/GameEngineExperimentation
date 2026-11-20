@@ -1,4 +1,7 @@
-
+// This file implements the custom result callbacks for the Bullet physics
+// engine within the Godot engine. It defines the behavior for contact added
+// callbacks, collision filtering, and handling ray and convex shape collision
+// results, including area and body-specific logic.
 #include "godot_result_callbacks.h"
 
 #include "area_bullet.h"

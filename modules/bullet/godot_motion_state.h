@@ -1,4 +1,8 @@
-
+// This file declares the GodotMotionState class, which provides a custom motion
+// state for kinematic bodies in the Bullet physics engine within the Godot
+// engine. It defines the methods for synchronizing the physics world transform
+// with the rendering engine, handling kinematic body movement, and managing the
+// current and kinematic world transforms.
 #ifndef GODOT_MOTION_STATE_H
 #define GODOT_MOTION_STATE_H
 

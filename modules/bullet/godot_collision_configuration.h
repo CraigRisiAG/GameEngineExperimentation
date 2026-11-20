@@ -1,4 +1,9 @@
-
+// This file declares the GodotCollisionConfiguration and
+// GodotSoftCollisionConfiguration classes, which provide custom collision
+// configurations for the Bullet physics engine within the Godot engine. It
+// defines the structure for creating and managing collision algorithm create
+// functions, handling custom convex shape types, and integrating with the
+// Bullet collision configuration system.
 #ifndef GODOT_COLLISION_CONFIGURATION_H
 #define GODOT_COLLISION_CONFIGURATION_H
 

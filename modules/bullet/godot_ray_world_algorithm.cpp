@@ -1,4 +1,8 @@
-
+// This file implements the GodotRayWorldAlgorithm class, which provides a
+// custom collision algorithm for ray shapes in the Bullet physics engine within
+// the Godot engine. It defines the methods for processing collisions,
+// calculating time of impact, and handling ray-specific collision logic,
+// including penetration depth and slope handling.
 #include "godot_ray_world_algorithm.h"
 
 #include "btRayShape.h"
