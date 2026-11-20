@@ -1,4 +1,8 @@
-
+// This file implements the HingeJointBullet class, which provides a hinge joint
+// constraint for the Bullet physics engine within the Godot engine. It defines
+// the constructors for creating hinge joints with either frame transforms or
+// pivot and axis vectors, as well as methods for getting the hinge angle and
+// setting and getting hinge joint parameters.
 #include "hinge_joint_bullet.h"
 
 #include "bullet_types_converter.h"

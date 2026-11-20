@@ -1,4 +1,7 @@
-
+// This file declares the JointBullet class, which provides a base class for
+// joint constraints in the Bullet physics engine within the Godot engine. It
+// defines the constructor and destructor for the JointBullet class, as well as
+// a pure virtual method for getting the joint type.
 #ifndef JOINT_BULLET_H
 #define JOINT_BULLET_H
 

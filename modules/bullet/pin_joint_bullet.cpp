@@ -1,4 +1,8 @@
-
+// This file implements the PinJointBullet class, which provides a pin joint
+// constraint for the Bullet physics engine within the Godot engine. It defines
+// the constructors for creating pin joints with pivot points on two rigid
+// bodies, as well as methods for setting and getting joint parameters and pivot
+// points.
 #include "pin_joint_bullet.h"
 
 #include "bullet_types_converter.h"
