@@ -1,4 +1,7 @@
-
+// This file implements the SoftBodyBullet class, which provides an interface
+// for a soft body in the Bullet physics engine within the Godot engine.
+// It includes methods for creating, updating, and destroying the soft body,
+// managing its nodes, and interacting with the visual server.
 #include "soft_body_bullet.h"
 
 #include "bullet_types_converter.h"

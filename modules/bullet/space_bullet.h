@@ -1,4 +1,9 @@
-
+// This file declares the SpaceBullet class and the
+// BulletPhysicsDirectSpaceState class, which provide an interface for the
+// physics space in the Bullet physics engine within the Godot engine. It
+// includes methods for performing collision queries such as intersect_point,
+// intersect_ray, and intersect_shape, as well as managing the dynamics world
+// and interacting with collision objects.
 #ifndef SPACE_BULLET_H
 #define SPACE_BULLET_H
 

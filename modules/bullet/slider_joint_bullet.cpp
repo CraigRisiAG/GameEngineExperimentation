@@ -1,4 +1,8 @@
-
+// This file implements the SliderJointBullet class, which provides an interface
+// for a slider joint in the Bullet physics engine within the Godot engine.
+// It includes methods for creating the joint, accessing the connected rigid
+// bodies, retrieving and setting joint limits, and obtaining various
+// transformation matrices related to the joint.
 #include "slider_joint_bullet.h"
 
 #include "bullet_types_converter.h"

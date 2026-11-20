@@ -1,4 +1,8 @@
-
+// This file declares the ShapeOwnerBullet class, which provides an interface
+// for managing shape owners in the Bullet physics engine within the Godot
+// engine. It includes pure virtual methods for finding, updating, reloading,
+// and removing shapes associated with a particular owner. Classes that want to
+// use shapes must inherit from this class.
 #ifndef SHAPE_OWNER_BULLET_H
 #define SHAPE_OWNER_BULLET_H
 
