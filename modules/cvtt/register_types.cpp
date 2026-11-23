@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the CVTT module types within the Godot
+// engine. It sets the image compression and decompression functions for BPTC
+// images using the CVTT library.
 #include "register_types.h"
 
 #ifdef TOOLS_ENABLED

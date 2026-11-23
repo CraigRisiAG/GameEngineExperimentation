@@ -1,4 +1,8 @@
-
+// This file implements the image compression functionality using the CVTT
+// library within the Godot engine. It includes structures and functions for
+// managing compression jobs, row tasks, and job queues. The main function,
+// image_compress_cvtt, compresses an image based on the specified lossy quality
+// and used channels.
 #include "image_compress_cvtt.h"
 
 #include "core/os/os.h"
