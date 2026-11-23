@@ -1,8 +1,11 @@
-
+// This file implements the CameraWindows and CameraFeedWindows classes, which
+// provide an interface for the camera on Windows devices within the Godot
+// engine. It includes methods for activating and deactivating camera feeds, as
+// well as managing active cameras.
 #include "camera_win.h"
 
 ///@TODO sorry guys, I got about 80% through implementing this using DirectShow
-///only
+/// only
 // to find out Microsoft deprecated half the API and its replacement is as
 // confusing as they could make it. Joey suggested looking into libuvc which
 // offers a more direct route to webcams over USB and this is very promising but
@@ -41,19 +44,19 @@ CameraFeedWindows::~CameraFeedWindows() {
 
 bool CameraFeedWindows::activate_feed() {
   ///@TODO this should activate our camera and start the process of capturing
-  ///frames
+  /// frames
 
   return true;
 };
 
 ///@TODO we should probably have a callback method here that is being called by
-///the
+/// the
 // camera API which provides frames and call back into the CameraServer to
 // update our texture
 
 void CameraFeedWindows::deactivate_feed() {
   ///@TODO this should deactivate our camera and stop the process of capturing
-  ///frames
+  /// frames
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -61,7 +64,7 @@ void CameraFeedWindows::deactivate_feed() {
 
 void CameraWindows::add_active_cameras() {
   ///@TODO scan through any active cameras and create CameraFeedWindows objects
-  ///for them
+  /// for them
 };
 
 CameraWindows::CameraWindows() {

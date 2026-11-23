@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the camera types for different platforms
+// within the Godot engine. It includes platform-specific headers and uses the
+// CameraServer to set the default camera implementation.
 #include "register_types.h"
 
 #if defined(WINDOWS_ENABLED)

@@ -1,9 +1,11 @@
-
+// This file declares the CameraOSX class, which provides an interface
+// for the camera on macOS devices within the Godot engine. It includes
+// methods for updating camera feeds and interacting with the camera server.
 #ifndef CAMERAOSX_H
 #define CAMERAOSX_H
 
 ///@TODO this is a near duplicate of CameraIOS, we should find a way to combine
-///those to minimize code duplication!!!!
+/// those to minimize code duplication!!!!
 // If you fix something here, make sure you fix it there as wel!
 
 #include "servers/camera_server.h"

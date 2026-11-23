@@ -1,4 +1,7 @@
-
+// This file declares the CameraWindows class, which provides an interface
+// for the camera on Windows devices within the Godot engine. It includes
+// methods for managing active camera feeds and interacting with the camera
+// server.
 #ifndef CAMERAWIN_H
 #define CAMERAWIN_H
 

@@ -1,4 +1,6 @@
-
+// This file implements the CameraIOS class, which provides an interface
+// for the camera on iOS devices within the Godot engine. It includes
+// methods for capturing frames from the camera and updating camera feeds.
 ///@TODO this is a near duplicate of CameraOSX, we should find a way to combine those to minimize code duplication!!!!
 // If you fix something here, make sure you fix it there as wel!
 
