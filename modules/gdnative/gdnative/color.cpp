@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Color interface for the Godot engine.
+// It provides functions to create, manipulate, and query Color objects through
+// the GDNative interface.
 #include "gdnative/color.h"
 
 #include "core/color.h"

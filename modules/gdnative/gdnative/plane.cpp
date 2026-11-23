@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Plane interface for the Godot engine.
+// It provides functions to create, manipulate, and query Plane objects through
+// the GDNative interface.
 #include "gdnative/plane.h"
 
 #include "core/math/plane.h"

@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Transform2D interface for the Godot engine.
+// It provides functions to create, manipulate, and query Transform2D objects
+// through the GDNative interface.
 #include "gdnative/transform2d.h"
 
 #include "core/math/transform_2d.h"

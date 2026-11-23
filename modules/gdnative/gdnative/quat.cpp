@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Quat interface for the Godot engine.
+// It provides functions to create, manipulate, and query Quat objects through
+// the GDNative interface.
 #include "gdnative/quat.h"
 
 #include "core/math/quat.h"

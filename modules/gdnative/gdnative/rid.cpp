@@ -1,4 +1,6 @@
-
+// This file implements the GDNative RID interface for the Godot engine.
+// It provides functions to create, manipulate, and query RID objects through
+// the GDNative interface.
 #include "gdnative/rid.h"
 
 #include "core/resource.h"

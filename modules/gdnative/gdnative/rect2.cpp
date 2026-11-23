@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Rect2 interface for the Godot engine.
+// It provides functions to create, manipulate, and query Rect2 objects through
+// the GDNative interface.
 #include "gdnative/rect2.h"
 
 #include "core/math/transform_2d.h"

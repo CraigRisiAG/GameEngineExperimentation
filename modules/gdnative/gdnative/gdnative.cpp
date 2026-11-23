@@ -1,4 +1,7 @@
-
+// This file implements the core GDNative interface for the Godot engine.
+// It provides functions to interact with Godot objects, singletons, method
+// bindings, class constructors, global constants, and system-level memory
+// management through the GDNative interface.
 #include "gdnative/gdnative.h"
 
 #include "core/class_db.h"

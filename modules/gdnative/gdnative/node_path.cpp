@@ -1,4 +1,6 @@
-
+// This file implements the GDNative NodePath interface for the Godot engine.
+// It provides functions to create, manipulate, and query NodePath objects
+// through the GDNative interface.
 #include "gdnative/node_path.h"
 
 #include "core/node_path.h"

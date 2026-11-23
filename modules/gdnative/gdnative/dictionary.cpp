@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Dictionary interface for the Godot engine.
+// It provides functions to create, manipulate, and query Dictionary objects
+// through the GDNative interface.
 #include "gdnative/dictionary.h"
 
 #include "core/variant.h"

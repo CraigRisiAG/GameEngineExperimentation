@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Vector3 interface for the Godot engine.
+// It provides functions to create, manipulate, and query Vector3 objects
+// through the GDNative interface.
 #include "gdnative/vector3.h"
 
 #include "core/variant.h"

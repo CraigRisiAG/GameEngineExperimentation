@@ -1,4 +1,7 @@
-
+// This file implements the GDNative PoolArrays interface for the Godot engine.
+// It provides functions to create, manipulate, and query various types of
+// PoolArrays (such as PackedByteArray, PackedIntArray, etc.) through the
+// GDNative interface.
 #include "gdnative/pool_arrays.h"
 
 #include "core/array.h"

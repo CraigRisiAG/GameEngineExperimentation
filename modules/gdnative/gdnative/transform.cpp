@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Transform interface for the Godot engine.
+// It provides functions to create, manipulate, and query Transform objects
+// through the GDNative interface.
 #include "gdnative/transform.h"
 
 #include "core/math/transform.h"

@@ -1,4 +1,6 @@
-
+// This file implements the GDNative StringName interface for the Godot engine.
+// It provides functions to create, manipulate, and query StringName objects
+// through the GDNative interface.
 #include "gdnative/string_name.h"
 
 #include "core/string_name.h"

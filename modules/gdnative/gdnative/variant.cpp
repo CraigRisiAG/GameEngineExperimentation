@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Variant interface for the Godot engine.
+// It provides functions to create, manipulate, and query Variant objects
+// through the GDNative interface.
 #include "gdnative/variant.h"
 
 #include "core/reference.h"
