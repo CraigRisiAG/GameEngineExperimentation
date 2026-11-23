@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the CSG module types within the Godot
+// engine. It includes functions to register CSG shapes, primitives, and related
+// editor plugins.
 #include "register_types.h"
 
 #include "csg_gizmos.h"

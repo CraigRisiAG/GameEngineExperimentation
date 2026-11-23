@@ -1,9 +1,11 @@
-***********************************************************************/
-
+// This file implements the CSGShape class, which represents a Constructive
+// Solid Geometry (CSG) shape within the Godot engine. It includes methods for
+// managing collision properties, handling CSG brush operations, and updating
+// the visual representation of the shape.
 #include "csg_shape.h"
 #include "scene/3d/path.h"
 
-    void CSGShape::set_use_collision(bool p_enable) {
+void CSGShape::set_use_collision(bool p_enable) {
 
   if (use_collision == p_enable)
     return;

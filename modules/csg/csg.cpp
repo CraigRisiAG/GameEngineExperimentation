@@ -1,4 +1,7 @@
-
+// This file implements various helper functions for Constructive Solid Geometry
+// (CSG) operations within the Godot engine. It includes functions for snapping
+// points, interpolating UV coordinates on segments and triangles, ray-triangle
+// intersection tests, and checking if a point lies within a triangle.
 #include "csg.h"
 
 #include "core/math/geometry.h"

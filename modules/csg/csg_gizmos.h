@@ -1,4 +1,9 @@
-
+// This file declares the CSGShapeSpatialGizmoPlugin class, which provides an
+// interface for manipulating CSG shapes within the Godot editor. It includes
+// methods for creating gizmo handles, getting and setting handle values, and
+// updating the visual representation of CSG shapes. It also declares the
+// EditorPluginCSG class for integrating CSG functionality into the Godot
+// editor.
 #ifndef CSG_GIZMOS_H
 #define CSG_GIZMOS_H
 

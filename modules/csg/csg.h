@@ -1,4 +1,7 @@
-
+// This file declares the structures and functions used for Constructive Solid
+// Geometry (CSG) operations within the Godot engine. It includes definitions
+// for CSGBrush, CSGBrushOperation, and related helper structures for managing
+// faces, vertices, and BVH trees.
 #ifndef CSG_H
 #define CSG_H
 

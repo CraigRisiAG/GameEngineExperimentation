@@ -1,4 +1,9 @@
-
+// This file declares the CSGShape class and its derivatives, which represent
+// Constructive Solid Geometry (CSG) shapes within the Godot engine. It includes
+// methods for managing collision properties, handling CSG brush operations, and
+// updating the visual representation of the shapes. It also declares the
+// CSGCombiner and CSGPrimitive classes, which extend the functionality of
+// CSGShape.
 #ifndef CSG_SHAPE_H
 #define CSG_SHAPE_H
 
