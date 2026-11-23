@@ -1,4 +1,8 @@
-
+// This file declares the ResourceFormatPKM class for loading PKM textures
+// within the Godot engine. It provides the interface for the load function to
+// read PKM files, extract texture data, and create ImageTexture resources.
+// Additionally, it defines functions to get recognized file extensions, handle
+// resource types, and determine the resource type based on the file path.
 #ifndef TEXTURE_LOADER_PKM_H
 #define TEXTURE_LOADER_PKM_H
 

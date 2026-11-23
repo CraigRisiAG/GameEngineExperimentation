@@ -1,4 +1,7 @@
-
+// This file registers and unregisters the ETC module types within the Godot
+// engine. It includes the functions register_etc_types and
+// unregister_etc_types, which are used to integrate the ETC compression
+// functionality and the PKM resource loader with the Godot editor.
 #include "register_types.h"
 
 #include "image_etc.h"

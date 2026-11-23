@@ -1,4 +1,8 @@
-
+// This file implements functions for compressing images using the ETC and ETC2
+// formats within the Godot engine. It includes helper functions to determine
+// the appropriate ETC2 mode based on the image's used channels, convert Godot
+// image formats to etc2comp formats, and perform the actual compression with
+// configurable lossy quality and ETC1 enforcement.
 #include "image_etc.h"
 #include "Etc.h"
 #include "EtcFilter.h"
