@@ -1,4 +1,7 @@
-
+// This file declares the ResourceFormatDDS class, which is a resource format
+// loader for DDS textures within the Godot engine. It provides the necessary
+// functions to load DDS texture files, recognize supported extensions, and
+// determine the resource type for DDS textures.
 #ifndef TEXTURE_LOADER_DDS_H
 #define TEXTURE_LOADER_DDS_H
 

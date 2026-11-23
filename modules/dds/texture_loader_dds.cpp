@@ -1,4 +1,7 @@
-
+// This file implements the DDS texture loader for the Godot engine.
+// It includes the ResourceFormatDDS class, which provides the load function
+// to read and parse DDS texture files, supporting various compressed and
+// uncompressed formats.
 #include "texture_loader_dds.h"
 #include "core/os/file_access.h"
 
