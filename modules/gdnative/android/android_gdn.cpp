@@ -1,4 +1,7 @@
-
+// This file implements the Android-specific entry points for the Godot Native
+// (GDNative) module. It provides functions to access the Android environment,
+// activity, surface, and activity state. These functions are only meaningful on
+// the Android platform and are stubbed out on other platforms.
 #include "modules/gdnative/gdnative.h"
 
 // Code by Paritosh97 with minor tweaks by Mux213

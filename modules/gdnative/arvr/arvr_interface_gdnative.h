@@ -1,4 +1,7 @@
-
+// This file declares the GDNative ARVR interface for the Godot engine.
+// It provides the necessary class and function declarations to interact with
+// AR/VR hardware through a GDNative interface, including initialization,
+// capability querying, and rendering setup for stereo displays.
 #ifndef ARVR_INTERFACE_GDNATIVE_H
 #define ARVR_INTERFACE_GDNATIVE_H
 

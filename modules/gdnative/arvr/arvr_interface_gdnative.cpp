@@ -1,4 +1,7 @@
-
+// This file implements the GDNative ARVR interface for the Godot engine.
+// It provides the necessary functions to interact with AR/VR hardware through
+// a GDNative interface, including initialization, capability querying, and
+// rendering setup for stereo displays.
 #include "arvr_interface_gdnative.h"
 #include "main/input_default.h"
 #include "servers/arvr/arvr_positional_tracker.h"

@@ -1,4 +1,6 @@
-
+// This file implements the GDNative AABB (Axis-Aligned Bounding Box) interface
+// for the Godot engine. It provides functions to create, manipulate, and query
+// AABB objects through the GDNative interface.
 #include "gdnative/aabb.h"
 
 #include "core/math/aabb.h"

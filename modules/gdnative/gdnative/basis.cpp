@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Basis interface for the Godot engine.
+// It provides functions to create, manipulate, and query Basis objects through
+// the GDNative interface.
 #include "gdnative/basis.h"
 
 #include "core/math/basis.h"

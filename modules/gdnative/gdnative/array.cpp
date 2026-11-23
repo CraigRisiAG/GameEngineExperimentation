@@ -1,4 +1,6 @@
-
+// This file implements the GDNative Array interface for the Godot engine.
+// It provides functions to create, manipulate, and query Array objects through
+// the GDNative interface.
 #include "gdnative/array.h"
 
 #include "core/array.h"
