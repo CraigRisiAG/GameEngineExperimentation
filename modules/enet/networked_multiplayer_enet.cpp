@@ -1,4 +1,7 @@
-
+// This file implements the NetworkedMultiplayerENet class for the Godot engine.
+// It provides functions to create and manage ENet-based multiplayer servers and
+// clients, handle incoming and outgoing packets, and configure network settings
+// such as transfer mode, target peer, and bandwidth limits.
 #include "networked_multiplayer_enet.h"
 #include "core/io/ip.h"
 #include "core/io/marshalls.h"

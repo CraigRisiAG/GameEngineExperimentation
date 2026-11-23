@@ -1,4 +1,7 @@
-
+// This file declares the NetworkedMultiplayerENet class for the Godot engine.
+// It provides the interface for creating and managing ENet-based multiplayer
+// servers and clients, handling incoming and outgoing packets, and configuring
+// network settings such as transfer mode, target peer, and bandwidth limits.
 #ifndef NETWORKED_MULTIPLAYER_ENET_H
 #define NETWORKED_MULTIPLAYER_ENET_H
 
