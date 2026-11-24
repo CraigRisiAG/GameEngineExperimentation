@@ -1,4 +1,7 @@
-
+// This file implements the C API for registering classes, methods, properties,
+// and signals with the Godot NativeScript system. It is used by the Godot
+// engine to allow NativeScript modules to define and expose their functionality
+// to the engine.
 #include "nativescript/godot_nativescript.h"
 
 #include "core/class_db.h"

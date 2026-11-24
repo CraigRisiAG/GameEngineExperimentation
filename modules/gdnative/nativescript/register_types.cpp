@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the NativeScript types with the Godot
+// engine. It sets up the NativeScript language, resource loaders, and resource
+// savers, and ensures proper cleanup on shutdown.
 #include "register_types.h"
 
 #include "core/io/resource_loader.h"

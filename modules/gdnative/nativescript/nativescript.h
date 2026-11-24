@@ -1,4 +1,7 @@
-
+// This file declares the NativeScript class, which allows Godot to interface
+// with scripts written in external languages via the GDNative system. It
+// provides the structure for script metadata, methods, properties, and signals,
+// as well as handling placeholders for the editor.
 #ifndef NATIVE_SCRIPT_H
 #define NATIVE_SCRIPT_H
 

@@ -1,4 +1,6 @@
-
+// This file declares the interface for generating a C API representation of the
+// Godot classes, methods, properties, constants, signals, and enums. It is used
+// to facilitate the creation of bindings for the Godot NativeScript API.
 #ifndef API_GENERATOR_H
 #define API_GENERATOR_H
 

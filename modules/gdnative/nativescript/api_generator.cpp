@@ -1,5 +1,6 @@
-***************************************************************/
-
+// This file generates a C API representation of the Godot classes, methods,
+// properties, constants, signals, and enums. It is used to facilitate the
+// creation of bindings for the Godot NativeScript API.
 #include "api_generator.h"
 
 #ifdef TOOLS_ENABLED
@@ -10,10 +11,9 @@
 #include "core/os/file_access.h"
 #include "core/pair.h"
 
-    // helper stuff
+// helper stuff
 
-    static Error save_file(const String &p_path,
-                           const List<String> &p_content) {
+static Error save_file(const String &p_path, const List<String> &p_content) {
 
   FileAccessRef file = FileAccess::open(p_path, FileAccess::WRITE);
 
