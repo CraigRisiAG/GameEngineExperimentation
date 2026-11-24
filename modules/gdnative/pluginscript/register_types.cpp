@@ -1,4 +1,6 @@
-
+// This file implements the registration and unregistration of the PluginScript
+// types and languages in Godot. It allows external code to define and interact
+// with custom scripting languages via the GDNative API.
 #include "register_types.h"
 
 #include "core/io/resource_loader.h"

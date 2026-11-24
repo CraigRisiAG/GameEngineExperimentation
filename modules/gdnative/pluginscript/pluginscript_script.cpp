@@ -1,4 +1,6 @@
-
+// This file implements the PluginScript class, which represents a custom
+// script in Godot. It allows external code to define and interact with
+// custom scripting languages via the GDNative API.
 // Godot imports
 #include "core/os/file_access.h"
 // PluginScript imports

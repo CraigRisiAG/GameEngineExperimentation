@@ -1,4 +1,6 @@
-
+// This file declares the PluginScriptInstance class, which represents an
+// instance of a PluginScript in Godot. It allows external code to interact
+// with the PluginScript instance via the GDNative API.
 #ifndef PLUGINSCRIPT_INSTANCE_H
 #define PLUGINSCRIPT_INSTANCE_H
 

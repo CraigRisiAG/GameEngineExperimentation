@@ -1,6 +1,9 @@
-
-#ifndef PYTHONSCRIPT_PY_LOADER_H
-#define PYTHONSCRIPT_PY_LOADER_H
+// This file declares the ResourceFormatLoaderPluginScript and
+// ResourceFormatSaverPluginScript classes, which handle loading and saving
+// PluginScript resources in Godot. It allows external code to define and
+// interact with custom scripting languages via the GDNative API.
+#ifndef PLUGINSCRIPT_LOADER_H
+#define PLUGINSCRIPT_LOADER_H
 
 // Godot imports
 #include "core/io/resource_loader.h"

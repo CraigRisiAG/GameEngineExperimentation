@@ -1,4 +1,7 @@
-
+// This file implements the ResourceFormatLoaderPluginScript and
+// ResourceFormatSaverPluginScript classes, which handle loading and saving
+// PluginScript resources in Godot. It allows external code to define and
+// interact with custom scripting languages via the GDNative API.
 // Godot imports
 #include "core/os/file_access.h"
 // Pythonscript imports
