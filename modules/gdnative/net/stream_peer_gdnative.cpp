@@ -1,4 +1,6 @@
-
+// This file implements the GDNative wrapper for the StreamPeer interface in
+// Godot. It allows external code to interact with Godot's networking system via
+// the GDNative API.
 #include "stream_peer_gdnative.h"
 
 StreamPeerGDNative::StreamPeerGDNative() { interface = NULL; }

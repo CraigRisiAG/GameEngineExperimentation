@@ -1,4 +1,6 @@
-
+// This file implements the GDNative wrapper for the PacketPeer interface in
+// Godot. It allows external code to interact with Godot's networking system via
+// the GDNative API.
 #include "packet_peer_gdnative.h"
 
 PacketPeerGDNative::PacketPeerGDNative() { interface = NULL; }

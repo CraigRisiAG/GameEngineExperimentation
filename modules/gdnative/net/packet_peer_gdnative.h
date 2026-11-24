@@ -1,4 +1,6 @@
-
+// This file declares the GDNative wrapper for the PacketPeer interface in
+// Godot. It allows external code to interact with Godot's networking system via
+// the GDNative API.
 #ifndef PACKET_PEER_GDNATIVE_H
 #define PACKET_PEER_GDNATIVE_H
 

@@ -1,4 +1,6 @@
-
+// This file implements the GDNative wrapper for the MultiplayerPeer interface
+// in Godot. It allows external code to interact with Godot's networking system
+// via the GDNative API.
 #include "multiplayer_peer_gdnative.h"
 
 MultiplayerPeerGDNative::MultiplayerPeerGDNative() { interface = NULL; }

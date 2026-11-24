@@ -1,4 +1,6 @@
-
+// This file implements the GDNative wrapper for the WebRTC interfaces in Godot.
+// It allows external code to interact with Godot's WebRTC system via the
+// GDNative API.
 #include "modules/gdnative/gdnative.h"
 #include "modules/gdnative/include/net/godot_net.h"
 
