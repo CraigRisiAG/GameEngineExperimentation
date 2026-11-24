@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with NodePath objects from
+// the Godot engine through the GDNative interface. It includes functions to
+// create, manipulate, and query NodePath objects.
 #ifndef GODOT_NODE_PATH_H
 #define GODOT_NODE_PATH_H
 

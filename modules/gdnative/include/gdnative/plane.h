@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Plane objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query Plane objects.
 #ifndef GODOT_PLANE_H
 #define GODOT_PLANE_H
 

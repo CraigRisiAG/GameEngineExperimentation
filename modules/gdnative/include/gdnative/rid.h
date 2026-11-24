@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with RID objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query RID objects.
 #ifndef GODOT_RID_H
 #define GODOT_RID_H
 

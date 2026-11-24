@@ -1,10 +1,11 @@
-*******************************************************************/
-
+// This file provides the interface for interacting with Vector3 objects from
+// the Godot engine through the GDNative interface. It includes functions to
+// create, manipulate, and query Vector3 objects.
 #ifndef GODOT_VECTOR3_H
 #define GODOT_VECTOR3_H
 
 #ifdef __cplusplus
-    extern "C" {
+extern "C" {
 #endif
 
 #include <stdint.h>
@@ -13,9 +14,9 @@
 
 #ifndef GODOT_CORE_API_GODOT_VECTOR3_TYPE_DEFINED
 #define GODOT_CORE_API_GODOT_VECTOR3_TYPE_DEFINED
-  typedef struct {
-    uint8_t _dont_touch_that[GODOT_VECTOR3_SIZE];
-  } godot_vector3;
+typedef struct {
+  uint8_t _dont_touch_that[GODOT_VECTOR3_SIZE];
+} godot_vector3;
 #endif
 
 // reduce extern "C" nesting for VS2013

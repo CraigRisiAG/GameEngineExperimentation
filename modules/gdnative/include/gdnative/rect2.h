@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Rect2 objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query Rect2 objects.
 #ifndef GODOT_RECT2_H
 #define GODOT_RECT2_H
 

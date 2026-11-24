@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Quat objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query Quat objects.
 #ifndef GODOT_QUAT_H
 #define GODOT_QUAT_H
 

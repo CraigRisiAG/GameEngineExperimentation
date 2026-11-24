@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Vector2 objects from
+// the Godot engine through the GDNative interface. It includes functions to
+// create, manipulate, and query Vector2 objects.
 #ifndef GODOT_VECTOR2_H
 #define GODOT_VECTOR2_H
 

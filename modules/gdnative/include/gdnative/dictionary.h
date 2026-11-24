@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Dictionary objects from
+// the Godot engine through the GDNative interface. It includes functions to
+// create, manipulate, and query Dictionary objects.
 #ifndef GODOT_DICTIONARY_H
 #define GODOT_DICTIONARY_H
 

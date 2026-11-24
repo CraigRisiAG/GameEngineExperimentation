@@ -1,4 +1,8 @@
-
+// This file provides the interface for interacting with PoolArray objects
+// (PackedByteArray, PackedInt32Array, PackedRealArray, PackedStringArray,
+// PackedVector2Array, PackedVector3Array, and PackedColorArray) from the Godot
+// engine through the GDNative interface. It includes functions to create,
+// manipulate, and query these array types.
 #ifndef GODOT_POOL_ARRAYS_H
 #define GODOT_POOL_ARRAYS_H
 

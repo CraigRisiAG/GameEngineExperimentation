@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Array objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query Array objects.
 #ifndef GODOT_ARRAY_H
 #define GODOT_ARRAY_H
 

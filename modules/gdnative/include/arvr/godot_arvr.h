@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with ARVR-specific
+// functionality from the Godot engine through the GDNative interface. It
+// includes functions to register ARVR interfaces, access ARVR server data,
+// handle rendering, and update ARVR controllers.
 #ifndef GODOT_NATIVEARVR_H
 #define GODOT_NATIVEARVR_H
 

@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Transform objects from
+// the Godot engine through the GDNative interface. It includes functions to
+// create, manipulate, and query Transform objects.
 #ifndef GODOT_TRANSFORM_H
 #define GODOT_TRANSFORM_H
 

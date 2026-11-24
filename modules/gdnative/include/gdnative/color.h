@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with Color objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query Color objects.
 #ifndef GODOT_COLOR_H
 #define GODOT_COLOR_H
 

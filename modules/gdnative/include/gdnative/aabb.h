@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with AABB (Axis-Aligned
+// Bounding Box) objects from the Godot engine through the GDNative interface.
+// It includes functions to create, manipulate, and query AABB objects.
 #ifndef GODOT_AABB_H
 #define GODOT_AABB_H
 

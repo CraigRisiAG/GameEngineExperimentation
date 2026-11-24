@@ -1,4 +1,6 @@
-
+// This file provides the interface for interacting with String objects from the
+// Godot engine through the GDNative interface. It includes functions to create,
+// manipulate, and query String objects.
 #ifndef GODOT_STRING_H
 #define GODOT_STRING_H
 
