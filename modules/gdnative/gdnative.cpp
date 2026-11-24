@@ -1,4 +1,8 @@
-
+// This file implements the core functionality for the GDNative module in Godot.
+// It handles loading and managing GDNative libraries, including their
+// configuration, dependencies, and entry points. It also defines the
+// GDNativeLibrary class and provides mechanisms for setting and retrieving
+// library properties based on configuration files.
 #include "gdnative.h"
 
 #include "core/global_constants.h"

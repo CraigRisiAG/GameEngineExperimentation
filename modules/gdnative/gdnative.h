@@ -1,4 +1,9 @@
-
+// This file declares the core classes and structures for the GDNative module in
+// Godot. It includes the GDNativeLibrary, GDNative, and GDNativeCallRegistry
+// classes, as well as resource loaders and savers for GDNative libraries. These
+// classes provide mechanisms for managing GDNative libraries, their
+// configuration, dependencies, and entry points, as well as calling native
+// functions from these libraries.
 #ifndef GDNATIVE_H
 #define GDNATIVE_H
 

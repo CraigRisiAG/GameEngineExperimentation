@@ -1,4 +1,5 @@
-/explain
+# This file provides configuration for the GDNative module, including build
+# settings and documentation paths. 
 def can_build(env, platform):
     return True
 

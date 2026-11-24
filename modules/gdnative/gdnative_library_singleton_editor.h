@@ -1,4 +1,7 @@
-
+// This file declares the GDNativeLibrarySingletonEditor class, which provides a
+// user interface for managing GDNative library singletons within the Godot
+// editor. It allows users to discover, enable, and disable GDNative singletons,
+// and updates the project settings accordingly.
 #ifndef GD_NATIVE_LIBRARY_EDITOR_H
 #define GD_NATIVE_LIBRARY_EDITOR_H
 

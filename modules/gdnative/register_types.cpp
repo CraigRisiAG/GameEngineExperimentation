@@ -1,4 +1,9 @@
-
+// This file implements the registration of GDNative-related types and plugins
+// within the Godot engine. It includes the registration of ARVR, NativeScript,
+// networking, plugin script, and video decoder modules, as well as the GDNative
+// library editor and singleton editor plugins. It also defines the
+// GDNativeExportPlugin class, which handles exporting GDNative libraries and
+// their dependencies for different platforms.
 #include "register_types.h"
 
 #include "gdnative/gdnative.h"

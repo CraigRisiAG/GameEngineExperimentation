@@ -1,4 +1,9 @@
-
+// This file declares the GDNativeLibraryEditor and GDNativeLibraryEditorPlugin
+// classes. The GDNativeLibraryEditor provides a user interface for editing
+// GDNative library configurations within the Godot editor, allowing users to
+// select dynamic libraries and their dependencies for different platforms. The
+// GDNativeLibraryEditorPlugin integrates this editor into the Godot editor as a
+// plugin.
 #ifndef GDNATIVE_LIBRARY_EDITOR_PLUGIN_H
 #define GDNATIVE_LIBRARY_EDITOR_PLUGIN_H
 
