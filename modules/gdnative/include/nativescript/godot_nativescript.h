@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with the Godot NativeScript
+// API through the GDNative interface. It includes definitions for method RPC
+// modes, property hints, and property usage flags used in NativeScript
+// bindings.
 #ifndef GODOT_NATIVESCRIPT_H
 #define GODOT_NATIVESCRIPT_H
 

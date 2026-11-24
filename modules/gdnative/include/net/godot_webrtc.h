@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with WebRTC-related objects
+// from the Godot engine through the GDNative interface. It includes functions
+// and structures for working with WebRTCPeerConnection and WebRTCDataChannel
+// objects.
 #ifndef GODOT_NATIVEWEBRTC_H
 #define GODOT_NATIVEWEBRTC_H
 

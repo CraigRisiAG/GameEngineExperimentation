@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with video decoder plugins
+// from the Godot engine through the GDNative interface. It includes functions
+// and structures for opening video files, retrieving video and audio frames,
+// and controlling playback.
 #ifndef GODOT_NATIVEVIDEODECODER_H
 #define GODOT_NATIVEVIDEODECODER_H
 

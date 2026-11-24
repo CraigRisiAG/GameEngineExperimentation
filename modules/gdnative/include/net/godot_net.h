@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with network-related objects
+// from the Godot engine through the GDNative interface. It includes functions
+// and structures for working with StreamPeer, PacketPeer, and
+// NetworkedMultiplayerPeer objects.
 #ifndef GODOT_NATIVENET_H
 #define GODOT_NATIVENET_H
 
