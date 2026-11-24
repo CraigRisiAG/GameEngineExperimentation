@@ -1,4 +1,7 @@
-
+// This file provides the interface for interacting with Android-specific
+// functionality from the Godot engine through the GDNative interface. It
+// includes functions to retrieve the JNI environment, the current activity, the
+// surface, and to check if the activity is resumed.
 #ifndef GODOT_ANDROID_GDN_H
 #define GODOT_ANDROID_GDN_H
 
