@@ -1,4 +1,6 @@
-
+// This file implements the VideoStreamPlaybackGDNative class and the GDNative
+// callbacks for the VideoDecoder. It allows external code to define and
+// interact with custom video stream formats via the GDNative API.
 #include "video_stream_gdnative.h"
 
 #include "core/project_settings.h"

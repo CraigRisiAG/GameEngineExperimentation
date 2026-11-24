@@ -1,4 +1,6 @@
-
+// This file implements the registration and unregistration of the VideoDecoder
+// types in Godot. It allows external code to define and interact with custom
+// video stream formats via the GDNative API.
 #include "register_types.h"
 
 #include "core/class_db.h"

@@ -1,4 +1,7 @@
-
+// This file declares the VideoDecoderGDNative, VideoDecoderServer,
+// VideoStreamPlaybackGDNative, VideoStreamGDNative, and
+// ResourceFormatLoaderVideoStreamGDNative classes. It allows external code to
+// define and interact with custom video stream formats via the GDNative API.
 #ifndef VIDEO_STREAM_GDNATIVE_H
 #define VIDEO_STREAM_GDNATIVE_H
 
