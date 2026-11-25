@@ -1,4 +1,8 @@
-
+// This file declares the GDScriptSyntaxHighlighter class, which provides syntax
+//  highlighting for GDScript code within the Godot editor. It defines the types
+//  of syntax elements and the colors used for highlighting them. The class also
+//  provides functions for updating the syntax highlighting cache and retrieving
+//  the highlighting information for each line of code.
 #ifndef GDSCRIPT_HIGHLIGHTER_H
 #define GDSCRIPT_HIGHLIGHTER_H
 

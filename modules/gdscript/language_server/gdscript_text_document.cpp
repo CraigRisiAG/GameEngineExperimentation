@@ -1,4 +1,9 @@
-
+// This file implements the GDScriptTextDocument class, which represents a text
+//  document in the GDScript language server. It provides methods for handling
+//  document events such as opening, changing, and requesting symbols,
+//  completions, and other language server features. The class interacts with
+//  the GDScript language protocol to synchronize the document content and
+//  communicate with the language server client.
 #include "gdscript_text_document.h"
 #include "../gdscript.h"
 #include "core/os/os.h"

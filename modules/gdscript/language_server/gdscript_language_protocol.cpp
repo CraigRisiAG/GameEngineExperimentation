@@ -1,4 +1,7 @@
-
+// This file implements the GDScriptLanguageProtocol class, which handles the
+//  communication between the Godot editor and the GDScript language server
+//  using the Language Server Protocol (LSP). It defines methods for processing
+//  incoming messages, sending responses, and managing client connections.
 #include "gdscript_language_protocol.h"
 #include "core/io/json.h"
 #include "core/os/copymem.h"

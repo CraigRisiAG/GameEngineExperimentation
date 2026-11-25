@@ -1,4 +1,8 @@
-
+// This file declares the GDScriptLanguageServer class, which manages the
+//  lifecycle of the GDScript language server within the Godot editor. It
+//  handles starting and stopping the server, managing the polling loop, and
+//  optionally running the server in a separate thread. The class also
+//  integrates with the editor settings to configure the server's behavior.
 #ifndef GDSCRIPT_LANGUAGE_SERVER_H
 #define GDSCRIPT_LANGUAGE_SERVER_H
 

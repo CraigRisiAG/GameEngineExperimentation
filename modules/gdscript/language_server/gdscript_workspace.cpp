@@ -1,4 +1,9 @@
-
+// This file implements the GDScriptWorkspace class, which manages the workspace
+//  for GDScript files in the Godot editor. It provides methods for parsing
+//  scripts, retrieving symbols, listing script files, and maintaining the state
+//  of parsed scripts. The class interacts with the GDScript language server to
+//  provide features such as code completion, diagnostics, and symbol
+//  navigation.
 #include "gdscript_workspace.h"
 #include "../gdscript.h"
 #include "../gdscript_parser.h"

@@ -1,4 +1,8 @@
-
+// This file implements the GDScriptSyntaxHighlighter class, which provides
+// syntax
+//  highlighting for GDScript code within the Godot editor. It defines functions
+//  for determining the type of each character and word in a line of code, and
+//  for generating a map of syntax highlighting information for each line.
 #include "gdscript_highlighter.h"
 #include "../gdscript_tokenizer.h"
 #include "editor/editor_settings.h"

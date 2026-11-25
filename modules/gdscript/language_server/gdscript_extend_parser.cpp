@@ -1,4 +1,8 @@
-
+// This file implements the ExtendGDScriptParser class, which extends the
+// GDScript
+//  parser to provide additional functionality for the Godot language server.
+//  It includes methods for updating diagnostics, symbols, and document links,
+//  as well as parsing class symbols and managing inner class members.
 #include "gdscript_extend_parser.h"
 #include "../gdscript.h"
 #include "core/io/json.h"

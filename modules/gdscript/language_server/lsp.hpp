@@ -1,4 +1,10 @@
-
+// This file declares the structures and types used in the GDScript language
+// server
+//  protocol (LSP). It includes definitions for text document identifiers,
+//  positions, ranges, locations, location links, and various request
+//  parameters. These types are used to communicate between the language server
+//  and the client, enabling features such as go-to-definition, document links,
+//  and symbol resolution.
 #ifndef GODOT_LSP_H
 #define GODOT_LSP_H
 
