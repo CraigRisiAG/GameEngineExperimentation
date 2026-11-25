@@ -1,4 +1,7 @@
-
+// This file declares the NavRegion class, which represents a navigation region
+// within the GDNavigation module. It provides functionality for setting the
+// map, transform, and mesh associated with the region, and for updating and
+// managing the navigation polygons derived from the mesh.
 #ifndef NAV_REGION_H
 #define NAV_REGION_H
 

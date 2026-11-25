@@ -1,4 +1,8 @@
-
+// This file declares the NavMap class, which represents a navigation map
+//  within the GDNavigation module. It provides functionality for setting up the
+//  map, defining its cell size and edge connection margin, and computing paths
+//  between points on the map. The class also handles the generation and
+//  management of navigation polygons and links.
 #ifndef RVO_SPACE_H
 #define RVO_SPACE_H
 

@@ -1,4 +1,6 @@
-
+// This file implements the registration and unregistration of types for the
+// GDNavigation module, including the NavigationMeshGenerator and the
+// NavigationMeshEditorPlugin (if tools are enabled).
 #include "register_types.h"
 
 #include "core/engine.h"

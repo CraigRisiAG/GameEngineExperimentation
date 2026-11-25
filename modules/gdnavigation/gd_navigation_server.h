@@ -1,4 +1,8 @@
-
+// This file declares the GDNavigationServer class, which provides navigation
+// functionality within the Godot engine. It defines commands for creating and
+// managing navigation maps, setting their active state, and handling navigation
+// queries. The server uses a command pattern to queue and execute navigation
+// operations in a thread-safe manner.
 #ifndef GD_NAVIGATION_SERVER_H
 #define GD_NAVIGATION_SERVER_H
 

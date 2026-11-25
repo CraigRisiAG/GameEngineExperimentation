@@ -1,4 +1,5 @@
-
+// This file declares the functions for registering and unregistering types for
+// the GDNavigation module.
 /**
         @author AndreaCatania
 */

@@ -1,4 +1,6 @@
-
+// This file declares the NavigationMeshGenerator class,
+// which provides functionality for generating navigation meshes
+// from 3D geometry within the GDNavigation module.
 #ifndef NAVIGATION_MESH_GENERATOR_H
 #define NAVIGATION_MESH_GENERATOR_H
 

@@ -1,4 +1,6 @@
-
+// This file implements the NavigationMeshEditor and NavigationMeshEditorPlugin
+// classes, which provide an editor interface for baking and managing navigation
+// meshes associated with NavigationRegion nodes within the GDNavigation module.
 #ifdef TOOLS_ENABLED
 #include "navigation_mesh_editor_plugin.h"
 

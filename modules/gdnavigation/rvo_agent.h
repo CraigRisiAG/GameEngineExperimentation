@@ -1,4 +1,8 @@
-
+// This file declares the RvoAgent class,
+// which represents an agent in the Reciprocal Velocity Obstacles (RVO) system
+// within the GDNavigation module. It provides functionality for setting the
+// navigation map, checking for map changes, and managing callbacks related to
+// agent movement.
 #ifndef RVO_AGENT_H
 #define RVO_AGENT_H
 

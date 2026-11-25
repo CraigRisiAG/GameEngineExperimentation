@@ -1,4 +1,6 @@
-
+// This file declares the NavRid class, which represents a navigation RID
+// within the GDNavigation module. It provides functionality for setting and
+// getting the underlying RID associated with the navigation object.
 #ifndef NAV_RID_H
 #define NAV_RID_H
 

@@ -1,4 +1,8 @@
-
+// This file declares utility structures and classes used in the GDNavigation
+// module, including PointKey, EdgeKey, Point, Edge, Polygon, Connection,
+// NavigationPoly, and FreeEdge. These structures facilitate the representation
+// and management of navigation polygons, edges, and connections within the
+// navigation system.
 #ifndef NAV_UTILS_H
 #define NAV_UTILS_H
 
