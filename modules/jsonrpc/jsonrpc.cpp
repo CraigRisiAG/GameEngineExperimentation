@@ -1,4 +1,7 @@
-
+// This file implements the JSONRPC class for the Godot engine. It provides
+// functionality to handle JSON-RPC requests, responses, and notifications,
+// including parsing JSON strings, processing actions, and generating
+// appropriate JSON-RPC formatted dictionaries.
 #include "jsonrpc.h"
 #include "core/io/json.h"
 

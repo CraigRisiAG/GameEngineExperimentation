@@ -1,4 +1,7 @@
-
+// This file declares the JSONRPC class for the Godot engine. It provides
+// the interface for handling JSON-RPC requests, responses, and notifications,
+// including methods for creating JSON-RPC formatted dictionaries and processing
+// actions and strings according to the JSON-RPC protocol.
 #ifndef GODOT_JSON_RPC_H
 #define GODOT_JSON_RPC_H
 
