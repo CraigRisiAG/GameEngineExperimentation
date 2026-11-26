@@ -1,4 +1,7 @@
-
+// This file declares the ImageLoaderHDR class for the Godot engine. It provides
+// the interface for loading HDR images in the Radiance RGBE format, including
+// handling both flat and RLE-encoded data, and converting it to the engine's
+// internal image format.
 #ifndef IMAGE_LOADER_HDR_H
 #define IMAGE_LOADER_HDR_H
 
