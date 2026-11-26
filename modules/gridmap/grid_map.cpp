@@ -1,4 +1,6 @@
-
+// This file implements the GridMap class for the Godot engine. It provides the
+// functionality for managing a 3D grid of cells, including setting and getting
+// cell data, handling baked meshes, and managing collision layers and masks.
 #include "grid_map.h"
 
 #include "core/io/marshalls.h"

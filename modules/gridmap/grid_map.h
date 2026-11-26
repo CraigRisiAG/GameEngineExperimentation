@@ -1,4 +1,6 @@
-
+// This file declares the GridMap class for the Godot engine. It provides the
+// interface for managing a 3D grid of cells, including setting and getting
+// cell data, handling baked meshes, and managing collision layers and masks.
 #ifndef GRID_MAP_H
 #define GRID_MAP_H
 

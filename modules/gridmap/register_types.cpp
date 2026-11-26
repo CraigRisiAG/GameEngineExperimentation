@@ -1,4 +1,7 @@
-
+// This file registers and unregisters the types and functionality of the
+// GridMap module within the Godot engine. It includes the necessary headers and
+// defines functions for integrating the GridMap node and its editor plugin with
+// the engine.
 #include "register_types.h"
 #ifndef _3D_DISABLED
 #include "core/class_db.h"

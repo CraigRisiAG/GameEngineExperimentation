@@ -1,4 +1,8 @@
-
+// This file declares the GridMapEditor class, which is an editor plugin for the
+// GridMap node within the Godot engine. It provides the interface and
+// functionality for handling user interactions, managing the grid display, and
+// maintaining the state of the GridMap editor, including floor navigation, view
+// locking, clipping modes, and cursor rotation.
 #ifndef GRID_MAP_EDITOR_PLUGIN_H
 #define GRID_MAP_EDITOR_PLUGIN_H
 
