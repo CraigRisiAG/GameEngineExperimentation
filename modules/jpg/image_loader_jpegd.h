@@ -1,4 +1,7 @@
-
+// This file declares the ImageLoaderJPG class for the Godot engine. It provides
+// the interface for loading JPEG images using the jpegd library, including
+// handling both single-channel and three-channel images, and converting them to
+// the engine's internal image format.
 #ifndef IMAGE_LOADER_JPG_H
 #define IMAGE_LOADER_JPG_H
 

@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the JPG module types within the Godot
+// engine. It includes the necessary headers and defines functions for
+// integrating the ImageLoaderJPG with the engine.
 #include "register_types.h"
 
 #include "image_loader_jpegd.h"
