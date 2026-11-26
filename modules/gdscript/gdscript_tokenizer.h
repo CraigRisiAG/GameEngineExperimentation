@@ -1,4 +1,7 @@
-
+// This file declares the GDScriptTokenizer class, which is responsible for
+// tokenizing GDScript code within the Godot engine. It defines enums for token
+// types, methods for retrieving token information, and structures for handling
+// token data, including identifiers, constants, and built-in functions.
 #ifndef GDSCRIPT_TOKENIZER_H
 #define GDSCRIPT_TOKENIZER_H
 

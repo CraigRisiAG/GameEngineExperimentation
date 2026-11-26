@@ -1,4 +1,8 @@
-
+// This file declares the GDScriptParser class, which is responsible for parsing
+// GDScript code within the Godot engine. It defines structures for representing
+// classes, functions, blocks, and various types of nodes, as well as enums for
+// node types and data types. The parser handles indentation, argument lists,
+// and provides methods for retrieving and setting data types for nodes.
 #ifndef GDSCRIPT_PARSER_H
 #define GDSCRIPT_PARSER_H
 

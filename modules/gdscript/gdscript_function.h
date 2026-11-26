@@ -1,4 +1,7 @@
-
+// This file declares the GDScriptFunction class, which provides functionality
+// for handling GDScript function calls within the Godot engine. It defines
+// enums for opcodes and addressing modes, as well as structures for stack
+// debugging and data type representation.
 #ifndef GDSCRIPT_FUNCTION_H
 #define GDSCRIPT_FUNCTION_H
 

@@ -1,4 +1,7 @@
-
+// This file implements the GDScriptFunction class, which provides functionality
+// for handling GDScript function calls within the Godot engine. It defines
+// functions for retrieving variant values based on addressing modes, handling
+// call errors, and providing debug information for function arguments.
 #include "gdscript_function.h"
 
 #include "core/os/os.h"

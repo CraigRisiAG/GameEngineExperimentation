@@ -1,4 +1,8 @@
-
+// This file implements the GDScript class and related functionality within the
+// Godot engine. It handles the creation and management of GDScript instances,
+// including native class integration, instance initialization, and script
+// inheritance. The file also provides methods for binding GDScript methods,
+// creating new instances, and managing script references and ownership.
 #include "gdscript.h"
 
 #include <stdint.h>

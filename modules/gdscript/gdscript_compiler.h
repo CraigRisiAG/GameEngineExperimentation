@@ -1,4 +1,8 @@
-
+// This file declares the GDScriptCompiler class, which is responsible for
+// compiling GDScript code into a format that can be executed by the Godot
+// engine. It defines functions for handling class member properties, setting
+// errors, creating unary and binary operators, and converting data types from
+// the parser representation to the internal GDScript representation.
 #ifndef GDSCRIPT_COMPILER_H
 #define GDSCRIPT_COMPILER_H
 

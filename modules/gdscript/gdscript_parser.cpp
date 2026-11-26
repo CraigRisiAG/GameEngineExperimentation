@@ -1,4 +1,7 @@
-
+// This file implements the GDScriptParser class, which is responsible for
+// parsing GDScript code within the Godot engine. It defines functions for
+// handling indentation, parsing statements and expressions, managing argument
+// lists, and providing code completion support.
 #include "gdscript_parser.h"
 
 #include "core/core_string_names.h"

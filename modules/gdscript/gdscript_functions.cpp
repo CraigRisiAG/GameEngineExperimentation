@@ -1,4 +1,8 @@
-
+// This file implements the GDScriptFunctions class, which provides
+// functionality for calling built-in GDScript functions within the Godot
+// engine. It defines functions for retrieving function names, validating
+// argument counts and types, and executing the corresponding mathematical or
+// utility operations.
 #include "gdscript_functions.h"
 
 #include "core/class_db.h"

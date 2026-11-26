@@ -1,4 +1,7 @@
-
+// This file implements the GDScriptLanguage class, which provides integration
+// of the GDScript language within the Godot editor. It defines functions for
+// handling templates, validating scripts, and providing language-specific
+// features such as comment and string delimiters.
 #include "gdscript.h"
 
 #include "core/engine.h"

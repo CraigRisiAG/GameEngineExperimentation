@@ -1,4 +1,7 @@
-
+// This file implements the GDScriptTokenizer class, which is responsible for
+// tokenizing GDScript code within the Godot engine. It defines token names,
+// built-in types, and keyword lists used during the lexical analysis of
+// GDScript source code.
 #include "gdscript_tokenizer.h"
 
 #include "core/io/marshalls.h"

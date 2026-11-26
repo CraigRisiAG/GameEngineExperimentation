@@ -1,4 +1,9 @@
-
+// This file declares the GDScript class and related functionality within the
+// Godot engine. It defines the GDScriptNativeClass and GDScript classes, which
+// handle native class integration, script inheritance, instance creation, and
+// management of GDScript instances. The file also provides methods for binding
+// GDScript methods, accessing member information, and managing script
+// references and ownership.
 #ifndef GDSCRIPT_H
 #define GDSCRIPT_H
 

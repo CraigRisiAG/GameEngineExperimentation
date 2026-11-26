@@ -1,4 +1,8 @@
-
+// This file implements the GDScriptCompiler class, which is responsible for
+// compiling GDScript code into a format that can be executed by the Godot
+// engine. It defines functions for handling class member properties, setting
+// errors, creating unary and binary operators, and converting data types from
+// the parser representation to the internal GDScript representation.
 #include "gdscript_compiler.h"
 
 #include "gdscript.h"
@@ -1839,8 +1843,8 @@ Error GDScriptCompiler::_parse_block(CodeGen &codegen,
       //
       // if (_is_class_member_property(codegen, lv->name)) {
       //	_set_error("Name for local variable '" + String(lv->name) + "'
-      //can't shadow class property of the same name.", lv); 	return
-      //ERR_ALREADY_EXISTS;
+      // can't shadow class property of the same name.", lv); 	return
+      // ERR_ALREADY_EXISTS;
       //}
 
       codegen.add_stack_identifier(lv->name, p_stack_level++);
@@ -1886,7 +1890,7 @@ Error GDScriptCompiler::_parse_function(
       // if (_is_class_member_property(p_script, p_func->arguments[i])) {
       //	_set_error("Name for argument '" + String(p_func->arguments[i])
       //+ "' can't shadow class property of the same name.", p_func); 	return
-      //ERR_ALREADY_EXISTS;
+      // ERR_ALREADY_EXISTS;
       //}
 
       codegen.add_stack_identifier(p_func->arguments[i], i);

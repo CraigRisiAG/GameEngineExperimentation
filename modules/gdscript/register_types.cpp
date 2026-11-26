@@ -1,4 +1,8 @@
-
+// This file registers and unregisters the GDScript types within the Godot
+// engine. It handles the initialization of the GDScript language, resource
+// loaders, and resource savers. Additionally, it sets up editor-specific
+// functionality such as export plugins and syntax highlighters when tools are
+// enabled.
 #include "register_types.h"
 
 #include "core/io/file_access_encrypted.h"
