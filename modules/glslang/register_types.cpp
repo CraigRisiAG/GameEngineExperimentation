@@ -1,4 +1,7 @@
-
+// This file registers the types and functionality for the glslang module within
+// the Godot engine.
+// It includes the necessary headers and defines functions for compiling GLSL
+// shaders to SPIR-V using the glslang library.
 #include "register_types.h"
 
 #include "servers/visual/rendering_device.h"

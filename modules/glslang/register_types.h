@@ -1,4 +1,7 @@
-
+// This file declares the functions for registering and unregistering the types
+// and functionality of the glslang module within the Godot engine. It provides
+// the interface for integrating the glslang shader compilation library with the
+// engine.
 #ifndef GLSLANG_REGISTER_TYPES_H
 #define GLSLANG_REGISTER_TYPES_H
 
