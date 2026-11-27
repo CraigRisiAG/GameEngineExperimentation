@@ -1,4 +1,7 @@
-
+// This file implements the MobileVRInterface class for the Godot engine.
+// It provides functionality for handling mobile VR input, including
+// accelerometer, gyroscope, and magnetometer data, and computing orientation
+// and position based on these sensors.
 #include "mobile_vr_interface.h"
 #include "core/os/input.h"
 #include "core/os/os.h"
@@ -158,7 +161,7 @@ void MobileVRInterface::set_position_from_sensors() {
   };
 
   ///@TODO improve this, the magnetometer is very fidgity sometimes flipping the
-  ///axis for no apparent reason (probably a bug on my part)
+  /// axis for no apparent reason (probably a bug on my part)
   // if you have a gyro + accelerometer that combo tends to be better then
   // combining all three but without a gyro you need the magnetometer..
   if (has_magneto && has_grav && !has_gyro) {
@@ -393,7 +396,7 @@ MobileVRInterface::get_projection_for_eye(ARVRInterface::Eyes p_eye,
 
   if (p_eye == ARVRInterface::EYE_MONO) {
     ///@TODO for now hardcode some of this, what is really needed here is that
-    ///this needs to be in sync with the real cameras properties
+    /// this needs to be in sync with the real cameras properties
     // which probably means implementing a specific class for iOS and Android.
     // For now this is purely here as an example. Note also that if you use a
     // normal viewport with AR/VR turned off you can still use the tracker

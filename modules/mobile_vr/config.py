@@ -1,3 +1,6 @@
+# This file provides the configuration for the MobileVR module in the Godot engine.
+# It defines functions for determining build support, configuring the environment,
+# and specifying documentation classes and paths.
 def can_build(env, platform):
     return True
 

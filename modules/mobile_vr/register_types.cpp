@@ -1,4 +1,6 @@
-
+// This file registers and unregisters the MobileVRInterface class with the
+// Godot engine. It ensures that the MobileVRInterface is available to the
+// ARVRServer and can be used for handling mobile VR input.
 #include "register_types.h"
 
 #include "mobile_vr_interface.h"

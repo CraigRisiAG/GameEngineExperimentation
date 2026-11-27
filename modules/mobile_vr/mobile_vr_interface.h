@@ -1,4 +1,7 @@
-
+// This file declares the MobileVRInterface class for the Godot engine.
+// It provides the interface for handling mobile VR input, including
+// accelerometer, gyroscope, and magnetometer data, and computing orientation
+// and position based on these sensors.
 #ifndef MOBILE_VR_INTERFACE_H
 #define MOBILE_VR_INTERFACE_H
 
@@ -58,7 +61,7 @@ private:
   Vector3 mag_next_max;
 
   ///@TODO a few support functions for trackers, most are math related and
-  ///should likely be moved elsewhere
+  /// should likely be moved elsewhere
   float floor_decimals(float p_value, float p_decimals) {
     float power_of_10 = pow(10.0f, p_decimals);
     return floor(p_value * power_of_10) / power_of_10;
