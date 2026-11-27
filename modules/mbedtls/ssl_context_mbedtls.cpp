@@ -1,4 +1,7 @@
-
+// This file implements the SSLContextMbedTLS and CookieContextMbedTLS classes
+// for the Godot engine. It provides functionality for setting up and managing
+// SSL/TLS and DTLS contexts using the mbedtls library, including handling
+// cryptographic keys, certificates, and DTLS cookies.
 #include "ssl_context_mbedtls.h"
 
 static void my_debug(void *ctx, int level, const char *file, int line,

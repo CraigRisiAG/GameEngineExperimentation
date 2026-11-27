@@ -1,4 +1,7 @@
-
+// This file declares the DTLSServerMbedTLS class for the Godot engine.
+// It provides the interface for setting up and managing a DTLS server using the
+// mbedtls library, including handling cryptographic keys, certificates, and
+// incoming UDP connections.
 #ifndef MBED_DTLS_SERVER_H
 #define MBED_DTLS_SERVER_H
 

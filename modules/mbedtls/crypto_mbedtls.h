@@ -1,4 +1,9 @@
-
+// This file declares the CryptoMbedTLS, CryptoKeyMbedTLS, and
+// X509CertificateMbedTLS classes for the Godot engine. It provides the
+// interface for handling cryptographic keys and X.509 certificates using the
+// mbedtls library, including loading, saving, and parsing keys and
+// certificates, as well as initializing and finalizing the cryptographic
+// environment.
 #ifndef CRYPTO_MBEDTLS_H
 #define CRYPTO_MBEDTLS_H
 

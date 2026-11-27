@@ -1,4 +1,7 @@
-
+// This file implements the registration and unregistration of mbedtls module
+// types for the Godot engine. It ensures that the necessary initialization and
+// finalization functions for the mbedtls-based classes are called when the
+// module is loaded and unloaded, respectively.
 #include "register_types.h"
 
 #include "crypto_mbedtls.h"

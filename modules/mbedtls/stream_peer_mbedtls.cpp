@@ -1,4 +1,7 @@
-
+// This file implements the StreamPeerMbedTLS class for the Godot engine.
+// It provides functionality for handling SSL/TLS communication over a stream
+// using the mbedtls library, including sending and receiving data, managing the
+// SSL/TLS handshake, and handling cryptographic keys and certificates.
 #include "stream_peer_mbedtls.h"
 
 #include "core/io/stream_peer_tcp.h"

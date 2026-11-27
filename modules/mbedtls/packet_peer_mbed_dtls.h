@@ -1,4 +1,7 @@
-
+// This file declares the PacketPeerMbedDTLS class for the Godot engine.
+// It provides the interface for handling DTLS communication over UDP using the
+// mbedtls library, including sending and receiving packets, managing the DTLS
+// handshake, and handling cryptographic keys and certificates.
 #ifndef PACKET_PEER_MBED_DTLS_H
 #define PACKET_PEER_MBED_DTLS_H
 
