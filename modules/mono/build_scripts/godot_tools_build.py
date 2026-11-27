@@ -1,5 +1,6 @@
 # Build GodotTools solution
-
+# This file provides the build script for the GodotTools solution using SCons.
+# It defines functions to build the GodotTools solution and manage build dependencies.
 import os
 
 from SCons.Script import Dir

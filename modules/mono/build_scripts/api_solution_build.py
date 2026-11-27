@@ -1,5 +1,7 @@
 # Build the Godot API solution
-
+# This file provides the build script for the Godot API solution using SCons.
+# It defines functions to build the API solution, copy the resulting binaries,
+# and manage build dependencies for different configurations (Debug and Release).
 import os
 
 from SCons.Script import Dir

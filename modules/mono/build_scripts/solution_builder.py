@@ -1,4 +1,6 @@
-
+# This file provides utility functions for finding NuGet and MSBuild executables on both Unix and Windows systems.
+# It includes functions to locate NuGet on Unix and Windows, find MSBuild on Unix, and determine the appropriate MSBuild path on Windows.
+# Additionally, it provides a function to run commands with optional environment overrides and verbose output.
 import os
 
 

@@ -1,3 +1,5 @@
+# This file provides utility functions for locating Mono installation directories and MSBuild tools on Windows.
+# It includes functions to query the Windows registry for Mono and MSBuild paths, handling both 32-bit and 64-bit architectures.
 import os
 import platform
 

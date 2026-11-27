@@ -1,4 +1,5 @@
-
+# This file generates a header file containing the CS glue version based on the latest modification time of C# source files.
+# The generated header file defines the CS_GLUE_VERSION macro, which can be used to track changes in the C# glue code.
 def generate_header(solution_dir, version_header_dst):
     import os
     latest_mtime = 0

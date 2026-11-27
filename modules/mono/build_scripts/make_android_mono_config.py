@@ -1,4 +1,7 @@
-
+# This file generates a compressed Android Mono configuration file for the Godot engine.
+# It reads the configuration from the source file, compresses it using zlib, and writes
+# the compressed data along with its size to a C++ source file. The generated C++ file
+# provides a function to retrieve the decompressed configuration as a string.
 def generate_compressed_config(config_src, output_dir):
     import os.path
 

@@ -1,3 +1,6 @@
+# This file provides the configuration script for the Mono module in the Godot engine using SCons.
+# It defines functions to determine platform-specific settings, locate Mono installation directories,
+# and configure the build environment for different platforms, architectures, and build options.
 import os
 import os.path
 import sys
